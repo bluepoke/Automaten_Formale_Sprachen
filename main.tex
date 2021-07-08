@@ -1,0 +1,41 @@
+
+\documentclass[18pt,aspectratio=169]{beamer}
+%\usetheme{kit}
+\usepackage{ngerman}
+
+% uncomment the following line if you want to hide the navigation symbols
+%\beamertemplatenavigationsymbolsempty 
+
+\title{Automaten und Formale Sprachen}
+\subtitle{Vorlesung Theoretische Informatik I}
+\author{Peter Kossek}
+
+\institute{Berufsakademie Sachsen, Staatliche Studienakademie Leipzig} % Deutsch
+\date{}
+
+\begin{document}
+
+%\selectlanguage{english} % Deutsch
+\selectlanguage{ngerman} % Englisch
+%title page
+\begin{frame}
+	\titlepage
+\end{frame}
+
+%table of contents
+\begin{frame}
+	\frametitle{Gliederung}
+	\tableofcontents
+\end{frame}
+
+\include{logik}
+
+\begin{frame}
+	\frametitle{References}
+	\bibliography{example}
+%	\bibliographystyle{plain} %does not render "url" fields...
+	\bibliographystyle{IEEEtran}  %does render "url" fields, requires "_"s and "#"s to be escaped, e.g. "\_".
+\end{frame}
+
+\end{document}
+
