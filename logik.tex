@@ -1,11 +1,84 @@
 \section{Aussagenlogik}
-\subsection{Grundbegriffe}
-\frame{
-	\frametitle{Grundbegriffe}
-	
+\begin{frame}
+	\frametitle{Aussagenlogik}
+	Gliederung
 	\begin{itemize}
-		\item einfache Verknüpfungen ("`und"', "`oder"', "`nicht"')
-		\item wahr oder falsch
-		\item Zusammensetzen von komplizierten Gebilden aus einfachen (atomaren) Bestandteilen
+		\item Aussagenlogische Formeln
+		\item Mengen/Relationen
+		\item Boolesche Rechenregeln
+		\item Beweistechniken
+		\item Erfüllbarkeit aussagenlogischer Formeln
 	\end{itemize}
-}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Aussagenlogik: Syntax}
+	\begin{itemize}
+		\item \emph{Aussage:} Satz, der entweder wahr ($w$) oder falsch ($f$) ist; Aussagenvariable $A$; Wahrheitswert $w(A)$
+		\item \emph{Syntax:} Induktive Definition korrekt gebildeter aussagenlogischer Formeln F über Variablenmenge $V=\{A, B, \ldots\}$:
+		\begin{itemize}
+			\item Die Booleschen Wahrheitswerte $w$ und $f$ sind Formeln
+			\item Jede Variable aus $V$ ist eine Formel: \emph{Atome}
+			\item Negation (NICHT): $\neg F$ ist eine Formel
+			\item Konjugation (UND): $(F_1 \land F_2)$ ist eine Formel
+			\item Disjunktion (ODER): $(F_1 \lor F_2)$ ist eine Formel
+			\item Implikation ("`wenn \ldots, dann"'): $(F_1 \rightarrow F_2)$ ist eine Formel
+			\item Äquivalenz ("`genau dann, wenn"'): $(F_1 \leftrightarrow F_2)$ ist eine Formel
+			\item andere Verknüpfungen bilden keine Formel
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Präzedenzregeln}
+	Vereinbarung zur Reduzierung von Klammern
+	\begin{itemize}
+		\item Bindung (analog "`Punkt vor Strich"'-Rechnung)
+		\begin{itemize}
+			\item $\neg$ bindet stärker als $\land$
+			\item $\land$ bindet stärker als $\lor$
+			\item $\lor$ bindet stärker als $\rightarrow$ und $\leftrightarrow$
+		\end{itemize}
+		\item Operatoren gleicher Stärke: Auswertung linksassoziativ; z.B. \\ $(A \lor B \lor C)$ steht für $((A \lor B) \lor C)$
+		\item äußere Klammer weglassen: $(((A \lor B) \rightarrow C) \land B) \mapsto (A \lor B \rightarrow C) \land B$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Semantik}
+	aussagenlogischen Formeln wird eine Bedeutung zugeordnet
+	\begin{itemize}
+		\item Def. Belegung (Interpretation) $I: V \rightarrow \{f, w\}$\\ den Atomen wird jeweils ein konkreter Wahrheitswert zugeordnet
+		\item schrittweise (über die Bewertung von Teilformeln) lassen sich dann zusammengesetzte Formeln bewertn:
+		\begin{itemize}
+			\item $I(\neg F)=w$ falls $I(F)=f$, sonst $I(\neg F)=f$
+			\item $I(F \land G)=w$ falls $I(F)=w$ und $I(G)=w$, sonst $I(F \land G)=f$
+			\item $I(F \lor G)=w$ falls $I(F)=w$ oder $I(G)=w$, sonst $I(F \lor G)=f$
+			\item $I(F \rightarrow G)=w$ falls $I(F)=f$ oder $I(G)=w$, sonst $I(F \rightarrow G)=f$
+			\item $I(F \leftrightarrow G)=w$ falls $I(F)=I(G)$, sonst $I(F \leftrightarrow G)=f$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Semantik: Darstellung per Wahrheitstafel}
+	Wahrheitstafel enthält zeilenweise alle möglichen Belegungen
+	\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+$A$ & $B$ & $\neg A$ & $A \land B$ & $A \lor B$ & $A \rightarrow B$ & $A \leftrightarrow B$ \\
+\hline
+f & f & w & f & f & w & w \\
+\hline
+f & w & w & f & w & w & f \\
+\hline
+w & f & f & f & w & f & f \\
+\hline
+w & w & f & w & w & w & w \\
+\hline
+			\end{tabular}
+		\end{center}
+		logische Äquivalenz $F_1 \equiv F_2$: $F_1$ und $F_2$ haben gleichen Wahrheitswerteverlauf; z.B.\\
+		$A \rightarrow B \equiv \neg A \lor B$\\
+		$A \leftrightarrow B \equiv (A \rightarrow B) \land (B \rightarrow A)$
+\end{frame}
