@@ -13,6 +13,15 @@
 \institute{Berufsakademie Sachsen, Staatliche Studienakademie Leipzig} % Deutsch
 \date{}
 
+\makeatletter
+\@addtoreset{figure}{section}
+\@addtoreset{table}{section}
+\makeatother
+
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+
+\renewcommand{\thetable}{\thesection.\arabic{table}}
+
 \begin{document}
 
 %\selectlanguage{english} % Deutsch

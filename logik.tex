@@ -1,6 +1,5 @@
 \section{Aussagenlogik}
-\begin{frame}
-	\frametitle{Aussagenlogik}
+\begin{frame}{Aussagenlogik}
 	Gliederung
 	\begin{itemize}
 		\item Aussagenlogische Formeln
@@ -11,8 +10,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Aussagenlogik: Syntax}
+\begin{frame}{Aussagenlogik: Syntax}
 	\begin{itemize}
 		\item \emph{Aussage:} Satz, der entweder wahr ($w$) oder falsch ($f$) ist; Aussagenvariable $A$; Wahrheitswert $w(A)$
 		\item \emph{Syntax:} Induktive Definition korrekt gebildeter aussagenlogischer Formeln F über Variablenmenge $V=\{A, B, \ldots\}$:
@@ -29,8 +27,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Präzedenzregeln}
+\begin{frame}{Präzedenzregeln}
 	Vereinbarung zur Reduzierung von Klammern
 	\begin{itemize}
 		\item Bindung (analog "`Punkt vor Strich"'-Rechnung)
@@ -44,8 +41,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Semantik}
+\begin{frame}{Semantik}
 	aussagenlogischen Formeln wird eine Bedeutung zugeordnet
 	\begin{itemize}
 		\item Def. Belegung (Interpretation) $I: V \rightarrow \{f, w\}$\\ den Atomen wird jeweils ein konkreter Wahrheitswert zugeordnet
@@ -60,25 +56,187 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Semantik: Darstellung per Wahrheitstafel}
+\begin{frame}{Semantik: Darstellung per Wahrheitstafel}
 	Wahrheitstafel enthält zeilenweise alle möglichen Belegungen
-	\begin{center}
+	\begin{table}
+		\centering
 			\begin{tabular}{|c|c|c|c|c|c|c|}
-\hline
-$A$ & $B$ & $\neg A$ & $A \land B$ & $A \lor B$ & $A \rightarrow B$ & $A \leftrightarrow B$ \\
-\hline
-f & f & w & f & f & w & w \\
-\hline
-f & w & w & f & w & w & f \\
-\hline
-w & f & f & f & w & f & f \\
-\hline
-w & w & f & w & w & w & w \\
-\hline
+				\hline
+				$A$ & $B$ & $\neg A$ & $A \land B$ & $A \lor B$ & $A \rightarrow B$ & $A \leftrightarrow B$ \\
+				\hline
+				f & f & w & f & f & w & w \\
+				\hline
+				f & w & w & f & w & w & f \\
+				\hline
+				w & f & f & f & w & f & f \\
+				\hline
+				w & w & f & w & w & w & w \\
+				\hline
 			\end{tabular}
-		\end{center}
+			\caption{Wahrheitstafel der Grundoperationen}
+		\end{table}
 		logische Äquivalenz $F_1 \equiv F_2$: $F_1$ und $F_2$ haben gleichen Wahrheitswerteverlauf; z.B.\\
 		$A \rightarrow B \equiv \neg A \lor B$\\
 		$A \leftrightarrow B \equiv (A \rightarrow B) \land (B \rightarrow A)$
+\end{frame}
+
+\begin{frame}{Erfüllbarkeit, Tautologie, Kontradiktion}
+	\begin{itemize}
+		\item Sei $F$ eine Formel und $I$ eine Belegung. Falls $I$ für alle in $F$ vorkommenden Atome definiert ist, so heißt $I$ \underline{zu $F$ passend}
+		\item Falls $I$ zu $F$ passend ist, und es gilt $I(F)=w$, dann heißt $I$ \underline{Modell für $F$}; Schreibweise: $I \models F$
+		\item $F$ heißt \underline{erfüllbar}, falls $F$ mindestens ein Modell besitzt; sonst heißt $F$ \underline{unerfüllbar} (Kontradiktion; Schreibweise $F\bot$)
+		\item $F$ heißt gültig bzw. \underline{Tautologie}, falls jede zu $F$ passende Belegung $I$ ein Modell für $F$ ist; Schreibweise $\models F$ oder $F\top$ \\
+		Beispiel: $(A \land B) \rightarrow A$
+		\item es gilt: $F$ ist Tautologie gdw. $\neg F$ ist Kontradiktion
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Äquivalenz aussagenlogischer Formeln}
+	\begin{itemize}
+		\item Zwei Formeln $F$ und $G$ heißen äquivalent ($F \equiv G$), falls für alle Belegungen $I$ gilt: $I(F)=I(G)$
+		\item Äquivalenz kann bewiesen (oder widerlegt) werden durch aufstellen der jeweiligen Wahrheitstafeln
+		\item Beispiele
+		\begin{itemize}
+			\item $A \rightarrow B \equiv \neg A \lor B$
+			\item $A \leftrightarrow B \equiv (A \land B) \lor (\neg A \land \neg B) \equiv (A \rightarrow B) \land (B \rightarrow A)$
+		\end{itemize}
+		\item Ersetzbarkeitstheorem:\\
+		enthält eine Formel $F$ eine Teilformel $G$ und wird $G$ durch eine äquivalente Formel ersetzt, so entsteht eine zu $F$ äquivalente Formel
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Äquivalenzen als Rechenregeln}
+	\begin{itemize}
+		\item Idempotenz
+		\begin{itemize}
+			\item $(A \land A) \equiv A$
+			\item $(A \lor A) \equiv A$
+		\end{itemize}
+		\item Kommutativgesetz
+		\begin{itemize}
+			\item $(A \land B) \equiv (B \land A)$
+			\item $(A \lor B) \equiv (B \lor A)$
+		\end{itemize}
+		\item Assoziativgesetz
+		\begin{itemize}
+			\item $(A \land (B \land C)) \equiv ((A \land B) \land C)$
+			\item $(A \lor (B \lor C)) \equiv ((A \lor B) \lor C)$
+		\end{itemize}
+		\item Distributivgesetz
+		\begin{itemize}
+			\item $(A \land (B \lor C)) \equiv ((A \land B) \lor (A \land C))$
+			\item $(A \lor (B \land C)) \equiv ((A \lor B) \land (A \lor C))$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Äquivalenzen als Rechenregeln (Fortsetzung)}
+	\begin{itemize}
+		\item Absorptionsgesetz
+		\begin{itemize}
+			\item $(A \land (A \lor B)) \equiv A$
+			\item $(A \lor (A \land B)) \equiv A$
+		\end{itemize}
+		\item Doppelnegation
+		\begin{itemize}
+			\item $\neg \neg A \equiv A$
+		\end{itemize}
+		\item deMorgansche Regeln
+		\begin{itemize}
+			\item $\neg (A \land B) \equiv (\neg A \lor \neg B)$
+			\item $\neg (A \lor B) \equiv (\neg A \land \neg B)$
+		\end{itemize}
+		\item Tautologieregeln: sei $A$ Tautologie; $A\top$ bzw. $\models A$
+		\begin{itemize}
+			\item $(A \lor B) \equiv A$; $(A \land B) \equiv B$
+		\end{itemize}
+		\item Kontradiktionsregeln: sei $A$ Kontradiktion; $A\bot$
+		\begin{itemize}
+			\item $(A \lor B) \equiv B$; $(A \land B) \equiv A$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiel: direkter Beweis der Gültigkeit einer Formel (als Alternative zur Wahrheitstafel)}
+	\begin{columns}
+		\column{.5\textwidth}
+		\begin{eqnarray*}
+				F &=& (A \land (A \rightarrow B)) \rightarrow B\\
+				  &\equiv& \neg (A \land (A \rightarrow B)) \lor B\\
+				  &\equiv& \neg (A \land (\neg A \lor B)) \lor B\\
+				  &\equiv& \neg A \lor \neg(\neg A \lor B) \lor B\\
+				  &\equiv& \neg A \lor (A \land \neg B) \lor B\\
+				  &\equiv& \neg A \lor (A \lor B) \land (\neg B \lor B)\\
+				  &\equiv& \neg A \lor (A \lor B) \land w\\
+				  &\equiv& \neg A \lor A \lor B\\
+				  &\equiv& w \lor B\\
+				  &\equiv& w
+		\end{eqnarray*}
+		\column{.5\textwidth}
+		\begin{table}
+			\begin{tabular}{|c|c|c|c|c|}
+				\hline
+				$A$ & $B$ & $A \rightarrow B$ & $A \land (A \rightarrow B)$ & $F$ \\
+				\hline
+				f & f & w & f & w \\
+				\hline
+				f & w & w & f & w \\
+				\hline
+				w & f & f & f & w \\
+				\hline
+				w & w & w & w & w \\
+				\hline
+			\end{tabular}
+			\caption{Wahrheitstafel}
+			\label{tblWahrheitswerteGrundoperationen}
+		\end{table}
+	\end{columns}		
+\end{frame}
+
+\begin{frame}{Normalformen}
+	\begin{itemize}
+		\item \emph{Literal:} Aussagenvariable $A$ ("`positives Literal"') oder negierte Aussagenvariable $\neg A$ ("`negatives Literal"')
+		\item \emph{Negationsnormalform (NNF)}: Formel $F$ ist in NNF, falls $\rightarrow$ und $\leftrightarrow$ aufgelöst sind und alle Negationszeichen $\neg$ unmittelbar vor einer Aussagenvariable stehen.\\
+		beachte: NNF ist nicht eindeutig
+		\item \emph{Monom:} Konjunktion von Literalen, d.h. Formel der Art\\
+		$\bigwedge_iL_i=L_1\land L_2\land\ldots\land L_k$
+		\item \emph{Klausel:} Disjunktion von Literalen, d.h. Formel der Art\\
+		$\bigvee_iL_i=L_1\lor L_2\lor\ldots\lor L_k$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Disjunktive und konjunktive Normalform}
+	\begin{itemize}
+		\item Disjunktive Normalform \emph{DNF:} Disjunktion von Monomen\\
+		$F=\bigvee_i\left(\bigwedge_jL_{ij}\right)$
+		\item Konjunktive Normalform \emph{KNF:} Konjunktion von Klauseln\\
+		$F=\bigwedge_i\left(\bigvee_jL_{ij}\right)$
+		\item Für jede Formel existiert eine äquivalente Formel in KNF und eine äquivalente Formel in DNF
+		\begin{itemize}
+			\item Erzeuge NNF $\mapsto$ DNF bzw. KNF\\
+			DNF: ersetze Ausdrücke der Art $(F \land (G \lor H))$ durch $(F \land G) \lor (F \land H)$ solange solche Teilformen existieren\\
+			KNF: ersetze Ausdrücke der Art $(F \lor (G \land H))$ durch $(F \lor G) \land (F \lor H)$ solange solche Teilformeln existieren
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Konstruktion kanonische DNF/KNF aus Wahrheitstafel}
+	\begin{itemize}
+		\item \emph{Kanonische} DNF bzw. KNF: jede Aussagenvariable kommt in jedem Monom bzw. jeder Klausel genau einmal vor (positiv oder negativ)
+		\item Kanonische NF lassen sich aus der Wahrheitstafel der Formel ablesen
+		\begin{itemize}
+			\item Kanonische DNF (KDNF)
+			\begin{itemize}
+				\item Je ein Monom für jede Belegung mit Wahrheitswert $w$
+				\item Setze $L_j=A_j$, falls $w(A_j)=w$, $L_j=\neg A_j$ sonst
+			\end{itemize}
+			\item Kanonische KNF (KKNF)
+			\begin{itemize}
+				\item Je eine Klausel für jede Belegung mit Wahrheitswert $f$
+				\item Setze $L_j=\neg A_j$, falls $w(A_j)=w$, $L_j=A_j$ sonst
+			\end{itemize}
+		\end{itemize}
+		\item Übungsbeispiel (KNF, aber nicht kanonisch)\\
+		$F=\neg B \land (A \lor \neg C)$
+	\end{itemize}
 \end{frame}
