@@ -1,0 +1,146 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{fancyhdr}
+\usepackage{fancyheadings}
+\usepackage[ngerman,german]{babel}
+\usepackage{german}
+\usepackage[utf8]{inputenc}
+%\usepackage[latin1]{inputenc}
+\usepackage[active]{srcltx}
+\usepackage{algorithm}
+\usepackage[noend]{algorithmic}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{bbm}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{ifthen}
+\usepackage{listings}
+\usepackage{struktex}
+\usepackage{hyperref}
+
+% table placement
+\usepackage{placeins}
+
+\newcommand{\Fach}{Theoretische Informatik I - Automaten und Formale Sprachen}
+\newcommand{\Name}{Peter Kossek}
+\newcommand{\Seminargruppe}{2}
+\newcommand{\Uebungsblatt}{1} %  <-- UPDATE ME
+\newcommand{\Uebungstitel}{Logik} %  <-- UPDATE ME
+
+\setlength{\parindent}{0em}
+\topmargin -1.0cm
+\oddsidemargin 0cm
+\evensidemargin 0cm
+\setlength{\textheight}{9.2in}
+\setlength{\textwidth}{6.0in}
+
+%%%%%%%%%%%%%%%
+%% Aufgaben-COMMAND
+\newcommand{\Aufgabe}[1]{
+	{
+		\vspace*{0.5cm}
+		\textsf{\textbf{Aufgabe #1}}
+		\vspace*{0.2cm}
+		
+	}
+}
+%%%%%%%%%%%%%%
+\hypersetup{
+	pdftitle={\Fach{}: Übungsblatt \Uebungsblatt{}},
+	pdfauthor={\Name},
+	pdfborder={0 0 0}
+}
+
+\lstset{ %
+	language=java,
+	basicstyle=\footnotesize\tt,
+	showtabs=false,
+	tabsize=2,
+	captionpos=b,
+	breaklines=true,
+	extendedchars=true,
+	showstringspaces=false,
+	flexiblecolumns=true,
+}
+
+\title{Übungsblatt \Uebungsblatt{}}
+\author{\Name{}}
+
+\begin{document}
+	\thispagestyle{fancy}
+	\chead{\sf \large \Fach{} \\ \small \Name{}}
+%	\rhead{\sf \Semester{} \\  Seminargruppe \Seminargruppe{}}
+	\vspace*{0.2cm}
+	\begin{center}
+		\LARGE \sf \textbf{Übungsblatt \Uebungsblatt{}} \\
+		\vspace*{0.4cm}
+		\Large \sf \textbf{\Uebungstitel}
+	\end{center}
+	\vspace*{0.2cm}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%% Aufgaben %%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\Aufgabe{1}
+	Welche der folgenden aussagenlogischen Ausdrücke sind Tautologien?
+	\begin{enumerate}[a)]
+		\item $(a \leftrightarrow b) \leftrightarrow (\neg b \leftrightarrow c)$
+		\item $\neg ((a \lor b) \rightarrow c) \lor c$
+		\item $((a \rightarrow b) \land (b \rightarrow c)) \rightarrow (a \rightarrow c)$
+	\end{enumerate}
+	
+	\Aufgabe{2}
+	Gegeben sei die Wahrheitstafel für eine Funktion $F$.
+	\FloatBarrier
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{|c|c|c|}
+			\hline
+			A & B & F \\
+			\hline
+			f & f & f \\
+			f & w & w \\
+			w & f & w \\
+			w & w & f \\
+			\hline
+		\end{tabular}
+	\end{table}
+	\FloatBarrier
+	Bestimmen Sie aussagenlogische Formeln in DNF und KNF, die diesen Wahrheitswerteverlauf haben.
+	
+	\Aufgabe{3}
+	Auszug aus dem Plädoyer einer Anwältin:
+	\begin{enumerate}[a.]
+		\item Wenn der Mandant schuldig ist, dann war das Messer im Schrank.
+		\item Das Messer war nicht im Schrank oder Emma hat das Messer gesehen.
+		\item Wenn das Messer am 1.10. nicht dort war konnte Emma es nicht sehen.
+		\item Wenn das Messer am 1.10. im Schrank war, dann war sowohl das Messer im Schrank als auch der Hammer im Stall.
+		\item Alle wissen, dass der Hammer nicht im Stall war.
+		\item Deshalb ist mein Mandant unschuldig.
+	\end{enumerate}
+	Analysieren Sie die verschiedenen Aussagen daraufhin, ob der Mandant schuldig war.
+	
+	\Aufgabe{4}
+	Prüfen Sie, ob aus den Prämissen $A \rightarrow B$ und $B$ die Gültigkeit von $A$ folgt.
+	
+	\Aufgabe{5}
+	Untersuchen Sie die Korrektheit des folgenden Schlusses:
+	\begin{enumerate}[a.]
+		\item Wenn John schwimmen war, dann verlor er seine Brille und ging nicht ins Kino.
+		\item Wenn John zu viel Fleisch gegessen hat und nicht ins Kino ging, dann wird er eine Magenverstimmung erleiden.
+		\item Also: Wenn John zu viel Fleisch gegessen hat und schwimmen war, dann wird er eine Magenverstimmung erleiden.
+	\end{enumerate}
+
+	\Aufgabe{6}
+	Zeigen Sie mittels Resolution, dass
+	$$F=(\neg A \land \neg B \land C) \lor (\neg A \land \neg C) \lor (B \land C) \lor A$$
+	eine Tautologie ist.
+	
+	\Aufgabe{7}
+	Prüfen Sie die Erfüllbarkeit der folgenden Klauselmenge:
+	$$S = \left\{\{A, \neg B, C\}, \{B, C\}, \{\neg A, C\}, \{B, \neg C\}, \{\neg C\}\right\}$$
+	Führen Sie dazu die Resolution durch. Bestimmen Sie die Resolutionsmengen $$S_i=RES_{L_i}(S_{i-1}), S_0=S$$ für eine geeignete Folge der Literale.
+\end{document}
+
