@@ -311,3 +311,85 @@
 			$R^{-1}=(b,a) \mid a \in A, b \in B, (a,b) \in R$
 	\end{itemize}
 \end{frame}
+
+\begin{frame}{Binäre Relationen \emph{in einer} Menge $M: R \subset M \times M$}
+	\begin{itemize}
+		\item Bezeichnung: es gelte $a,b,c \in M$
+		\item \emph{Identität $I$:} $I=\left\{(a,a) \mid a \in M\right\}$
+		\item $R$ heißt \emph{reflexiv} gdw. $I \subseteq R$
+		\item $R$ heißt \emph{symmetrisch} gdw. $(a,b) \in R \rightarrow (b,a) \in R$
+		\item $R$ heißt \emph{asymmetrisch} gdw. $(a,b) \in R \rightarrow (b,a) \notin R$
+		\item $R$ heißt \emph{antisymmetrisch} gdw. $(a,b) \in R \land (b,a) \in R \rightarrow a = b$
+		\item $R$ heißt \emph{transitiv} gdw. $((a,b) \in R \land (b,c) \in R) \rightarrow (a,c) \in R$
+		\item \emph{Transitive Hülle} $T$ von $R$\\
+			$T=\{(a,b) \mid (a,b) \in R, \textrm{ oder: es gibt } c_0, c_1, \ldots, c_m \in M$\\
+			$\textrm{mit } (a,c_0) \in R, (c_0, c_1) \in R, \ldots, (c_m,b) \in R\}$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Äquivalenzrelationen}
+	\begin{itemize}
+		\item Definition: $R$ in $M$ heißt Äquivalenzrelation in $M$ gdw. $R$ ist reflexiv, symmetrisch und transitiv
+		\item Äquivalenzklassen: $R[x]=\{y \mid (x,y) \in R\}$ heißt Äquivalenzklasse von $x$ bezüglich $R$;\\
+			es gilt: zwei Äquivalenzklassen $R[x], R[y]$ sind entweder identisch oder disjunkt
+		\item Beispiel (Zahlentheorie): Kongruenz\\
+			zwei ganze Zahlen $a,b$ heißen kongruent bzgl. $m \in \mathbb{N}$ gdw. sie haben bei Division durch $m$ den gleichen Rest\\
+			Schreibweise: $a \equiv b\ (\mathrm{mod}\ m)$\\
+			Rechenregeln: sei $a \equiv a'\ (\mathrm{mod}\ m), b \equiv b'\ (\mathrm{mod}\ m)$\\
+			$a+b\equiv a'+b'\ (\mathrm{mod}\ m), a \cdot b \equiv a' \cdot b'\ (\mathrm{mod}\ m)$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Abbildungen}
+	\begin{itemize}
+		\item Sei $R$ eine Relation zwischen den Mengen $A,B$
+		\begin{itemize}
+			\item $R$ heißt \emph{linkseindeutig} gdw. $(a_1,b)\in R\land (a_2,b)\in R \rightarrow a_1=a_2$
+			\item $R$ heißt \emph{rechtseindeutig} gdw. $(a,b_1)\in R\land (a,b_2)\in R \rightarrow b_1=b_2$
+		\end{itemize}
+		\item Eine \emph{Abbildung} $f$ von $A$ \emph{in} die Menge $B$ entspricht einer rechtseindeutigen Relation $F$ zwischen $A$ und $B$, für die es zu jedem $a\in A$ ein $b\in B$ gibt mit $(a,b) \in F$\\
+		Bezeichnung: $f: A \rightarrow B$ bzw. $b=f(a)$
+		\item Eine Abbildung $f$ heißt \emph{surjektiv} (Abbildung \emph{auf} $B$), wenn es zu jedem $b\in B$ ein $a\in A$ gibt mit $b=f(a)$.\\
+		Schreibweise: $B = f(A)$
+		\item Eine Abbildung $f$ heißt \emph{injektiv} (eineindeutig), wenn die zugehörige Relation $F$ auch linkseindeutig ist
+		\item Eine Abbildung $f$ heißt \emph{bijektiv}, wenn sie surjektiv und injektiv ist. Die inverse Relation $F^{-1}$ erklärt dann die inverse Abbildung $a = f^{-1}(b)$ bzw. $A=f^{-1}(B)$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Boolesche Algebra: Rechenregeln}
+	\begin{columns}
+		\column{.5\textwidth}
+		\emph{Abstrakte Definition}\\
+		Boolesche Algebra $(B, +, \times, \kappa)$
+		\begin{itemize}
+			\item $B$: Grundmenge, enthält insbesondere 0 und 1
+			\item $+$ und $\times$: zweistellige Operationen auf $B$
+			\item $\kappa$: einstellige Operation auf $B$ (Komplement)
+			\item dazu gelten die folgenden vier Rechengesetze $(a,b,c\in B)$
+		\end{itemize}
+		\column{.5\textwidth}
+		\emph{vorausgesetzte Rechenregeln}\\
+		\begin{itemize}
+			\item Kommutativgesetze\\
+				$a+b=b+a$, $a \times b=b \times a$
+			\item Distributivgesetze\\
+				$a \times (b + c) = (a \times b) + (a\times c)$\\
+				$a + (b \times c) = (a + b) \times (a + c)$\\
+			\item Neutralitätsgesetze\\
+				$a \times 1 = a$, $a + 0 = a$
+			\item Komplementgesetze
+				$a + \kappa(a) = 1$, $a \times \kappa(a) = 0$
+		\end{itemize}
+	\end{columns}		
+\end{frame}
+
+\begin{frame}{Beispiele}
+	\begin{itemize}
+		\item Potenzmenge; $B=P(M)$\\
+			$+:\cup$, $\times:\cap$, $\kappa(A):M\setminus A$, $0:\varnothing$, $1:M$
+		\item $B$: Menge der n-stelligen aussagenlogischen Formeln\\
+			(gebildet aus maximal n verschiedenen Aussagenvariablen, zzgl. $w$, $f$)\\
+			$+:\lor$, $\times:\land$, $\kappa:\neg$, $0:f$, $1:w$
+		\item Schaltfunktionen-Algebra
+	\end{itemize}
+\end{frame}
