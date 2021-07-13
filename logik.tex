@@ -10,6 +10,8 @@
 	\end{itemize}
 \end{frame}
 
+\subsection{Aussagenlogische Formeln}
+
 \begin{frame}{Aussagenlogik: Syntax}
 	\begin{itemize}
 		\item \emph{Aussage:} Satz, der entweder wahr ($w$) oder falsch ($f$) ist; Aussagenvariable $A$; Wahrheitswert $w(A)$
@@ -238,5 +240,74 @@
 		\end{itemize}
 		\item Übungsbeispiel (KNF, aber nicht kanonisch)\\
 		$F=\neg B \land (A \lor \neg C)$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Aussagenlogische Formeln in Java}
+	\begin{itemize}
+		\item Datentyp \texttt{boolean}\\
+		\texttt{p,q; //zulässige Werte: true, false}
+		\item Logische Verküpfungen\\
+		\begin{tabbing}
+			UND: \quad \= \texttt{\&\&}\\
+			ODER: \> \texttt{||}\\
+			NICHT: \> \texttt{!}
+		\end{tabbing}
+		\item Beispiel \\
+			\texttt{boolean p,q;}\\
+			\texttt{int x = 8;}\\
+			\texttt{p = false;}\\
+			\texttt{q = x == 10; // false}\\
+			\texttt{p = (p || q) \&\& x < 10; //  false}
+		\item Vorrangregeln: \texttt{!} bindet stärker als \texttt{\&\&} bindet stärker als \texttt{||}
+	\end{itemize}
+\end{frame}
+
+\subsection{Exkurs: Mengen}
+
+\begin{frame}{Exkurs: Mengen}
+	\begin{itemize}
+		\item \emph{Menge:} Zusammenfassung unterschiedlicher Objekte (Elemente) zu einer Einheit
+		\item \emph{Bezeichner:} $M=\left\{x \in G \mid \textrm{Bedingung}_1, \textrm{Bedingung}_2, \ldots \right\}$; $G$: Grundmenge
+		\item Beispiel: $M=\left\{n \in \mathbb{N} \mid n^2-3n+2=0 \right\}=\left\{1,2\right\}$
+		\item \emph{Leere Menge:} $\varnothing=\left\{{}\right\}$
+		\item \emph{Teilmengen:} $A \subseteq B$ gdw. $x \in A \rightarrow x \in B$ für alle $x \in G$
+		\item \emph{Gleichheit von Mengen:} $A=B$ gdw. $A \subseteq B \land B \subseteq A$\\
+			z.B. $A = \left\{a, b, a\right\}, B = \left\{b, a\right\}$ es gilt: $A = B$
+		\item \emph{Mächtigkeit (endlicher) Mengen:}\\
+		$|M|=$ Anzahl verschiedener Elemente von $M$; z.B. $|\left\{a, b, a\right\}|=2$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Mengenverknüpfungen}
+	\begin{itemize}
+		\item Durchschnitt: $A \cap B = \left\{x \mid x \in A \land x \in B\right\}$
+		\item Vereinigung: $A \cup B = \left\{x \mid x \in A \lor x \in B\right\}$
+		\item Differenz: $A \setminus B = \left\{x \mid x \in A \land x \notin B\right\}$\\
+			insbesondere: Komplement $A'= \bar{A} = G \setminus A$
+		\item es gelten Kommutativ-, Assoziativ- und Distributivgesetze, insbesondere\\
+			$A \cap \left(B \cup C\right) = \left(A \cap B\right) \cup \left(A \cap C\right)$\\
+			$A \cup \left(B \cap C\right) = \left(A \cup B\right) \cap \left(A \cup C\right)$
+		\item Potenzmenge $P(M) =$ Menge aller Teilmengen von M, z.B.\\
+			$M=\left\{a, b, c\right\}$\\
+			$P(M)=\left\{\varnothing, \{a\}, \{b\}, \{c\}, \{a,b\}, \{a,c\}, \{b,c\}, \{a,b,c\}\right\}$\\
+			es gilt: $|P(M)|=2^{|M|}$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Relationen}
+	Begriffsbestimmungen
+	\begin{itemize}
+		\item Kartesisches Produkt zweier Mengen $A, B$\\
+			Menge aller geordneten Paare $(a,b): A \times B = \left\{(a,b) \mid a \in A, b \in B\right\}$
+		\item Binäre Relation $R$ zwischen $A$ und $B$\\
+			$R \subseteq A \times B$, Sprechweise: $(a,b) \in R \Rightarrow a$ und $b$ stehen in Relation $R$
+		\item Darstellungen: Tabelle, Pfeildiagramm
+		\item Produkt (Komposition) $R_1 \circ R_2$\\
+			sei $R_1 \subseteq A \times B, R_2 \subseteq B \times C$\\
+			$R_1 \circ R_2 = \left\{(a,c) \mid \textrm{es ex. ein } b \in B \textrm{ mit } (a,b) \in R_1, (b,c) \in R_2\right\}$
+		\item Inverse Relation $R^{-1}$\\
+			sei $R \subseteq A \times B \Rightarrow R^{-1}\subseteq B \times A$\\
+			$R^{-1}=(b,a) \mid a \in A, b \in B, (a,b) \in R$
 	\end{itemize}
 \end{frame}
