@@ -3,11 +3,25 @@
 %\usetheme{kit}
 \usepackage{ngerman}
 
+% metropolis theme: https://github.com/matze/mtheme
+\usetheme[sectionpage=progressbar,subsectionpage=progressbar,progressbar=frametitle]{metropolis}
+\definecolor{myColor}{HTML}{4477AA}
+\definecolor{pitchblack}{HTML}{000000}
+\setbeamercolor{alerted text}{fg=myColor}
+\setbeamercolor{frametitle}{bg=pitchblack, fg=white}
+
+\makeatletter
+\setlength{\metropolis@titleseparator@linewidth}{1pt}
+\setlength{\metropolis@progressonsectionpage@linewidth}{2pt}
+\setlength{\metropolis@progressinheadfoot@linewidth}{2pt}
+\makeatother
+
+
 % uncomment the following line if you want to hide the navigation symbols
 %\beamertemplatenavigationsymbolsempty 
 
-\title{Automaten und Formale Sprachen}
-\subtitle{Vorlesung Theoretische Informatik I}
+\title{Theoretische Informatik I}
+\subtitle{Automaten und Formale Sprachen}
 \author{Peter Kossek}
 
 \institute{Berufsakademie Sachsen, Staatliche Studienakademie Leipzig} % Deutsch
@@ -22,10 +36,14 @@
 
 \renewcommand{\thetable}{\thesection.\arabic{table}}
 
+\usepackage{nameref}
+\makeatletter
+\newcommand*{\currentname}{\@currentlabelname}
+\makeatother
+
 \begin{document}
 
-%\selectlanguage{english} % Deutsch
-\selectlanguage{ngerman} % Englisch
+\selectlanguage{ngerman}
 %title page
 \begin{frame}
 	\titlepage
@@ -37,6 +55,13 @@
 	Prof. Jochen Kripfganz\\
 	Dozent für Theoretische Informatik an der BA Leipzig bis 2021
 \end{frame}
+
+\AtBeginSection{
+	\begin{frame}
+		\sectionpage
+		\tableofcontents[sectionstyle=hide/hide,subsectionstyle=show/show/hide]
+	\end{frame}
+}
 
 %table of contents
 \begin{frame}
