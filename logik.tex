@@ -385,3 +385,54 @@
 		\item Schaltfunktionen-Algebra
 	\end{itemize}
 \end{frame}
+
+\begin{frame}{Abgeleitete Rechenregeln für Boolesche Ausdrücke}
+	\begin{itemize}
+		\item Dualitätsprinzip der Booleschen Algebra:\\
+			zu jeder Rechenregel existiert eine zweite (duale) Rechenregel, die durch Vertauschung $+$ mit $\times$ und $0$ mit $1$ entsteht
+		\item Regeln\\
+		\begin{tabbing}
+		\hspace{12em}\=\hspace{8em}\=\kill
+		Idempotenz:	\> $a+a=a$  \> $a\times a = a$\\ 
+		Dominanzgesetz:	\> $a+1=a$ \> $a\times 0 = 0$\\ 
+		Absorptionsgesetz:	\> $a+(a\times b) = a$ \> $a \times (a + b) = a$\\ 
+		Gleichungsvereinfachung:	\> aus $b+a=c+a$ und $b+\kappa(a)=c+\kappa(a)$ \\ 
+									\> folgt $b=c$ \\ 
+		Assoziativgesetz:	\> $a+(b+c)=(a+b)+c$ \\ 
+							\> $a\times (b\times c)=(a\times b)\times c$ \\ 
+		De Morgansche Gesetze:	\> $\kappa(a+b) = \kappa(a) \times \kappa(b)$ \\ 
+								\> $\kappa(a\times b) = \kappa(a) + \kappa(b)$   
+		\end{tabbing} 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Beweisbeispiele}
+	\begin{columns}
+		\column{.3\textwidth}
+		\begin{align*}
+			a+a&=a\\
+			a+a&=(a+a)\times 1\\
+			   &=(a+a)\times (a+\kappa(a))\\
+			   &=a+(a\times \kappa(a))\\
+			   &=a+0\\
+			   &=a
+		\end{align*}
+		\column{.3\textwidth}
+		\begin{align*}
+			a+1&=1\\
+			a+1&=(a+1)\times 1\\
+			&=(a+1)\times (a+\kappa(a))\\
+			&=a+(1\times \kappa(a))\\
+			&=a+\kappa(a)\\
+			&=1
+		\end{align*}
+		\column{.3\textwidth}
+		\begin{align*}
+			a+(a\times b)&=a\\
+			a+(a\times b)&=(a\times 1)+(a\times b)\\
+			&=a\times (1+b)\\
+			&=a\times 1\\
+			&=a
+		\end{align*}
+	\end{columns}	
+\end{frame}
