@@ -451,10 +451,11 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Gatter IEC 60617-12}
+\begin{frame}[shrink=10]{Gatter IEC 60617-12}
 	\ctikzset{
 		logic ports=european,
 		tripoles/european not symbol=ieee circle}
+	\centering
 	\begin{tabular}{llc}
 	AND		& $Y=A\times B=AB$ & \begin{circuitikz}\draw	(0,0) node[and port] (gate) {} (gate.in 1) node[left](i1) {A}	(gate.in 2) node[left](i2) {B} (gate.out) node[right](o) {Y};	\end{circuitikz} \\
 	OR		& $Y=A+B$ & \begin{circuitikz}\draw	(0,0) node[or port] (gate) {} (gate.in 1) node[left](i1) {A}	(gate.in 2) node[left](i2) {B} (gate.out) node[right](o) {Y};	\end{circuitikz} \\
