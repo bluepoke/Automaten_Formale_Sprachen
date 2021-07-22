@@ -440,24 +440,25 @@
 \begin{frame}{Beispiel: Schaltfunktionen-Algebra}
 	\begin{itemize}
 		\item Jeder n-stellige Boolesche Ausdruck stellt eine n-stellige Schaltfunktion $f(x_1,\ldots,x_n)$, d.h. $f:\left\{0,1\right\}^n\rightarrow\left\{0,1\right\}$ dar
-		\item Bezeichnungen an Stelle $f,w,\lor,\land,\neg:0,1,+,\times,\textrm{Überstrich}$
+		\item Bezeichnungen an Stelle $f,w,\lor,\land,\neg:0,1,+,\cdot,\textrm{Überstrich}$
 		\item Schaltfunktionen-Algebra:\\
 		$B=$ Menge aller n-stelligen Schaltfunktionen\\
 		$0:f\equiv 0$\\
 		$1:f\equiv 1$\\
 		$+:\mathrm{Max}[f,g](x_1,\ldots,x_n)=\mathrm{max}\left\{f(x_1,\ldots,x_n),g(x_1,\ldots,x_n)\right\}$ (zeilenweise)\\
-		$\times:\mathrm{Min}[f,g](x_1,\ldots,x_n)=\mathrm{min}\left\{f(x_1,\ldots,x_n),g(x_1,\ldots,x_n)\right\}$ (zeilenweise)\\
+		$\cdot:\mathrm{Min}[f,g](x_1,\ldots,x_n)=\mathrm{min}\left\{f(x_1,\ldots,x_n),g(x_1,\ldots,x_n)\right\}$ (zeilenweise)\\
 		$\kappa : \kappa [f](x_1,\ldots,x_n)=1-f(x_1,\ldots,x_n)$
 	\end{itemize}
 \end{frame}
 
+\ctikzset{
+	logic ports=european,
+	tripoles/european not symbol=ieee circle}
+
 \begin{frame}[shrink=10]{Gatter IEC 60617-12}
-	\ctikzset{
-		logic ports=european,
-		tripoles/european not symbol=ieee circle}
 	\centering
 	\begin{tabular}{llc}
-	AND		& $Y=A\times B=AB$ & \begin{circuitikz}\draw	(0,0) node[and port] (gate) {} (gate.in 1) node[left](i1) {A}	(gate.in 2) node[left](i2) {B} (gate.out) node[right](o) {Y};	\end{circuitikz} \\
+	AND		& $Y=A\cdot B=AB$ & \begin{circuitikz}\draw	(0,0) node[and port] (gate) {} (gate.in 1) node[left](i1) {A}	(gate.in 2) node[left](i2) {B} (gate.out) node[right](o) {Y};	\end{circuitikz} \\
 	OR		& $Y=A+B$ & \begin{circuitikz}\draw	(0,0) node[or port] (gate) {} (gate.in 1) node[left](i1) {A}	(gate.in 2) node[left](i2) {B} (gate.out) node[right](o) {Y};	\end{circuitikz} \\
 	NOT		& $Y=\overline{A}$ & \begin{circuitikz}\draw	(0,0) node[not port] (gate) {} (gate.in 1) node[left](i1) {A} (gate.out) node[right](o) {Y};	\end{circuitikz} \\
 	NAND	& $Y=\overline{AB}$ & \begin{circuitikz}\draw	(0,0) node[nand port] (gate) {} (gate.in 1) node[left](i1) {A}	(gate.in 2) node[left](i2) {B} (gate.out) node[right](o) {Y};	\end{circuitikz} \\
@@ -465,4 +466,47 @@
 	XOR		& $Y=A\overline{B}+\overline{A}B$ & \begin{circuitikz}\draw	(0,0) node[xor port] (gate) {} (gate.in 1) node[left](i1) {A}	(gate.in 2) node[left](i2) {B} (gate.out) node[right](o) {Y};	\end{circuitikz} \\
 	XNOR	& $Y=(\overline{A}+B)(A+\overline{B})$ & \begin{circuitikz}\draw	(0,0) node[xnor port] (gate) {} (gate.in 1) node[left](i1) {A}	(gate.in 2) node[left](i2) {B} (gate.out) node[right](o) {Y};	\end{circuitikz} \\
 	\end{tabular}
+\end{frame}
+
+\begin{frame}{Beispiele}
+	\centering
+	$y=((x_1\cdot x_2)\cdot(x_2+x_3))\cdot \overline{(x_2 + x_3)}$\\
+	\vspace{1em}
+	\begin{circuitikz}
+		\draw
+		(0,0) coordinate[label={[below]$x_1$}](x1)
+		(0.5,0) coordinate[label={[below]$x_2$}](x2)
+		(1,0) coordinate[label={[below]$x_3$}](x3)
+		
+		(0,6) coordinate(x1End)
+		(.5,6) coordinate(x2End)
+		(1,6) coordinate(x3End)
+		
+		(x1) -| (x1End)
+		(x2) -| (x2End)
+		(x3) -| (x3End)
+		
+		(3,1) node[and port] (Aandx1x2) {}
+		(3,3) node[or port] (Borx2x3) {}
+		(5,2) node[and port] (AandB) {}
+		(3,5) node[nor port] (nor) {}
+		(7,4) node[and port] (andAll) {}
+		
+		(Aandx1x2.in 1) to[short, -*] (x1 |- Aandx1x2.in 1)
+		(Aandx1x2.in 2) to[short, -*] (x2 |- Aandx1x2.in 2)
+		
+		(Borx2x3.in 1) to[short, -*] (x2 |- Borx2x3.in 1)
+		(Borx2x3.in 2) to[short, -*] (x3 |- Borx2x3.in 2)
+		
+		(nor.in 1) to[short, -*] (x2 |- nor.in 1)
+		(nor.in 2) to[short, -*] (x3 |- nor.in 2)
+
+		(Aandx1x2.out) -- (AandB.in 2)
+		(Borx2x3.out) -- (AandB.in 1)
+		(nor.out) -- (andAll.in 1)
+		(AandB.out) -- (andAll.in 2)
+
+		(andAll.out) node[right](y) {y}
+		;
+	\end{circuitikz}
 \end{frame}
