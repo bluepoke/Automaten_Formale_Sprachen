@@ -1,0 +1,36 @@
+\section{Erfüllbarkeit aussagenlogischer Formeln}
+\begin{frame}{Entscheidungsproblem SAT}
+	\begin{itemize}
+		\item Ist eine gegebene aussagenlogische Formel erfüllbar / nicht erfüllbar?
+		\item Gesucht sind \emph{Algorithmen} (Verfahren, Handlungsanweisungen), die für eine (beliebige) aussagenlogische Formel als Eingabe nach endlich vielen Schritten mit (korrekter) Aussage ja/nein terminieren.
+		\item trivialer Algorithmus: Berechnung der Wahrheitstafel $\rightarrow$ nicht effizient
+		\item Bemerkung: jede aussagenlogische Formel lässt sich effizient in eine erfüllbarkeitsäquivalente Formel in KNF umschreiben (unter Einführung zusätzlicher Variablen) $\rightarrow$ betrachte im weiteren Formeln in KNF
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Klauselmengen}
+	\begin{itemize}
+		\item Mengennotation für Formeln in KNF\\
+		ersetze Klausel $L_{i1} \lor L_{i2} \lor \ldots$ durch $C_i = \left\{L_{i1}, L_{i2}, \ldots\right\}$ und Formel $F$ in KNF durch Klauselmenge $S=\left\{C_1, C_2, \ldots\right\}$
+		\item Belegung $I$ lässt sich ebenfalls als Menge darstellen:\\
+		z.B. $I(x_1)=w, I(x_2)=f, \ldots$\\
+		dann Schreibweise $I=\left\{x_1, \overline{x_2}, \ldots\right\}$
+		\item Belegung $I$ ist Modell der Klausel $C_i$ gdw. $I \cap C_i \neq \varnothing$.\\
+		Belegung $I$ ist Modell der Klauselmenge $S$ gdw. $I \cap C_i \neq \varnothing$ für alle $C_i \in S$.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Hornformeln}
+	\begin{itemize}
+		\item Definition: $F$ ist Hornformel gdw. $F$ ist in KNF und jede Klausel enthält höchstens ein positives Literal.
+		\item Beispiel: $F_1=(A \lor \neg B) \land (\neg C \lor \neg A \lor D) \land (\neg A \lor \neg B) \land D \land \neg E$
+		\item Es gilt: jede Hornformel lässt sich äquivalent in eine Konjunktion von Implikationen ("`Regeln"') umformen
+		\item Beispiel: $F_1=(B \rightarrow A) \land (A \land C \rightarrow D) \land (A \land B \rightarrow f) \land (w \rightarrow D) \land (E \rightarrow f)$
+		\item Eine Menge von Hornklauseln heißt auch Logikprogramm
+		\begin{itemize}
+			\item Tatsachenklausel: ein positives und kein negatives Literal
+			\item Prozedurklausel (Regel): ein positives und mindestens ein negatives Literal
+			\item Zielklausel (Frageklausel): negative Klausel (ohne positives Literal)
+		\end{itemize}
+	\end{itemize}
+\end{frame}

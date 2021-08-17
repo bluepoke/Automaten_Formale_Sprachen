@@ -1,0 +1,116 @@
+\section{Logischer Schluss}
+\begin{frame}{Logische Folgerungen (Beweise)}
+	\begin{itemize}
+		\item logischer Schluss
+		\begin{itemize}
+			\item aus einer Reihe von Annahmen $A_1,\ldots,A_n$ (Voraussetzungen, Prämissen) soll eine Schlussfolgerung $B$ (Konklusion) gezogen werden
+			\item formelmäßig ausgedrückt: $A_1 \land \ldots \land A_n \rightarrow B$
+			\item Bezeichnung: $\left\{A_1, A_2, \ldots, A_n\right\} \models B$ bzw. $A_1, A_2, \ldots, A_n \models B$
+		\end{itemize}
+		\item Beweisfolge
+		\begin{itemize}
+			\item Aus einer Menge von Prämissen oder bereits abgeleiteten Aussagen werden durch Anwendung von Ableitungsregeln neue Aussagen abgeleitet, die im Weiteren ebenfalls benutzt werden können; entspricht Kettenschluss $((A_1 \rightarrow A_2) \land (A_2 \rightarrow A_3)) \rightarrow (A_1 \rightarrow A_3)$
+			\item Ableitungsregeln sind entweder Äquivalenzregeln (äquivalente Ersetzungen gemäß Boolescher Rechenregeln) oder Schlussregeln (geeignete Tautologien)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Schlussregeln}
+	\begin{itemize}
+		\item $(A \land (A \rightarrow B)) \rightarrow B$ (Modus ponens)\\
+		"`wenn A gilt und aus A folgt B, dann gilt B"'
+		\item $((A \rightarrow B) \land \neg B) \rightarrow \neg A$ (Modus tollens)\\
+		"`wenn aus A B folgt und B nicht gilt, dann gilt A nicht"'
+		\item $A \land B \rightarrow (A \land B)$ (Konjunktion)\\
+		"`wenn A und B bereits gezeigt sind, dann gilt auch die Verknüpfung $A \land B$"'
+		\item $A \land B \rightarrow A$ (Vereinfachung)\\
+		"`wenn A und B gelten, dann gilt insbesondere auch A"'
+		\item $A \rightarrow (A \lor B)$ (Ausdehnung)\\
+		"`ist A bereits gezeigt, dann gilt auch A oder B"'
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Bemerkungen und Beispiel}
+	\begin{itemize}
+		\item Zweckmäßige Tipps
+		\begin{itemize}
+			\item Formeln $\neg (A \land B)$ bzw. $\neg (A \lor B)$ umschreiben als $(\neg A \lor \neg B)$ bzw. $(\neg A \land \neg B)$
+			\item $A \lor B$ überführen in Implikation $\neg A \rightarrow B$
+			\item Ist als Konklusion B eine Implikation zu zeigen, d.h.\\
+			$(A_1 \land \ldots \land A_k) \rightarrow (C \rightarrow D)$, dann kann stattdessen auch\\
+			$(A_1 \land \ldots \land A_k) \rightarrow D$ gezeigt werden
+		\end{itemize}
+		\item Beispiel\\
+			es gelten die Prämissen: $A, B \rightarrow C, (A \land B) \rightarrow (D \lor \neg C), B$;\\
+			zeige: $D$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[shrink=5]{Beweistypen (deduktiv)}
+	\begin{columns}
+		\column{.5\textwidth}
+			\begin{enumerate}
+				\item \underline{direkter Beweis} $A \rightarrow B$
+				\item Beweis durch \underline{Umkehrschluss} (Kontraposition): zeige $\neg B \rightarrow \neg A$
+				\item \underline{Widerspruchsbeweis:} zeige $(A \land \neg B) \rightarrow f$
+				\item \underline{Äqzivalenzbeweis:}\\
+				zu zeigen: $A \leftrightarrow B$\\
+				stattdessen:\\
+				$A \rightarrow B$ und $B \rightarrow A$ bzw. $A \rightarrow B$ und $\neg A \rightarrow \neg B$
+				\item Beweis durch \underline{Fallunterscheidung:}\\
+				zeige A durch $B \rightarrow A$ und $\neg B \rightarrow A$
+				\item Beweis \underline{atomararer Aussagen:}\\
+				zeige A durch $w \rightarrow A$ bzw. $\neg A \rightarrow f$
+			\end{enumerate}
+		\column{.5\textwidth}
+			Erläuterungen
+			\begin{enumerate}
+				\item da $A \rightarrow B$ nur falsch sein kann für $I(A)=w$ und $I(B)=f$, genügt es, $A$ als wahr anzunehmen und $I(B)=w$ zu zeigen ($B$ abzuleiten)
+				\item $(\neg B \rightarrow \neg A) \equiv A \rightarrow B$
+				\item $(A \land \neg B) \rightarrow f \equiv A \rightarrow B$
+				\item $A \leftrightarrow B \equiv (A \rightarrow B) \land (B \rightarrow A)$
+				\item $A \equiv (B \rightarrow A) \land (\neg B \rightarrow A)$
+				\item $A \equiv w \rightarrow A \equiv \neg A \rightarrow f$
+			\end{enumerate}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Exkurs: Methode der vollständigen Induktion}
+	\begin{itemize}
+		\item sei $A(n), n=0,1,\ldots$ eine Folge von Aussagen, die zu beweisen sind
+		\item Induktionsbeweis
+		\begin{itemize}
+			\item[(1)] Induktionsbasis: zeige $A(0)$
+			\item[(2)] zeige für alle $n: A(n) \rightarrow A(n+1)$
+			\item alternative Formulierung
+			\begin{itemize}
+				\item[(2')] Induktionsvoraussetzung: $A(n)$ für ein beliebig gewähltes n
+				\item[(3')] Induktionsschluss: zeige $A(n+1)$ aus $A(n)$
+			\end{itemize}
+		\end{itemize}
+		\item Verallgemeinerte vollständige Induktion
+		\begin{itemize}
+			\item Zeige $A(0)$
+			\item Zeige $A(0) \land A(1) \land \ldots \land A(n) \rightarrow A(n+1)$\\
+			zum Beweis von $A(n)$ kann auf die Gültigkeit von $A(m)$ für beliebige $m<n$ zurückgegriffen werden
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiele Beweistechniken}
+	seien $a, b$ natürliche Zahlen
+	\begin{itemize}
+		\item direkter Beweis: wenn $a$ teilbar ist durch 6, dann ist $a$ auch teilbar durch 3
+		\item Beweis durch Kontraposition: wenn $a^2$ ungerade, dann auch $a$
+		\item Widerspruchsbeweis: wenn $a$ und $b$ gerade, dann auch $a \cdot b$
+		\item Äquivalenzbeweis: $a$ ist gerade genau dann wenn $a^2$ gerade ist
+		\item Beweis durch Fallunterscheidung: $a^2$ geteilt durch $4$ liefert Rest $1$ oder $0$
+		\item Beweis atomarer Aussagen: $\sqrt{2}$ ist keine rationale Zahl
+		\item Induktionsbeweis:
+		\begin{itemize}
+			\item zeige: $s_n := \sum_{i=1}^{n}i=\frac{n(n+1)}{2}$ (dazu auch direkten Beweis)
+			\item Fibonacci-Folge: $f_1=1, f_2=1, f_n=f_{n-1}+f_{n-2} (n>2)$\\
+			zeige: $f_n=\frac{1}{\sqrt{5}}(A^n-B^n)$ mit $A=\frac{1+\sqrt{5}}{2}$ und $B=\frac{1-\sqrt{5}}{2}$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
