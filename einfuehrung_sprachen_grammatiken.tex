@@ -1,0 +1,52 @@
+\section{Einführung: Sprachen und Grammatiken}
+
+\begin{frame}{Sprachen: Bezeichnungen, Regeln}
+	\begin{itemize}
+		\item Alphabet $\Sigma$: Menge von Symbolen (Buchstaben)
+		\item $\Sigma^*$:
+		\begin{itemize}
+			\item Menge aller Worte, die sich durch Hintereinanderschreiben ("`Konkatenation"') von Buchstaben aus $\Sigma$ bilden lassen
+			\item Beispiel: $\Sigma=\left\{a,b\right\}, \Sigma^*=\left\{\varepsilon, a, b, aa, \ldots\right\}, \varepsilon$: "`leeres Wort"', $\varepsilon a=a \varepsilon = a$
+			\item Länge eines Wortes $|w|: |a|=1, |\varepsilon|=0, |w_1w_2|=|w_1|+|w_2|$
+		\end{itemize}
+		\item Sprache $L$: Teilmenge von $\Sigma^*$
+		\begin{itemize}
+			\item Es gelten die Mengen-Verknüpfungen $L_1 \cup L_2, L_1 \cap L_2, L_1 \setminus L_2$
+			\item Dazu die Konkatenation $L_1L_2=\left\{xy \mid x \in L_1 \land y \in L_2\right\}$
+			\item Regeln:\\
+			$L^0=\left\{\varepsilon\right\}, L^1=L, L^{n+1}=LL^n, L^*=\bigcup_{n\geq0}L^n, L^+=\bigcup_{n\geq1}L^n$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Grammatiken}
+	\begin{itemize}
+		\item generierende Grammatik $G$: Sprache durch Regeln erzeugen
+		\item Definition: $G=(V, \Sigma, P, S)$ mit\\
+		$V$: endliche Menge von Variablen\\
+		$\Sigma$: Terminalalphabet, $V \cap \Sigma = \varnothing$\\
+		$P$: Menge von Regeln (Produktionen) der Art $u_1 \rightarrow u_2$, mit $u_1, u_2 \in \left(V \cup \Sigma\right)^*$\\
+		$S$: Startvariable, $S \in V$
+		\item Ableitung $S \underset{G}{\Rightarrow}^* w$
+		\begin{itemize}
+			\item Ableitungsschritt $u \underset{G}{\Rightarrow} v: u=xyz, v=xy'z, y\rightarrow y' \in P$
+			\item $\underset{G}{\Rightarrow}^*$: reflexive und transitive Hülle der Relation $\underset{G}{\Rightarrow}$ (endliche Folge)
+		\end{itemize}
+		\item durch $G$ erzeugte Sprache: $L(G)=\left\{w \in \Sigma^* \mid S \underset{G}{\Rightarrow}^* w\right\}$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Chomsky-Hierarchie}
+	\begin{itemize}
+		\item Hierarchie von Grammatiken
+		\begin{itemize}
+			\item[\underline{Typ 0}:] Startwort besteht aus genau einer Variablen $S$,\\
+			es gibt keine Regeln der Art $\varepsilon \rightarrow u$ abgeleitet werden; $S$ darf dann auf keiner rechten Seite einer Regel vorkommen
+			\item[\underline{Typ 1:}] (kontextsensitiv) Typ 0, und für alle Regeln $w_1 \rightarrow w_2$ gilt: $|w_1| \leq |w_2|$;\\
+			$S \rightarrow \varepsilon$ als Sonderregel erlaubt
+			\item[\underline{Typ 2:}] (kontextfrei) Typ 1, und für alle Regeln $w_1 \rightarrow w_2$ gilt: $w_1$ ist eine einzelne Variable
+			\item[\underline{Typ 3:}] (regulär) Typ 2, und für alle Regeln $w_1 \rightarrow w_2$ gilt: $w_2 \in \Sigma \cup \Sigma V$
+		\end{itemize}
+		\item \underline{$\varepsilon$-Sonderregel}: $\varepsilon$ darf nur aus Startsymbol $S$
+	\end{itemize}
+\end{frame}
