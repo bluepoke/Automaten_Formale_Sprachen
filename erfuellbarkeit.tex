@@ -34,3 +34,97 @@
 		\end{itemize}
 	\end{itemize}
 \end{frame}
+
+\begin{frame}{Beweismethodik}
+	\begin{itemize}
+		\item Zeige Gültigkeit einer regelbasierten aussagenlogischen Formel durch Nichterfüllbarkeit von $\neg F$
+		\item Beispiel: es gelten die Prämissen $B, B \rightarrow A$ und $(A \land B) \rightarrow C$; logisches Schließen liefert $A$ und daraus auch $C$; also ist\\
+		$F=(B \land (B \rightarrow A) \land (A \land B \rightarrow C)) \rightarrow (A \land C)$\\
+		eine Tautologie. Es gilt\\
+		$\neg F = B \land (B \rightarrow A) \land (A \land B \rightarrow C) \land (\neg A \lor \neg C)$\\
+		das ist Hornformel, mit Zielklausel $(\neg A \lor \neg C) (\equiv (A \land C) \rightarrow f)$
+		\item Anstelle die Gültigkeit von F direkt zu beweisen, zeige die Nichterfüllbarkeit der Hornformel $\neg F$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Erfüllbarkeitstest (Markierungsalgorithmus)}
+	Sei F Konjunktion von Implikationen
+	\begin{enumerate}
+		\item Für alle Teilformeln der Art $w \rightarrow A$: markiere in allen Teilformeln auftretende $A$
+		\item while (es gibt Teilformeln der Art
+		\begin{enumerate}
+			\item[(i)] $A_1 \land A_2 \land \ldots \land A_n \rightarrow B$ oder
+			\item[(ii)] $A_1 \land A_2 \land \ldots \land A_n \rightarrow f$\\
+			mit: alle $A_i$ markiert, $B$ nicht markiert)\\
+			if (Fall (i)) markiere alle B\\
+			else (Fall (ii)) Rückgabe "`unerfüllbar, STOP\\
+			end
+		\end{enumerate}
+		end\\
+		Rückgabe "`erfüllbar"'\\
+		STOP
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Erfüllbarkeitstest (Hornklauselalgorithmus)}
+	Sei $S$ Menge von Hornklauseln\\
+	while ($S$ enthält eine positive Klausel $\left\{A_i\right\}$)\\
+	\qquad entferne alle Klauseln, die $A_i$ enhalten\\
+	\qquad und entferne $\overline{A_i}$ aus den verbliebenen Klauseln\\
+	end\\
+	if ($S$ enhält die leere Klausel $\Box$)\\
+	\qquad Rückgabe "`unerfüllbar"'\\
+	else Rückgabe "`erfüllbar"'\\
+	end
+\end{frame}
+
+\begin{frame}{Erfüllbarkeit allgemeiner Klauselmengen: Davis-Putnam-Regeln}
+	\begin{itemize}
+		\item Sei $S=\left\{c_1, \ldots, c_k\right\}$ Klauselmenge, $L$ ein Literal, $\overline{L}$ das negierte Literal. Definiere:
+		\begin{itemize}
+			\item $S_L^+=\left\{c_j \in S \mid L \in c_j\right\}, S_L^-=\left\{c_j \in S \mid \overline{L} \in c_j\right\}, S_L^0=\left\{c_j \in S \mid L, \overline{L} \notin c_j\right\}$
+			\item $POS_L(S)=S_L^0 \bigcup \left\{c_j \setminus \left\{L\right\} \mid c_j \in S_L^+\right\}; NEG_L(S)=S_L^0 \bigcup \left\{c_j \setminus \left\{\overline{L}\right\} \mid c_j \in S_L^-\right\}$
+		\end{itemize}
+		\item Es gilt: Die Klauselmenge $S$ ist erfüllbar gdw. wenigstens eine der beiden Klauselmengen $POS_L(S)$ und $NEG_L(S)$ erfüllbar ist
+		\begin{itemize}
+			\item Vorteil: Anzahl der Literale wird schrittweise reduziert
+			\item Nachteil: in jedem Schritt verdoppelt sich i.A. die Zahl der Klauselmengen (vielfach aber auch nicht, s.u.)
+		\end{itemize}
+		\item Spezialfälle
+		\begin{itemize}
+			\item $S_L^-=\varnothing$: S erfüllbar gdw. $NEG_L(S)=S_L^0$ erfüllbar (analog für $S_L^+=\varnothing$)
+			\item Unit-Regel: falls $\left\{L\right\} \in S$, dann $S$ erfüllbar gdw. $NEG_L(S)$ erfüllbar
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Resolution}
+	\begin{itemize}
+		\item Beweis der Unerfüllbarkeit allgemeiner Klauselmengen durch Herleitung der leeren Klausel
+		\item Definition: Resolvente
+		\begin{itemize}
+			\item sei $L$ ein Literal und $\overline{L}$ das negierte Literal
+			\item sei $c_1$ eine Klausel, die $L$ enthält, $c_2$ eine Klausel, die $\overline{L}$ enthält
+			\item dann heißt die Klausel $res_L(c_1, c_2)=\left(c_1 \setminus \left\{L\right\}\right) \cup \left(c_2 \setminus \left\{\overline{L}\right\}\right)$
+			\item Gesprochen: "`Resolvente der Klauseln $c_1$ und $c_2$ nach $L$"'
+		\end{itemize}
+		\item Resolutionslemma\\
+		sei $I$ ein Modell von $c_1$ und $c_2$, dann ist $I$ auch Modell von $res_L(c_1, c_2)$, d.h. $I \cap c_1 \neq \varnothing \land I \cap c_2 \neq \varnothing \rightarrow I \cap res_L(c_1, c_2) \neq \varnothing$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Grundresolutionstheorem}
+	\begin{itemize}
+		\item Zu $S$ erfüllbarkeitsäquivalente Klauselmenge $RES_L(S)$
+		\begin{itemize}
+			\item sei $S$ Klauselmenge; $k$ Anzahl der Variablen; definiere:\\
+			$RES_L(S)=S_L^0 \bigcup \left\{res_L(c_1, c_2) \mid c_1 \in S_L^+, c_2 \in S_L^-\right\}$
+			\item beachte: $RES_L(S)$ enhält $L$ bzw. $\overline{L}$ nicht mehr
+			\item es gilt: $S$ ist erfüllbar gdw. $RES_L(S)$ ist erfüllbar
+		\end{itemize}
+		\item Grundresolutionstheorem: eine Klauselmenge $S$ ist unerfüllbar gdw. $S$ lässt sich mittels Resolution widerlegen, d.h. die leere Klausel ist herleitbar
+		\item Systematische Durchführung:\\
+		$S_0=S$, $S_i=RES_{L_i}\left(S_{i-1}\right)$; alle $S_i, i \leq k$ sind erfüllbarkeitsäquivalent\\
+		$S_k$ enthält kein Literal mehr, d.h. $S_k=\varnothing$ (erfüllbar) oder $S_k=\left\{\Box\right\}$ (unerfüllbar)
+	\end{itemize}
+\end{frame}
