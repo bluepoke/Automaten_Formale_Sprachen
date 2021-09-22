@@ -1,0 +1,54 @@
+\section{Reguläre Sprachen und Endliche Automaten}
+
+% change settings of tikz for state machine drawings
+\tikzset {
+	->, % makes the edges directed
+	>=stealth, % makes the arrow heads bold
+	node distance=2cm and 2cm, % specifies the minimum distance between two nodes.
+	every state/.style={thick, fill=gray!10}, %properties for every 'state' node
+	initial text=$ $, % Remove text from start arrow
+}
+
+\begin{frame}{Endliche Automaten (Finite-State Machine (FSM), Finite Automaton (FA))}
+	\begin{itemize}
+		\item Grundkonzept
+		\begin{itemize}
+			\item FSM befinden sich jeweils in genau einem aus einer endlichen Menge von Zuständen
+			\item FSM reagieren auf Eingaben, führen dabei gegebenenfalls Aktionen aus und wechseln ihren Zustand (Transition)
+		\end{itemize}
+		\item Einsatz zur Spracherkennung
+		\begin{itemize}
+			\item Folge von Eingaben kann aufgefasst werden als Wort über einem Alphabet (Eingabe jeweils ein Buchstabe)
+			\item Eingabenfolge entspricht einem Wort der vom FSM $A$ akzeptierten Sprache $L(A)$ gdw.
+			\begin{itemize}
+				\item das Wort vollständig gelesen wird und
+				\item sich $A$ danach in einem der vorab definierten Endzustände befindet
+			\end{itemize}
+			\item Wort wird nicht generiert (Grammatik) sonder akzeptiert (als zugehörig erkannt)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Deterministischer Endlicher Automat (DFA)}
+	\begin{itemize}
+		\item Allgemeine Spezifikation eines DFA $A$:\\
+		$A=\left(S, \Sigma, \delta, s_0, F\right)$
+		\begin{itemize}
+			\item $S$: endliche Menge von Zuständen
+			\item $\Sigma$: Alphabet
+			\item $\delta:S \times \Sigma \rightarrow S$ Überführungsfunktion
+			\item $s_0$: Startzustand, $s_0 \in S$
+			\item $F$: Menge (akzeptierender) Endzustände, $F \subseteq S$
+		\end{itemize}
+		\item Graphische Darstellung: Zustände als Knoten eines Graphen\\
+		\vspace{1em}
+		\begin{tikzpicture}
+			\node[state, initial] (s0) {$s_0$};
+			\node[state, accepting, right of=s0] (sf) {$s_f$};
+			\node[state, right=of sf] (s1) {$s_1$};
+			\node[state, right=of s1] (s2) {$s_2$};
+			
+			\draw	(s1) edge[above] node{a} (s2);
+		\end{tikzpicture}
+	\end{itemize}
+\end{frame}

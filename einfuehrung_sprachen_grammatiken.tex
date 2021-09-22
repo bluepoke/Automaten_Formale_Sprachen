@@ -47,6 +47,37 @@
 			\item[\underline{Typ 2:}] (kontextfrei) Typ 1, und für alle Regeln $w_1 \rightarrow w_2$ gilt: $w_1$ ist eine einzelne Variable
 			\item[\underline{Typ 3:}] (regulär) Typ 2, und für alle Regeln $w_1 \rightarrow w_2$ gilt: $w_2 \in \Sigma \cup \Sigma V$
 		\end{itemize}
-		\item \underline{$\varepsilon$-Sonderregel}: $\varepsilon$ darf nur aus Startsymbol $S$
+		\item \underline{$\varepsilon$-Sonderregel}: $\varepsilon$ darf nur aus Startsymbol $S$ abgeleitet werden; $S$ darf dann auf keiner rechten Seite einer Regel vorkommen
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiel Typ-1 Grammatik}
+	\begin{align*}
+		L&=\left\{a^nb^nc^n \mid n \geq 1\right\}\\
+		G&=\left(\left\{S,B,C\right\},\left\{a,b,c\right\},P,S\right)\\
+		P&=\{S \rightarrow aSBC \mid aBC,\\
+		         &\qquad CB \rightarrow BC,\\
+		         &\qquad aB \rightarrow ab,\\
+		         &\qquad bB \rightarrow bb,\\
+		         &\qquad bC \rightarrow bc,\\
+		         &\qquad cC \rightarrow cc\}\\
+	\end{align*}
+\end{frame}
+
+\begin{frame}{Ableitungsbaum}
+	\begin{itemize}
+		\item Darstellung der Ableitungsschritte als Baum
+		\item Links- bzw. Rechtsableitungen
+		\item Mehrdeutige Grammatiken
+		\begin{itemize}
+			\item zu ein und demselben Terminalwort existieren verschiedene (Links-) Ableitungen
+			\item Eine Sprache $L$ heißt \emph{inhärent mehrdeutig}, falls keine eindeutige Grammatik für $L$ existiert
+		\end{itemize}
+		\item Berechnung von Ausdrücken:
+		\begin{itemize}
+			\item Operanden, die im Ableitungsbaum tiefer liegen, haben bei der Ausführung höhere Priorität
+			\item Compiler erzeugt Ableitungsbaum bottom-up durch Ableitung des Startsymbols aus dem Terminalwort
+			\item benutzt dazu \emph{reduktive} Grammatik: erzeugt aus der \emph{generativen} Grammatik durch Transponieren der Regeln
+		\end{itemize}
 	\end{itemize}
 \end{frame}
