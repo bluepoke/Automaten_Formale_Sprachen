@@ -1,0 +1,130 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{fancyhdr}
+\usepackage{fancyheadings}
+\usepackage[ngerman,german]{babel}
+\usepackage{german}
+\usepackage[utf8]{inputenc}
+%\usepackage[latin1]{inputenc}
+\usepackage[active]{srcltx}
+\usepackage{algorithm}
+\usepackage[noend]{algorithmic}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{bbm}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{ifthen}
+\usepackage{listings}
+\usepackage{struktex}
+\usepackage{hyperref}
+
+% table placement
+\usepackage{placeins}
+
+\newcommand{\Fach}{Theoretische Informatik I - Automaten und Formale Sprachen}
+\newcommand{\Name}{}
+\newcommand{\Seminargruppe}{2}
+\newcommand{\Uebungsblatt}{2} %  <-- UPDATE ME
+\newcommand{\Uebungstitel}{Grammatiken, endliche Automaten, reguläre Sprachen} %  <-- UPDATE ME
+
+\setlength{\parindent}{0em}
+\topmargin -1.0cm
+\oddsidemargin 0cm
+\evensidemargin 0cm
+\setlength{\textheight}{9.2in}
+\setlength{\textwidth}{6.0in}
+
+%%%%%%%%%%%%%%%
+%% Aufgaben-COMMAND
+\newcommand{\Aufgabe}[1]{
+	{
+		\vspace*{0.5cm}
+		\textsf{\textbf{Aufgabe #1}}
+		\vspace*{0.2cm}
+		
+	}
+}
+%%%%%%%%%%%%%%
+\hypersetup{
+	pdftitle={\Fach{}: Übungsblatt \Uebungsblatt{}},
+	pdfauthor={\Name},
+	pdfborder={0 0 0}
+}
+
+\lstset{ %
+	language=java,
+	basicstyle=\footnotesize\tt,
+	showtabs=false,
+	tabsize=2,
+	captionpos=b,
+	breaklines=true,
+	extendedchars=true,
+	showstringspaces=false,
+	flexiblecolumns=true,
+}
+
+\title{Übungsblatt \Uebungsblatt{}}
+\author{\Name{}}
+
+\begin{document}
+	\thispagestyle{fancy}
+	\chead{\sf \large \Fach{} \\ \small \Name{}}
+	%	\rhead{\sf \Semester{} \\  Seminargruppe \Seminargruppe{}}
+	\vspace*{0.2cm}
+	\begin{center}
+		\LARGE \sf \textbf{Übungsblatt \Uebungsblatt{}} \\
+		\vspace*{0.4cm}
+		\Large \sf \textbf{\Uebungstitel}
+	\end{center}
+	\vspace*{0.2cm}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%% Aufgaben %%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\Aufgabe{1}
+	Welche Sprache $L(G)$ wird durch die folgende Grammatik $G$ erzeugt? Ist die Grammatik eindeutig? Falls nein: lässt sich für diese Sprache eine eindeutige Grammatik angeben? Von welchem Typ ist die Sprache?
+	
+	\begin{align*}
+		G&=\left(\left\{S,A,B\right\},\left\{a,b,c\right\},P,S\right)\\
+		P&=\left\{S \rightarrow aB \mid Ac, A \rightarrow ab, B \rightarrow bc\right\}
+	\end{align*}
+
+	\Aufgabe{2}
+	Ist die Sprache $L = \left\{0^{2n} \mid n \in \mathbb{N}_0\right\}$ regulär? Beantworten Sie die Frage vom Standpunkt einer erzeugenden Grammatik, sowie von dem eines akzeptierenden Automaten.
+	
+	\Aufgabe{3}
+	Konstruieren Sie einen DFA, der alle Worte über $\{0,1\}$ erkennt, die den String $101$ \underline{nicht} als Teilwort enthalten.
+	
+	\Aufgabe{4}
+	Konstruieren Sie einen DFA der die Menge aller natürlichen Zahlen kongruent zu Null (mod 5) akzeptiert. Eingabe ist jeweils eine natürliche Zahl in Dualdarstellung.
+	
+	\Aufgabe{5}
+	Geben Sie eine Typ-3 Grammatik an, die die durch folgenden Automaten akzeptierte Sprache produziert. Beschreiben Sie die akzeptierte Sprache verbal. Ermitteln sie dazu gegebenenfalls den Minimalautomaten zu $A$.
+	
+	\begin{align*}
+		A&=\left(\left\{s_0,s_1,s_2,s_3,s_4\right\},\left\{0,1\right\},\delta,s_0,\left\{s_3,s_4\right\}\right)\\
+		\delta &=\{(s_0,0,s_1),(s_0,1,s_2),(s_1,0,s_2),(s_1,1,s_3),(s_2,0,s_1),(s_2,1,s_3),\\
+		&\qquad(s_3,0,s_1),(s_3,1,s_4),(s_4,0,s_2),(s_4,1,s_4)\}
+	\end{align*}
+	
+	\Aufgabe{6}
+	Konstruieren Sie zu folgendem nichtdeterministischem endlichem Automaten
+	$$A=(\{p,q,r\}, \{a,b\}, \delta, p, \{r\})$$
+	mit der mengenwertigen Übergangsfunktion $\delta$
+	\begin{center}
+		\begin{tabular}{|l|l|l|l|}
+			\hline
+			$\delta$ & $p$ & $q$ & $r$ \\
+			\hline
+			$a$ & $\{p,q\}$ & $\{p,q,r\}$ & $\{\}$ \\
+			\hline
+			$b$ & $\{r\}$ & $\{\}$ & $\{q,r\}$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	einen äquivalenten deterministischen Automaten.\\
+	Zusatzaufgabe: Ermitteln Sie dazu einen Minimalautomat. 
+\end{document}
+
