@@ -52,3 +52,98 @@
 		\end{tikzpicture}
 	\end{itemize}
 \end{frame}
+
+\begin{frame}{Durch DFA akzeptierte Sprachen: Reguläre Sprachen}
+	\begin{itemize}
+		\item Konfiguration des Automaten: $A: (s,u)$
+		\begin{itemize}
+			\item $s$: aktueller Zustand
+			\item $u$: noch zu lesendes Teilwort
+		\end{itemize}
+		\item Konfigurationsübergang\\
+		\quad $(s, av) \mapsto (s', v) \leftrightarrow \delta(s,a) = s'$
+		\item Durch $A$ akzeptierte Sprache\\
+		\quad $L(A) = \left\{w \in \Sigma^* \mid (s_0,w) \mapsto^* (s_f, \varepsilon), s_f \in F \right\}$
+		\item es gilt: reguläre Sprachen sind Teilmenge der Typ-3-Sprachen\\
+		\begin{itemize}
+			\item[Beweis:] konstruiere zu $A$ einen korrespondierende Grammatik $G=(S,\Sigma,P,S_0)$\\
+			\item[$S:$] $S_i=s_i$, insbesondere $S_0=s_0$
+			\item[$P:$] für jeden Übergang $\delta(s,a)=s'$ die Regel $S \rightarrow aS'$\\
+			zusätzlich die Regeln $S \rightarrow a$, falls $s'$ Endzustand und $S_0 \rightarrow \varepsilon$, falls $s_0$ Endzustand
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Nichtdeterministische endliche Automaten (NFA)}
+	\begin{itemize}
+		\item Ausgangspunkt: Typ-3-Grammatiken erlauben Regeln der Art\\
+		\quad $S_1 \rightarrow aS_2 \mid aS_3$
+		\item korrespondierende nichtdeterministische Automaten: zu
+		einem Zustand $s_1$ kann es bei Eingabe $a$ Übergänge zu
+		verschiedenen Zuständen $s_2, s_3$ geben
+		\item $\delta$ ist dann keine Abbildung, sondern eine allgemeinere Transitionsrelation:\\
+		\quad $\delta \subseteq (S \times \Sigma) \times S$
+		\item akzeptierte Sprache:\\
+		\quad $L(A)=\left\{w \in \Sigma^* \mid (s_0,w) \mapsto^* (S_f, \varepsilon), s_f \in F, s_0 \in S_0 \right\}$
+		\begin{itemize}
+			\item $w$ wird akzeptiert, falls es eine akzeptierende Folge von Konfigurationsübergängen gibt; andere Folgen müssen nicht akzeptierend sein
+			\item $S_0:$ Menge von Startzuständen (mehrere sind erlaubt)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Simulation des Verhaltens von NFAs}
+	\begin{itemize}
+		\item Backtracking: Tiefensuche
+		\begin{itemize}
+			\item Jeweis eine mögliche Alternative wird weiter verfolgt $\rightarrow$ Tiefensuchbaum
+			\item bei "`Sackgasse"': zurück (aufwärts im Baum) bis zur nächsten freien Alternative
+			\item Abbruch, wenn akzeptierende Konfigurationsfolge gefunden oder sonst alle möglichen Konfigurationsfolgen untersucht
+		\end{itemize}
+		\item Breitensuche:
+		\begin{itemize}
+			\item parallele schrittweise Verfolgung aller Verzweigungen (Breitensuchbaum)
+			\item Darstellung von $\delta$ als mengenwertige Funktion $\delta: S \times \Sigma \rightarrow \mathcal{P}(S)$
+			\item Erweiterung auf Folge von Konfigurationsübergängen\\
+			\quad $\hat{\delta}: \mathcal{P}(S) \times \Sigma^* \mapsto \mathcal{P}(S)$\\
+			\quad $\hat{\delta}(S', \varepsilon) = S'$ \quad $\hat{\delta}(S', av)=\hat{\delta}\left(\bigcup_{s \in S}, \delta(s,a),v\right)$ \quad $(S' \in \mathcal{P}(S))$
+			\item Akzeptierte Sprache\\
+			\quad $L(A)=\left\{w \in \Sigma^* \mid \hat{\delta}(S_0,w)\cap F \neq \varnothing\right\}$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Äquivalenz von DFA und NFA}
+	\begin{itemize}
+		\item jede durch einen NFA akzeptierte Sprache kann auch durch einen DFA akzeptiert werden (umgekehrt sowieso)
+		\item Konstruktiver Beweis: Potenzmengenkonstruktion für \underline{DFA} $A_d$ äquivalent zu NFA $(S, \Sigma, \delta, S_0, F)$\\
+		$A_d=\left(S_d, \Sigma, \delta_d, s_0^d, F_d\right)$ mit\\
+		\quad $S_d=\mathcal{P}(S)$; 
+		\quad $s_0^d=S_0 \in \mathcal{P}(S)$;
+		\quad $\delta_d(S', a)=\bigcup_{s \in S}$
+		\quad $\delta(s, a) \in \mathcal{P}(S)$\\
+		\quad $F_d = \left\{S' \in \mathcal{P}(S) \mid S' \cap F \neq \varnothing\right\} \subseteq \mathcal{P}(S)$
+		\item es gilt: $w \in L(A)$ gdw. $\hat{\delta}(S_0, w) \cap F \neq \varnothing$\\
+		\quad gdw. $(s_0^d, w) \mapsto^* (s_f^d, \varepsilon), s_f^d \in F_d$ gdw. $w \in L(A_d)$
+		\item Nutzen: mit NFA kann eine Sprache leichter modelliert werden $\rightarrow$ zur Anwendung in DFA umrechnen
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Äquivalenz von Typ-3-Sprachen und regulären Sprachen}
+	\begin{itemize}
+		\item Menge der regulären Sprachen Teilmenge der Typ-3-Sprachen:\\
+		\quad $\rightarrow$ schon gezeigt (DFA)
+		\item Menge der Typ-3-Sprachen Teilmenge der regulären Sprachen:\\
+		Beweis: konstruiere zu gegebener Typ-3-Grammatik einen (i.A. nichtdeterministischen) FA\\
+		\begin{tabbing}
+			\hspace{5cm}\=\kill
+		$G=(V,\Sigma, P, S_0)$	\> $FA=(S, \Sigma, \delta, s_0, F)$\\ 
+			\> intialisiere: $S=V \cup \left\{f\right\}, s_0=S_0, \delta=\varnothing$\\ 
+			\> $F=\left\{f\right\}$ (neues Symbol $f$)\\ 
+		Regel $A \rightarrow aB$	\> füge ein: $(A, a, B) \in \delta$\\ 
+		Regel $A \rightarrow a$	\> füge ein: $(A, a, f) \in \delta$\\ 
+		Regel $S_0 \rightarrow \varepsilon \mid S_1$	\> füge $S_0$ in $F$ ein; für $S_1$ die Regeln für $S_1$\\ 
+			\> einsetzen (Kettenregel); $S_1$ verbleibt als Zustand
+		\end{tabbing} 
+	\end{itemize}
+\end{frame}
