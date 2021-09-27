@@ -44,9 +44,9 @@
 		\vspace{1em}
 		\begin{tikzpicture}
 			\node[state, initial] (s0) {$s_0$};
-			\node[state, accepting, right of=s0] (sf) {$s_f$};
+			\node[state, accepting, right=of s0] (sf) {$s_f$};
 			\node[state, right=of sf] (s1) {$s_1$};
-			\node[state, right=of s1] (s2) {$s_2$};
+			\node[state, right=1cm of s1] (s2) {$s_2$};
 			
 			\draw	(s1) edge[above] node{a} (s2);
 		\end{tikzpicture}
@@ -146,4 +146,149 @@
 			\> einsetzen (Kettenregel); $S_1$ verbleibt als Zustand
 		\end{tabbing} 
 	\end{itemize}
+\end{frame}
+
+\begin{frame}{Minimalautomat}
+	\begin{itemize}
+		\item Ausgangspunkt: ein DFA;\\
+		Ziel: konstruiere einen äquivalenten DFA mit geringster Anzahl von Zuständen
+		\item Konstruktion
+		\begin{enumerate}
+			\item Beginne mit einer Partition $P_1=\left\{S_{11}, S_{12}\right\}$ der Zustandsmenge $S$ in $S_{11}=F, S_{12}=S \setminus F$
+			\item bilde aus $P_i=\left\{S_{i1},\ldots,S_{ik}\right\}$ die Partition $P_{i+1}$ durch folgende Verfeinerung:\\
+			teile $S_{ij}$, falls es in $S_{ij}$ Zustände $s$ und $s'$ gibt mit:\\
+			für ein $a \in \Sigma$ liegen $\delta(s, a)$ und $\delta(s', a)$ in unterschiedlichen Blöcken $S_{il}$ von $P_i$
+			\item Minimalautomat erreicht, wenn $P_{i+1}=P_i$;\\
+			die $S_{ij}$ bilden dann die Zustände des Minimalautomaten
+		\end{enumerate}
+		\item Minimalautomat kann alternativ auch durch schrittweises Zusammenfassen von Zuständen konstruiert werden (insbesondere falls Menge der Nichtendzustände leer)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Abgeschlossenheit regulärer Sprachen}
+	Seien $L, L_1, L_2$ reguläre Sprachen. Dann sind auch die folgenden Sprachen regulär:
+	\begin{itemize}
+		\item jede endliche Sprache $L \subset \Sigma^*$
+		\item $L = \Sigma^*$
+		\item $L_1 \cup L_2$
+		\item $L_1 \setminus L_2$ (und damit auch Komplement $\Sigma^* \setminus L$)
+		\item $L_1 \cap L_2$
+		\item $L_1L_2$
+		\item $L^*$
+		\item $\tilde{L}$ (gespiegelte Sprache)
+	\end{itemize}
+	\emph{Kleene's Theorem}\\
+		Eine Sprache $L$ ist regulär gdw. sie lässt sich durch endlich viele
+		Anwendungen der Operationen Vereinigung, Konkatenation und $*$ aus
+		einer endlichen Sprache erzeugen.
+\end{frame}
+
+\begin{frame}{Reguläre Ausdrücke}
+	\begin{itemize}
+		\item Zweck: Mittel zur Beschreibung regulärer Sprachen
+		\item Induktive Definition regulärer Ausdrücke $\alpha$ über $\Sigma$
+		\begin{itemize}
+			\item $\varnothing $ ist ein regulärer Ausdruck: $L(\varnothing)=\varnothing$
+			\item $\varepsilon$ ist ein regulärer Ausdruck: $L(\varepsilon)=\left\{\varepsilon\right\}$
+			\item für jedes $a \in \Sigma$ ist $a$ ein regulärer Ausdruck: $L(a)=\left\{a\right\}$
+			\item sind $\alpha$ und $\beta$ reguläre Ausdrücke, dann auch $\alpha^*$, $\alpha\beta$ und $\alpha | \beta$\\
+			\quad $L(\alpha^*)=(L(\alpha))^*,$ $L(\alpha|\beta)=L(\alpha)\cup L(\beta),$ $L(\alpha\beta)=L(\alpha)L(\beta)$
+			\item nur die so gebildeten Ausdrücke sind regulär
+		\end{itemize}
+		\item "`Rechenregeln"' bzw. Bezeichnungen\\
+		\quad $\varnothing|\alpha=\alpha;$ $\varnothing\alpha=\varnothing;$ $\varnothing^*=\varepsilon;$ $\varepsilon\alpha=\alpha;$ $\alpha|\alpha=\alpha;$ $\alpha^+:=\alpha\alpha^*;$ $\alpha^+|\varepsilon=\alpha^*$
+		\item Kleene's Theorem (umformuliert)\\
+		\quad Eine Sprache $L'$ ist regulär gdw.\\
+		\quad es existiert ein regulärer Ausdruck $\alpha$ mit $L'=L(\alpha)$.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{$\varepsilon$-Automaten ($\varepsilon$FA)}
+	\begin{itemize}
+		\item Definition: Erweiterung von NFA; es werden Zustandsübergänge zugelassen ohne Lesen eines Zeichens\\
+		\quad $\delta\subseteq S \times \left(\Sigma \cup \left\{\varepsilon\right\}\right) \times S$
+		\item Nutzen:
+		\begin{itemize}
+			\item besonders geeignet zum Zusammensetzen von Automaten aus Teilautomaten
+			\item Umsetzung regulärer Ausdrücke in $\varepsilon$-Automaten, danach in NFA und damit auch in DFA umrechenbar
+		\end{itemize}
+		\item Beispiel: $\alpha=a^*b^*$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Zusammengesetzte Automaten}
+	
+	\begin{columns}
+		\begin{column}{0.5\textwidth}  %%<--- here
+			\begin{tikzpicture}
+				\node[state, initial] (s0) {$s_0$};
+				\node[state, right=1.5cm of s0, accepting] (sf) {$s_f$};
+				
+				\draw	(s0) edge[above] node{$\alpha$} (sf);
+			\end{tikzpicture}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			Top-Down-Zugang: zerlege den durch den regulären Ausdruck $\alpha$ beschriebenen Automaten in Teilbestandteile
+		\end{column}
+	\end{columns}
+	
+	\begin{tikzpicture}
+		\node[state] (s11l) {$s_1$};
+		\node[state, right=1.5cm of s11l] (s21l) {$s_2$};
+		\draw (s11l) edge[above] node{$\alpha_1|\alpha_2$} (s21l);
+		
+		\coordinate[right=1cm of s21l] (a1l);
+		\coordinate[right=1cm of a1l] (a1r);
+		\draw [-Triangle, line width=3pt](a1l) -- (a1r);
+		
+		\node[state, right=1cm of a1r] (s11r) {$s_1$};
+		\node[state, right=1.5cm of s11r] (s21r) {$s_2$};
+		\draw (s11r) edge[above, bend left] node{$\alpha_1$} (s21r);
+		\draw (s11r) edge[below, bend right] node{$\alpha_2$} (s21r);
+		
+		
+		\node[state, below=0.75cm of s11l] (s12l) {$s_1$};
+		\node[state, right=1.5cm of s12l] (s22l) {$s_2$};
+		\draw (s12l) edge[above] node{$\alpha_1\alpha_2$} (s22l);
+		
+		\coordinate[right=1cm of s22l] (a2l);
+		\coordinate[right=1cm of a2l] (a2r);
+		\draw [-Triangle, line width=3pt](a2l) -- (a2r);
+		
+		\node[state, right=1cm of a2r] (s12r) {$s_1$};
+		\node[state, right=1cm of s12r] (sq2r) {$q$};
+		\node[state, right=1cm of sq2r] (s22r) {$s_2$};
+		\draw (s12r) edge[above] node{$\alpha_1$} (sq2r);
+		\draw (sq2r) edge[above] node{$\alpha_2$} (s22r);
+		
+		\node[state, below=0.5cm of s12l] (s13l) {$s_1$};
+		\node[state, right=1.5cm of s13l] (s23l) {$s_2$};
+		\draw (s13l) edge[above] node{$\alpha^*$} (s23l);
+		
+		\coordinate[right=1cm of s23l] (a3l);
+		\coordinate[right=1cm of a3l] (a3r);
+		\draw [-Triangle, line width=3pt](a3l) -- (a3r);
+		
+		\node[state, right=1cm of a3r] (s13r) {$s_1$};
+		\node[state, right=1cm of s13r] (sq13r) {$q_1$};
+		\node[state, right=1cm of sq13r] (sq23r) {$q_2$};
+		\node[state, right=1cm of sq23r] (s23r) {$s_2$};
+		\draw (s13r) edge[above] node{$\varepsilon$} (sq13r);
+		\draw (sq13r) edge[above, bend left] node{$\varepsilon$} (sq23r);
+		\draw (sq23r) edge[below, bend left] node{$\alpha$} (sq13r);
+		\draw (sq23r) edge[above] node{$\varepsilon$} (s23r);
+		
+	\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Äquivalenz von $\varepsilon$FA und NFA}
+	Konstruktion eines zu einem $\varepsilon$FA äquivalenten NFA
+	\begin{enumerate}
+		\item erweitere $A$ um zwei Zustände $i$ und $f$; $\varepsilon$-Übergänge von $i$ zu allen Anfangszuständen aus $S_0$, sowie von allen Endzuständen aus $F$ zu $f$
+		\item eliminiere alle $\varepsilon$-Zyklen; die betroffenen Zustände werden zu einem neuen Zustand zusammengefasst; verbleibende $\varepsilon$-Übergänge des neuen Zustands auf sich selbst werden entfernt
+		\item Neue Übergänge einfügen: gibt es einen $\varepsilon$-Übergang von $s_1$ nach $s_2$, und einen $a$-Übergang von $s_2$ nach $s_3$ (bzw. auch $a$-Übergang von $s_1$ nach $s_2$, und einen $\varepsilon$-Übergang von $s_2$ nach $s_3$), dann füge einen Übergang $(s_1,a,s_3)$ ein; iterieren über neu hinzugefügte Übergänge
+		\item Endzustandsmenge bestimmen: Endzustände sind alle Zustände von
+		denen aus $f$ über eine Folge von $\varepsilon$-Übergängen erreichbar ist
+		\item alle $\varepsilon$-Übergänge eliminieren
+	\end{enumerate}
 \end{frame}
