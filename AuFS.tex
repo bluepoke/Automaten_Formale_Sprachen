@@ -5,6 +5,31 @@
 
 % metropolis theme: https://github.com/matze/mtheme
 \usetheme[sectionpage=progressbar,subsectionpage=progressbar,progressbar=frametitle]{metropolis}
+
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}[subsections numbered]
+
+\makeatletter
+\setbeamertemplate{section page}{
+	\centering
+	\begin{minipage}{22em}
+		\raggedright
+		\usebeamercolor[fg]{section title}
+		\usebeamerfont{section title}
+		\thesection.~\insertsectionhead\\[-1ex]
+		\usebeamertemplate*{progress bar in section page}
+		\par
+		\ifx\insertsubsectionhead\@empty\else%
+		\usebeamercolor[fg]{subsection title}%
+		\usebeamerfont{subsection title}%
+		\thesection.\thesubsection~\insertsubsectionhead
+		\fi
+	\end{minipage}
+	\par
+	\vspace{\baselineskip}
+}
+\makeatother
+
 \definecolor{myColor}{HTML}{4477AA}
 \definecolor{pitchblack}{HTML}{000000}
 \setbeamercolor{alerted text}{fg=myColor}
@@ -67,46 +92,52 @@
 	\end{frame}
 }
 
-%table of contents
-\begin{frame}
-	\frametitle{Gliederung}
-	\tableofcontents
-\end{frame}
-
-\frame{
-	\frametitle{Sprachen im Kontext der Informatik}
-	
-	\begin{itemize}
-		\item \emph{Sprache:} Menge zulässiger Worte über einem Alphabet
-		\item \emph{Programm:} String über einem Alphabet von Eingabezeichen (Quellcode) bzw. binär über 0/1
-		\item \emph{Compiler:} 
-		\begin{itemize}
-			\item prüft die Zulässigkeit dieses Strings als Satz (Wort) einer Sprache
-			\item generiert Folge von Maschinenbefehlen
-		\end{itemize}
-		\item \emph{Lexikalische Analyse:} Übersetzer-Modul ("`Scanner"') fasst Symbolfolgen zu Schlüsselworten ("`Token"') zusammen
-		\item \emph{Syntaxanalyse:}
-		\begin{itemize}
-			\item "`Parser"' prüft, ob Folge von Token zulässig ist
-			\item Semantik-Prüfung erfolgt dabei nicht
-		\end{itemize}
-	\end{itemize}
-}
-
 \begin{frame}
 	\frametitle{Literatur}
 	\begin{itemize}
-	  \item Grundlage der Vorlesung
+		\item Script zur Vorlesung
+		\begin{itemize}
+			\item \url{https://github.com/bluepoke/Automaten_Formale_Sprachen}
+		\end{itemize}
+		\item Grundlage der Vorlesung
 		\begin{itemize}
 			\item Schöning, U.: \textit{Logik für Informatiker}
 			\item Schöning, U.: \textit{Theoretische Informatik - kurz gefasst}
 		\end{itemize}
 		\item Weitere Literatur
 		\begin{itemize}
-			\item Vossen, G.; Witt, K. U.: Grundlagen der Theoretischen
+			\item Vossen, G.; Witt, K. U.: \textit{Grundlagen der Theoretischen Informatik mit Anwendungen}
+			\item Hollas, B.: \textit{Grundkurs Theoretische Informatik}
+			\item Erk, K.;  Priese, L.: \textit{Theoretische Informatik}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
+
+%table of contents
+\begin{frame}
+	\frametitle{Gliederung}
+	\tableofcontents
+\end{frame}
+
+%\frame{
+%	\frametitle{Sprachen im Kontext der Informatik}
+%	
+%	\begin{itemize}
+%		\item \emph{Sprache:} Menge zulässiger Worte über einem Alphabet
+%		\item \emph{Programm:} String über einem Alphabet von Eingabezeichen (Quellcode) bzw. binär über 0/1
+%		\item \emph{Compiler:} 
+%		\begin{itemize}
+%			\item prüft die Zulässigkeit dieses Strings als Satz (Wort) einer Sprache
+%			\item generiert Folge von Maschinenbefehlen
+%		\end{itemize}
+%		\item \emph{Lexikalische Analyse:} Übersetzer-Modul ("`Scanner"') fasst Symbolfolgen zu Schlüsselworten ("`Token"') zusammen
+%		\item \emph{Syntaxanalyse:}
+%		\begin{itemize}
+%			\item "`Parser"' prüft, ob Folge von Token zulässig ist
+%			\item Semantik-Prüfung erfolgt dabei nicht
+%		\end{itemize}
+%	\end{itemize}
+%}
 
 \include{logik}
 \include{logischer_schluss}
