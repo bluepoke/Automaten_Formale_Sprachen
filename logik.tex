@@ -197,11 +197,11 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Disjunktive und konjunktive Normalform}
+\begin{frame}{Disjunktive Normalform (DNF) und Konjunktive Normalform (KNF)}
 	\begin{itemize}
-		\item Disjunktive Normalform \emph{DNF:} Disjunktion von Monomen\\
+		\item Disjunktive Normalform \emph{DNF:} Disjunktion von Konjunktionen (Monomen)\\
 		$F=\bigvee_i\left(\bigwedge_jL_{ij}\right)$
-		\item Konjunktive Normalform \emph{KNF:} Konjunktion von Klauseln\\
+		\item Konjunktive Normalform \emph{KNF:} Konjunktion von Disjunktionen (Klauseln)\\
 		$F=\bigwedge_i\left(\bigvee_jL_{ij}\right)$
 		\item Für jede Formel existiert eine äquivalente Formel in KNF und eine äquivalente Formel in DNF
 		\begin{itemize}
@@ -231,6 +231,39 @@
 		\item Übungsbeispiel (KNF, aber nicht kanonisch)\\
 		$F=\neg B \land (A \lor \neg C)$
 	\end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiel: Konstruktion von KDNF und KKNF aus Wahrheitstafel}
+	\begin{columns}
+		\column{.3\textwidth}
+		\begin{center}
+			\begin{tabular}{|c|c|c||c|}
+				\hline
+				A & B & C & F \\
+				\hline
+				0 & 0 & 0 & 1 \\
+				0 & 0 & 1 & 0 \\
+				0 & 1 & 0 & 0 \\
+				0 & 1 & 1 & 0 \\
+				1 & 0 & 0 & 1 \\
+				1 & 0 & 1 & 1 \\
+				1 & 1 & 0 & 0 \\
+				1 & 1 & 1 & 0 \\
+				\hline
+			\end{tabular}
+		\end{center}
+		\column{.7\textwidth}
+		\begin{itemize}
+			\item [KDNF:] Werte für F=1 auslesen
+			$$(\neg A \land \neg B \land \neg C) \lor (A \land \neg B \land \neg C) \lor (A \land \neg B \land C)$$
+			\item [KKNF:] Werte für F=0 auslesen und Literale negieren
+			\begin{align*}
+				&(A \lor B \lor \neg C) \land (A \lor \neg B \lor C) \land \\
+				&(A \lor \neg B \lor \neg C) \land (\neg A \lor \neg B \lor C) \land (\neg A \lor \neg B \lor \neg C)
+			\end{align*}
+			\item Minimierung der KKNF und KDNF durch Karnaugh-Veitch-Diagramm möglich (dann aber i.d.R. nicht mehr kanonisch)
+		\end{itemize}
+	\end{columns}
 \end{frame}
 
 \begin{frame}{Aussagenlogische Formeln in Java}
