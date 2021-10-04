@@ -149,7 +149,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Beispiel: direkter Beweis der Gültigkeit einer Formel (als Alternative zur Wahrheitstafel)}
+\begin{frame}{Beispiel: direkter Beweis der Gültigkeit einer Formel\\ \hspace{1.6cm} (als Alternative zur Wahrheitstafel)}
 	\begin{columns}
 		\column{.5\textwidth}
 		\begin{eqnarray*}
@@ -165,23 +165,19 @@
 				  &\equiv& w
 		\end{eqnarray*}
 		\column{.5\textwidth}
-		\begin{table}
-			\begin{tabular}{|c|c|c|c|c|}
+			\begin{tabular}{|c|c|c|c||c|}
 				\hline
 				$A$ & $B$ & $A \rightarrow B$ & $A \land (A \rightarrow B)$ & $F$ \\
 				\hline
 				f & f & w & f & w \\
-				\hline
+				%\hline
 				f & w & w & f & w \\
-				\hline
+				%\hline
 				w & f & f & f & w \\
-				\hline
+				%\hline
 				w & w & w & w & w \\
 				\hline
 			\end{tabular}
-			\caption{Wahrheitstafel}
-			\label{tblWahrheitswerteGrundoperationen}
-		\end{table}
 	\end{columns}		
 \end{frame}
 
