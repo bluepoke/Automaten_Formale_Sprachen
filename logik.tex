@@ -262,6 +262,33 @@
 	\end{columns}
 \end{frame}
 
+\begin{frame}{Beispiel: Karnaugh-Tafel}
+	\begin{columns}
+	\column{.5\textwidth}
+	Karnaugh-Tafel für $F=\neg B \land (A \lor \neg C)$
+	\begin{center}
+		\begin{tabular}{|c||c|c|c|c|}
+			\hline
+			& $AB$ & $\neg A B$ & $\neg A \neg B$ & $A \neg B$ \\
+			\hline
+			\hline
+			$C$ & 0 & 0 & 0 & 1 \\
+			\hline
+			$\neg C$ & 0 & 0 & 1 & 1 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\column{.5\textwidth}
+	Abgeleitete Formeln:
+	\begin{itemize}
+		\item [DNF:] Einsen zu Blöcken (Größe $2^n$) und die Variablen im Block weglassen, die sowohl positiv als auch negativ vertreten sind. Variablen mit Konjunktion verknüpfen, Blöcke mit Disjunktion:\\
+		$(\neg B \land \neg C) \lor (A \land \neg B)$
+		\item [KNF:] Wie DNF, aber: Nullen zu Blöcken, Variablen negieren, Verknüfungen umkehren\\
+		$(\neg B) \land (A \lor \neg C)$
+	\end{itemize}
+	\end{columns}
+\end{frame}
+
 \begin{frame}{Aussagenlogische Formeln in Java}
 	\begin{itemize}
 		\item Datentyp \texttt{boolean}\\
