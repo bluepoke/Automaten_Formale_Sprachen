@@ -208,6 +208,19 @@
 	\end{itemize}
 \end{frame}
 
+\note{
+Beispiel DNF/KNF durch Umformung:
+\begin{align*}
+	\neg &(x \leftrightarrow y) \rightarrow z\\
+  \equiv &(x \leftrightarrow y) \lor z\\
+  \equiv &(x \land y) \lor (\neg x \land \neg y) \lor z \textrm{\qquad[DNF]}\\
+  \equiv &(\underbrace{(x \lor \neg x)}_1 \land (x \lor \neg y) \land (y \lor \neg x) \land \underbrace{(y \lor \neg y)}_1) \lor z\\
+  \equiv &((x \lor \neg y) \land (y \lor \neg x)) \lor z\\
+  \equiv &(x \lor \neg y \lor z) \land (y \lor \neg x \lor z) \textrm{\qquad[KNF]}
+\end{align*}
+
+}
+
 \begin{frame}{Konstruktion kanonische DNF/KNF aus Wahrheitstafel}
 	\begin{itemize}
 		\item \emph{Kanonische} DNF bzw. KNF: jede Aussagenvariable kommt in jedem Monom bzw. jeder Klausel genau einmal vor (positiv oder negativ)
@@ -283,7 +296,7 @@
 	\begin{itemize}
 		\item [DNF:] Einsen zu Blöcken (Größe $2^n$) und die Variablen im Block weglassen, die sowohl positiv als auch negativ vertreten sind. Variablen mit Konjunktion verknüpfen, Blöcke mit Disjunktion:\\
 		$(\neg B \land \neg C) \lor (A \land \neg B)$
-		\item [KNF:] Wie DNF, aber: Nullen zu Blöcken, Variablen negieren, Verknüfungen umkehren\\
+		\item [KNF:] Wie DNF, aber: Nullen zu Blöcken, Variablen negieren, Verknüpfungen umkehren\\
 		$(\neg B) \land (A \lor \neg C)$
 	\end{itemize}
 	\end{columns}
@@ -430,6 +443,12 @@
 		\end{itemize}
 	\end{columns}		
 \end{frame}
+
+\note{
+George Boole (1815-1864)\\
+englischer Mathematiker\\
+Begründer der modernen mathematischen Logik
+}
 
 \begin{frame}{Beispiele}
 	\begin{itemize}
