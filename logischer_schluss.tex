@@ -30,6 +30,15 @@
 	\end{itemize}
 \end{frame}
 
+\note{
+	\begin{itemize}
+		\item Modus ponens: "`Wenn es regnet, wird die Straße nass. Es regnet."'\\
+		$\rightarrow$ "`Die Straße wird nass."'
+		\item Modus tollens: "`Wenn es geregnet hat, ist die Straße nass. Die Straße ist nicht nass."'\\
+		$\rightarrow$ "`Es hat nicht geregnet."'
+\end{itemize}
+}
+
 \begin{frame}{Bemerkungen und Beispiel}
 	\begin{itemize}
 		\item Zweckmäßige Tipps
@@ -45,6 +54,20 @@
 			zeige: $D$
 	\end{itemize}
 \end{frame}
+
+\note{
+	\scriptsize
+	\begin{enumerate}[(1)]
+		\item $A$
+		\item $B \rightarrow C$
+		\item $(A \land B) \rightarrow (D \lor \neg C) \equiv (A \land B) \rightarrow (C \rightarrow D)$
+		\item $B$
+		\item $C$  \qquad[aus (2) und (4)]
+		\item $A \land B$  \qquad[aus (1) und (4)]
+		\item $C \rightarrow D$  \qquad[aus (3) und (6)]
+		\item $D$  \qquad[aus (5) und (7)]
+	\end{enumerate}
+}
 
 \begin{frame}[shrink=5]{Beweistypen (deduktiv)}
 	\begin{columns}
@@ -74,6 +97,8 @@
 			\end{enumerate}
 	\end{columns}
 \end{frame}
+
+\note{Deduktion = "`Schluss vom Allgemeinen auf das Besondere"' (Aristoteles), d.h. Schlussfolgerung von Prämissen auf Konklusion}
 
 \begin{frame}{Exkurs: Methode der vollständigen Induktion}
 	\begin{itemize}
