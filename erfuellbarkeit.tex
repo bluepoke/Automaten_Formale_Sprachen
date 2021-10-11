@@ -42,7 +42,7 @@
 		$F=(B \land (B \rightarrow A) \land (A \land B \rightarrow C)) \rightarrow (A \land C)$\\
 		eine Tautologie. Es gilt\\
 		$\neg F = B \land (B \rightarrow A) \land (A \land B \rightarrow C) \land (\neg A \lor \neg C)$\\
-		das ist Hornformel, mit Zielklausel $(\neg A \lor \neg C) (\equiv (A \land C) \rightarrow f)$
+		das ist Hornformel, mit Zielklausel $(\neg A \lor \neg C) \equiv ((A \land C) \rightarrow f)$
 		\item Anstelle die Gültigkeit von F direkt zu beweisen, zeige die Nichterfüllbarkeit der Hornformel $\neg F$
 	\end{itemize}
 \end{frame}
@@ -53,7 +53,7 @@
 		\item Für alle Teilformeln der Art $w \rightarrow A$: markiere in allen Teilformeln auftretende $A$
 		\item while (es gibt Teilformeln der Art
 		\begin{enumerate}
-			\item[(i)] $A_1 \land A_2 \land \ldots \land A_n \rightarrow B$ oder
+			\item[(i)] $A_1 \land A_2 \land \ldots \land A_n \rightarrow B$ bzw. $1 \rightarrow B$ oder
 			\item[(ii)] $A_1 \land A_2 \land \ldots \land A_n \rightarrow f$\\
 			mit: alle $A_i$ markiert, $B$ nicht markiert)\\
 			if (Fall (i)) markiere alle B\\
@@ -66,6 +66,21 @@
 	\end{enumerate}
 \end{frame}
 
+\begin{frame}{Beispiel: Markierungsalgorithmus}
+	$$F=(\neg A \lor \neg B \lor \neg D) \land \neg E \land (\neg C \lor A) \land C \land B \land (\neg G \lor D) \land G$$
+\end{frame}
+
+\note{\begin{align*}
+		F &= (\neg A \lor \neg B \lor \neg D) \land \neg E \land (\neg C \lor A) \land C \land B \land (\neg G \lor D) \land G\\
+		&= (A \land B \land D \rightarrow 0) \land (E \rightarrow 0) \land (C \rightarrow A) \land \\
+		& \qquad (1 \rightarrow C) \land (1 \rightarrow B) \land (G \rightarrow D) \land (1 \rightarrow G) \\
+		&= (A \land \stkout{B} \land D \rightarrow 0) \land (E \rightarrow 0) \land (\stkout{C} \rightarrow A) \land \\
+		& \qquad \stkout{(1 \rightarrow C)} \land \stkout{(1 \rightarrow B)} \land (\stkout{G} \rightarrow D) \land \stkout{(1 \rightarrow G)} \\
+		&= (\stkout{A} \land \stkout{B} \land \stkout{D} \rightarrow 0) \land (E \rightarrow 0) \land \stkout{(\stkout{C} \rightarrow A)} \land \\
+		& \qquad \stkout{(1 \rightarrow C)} \land \stkout{(1 \rightarrow B)} \land \stkout{(\stkout{G} \rightarrow D)} \land \stkout{(1 \rightarrow G)} \\
+	\end{align*}
+	unerfüllbar, wegen $(\stkout{A} \land \stkout{B} \land \stkout{D} \rightarrow 0)$
+}
 \begin{frame}{Erfüllbarkeitstest (Hornklauselalgorithmus)}
 	Sei $S$ Menge von Hornklauseln\\
 	while ($S$ enthält eine positive Klausel $\left\{A_i\right\}$)\\
