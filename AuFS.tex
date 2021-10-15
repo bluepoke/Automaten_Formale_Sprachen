@@ -7,6 +7,7 @@
 \usetheme[sectionpage=progressbar,subsectionpage=progressbar,progressbar=frametitle]{metropolis}
 
 % Notizen
+%\setbeameroption{show notes}
 %\setbeameroption{show notes on second screen=right}
 
 \setbeamertemplate{section in toc}[sections numbered]
@@ -132,6 +133,9 @@
 \usepackage[normalem]{ulem}
 \usepackage{amsmath}
 \newcommand{\stkout}[1]{\ifmmode\text{\sout{\ensuremath{#1}}}\else\sout{#1}\fi}
+
+\usepackage{tabularx} %same-width columns
+\newcolumntype{Y}{>{\centering\arraybackslash}X} %columntype Y is centered column for tabularx
 
 \setcounter{tocdepth}{1} % only sections in TOC
 

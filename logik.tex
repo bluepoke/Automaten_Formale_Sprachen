@@ -386,6 +386,132 @@ Beispiel DNF/KNF durch Umformung:
 	\end{itemize}
 \end{frame}
 
+\begin{frame}{Beispiel: Reflexivität}
+	% change settings of tikz for state machine drawings
+	\tikzset {
+		->, % makes the edges directed
+		>=stealth, % makes the arrow heads bold
+		node distance=2cm and 2cm, % specifies the minimum distance between two nodes.
+		every state/.style={thick, fill=gray!10}, %properties for every 'state' node
+		initial text=$ $, % Remove text from start arrow
+	}
+	\begin{itemize}
+		\item Reflexivität: Jedes Element der Relation steht mit sich selbst in Relation.
+		\begin{itemize}
+			\item "`$=$"': $a=a$
+			\item "`Studenten mit gleicher Punktzahl in einer Klausur"': Jeder Student hat die gleiche Punktzahl wie er selbst.
+			\item Darstellung als Tabelle und Graph:\\
+			\vspace{1em}
+				\begin{columns}
+				\column{.2\textwidth}
+				\begin{tabularx}{\textwidth}{|Y|Y|Y|Y|Y|}
+					\hline
+					& A & B & C & D \\
+					\hline
+					A & X &  &  &  \\
+					\hline
+					B &  & X &  &  \\
+					\hline
+					C &  &  & X &  \\
+					\hline
+					D &  &  &  & X \\
+					\hline
+				\end{tabularx}
+				\column{.3\textwidth}
+				\begin{tikzpicture}
+					\node[state] (A) {$A$};
+					\node[state, right=1cm of A] (B) {$B$};
+					\node[state, below=1cm of A] (C) {$C$};
+					\node[state, right=1cm of C] (D) {$D$};
+					
+					\draw	(A) edge[loop above] (A);
+					\draw	(B) edge[loop above] (B);
+					\draw	(C) edge[loop above] (C);
+					\draw	(D) edge[loop above] (D);
+				\end{tikzpicture}
+			\end{columns}
+		\end{itemize}
+	\end{itemize}	
+\end{frame}
+
+\begin{frame}{Beispiel: Symmetrie}
+	% change settings of tikz for state machine drawings
+	\tikzset {
+		->, % makes the edges directed
+		>=stealth, % makes the arrow heads bold
+		node distance=2cm and 2cm, % specifies the minimum distance between two nodes.
+		every state/.style={thick, fill=gray!10}, %properties for every 'state' node
+		initial text=$ $, % Remove text from start arrow
+	}
+	\begin{itemize}
+		\item Symmetrie: zwei Elemente, die in Relation stehen, stehen umgekehrt auch in Relation.
+		\begin{itemize}
+			\item "`$=$"': $a=b\quad\rightarrow\quad b=a$
+			\item "`Geschwister"': Anna ist Geschwister von Charlie. Dann ist Charlie auch Geschwister von Anna.
+			\item Darstellung als Tabelle und Graph:\\
+			\vspace{1em}
+			\begin{columns}
+				\column{.2\textwidth}
+				\begin{tabularx}{\textwidth}{|Y|Y|Y|Y|Y|}
+					\hline
+					& A & B & C & D \\
+					\hline
+					A &  &  & X &  \\
+					\hline
+					B &  &  &  & X \\
+					\hline
+					C & X &  &  &  \\
+					\hline
+					D &  & X &  &  \\
+					\hline
+				\end{tabularx}
+				\column{.3\textwidth}
+				\begin{tikzpicture}
+					\node[state] (A) {$A$};
+					\node[state, right=1cm of A] (B) {$B$};
+					\node[state, below=1cm of A] (C) {$C$};
+					\node[state, right=1cm of C] (D) {$D$};
+					
+					\draw	(A) edge[bend left] (C);
+					\draw	(B) edge[bend left] (D);
+					\draw	(C) edge[bend left] (A);
+					\draw	(D) edge[bend left] (B);
+				\end{tikzpicture}
+			\end{columns}
+		\end{itemize}
+	\end{itemize}	
+\end{frame}
+
+\begin{frame}{Beispiel: Transitivität}
+	% change settings of tikz for state machine drawings
+	\tikzset {
+		->, % makes the edges directed
+		>=stealth, % makes the arrow heads bold
+		node distance=2cm and 2cm, % specifies the minimum distance between two nodes.
+		every state/.style={thick, fill=gray!10}, %properties for every 'state' node
+		initial text=$ $, % Remove text from start arrow
+	}
+	\begin{itemize}
+		\item Transitivität: Wenn ein Element mit einem anderen in Relation steht, und dieses wiederum mit einem dritten, so steht auch das erste mit dem dritten Element in Relation.
+		\begin{itemize}
+			\item "`$=$"': $a=b \land b=a \rightarrow a=c$
+			\item "`Vorfahren"': Albert ist Vorfahr von Brunhilde. Brunhilde ist Vorfahr von Diana. Dann ist Albert auch Vorfahr von Diana.
+			\item Darstellung als Graph (in Tabelle nicht gut zu sehen):\\
+			\vspace{1em}
+				\begin{tikzpicture}
+					\node[state] (A) {$A$};
+					\node[state, right=1cm of A] (B) {$B$};
+					\node[state, below=1cm of A] (C) {$C$};
+					\node[state, right=1cm of C] (D) {$D$};
+					
+					\draw	(A) -- (B);
+					\draw	(B) -- (D);
+					\draw	(A) -- (D);
+				\end{tikzpicture}
+		\end{itemize}
+	\end{itemize}	
+\end{frame}
+
 \begin{frame}{Äquivalenzrelationen}
 	\begin{itemize}
 		\item Definition: $R$ in $M$ heißt Äquivalenzrelation in $M$ gdw. $R$ ist reflexiv, symmetrisch und transitiv
