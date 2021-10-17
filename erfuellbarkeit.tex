@@ -70,16 +70,17 @@
 	$$F=(\neg A \lor \neg B \lor \neg D) \land \neg E \land (\neg C \lor A) \land C \land B \land (\neg G \lor D) \land G$$
 \end{frame}
 
-\note{\begin{align*}
+\note{\scriptsize
+	\begin{align*}
 		F &= (\neg A \lor \neg B \lor \neg D) \land \neg E \land (\neg C \lor A) \land C \land B \land (\neg G \lor D) \land G\\
 		&= (A \land B \land D \rightarrow 0) \land (E \rightarrow 0) \land (C \rightarrow A) \land \\
 		& \qquad (1 \rightarrow C) \land (1 \rightarrow B) \land (G \rightarrow D) \land (1 \rightarrow G) \\
 		&= (A \land \stkout{B} \land D \rightarrow 0) \land (E \rightarrow 0) \land (\stkout{C} \rightarrow A) \land \\
 		& \qquad \stkout{(1 \rightarrow C)} \land \stkout{(1 \rightarrow B)} \land (\stkout{G} \rightarrow D) \land \stkout{(1 \rightarrow G)} \\
 		&= (\stkout{A} \land \stkout{B} \land \stkout{D} \rightarrow 0) \land (E \rightarrow 0) \land \stkout{(\stkout{C} \rightarrow A)} \land \\
-		& \qquad \stkout{(1 \rightarrow C)} \land \stkout{(1 \rightarrow B)} \land \stkout{(\stkout{G} \rightarrow D)} \land \stkout{(1 \rightarrow G)} \\
+		& \qquad \stkout{(1 \rightarrow C)} \land \stkout{(1 \rightarrow B)} \land \stkout{(\stkout{G} \rightarrow D)} \land \stkout{(1 \rightarrow G)}\\
+		& \textrm{unerfüllbar, wegen } (\stkout{A} \land \stkout{B} \land \stkout{D} \rightarrow 0)
 	\end{align*}
-	unerfüllbar, wegen $(\stkout{A} \land \stkout{B} \land \stkout{D} \rightarrow 0)$
 }
 \begin{frame}{Erfüllbarkeitstest (Hornklauselalgorithmus)}
 	Sei $S$ Menge von Hornklauseln\\
@@ -92,6 +93,17 @@
 	else Rückgabe "`erfüllbar"'\\
 	end
 \end{frame}
+
+\note{\begin{align*}
+F &= \left\{\left\{\overline{A}, \overline{B}, \overline{D}\right\}, \left\{\overline{E}\right\}, \left\{\overline{C}, A\right\}, \left\{C\right\}, \left\{B\right\}, \left\{\overline{G}, D\right\}, \left\{G\right\}\right\}\\
+ &\equiv \left\{\left\{\overline{A}, \overline{B}, \overline{D}\right\}, \left\{\overline{E}\right\}, \left\{\stkout{\overline{C}}, A\right\}, \stkout{\left\{C\right\}}, \left\{B\right\}, \left\{\overline{G}, D\right\}, \left\{G\right\}\right\}\\
+ &\equiv \left\{\left\{\overline{A}, \stkout{\overline{B}}, \overline{D}\right\}, \left\{\overline{E}\right\}, \left\{\stkout{\overline{C}}, A\right\}, \stkout{\left\{C\right\}}, \stkout{\left\{B\right\}}, \left\{\overline{G}, D\right\}, \left\{G\right\}\right\}\\
+ &\equiv \left\{\left\{\stkout{\overline{A}}, \stkout{\overline{B}}, \overline{D}\right\}, \left\{\overline{E}\right\}, \stkout{\left\{\stkout{\overline{C}}, A\right\}}, \stkout{\left\{C\right\}}, \stkout{\left\{B\right\}}, \left\{\overline{G}, D\right\}, \left\{G\right\}\right\}\\
+ &\equiv \left\{\left\{\stkout{\overline{A}}, \stkout{\overline{B}}, \overline{D}\right\}, \left\{\overline{E}\right\}, \stkout{\left\{\stkout{\overline{C}}, A\right\}}, \stkout{\left\{C\right\}}, \stkout{\left\{B\right\}}, \left\{\stkout{\overline{G}}, D\right\}, \stkout{\left\{G\right\}}\right\}\\
+ &\equiv \{\underbrace{\left\{\stkout{\overline{A}}, \stkout{\overline{B}}, \stkout{\overline{D}}\right\}}_\Box, \left\{\overline{E}\right\}, \stkout{\left\{\stkout{\overline{C}}, A\right\}}, \stkout{\left\{C\right\}}, \stkout{\left\{B\right\}}, \stkout{\left\{\stkout{\overline{G}}, D\right\}}, \stkout{\left\{G\right\}}\}\\
+\end{align*}
+
+}
 
 \begin{frame}{Erfüllbarkeit allgemeiner Klauselmengen: Davis-Putnam-Regeln}
 	\begin{itemize}
@@ -119,27 +131,54 @@
 		\item Definition: Resolvente
 		\begin{itemize}
 			\item sei $L$ ein Literal und $\overline{L}$ das negierte Literal
-			\item sei $c_1$ eine Klausel, die $L$ enthält, $c_2$ eine Klausel, die $\overline{L}$ enthält
-			\item dann heißt die Klausel $res_L(c_1, c_2)=\left(c_1 \setminus \left\{L\right\}\right) \cup \left(c_2 \setminus \left\{\overline{L}\right\}\right)$
-			\item Gesprochen: "`Resolvente der Klauseln $c_1$ und $c_2$ nach $L$"'
+			\item sei $K_1$ eine Klausel, die $L$ enthält, $K_2$ eine Klausel, die $\overline{L}$ enthält
+			\item dann heißt die Klausel $RES_L(K_1, K_2)=\left(K_1 \setminus \left\{L\right\}\right) \cup \left(K_2 \setminus \left\{\overline{L}\right\}\right)$
+			\item Gesprochen: "`Resolvente der Klauseln $K_1$ und $K_2$ nach $L$"'
+			\item Notation: $\left\{K_1, K_2\right\} \vdash_{res} RES_L$
 		\end{itemize}
 		\item Resolutionslemma\\
-		sei $I$ ein Modell von $c_1$ und $c_2$, dann ist $I$ auch Modell von $res_L(c_1, c_2)$, d.h. $I \cap c_1 \neq \varnothing \land I \cap c_2 \neq \varnothing \rightarrow I \cap res_L(c_1, c_2) \neq \varnothing$
+		sei $I$ ein Modell von $K_1$ und $K_2$, dann ist $I$ auch Modell von $RES_L(K_1, K_2)$, d.h. $I \cap K_1 \neq \varnothing \land I \cap K_2 \neq \varnothing \rightarrow I \cap RES_L(K_1, K_2) \neq \varnothing$
 	\end{itemize}
 \end{frame}
+
+\note{
+Lemma: "`Hilfssatz"', auch "`Stichwort"' oder "`Hauptgedanke"'. Wird zum Beweisen von anderen, allgemeingültigeren "`Sätzen"' ("`Theoremen"') verwendet.
+}
 
 \begin{frame}{Grundresolutionstheorem}
 	\begin{itemize}
 		\item Zu $S$ erfüllbarkeitsäquivalente Klauselmenge $RES_L(S)$
 		\begin{itemize}
-			\item sei $S$ Klauselmenge; $k$ Anzahl der Variablen; definiere:\\
-			$RES_L(S)=S_L^0 \bigcup \left\{res_L(c_1, c_2) \mid c_1 \in S_L^+, c_2 \in S_L^-\right\}$
+			\item sei $S$ Klauselmenge; $n$ Anzahl der Variablen; definiere:\\
+			$RES_L(S)=S_L^0 \bigcup \left\{RES_L(K_1, K_2) \mid K_1 \in S_L^+, K_2 \in S_L^-\right\}$
 			\item beachte: $RES_L(S)$ enhält $L$ bzw. $\overline{L}$ nicht mehr
 			\item es gilt: $S$ ist erfüllbar gdw. $RES_L(S)$ ist erfüllbar
 		\end{itemize}
 		\item Grundresolutionstheorem: eine Klauselmenge $S$ ist unerfüllbar gdw. $S$ lässt sich mittels Resolution widerlegen, d.h. die leere Klausel ist herleitbar
 		\item Systematische Durchführung:\\
-		$S_0=S$, $S_i=RES_{L_i}\left(S_{i-1}\right)$; alle $S_i, i \leq k$ sind erfüllbarkeitsäquivalent\\
-		$S_k$ enthält kein Literal mehr, d.h. $S_k=\varnothing$ (erfüllbar) oder $S_k=\left\{\Box\right\}$ (unerfüllbar)
+		$S_0=S$, $S_i=RES_{L_i}\left(S_{i-1}\right)$; alle $S_i, i \leq n$ sind erfüllbarkeitsäquivalent\\
+		$S_n$ enthält kein Literal mehr, d.h. $S_n=\varnothing$ (erfüllbar) oder $S_n=\left\{\Box\right\}$ (unerfüllbar)
 	\end{itemize}
 \end{frame}
+
+\begin{frame}{Resolution: Beispiel und Hinweis}
+	\begin{itemize}
+		\item Ist folgende Formel (un-)erfüllbar?: $(\neg A \lor B) \land (\neg B \lor C) \land A \land \neg C$
+		\item \textbf{Vorsicht!} 
+		\begin{itemize}
+			\item $\left\{A, \neg B\right\}$ und $\left\{\neg A, B\right\}$ haben als Resolvente \textbf{nicht} $\Box$! Es wird immer nur ein (komplementäres) Literal entfernt!
+			\item $\left\{B, \neg B\right\}$ führt nicht zu $\Box$! Es werden immer zwei Klauseln benötigt!
+		\end{itemize}
+		
+	\end{itemize}
+\end{frame}
+
+\note{
+$\left\{\neg A, B\right\}$\\
+$\left\{\neg B, C\right\}$\\
+$\left\{A\right\}$\\
+$\left\{\neg C\right\}$\\
+$\left\{B\right\}$\\
+$\left\{C\right\}$\\
+$\Box$
+}
