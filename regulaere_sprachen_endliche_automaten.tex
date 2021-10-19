@@ -13,8 +13,8 @@
 	\begin{itemize}
 		\item Grundkonzept
 		\begin{itemize}
-			\item FSM befinden sich jeweils in genau einem aus einer endlichen Menge von Zuständen
-			\item FSM reagieren auf Eingaben, führen dabei gegebenenfalls Aktionen aus und wechseln ihren Zustand (Transition)
+			\item FSM befinden sich jeweils in genau \emph{einem} aus einer \emph{endlichen Menge} von Zuständen
+			\item FSM reagieren auf Eingaben, führen dabei gegebenenfalls Aktionen aus und wechseln ihren Zustand (Übergang, Transition)
 		\end{itemize}
 		\item Einsatz zur Spracherkennung
 		\begin{itemize}
@@ -40,7 +40,7 @@
 			\item $s_0$: Startzustand, $s_0 \in S$
 			\item $F$: Menge (akzeptierender) Endzustände, $F \subseteq S$
 		\end{itemize}
-		\item Graphische Darstellung: Zustände als Knoten eines Graphen\\
+		\item Graphische Darstellung: Zustände als Knoten eines Graphen (Zustandsgraph)\\
 		\vspace{1em}
 		\begin{tikzpicture}
 			\node[state, initial] (s0) {$s_0$};
@@ -52,6 +52,36 @@
 		\end{tikzpicture}
 	\end{itemize}
 \end{frame}
+
+\begin{frame}{Beispiel DFA}
+	\begin{align*}
+		M &= (S, \Sigma, \delta, s_0, F)\\
+		S &= \left\{s_0, s_1, s_2, s_3\right\}\\
+		\Sigma &= \{a, b\}\\
+		F &= \{s_3\}\\
+		\delta &= \{(s_0, a, s_1), (s_0, b, s_3), (s_1, a, s_2), (s_1, b, s_0), \\
+		& \qquad (s_2, a, s_3), (s_2, b, s_1), (s_3, a, s_0), (s_3, b, s_2)\}
+	\end{align*}
+\end{frame}
+
+\note{
+\begin{tikzpicture}
+	\node[state, initial] (s0) {$s_0$};
+	\node[state, right=of s0] (s1) {$s_1$};
+	\node[state, below=of s1] (s2) {$s_2$};
+	\node[state, accepting, below=of s0] (s3) {$s_3$};
+	
+	\draw (s0) edge[bend left, above] node{a} (s1);
+	\draw (s0) edge[bend left, right] node{b} (s3);
+	\draw (s1) edge[bend left, right] node{a} (s2);
+	\draw (s1) edge[bend left, below] node{b} (s0);
+	\draw (s2) edge[bend left, below] node{a} (s3);
+	\draw (s2) edge[bend left, left] node{b} (s1);
+	\draw (s3) edge[bend left, left] node{a} (s0);
+	\draw (s3) edge[bend left, above] node{b} (s2);
+	
+\end{tikzpicture}
+}
 
 \begin{frame}{Durch DFA akzeptierte Sprachen: Reguläre Sprachen}
 	\begin{itemize}
