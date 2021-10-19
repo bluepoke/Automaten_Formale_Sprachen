@@ -24,9 +24,10 @@
 
 \newcommand{\Fach}{Theoretische Informatik I - Automaten und Formale Sprachen}
 \newcommand{\Name}{}
-\newcommand{\Seminargruppe}{2}
-\newcommand{\Uebungsblatt}{1} %  <-- UPDATE ME
+\newcommand{\Seminargruppe}{5CS21-1}
+\newcommand{\Uebung}{1} %  <-- UPDATE ME
 \newcommand{\Uebungstitel}{Logik} %  <-- UPDATE ME
+\newcommand{\Besprechungstermin}{1. November 2021}
 
 \setlength{\parindent}{0em}
 \topmargin -1.0cm
@@ -47,7 +48,7 @@
 }
 %%%%%%%%%%%%%%
 \hypersetup{
-	pdftitle={\Fach{}: Übungsblatt \Uebungsblatt{}},
+	pdftitle={\Fach{}: Übungsblatt \Uebung{}},
 	pdfauthor={\Name},
 	pdfborder={0 0 0}
 }
@@ -64,18 +65,20 @@
 	flexiblecolumns=true,
 }
 
-\title{Übungsblatt \Uebungsblatt{}}
+\title{Übungsblatt \Uebung{}}
 \author{\Name{}}
 
 \begin{document}
 	\thispagestyle{fancy}
-	\chead{\sf \large \Fach{} \\ \small \Name{}}
+	\chead{\sf \large \Fach{} \\ \small Seminargruppe \Seminargruppe{}}
 %	\rhead{\sf \Semester{} \\  Seminargruppe \Seminargruppe{}}
 	\vspace*{0.2cm}
 	\begin{center}
-		\LARGE \sf \textbf{Übungsblatt \Uebungsblatt{}} \\
+		\LARGE \sf \textbf{Übung \Uebung{}} \\
 		\vspace*{0.4cm}
-		\Large \sf \textbf{\Uebungstitel}
+		\Large \sf \textbf{\Uebungstitel}\\
+		\vspace*{0.4cm}
+		\normalsize \rm Besprechungstermin: \Besprechungstermin
 	\end{center}
 	\vspace*{0.2cm}
 	
@@ -96,14 +99,14 @@
 	\FloatBarrier
 	\begin{table}[h]
 		\centering
-		\begin{tabular}{|c|c|c|}
+		\begin{tabular}{|c|c|c||c|}
 			\hline
-			A & B & F \\
+			A & B & C & F \\
 			\hline
-			f & f & f \\
-			f & w & w \\
-			w & f & w \\
-			w & w & f \\
+			f & f & w & f \\
+			f & w & f & w \\
+			w & f & f & w \\
+			w & w & w & f \\
 			\hline
 		\end{tabular}
 	\end{table}
