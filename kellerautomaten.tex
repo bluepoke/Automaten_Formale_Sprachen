@@ -1,1 +1,42 @@
 \section{Kellerautomaten}
+
+\begin{frame}{Kellerautomaten (PDA, i.A. nichtdeterministisch)}
+	\begin{itemize}
+		\item Grundidee Kellerautomat (PDA, push-down automaton)
+		\begin{itemize}
+			\item FA wird erweitert um einen zusätzlichen Kellerspeicher (Stack, Stapel)
+			mit unbeschränkter Kapazität
+			\item Stack: Datenstruktur mit den Methoden pop und push (LIFO-Prinzip)
+			\item pop: oberstes Zeichen wird gelesen und gelöscht
+			\item push: neues Zeichen wird auf den Stack geschrieben
+		\end{itemize}
+		\item Konfigurationsübergänge
+		\begin{itemize}
+			\item Nächstes Zeichen des Eingabewortes sowie oberstes Symbol auf Stack
+			werden gelesen
+			\item abhängig davon erfolgt Zustandsübergang, und es werden (i.A.
+			mehrere) push-Operationen ausgeführt
+			\item möglich sind auch $\varepsilon$-Übergänge: Zustandsübergang und Stack-
+			Operationen ohne Weiterlesen des Eingabewortes
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Spezifikation PDA}
+	\begin{itemize}
+		\item Spezifikation nichtdeterministischer PDA\\
+		$A_{PDA}=(S, \Sigma, \Gamma, \delta, s_0, \#, F)$
+		\begin{itemize}
+			\item $S$: Zustandsmenge
+			\item $\Sigma$: Terminalalphabet
+			\item $\Gamma$: Kelleralphabet
+			\item $\delta$: Zustandsüberführungsrelation\\
+			$\delta \subseteq S \times \Sigma \times \Gamma \times \Sigma \times \Gamma^*$
+			\item $\#$: Kellerboden-Symbol, $\# \in \Gamma$
+			\item $s_0$: Startzustand, $s_0 \in S$
+			\item $F$: Menge von Endzuständen
+		\end{itemize}
+		\item Konfiguration: $(s, u, \gamma)$
+		\item Konfigurationsübergang: $(s_1, av, A\beta) \mapsto (s_2, v, \alpha\beta)$
+	\end{itemize}
+\end{frame}
