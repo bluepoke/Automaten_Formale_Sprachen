@@ -107,10 +107,10 @@ F &= \left\{\left\{\overline{A}, \overline{B}, \overline{D}\right\}, \left\{\ove
 
 \begin{frame}{Erfüllbarkeit allgemeiner Klauselmengen: Davis-Putnam-Regeln}
 	\begin{itemize}
-		\item Sei $S=\left\{c_1, \ldots, c_k\right\}$ Klauselmenge, $L$ ein Literal, $\overline{L}$ das negierte Literal. Definiere:
+		\item Sei $S=\left\{K_1, \ldots, K_k\right\}$ Klauselmenge, $L$ ein Literal, $\overline{L}$ das negierte Literal. Definiere:
 		\begin{itemize}
-			\item $S_L^+=\left\{c_j \in S \mid L \in c_j\right\}, S_L^-=\left\{c_j \in S \mid \overline{L} \in c_j\right\}, S_L^0=\left\{c_j \in S \mid L, \overline{L} \notin c_j\right\}$
-			\item $POS_L(S)=S_L^0 \bigcup \left\{c_j \setminus \left\{L\right\} \mid c_j \in S_L^+\right\}; NEG_L(S)=S_L^0 \bigcup \left\{c_j \setminus \left\{\overline{L}\right\} \mid c_j \in S_L^-\right\}$
+			\item $S_L^+=\left\{K_j \in S \mid L \in K_j\right\}, S_L^-=\left\{K_j \in S \mid \overline{L} \in K_j\right\}, S_L^0=\left\{K_j \in S \mid L, \overline{L} \notin K_j\right\}$
+			\item $POS_L(S)=S_L^0 \bigcup \left\{K_j \setminus \left\{L\right\} \mid K_j \in S_L^+\right\}; NEG_L(S)=S_L^0 \bigcup \left\{K_j \setminus \left\{\overline{L}\right\} \mid K_j \in S_L^-\right\}$
 		\end{itemize}
 		\item Es gilt: Die Klauselmenge $S$ ist erfüllbar gdw. wenigstens eine der beiden Klauselmengen $POS_L(S)$ und $NEG_L(S)$ erfüllbar ist
 		\begin{itemize}
