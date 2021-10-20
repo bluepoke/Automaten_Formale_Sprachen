@@ -322,3 +322,31 @@
 		\item alle $\varepsilon$-Übergänge eliminieren
 	\end{enumerate}
 \end{frame}
+
+\begin{frame}{Pumping-Lemma für reguläre Sprachen}
+	\begin{itemize}
+		\item Wie kann man feststellen dass eine Sprache \underline{nicht} regulär ist?
+		\item Für reguläre Sprachen $L$ gilt das Pumping-Lemma:\\
+		Sei L regulär. Dann gibt es eine natürliche Zahl n so dass $\forall x \in L \textrm{ mit } |x|\geq n$ gilt:\\
+		$x$ lässt sich so in Teilworte $u, v, w$ zerlegen, d.h. $x=uvw$, dass
+		gilt:
+		\begin{enumerate} [i.]
+			\item $|v| \geq 1$
+			\item $|uv| \leq n$
+			\item $uv^iw \in L\quad \forall i = 0, 1, 2, ...$ ("`aufpumpen"' von $x$)
+		\end{enumerate}
+		\item Genügt $L$ diesem Lemma nicht, dann kann $L$ nicht regulär sein
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Entscheidungsprobleme für reguläre Sprachen}
+	Seien $G$ bzw. $G_1$ und $G_2$ Typ-3 Grammatiken. Die folgenden
+	Probleme sind algorithmisch entscheidbar:
+	\begin{itemize}
+		\item Wortproblem $w \in L(G)?$
+		\item Leerheitsproblem $L(G) = \varnothing?$
+		\item Endlichkeitsproblem $|L(G)|=\infty ?$
+		\item Schnittproblem $L(G_1) \cap L(G_2) = \varnothing ?$
+		\item Äquivalenzproblem $L(G_1) = L(G_2)?$
+	\end{itemize}
+\end{frame}
