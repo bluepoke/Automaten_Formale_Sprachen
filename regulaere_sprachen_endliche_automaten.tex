@@ -55,7 +55,7 @@
 
 \begin{frame}{Beispiel DFA}
 	\begin{align*}
-		M &= (S, \Sigma, \delta, s_0, F)\\
+		A &= (S, \Sigma, \delta, s_0, F)\\
 		S &= \left\{s_0, s_1, s_2, s_3\right\}\\
 		\Sigma &= \{a, b\}\\
 		F &= \{s_3\}\\
@@ -122,6 +122,25 @@
 	\end{itemize}
 \end{frame}
 
+\begin{frame}{Beispiel NFA}
+	\label{NFA_Beispiel}
+	\begin{tikzpicture}
+		\node[state, initial] (s0) {$s_0$};
+		\node[state, initial, initial where=above, right=of s0] (s1) {$s_1$};
+		\node[state, accepting, right=of s1] (s2) {$s_2$};
+		
+		\draw (s0) edge[loop, above] node{$0|1$} (s0);
+		\draw (s0) edge[above] node{$0$} (s1);
+		\draw (s1) edge[above] node{$0$} (s2);
+	\end{tikzpicture}\\
+	$A=(S, \Sigma, \delta, s_0, F)$\\
+	$S=\{s_0, s_1, s_2\}$ \\
+	$\Sigma=\{0,1\}$\\
+	$F=\{s_2\}$ \\
+	$\delta=\{(s_0,0,s_0), (s_0, 1, s_0), (s_0, 0, s_1), (s_1, 0, s_2)\}$\\ 
+	Akzeptierte Sprache: $L(A)=\left\{w \in \Sigma^* \mid w=0 \lor w=x00, x\in \Sigma^*\right\}$
+\end{frame}
+
 \begin{frame}{Simulation des Verhaltens von NFAs}
 	\begin{itemize}
 		\item Backtracking: Tiefensuche
@@ -157,6 +176,33 @@
 		\quad gdw. $(s_0^d, w) \mapsto^* (s_f^d, \varepsilon), s_f^d \in F_d$ gdw. $w \in L(A_d)$
 		\item Nutzen: mit NFA kann eine Sprache leichter modelliert werden $\rightarrow$ zur Anwendung in DFA umrechnen
 	\end{itemize}
+\end{frame}
+
+\begin{frame}{Algorithmus zur Umwandlung NFA in DFA (verbal)}
+	NFA: $A_n=(S_n, \Sigma, \delta_n, S_0^n, F_n)$, DFA: $A_d=(S_d, \Sigma, \delta_d, s_0^d, F_d)$
+	\begin{enumerate}
+		\item $S_d$ ist die Potenzmenge von $S_n$
+		\item $s_0^d$ ist das Element aus $S_d$, das die Kombination aller Startzustände aus $S_0^n$ repräsentiert. Aus (möglicherweise) vielen Startzuständen in $S_n$ wird somit genau ein Startzustand $s_0^d$.
+		\item Jede Kombination in $S_d$, die mindestens einen Endzustand aus $F_n$ enthält, wird zum Endzustand in $F_d$.
+		\item Für jede Zustandskombination in $S_d$ wird ermittelt, welche Zustände mit dem Eingabesymbol $a \in \Sigma$ erreichbar sind. Diese Kombination wird zur Übergangsfunktion $\delta_d$ hinzugefügt.
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Beispiel: Umwandlung NFA in DFA (Berechnung)}
+	Beispiel zur Umwandlung des NFA aus Folie \ref{NFA_Beispiel} in DFA:
+	\begin{itemize}
+		\item $S_d=\{\varnothing, s_0, s_1, s_2, s_0s_1, s_0s_2, s_1s_2, s_0s_1s_2\}$
+		\item $\Sigma=\{0,1\}$ (unverändert)
+		\item $F_d=\{s_2, s_0s_2, s_1s_2, s_0s_1s_2\}$
+		\item $\delta_d=\{(\varnothing, 0, \varnothing), (\varnothing, 1, \varnothing), (s_0, 0, s_0s_1), (s_0, 1, s_0), (s_1, 0, s_2), (s_1, 1, \varnothing),$\\
+		\qquad $(s_2, 0, \varnothing), (s_2, 1, \varnothing), (s_0s_1, 0, s_0s_1s_2),(s_0s_1, 1, s_0),$\\
+		\qquad $(s_0s_2, 0, s_0s_1), (s_0s_2, 1, s_0), (s_1s_2, 0, s_2), (s_1s_2, 1, \varnothing),$\\
+		\qquad $(s_0s_1s_2, 0, s_0s_1s_2), (s_0s_1s_2, 1, s_0)\}$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiel: Umwandlung NFA in DFA (Zustandsgraph)}
+	TODO: Graph
 \end{frame}
 
 \begin{frame}{Äquivalenz von Typ-3-Sprachen und regulären Sprachen}
