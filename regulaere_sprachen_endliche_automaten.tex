@@ -133,8 +133,9 @@
 		\draw (s0) edge[above] node{$0$} (s1);
 		\draw (s1) edge[above] node{$0$} (s2);
 	\end{tikzpicture}\\
-	$A=(S, \Sigma, \delta, s_0, F)$\\
+	$A=(S, \Sigma, \delta, S_0, F)$\\
 	$S=\{s_0, s_1, s_2\}$ \\
+	$S_0=\{s_0, s_1\}$\\
 	$\Sigma=\{0,1\}$\\
 	$F=\{s_2\}$ \\
 	$\delta=\{(s_0,0,s_0), (s_0, 1, s_0), (s_0, 0, s_1), (s_1, 0, s_2)\}$\\ 
@@ -192,17 +193,48 @@
 	Beispiel zur Umwandlung des NFA aus Folie \ref{NFA_Beispiel} in DFA:
 	\begin{itemize}
 		\item $S_d=\{\varnothing, s_0, s_1, s_2, s_0s_1, s_0s_2, s_1s_2, s_0s_1s_2\}$
+		\item $s_0^d=s_0s_1$
 		\item $\Sigma=\{0,1\}$ (unverändert)
 		\item $F_d=\{s_2, s_0s_2, s_1s_2, s_0s_1s_2\}$
 		\item $\delta_d=\{(\varnothing, 0, \varnothing), (\varnothing, 1, \varnothing), (s_0, 0, s_0s_1), (s_0, 1, s_0), (s_1, 0, s_2), (s_1, 1, \varnothing),$\\
 		\qquad $(s_2, 0, \varnothing), (s_2, 1, \varnothing), (s_0s_1, 0, s_0s_1s_2),(s_0s_1, 1, s_0),$\\
 		\qquad $(s_0s_2, 0, s_0s_1), (s_0s_2, 1, s_0), (s_1s_2, 0, s_2), (s_1s_2, 1, \varnothing),$\\
 		\qquad $(s_0s_1s_2, 0, s_0s_1s_2), (s_0s_1s_2, 1, s_0)\}$
+		\item Für den DFA $A_d$ sind die Zustände $\varnothing, s_1, s_2$ und $s_1s_2$ nicht relevant, da sie vom Startzustand $s_0s_1$ aus nicht erreicht werden können.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Beispiel: Umwandlung NFA in DFA (Zustandsgraph)}
-	TODO: Graph
+	\centering
+	\tikzset {node distance=1cm}
+	\begin{tikzpicture}
+		\node[state] (s0) {$s_0$};
+		
+		\node[state, accepting, below=of s0] (s0s2) {$s_0s_2$};
+		\node[state, initial, initial where=right, right=of s0s2] (s0s1) {$s_0s_1$};
+		\node[state, accepting, right=of s0] (s0s1s2) {$s_0s_1s_2$};
+		
+		\node[state, below=of s0s2] (s1) {$s_1$};
+		\node[state, accepting, right=of s1] (s2) {$s_2$};
+		\node[state, accepting, below=of s2] (s1s2) {$s_1s_2$};
+		
+		\node[state, below=of s1] (leer) {$\varnothing$};
+		
+		\draw	(leer) edge[loop left] node{0,1} (leer)
+				(s0) edge[bend left, below left] node{0} (s0s1)
+				(s0) edge[loop left] node{1} (s0)
+				(s1) edge[above] node{0} (s2)
+				(s1) edge[right] node{1} (leer)
+				(s2) edge[below right] node{0,1} (leer)
+				(s0s1) edge[right] node{0} (s0s1s2)
+				(s0s1) edge[bend left, above right] node{1} (s0)
+				(s0s2) edge[below] node{0} (s0s1)
+				(s0s2) edge[left] node{1} (s0)
+				(s1s2) edge[right] node{0} (s2)
+				(s1s2) edge[below] node{1} (leer)
+				(s0s1s2) edge[loop right] node{0} (s0s1s2)
+				(s0s1s2) edge[above] node{1} (s0);
+	\end{tikzpicture}
 \end{frame}
 
 \begin{frame}{Äquivalenz von Typ-3-Sprachen und regulären Sprachen}
