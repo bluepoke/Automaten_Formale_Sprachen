@@ -1,6 +1,6 @@
 \section{Kellerautomaten}
 
-\begin{frame}{Kellerautomaten (PDA, i.A. nichtdeterministisch)}
+\begin{frame}{Kellerautomaten (PDA, i.Allg. nichtdeterministisch)}
 	\begin{itemize}
 		\item Grundidee Kellerautomat (PDA, push-down automaton)
 		\begin{itemize}
@@ -14,7 +14,7 @@
 		\begin{itemize}
 			\item Nächstes Zeichen des Eingabewortes sowie oberstes Symbol auf Stack
 			werden gelesen
-			\item abhängig davon erfolgt Zustandsübergang, und es werden (i.A.
+			\item abhängig davon erfolgt Zustandsübergang, und es werden (i.Allg.
 			mehrere) push-Operationen ausgeführt
 			\item möglich sind auch $\varepsilon$-Übergänge: Zustandsübergang und Stack-
 			Operationen ohne Weiterlesen des Eingabewortes
@@ -30,13 +30,92 @@
 			\item $S$: Zustandsmenge
 			\item $\Sigma$: Terminalalphabet
 			\item $\Gamma$: Kelleralphabet
-			\item $\delta$: Zustandsüberführungsrelation\\
-			$\delta \subseteq S \times \Sigma \times \Gamma \times \Sigma \times \Gamma^*$
+			\item $\delta$: Zustandsüberführungsrelation, $\delta \subseteq S \times \Sigma \times \Gamma \times \Sigma \times \Gamma^*$
 			\item $\#$: Kellerboden-Symbol, $\# \in \Gamma$
 			\item $s_0$: Startzustand, $s_0 \in S$
 			\item $F$: Menge von Endzuständen
 		\end{itemize}
 		\item Konfiguration: $(s, u, \gamma)$
 		\item Konfigurationsübergang: $(s_1, av, A\beta) \mapsto (s_2, v, \alpha\beta)$
+	\end{itemize}
+	\centering
+	\begin{tikzpicture}
+		\node[state] (s1) {$s_1$};
+		\node[state, right=of s1] (s2) {$s_2$};
+		
+		\draw (s1) edge[above] node{$a, A/\alpha$} (s2);
+	\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Akzeptierte Sprache}
+	\begin{itemize}
+		\item Akzeptanzverhalten
+		\begin{itemize}
+			\item per Endzustand akzeptierte Sprache\\
+			$L(A)=\{w \in \Sigma^* \mid (s_0, w, \#) \mapsto^* (s_f, \varepsilon, \beta), s_f \in F, \beta \in \Gamma^*\}$\\
+			d.h. Keller muss nicht leer sein
+			\item durch leeren Keller akzeptierte Sprache\\
+			(beachte: auch der Kellerboden wird gelöscht!)\\
+			$L_\varepsilon(A)=\{w \in \Sigma^*\mid (s_0, w, \#) \mapsto^* (q, \varepsilon, \varepsilon), q \in S\}$\\
+			d.h. Zustand am Wortende kann beliebig sein
+		\end{itemize}
+		\item die beiden Akzeptanzbedingungen sind wie folgt äquivalent:
+		\begin{itemize}
+			\item zu jedem nichtdet. PDA $K$ gibt es einen PDA $K'$ mit $L(K) = L_\varepsilon(K')$
+			\item zu jedem nichtdet. PDA $K$ gibt es einen PDA $K'$ mit $L(K') = L_\varepsilon(K)$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Zusammenhang mit kontextfreien Sprachen}
+	\begin{itemize}
+		\item zu jedem PDA lässt sich eine kontextfreie Grammatik konstruieren, die die gleiche Sprache generiert (s. \ref{Grammatik_aus_PDA})
+		\item zu jeder kontextfreien Grammatik lässt sich ein (i.Allg. nichtdeteministischer) PDA konstruieren, der die gleiche Sprache akzeptiert
+		\item Grundsätzlicher Zusammenhang mit kontextfreier Grammatik
+		\begin{itemize}
+			\item PDA kann mit Grammatik-Startsymbol $S$ als Kellerboden initialisiert werden
+			\item liegt Variable A oben auf Stack: per $\varepsilon$-Übergang durch rechte Seite einer Regel ersetzen
+			\item liegt Terminalsymbol $a$ oben auf Stack: mit gelesenem Symbol abgleichen; Löschen bei Übereinstimmung, sonst Kopie verwerfen
+			\item Äquivalenter PDA ist i.Allg. nichtdeterministisch; lässt sich i.Allg. \underline{nicht} in einen deterministischen PDA äquivalent umrechnen
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Kontextfreie Grammatik, ausgehend von PDA, der mit leerem Keller akzeptiert}
+	\label{Grammatik_aus_PDA}
+	\begin{columns}
+		\column{.5\textwidth}
+		Regeln
+		\begin{itemize}
+			\item Startregel\\
+			$S\rightarrow [s_0, \#, s]$ für alle $s$
+			\item Übergang $(s,a,A,s_1,B_1\ldots B_m)$\\
+			$[s,A,s_{m+1}] \rightarrow a[s_1,B_1,s_2]\ldots[s_m,B_m,s_{m+1}]$ für alle Kombinationen $s_2,\ldots,s_{m+1}$
+			\item Übergang $(s,a,A,s_1,\varepsilon)$\\
+			$[s,A,s_1]\rightarrow a$
+		\end{itemize}
+		\column{.5\textwidth}
+		Beispiel $L=\{a^nb^n \mid n \geq q\}$\\
+		 $\delta\{(s_0,a,\#,s_0,A),(s_0,a,A,s_0,AA),$\\
+		 \qquad$(s_0,b,A,s_1,\varepsilon),(s_1,b,A,s_1,\varepsilon)\}$\\
+		Regeln: $P=\{S \rightarrow [s_0,\#,s_0]|[s_0,\#,s_1],$\\
+			$[s_0,\#,s_0]\rightarrow a[s_0,A,s_0],$\\
+			$[s_0,\#,s_1]\rightarrow a[s_0,A,s_1],$\\
+			$[s_0,A,s_0]\rightarrow a[s_0,A,s_0][s_0,A,s_0],$\\
+			$[s_0,A,s_0]\rightarrow a[s_0,A,s_1][s_1,A,s_0],$\\
+			$[s_0,A,s_1]\rightarrow a[s_0,A,s_0][s_0,A,s_1],$\\
+			$[s_0,A,s_1]\rightarrow a[s_0,A,s_1][s_1,A,s_1],$\\
+			$[s_0,A,s_1]\rightarrow a[s_0,A,s_1][s_1,A,s_1],$\\
+			$[s_0,A,s_1]\rightarrow b, [s_1,A,s_1]\rightarrow b\}$
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Deterministische Kellerautomaten (DPDA): Problemstellung}
+	\begin{itemize}
+		\item Für praktische Anwendungen (Parser) wird ein im wesentlichen lineares Laufzeitverhalten angestrebt
+		\item Die Simulation nichtdeterministischer Automaten zeigt i.Allg. ein exponentielles Verhalten
+		\item Lässt sich jeder nichtdet. Kellerautomat in einen äquivalenten det. Kellerautomaten umschreiben?\\
+		\underline{nein:} z.B. $L=\{w\tilde{w} \mid w\in \Sigma^*\}$ ist kontextfrei, aber nicht durch det. PDA akzeptierbar
+		\item \underline{Deterministisch kontextfreie Sprachen} sind solche, die durch einen deterministischen Kellerautomaten (per Endzustand) akzeptiert werden. Sie bilden damit eine \underline{Unterklasse} der kontextfreien Sprachen.
 	\end{itemize}
 \end{frame}
