@@ -119,3 +119,28 @@
 		\item \underline{Deterministisch kontextfreie Sprachen} sind solche, die durch einen deterministischen Kellerautomaten (per Endzustand) akzeptiert werden. Sie bilden damit eine \underline{Unterklasse} der kontextfreien Sprachen.
 	\end{itemize}
 \end{frame}
+
+\begin{frame}{Deterministische Kellerautomaten}
+	\begin{itemize}
+		\item Spezifikation:\\
+		deterministische Zustandsüberführungsfunktion; \underline{$\varepsilon$-Übergänge erlaubt}\\
+		insoweit gilt (für $a \in \Sigma, A \in \Gamma$): $|\delta(s, a, A)| + |\delta(s, \varepsilon, A)| \leq 1$ (d.h.: für	jede Konfiguration $(s, ax, A\rho)$ gibt es höchstens eine Folgekonfiguration)
+		\item Nichtäquivalenz von Akzeptanz per leerem Keller bzw.
+		Endzustand bei det. PDA:\\
+		führt bei DPDA \underline{nicht} zur gleichen Sprachklasse
+		\item Definition: Präfixeigenschaft\\
+		Die Sprache $L$ hat die Präfixeigenschaft gdw. für alle $w \in L$ gilt:\\
+		Ist $x$ echtes Präfix von $w$ (d.h. $w=xy, y \neq \varepsilon$) dann gilt $x \notin L$
+		\item Es gilt: deterministisch kontextfreie Sprachen, die durch	DPDA per leerem Keller akzeptiert werden können, sind genau die mit Präfixeigenschaft
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Beziehungen zwischen Sprachklassen}
+	\begin{itemize}
+		\item Die det. kontextfreien Sprachen $L_\varepsilon(A)$ (mit Präfixeigenschaft, Akzeptanz per leerem Keller) sind echt in den det. kontextfreien Sprachen $L(A)$ (Akzeptanz per Endzustand) enthalten
+		\item \underline{reguläre} Sprachen sind echt in den det. kontextfreien	Sprachen enthalten ( FA ist "`Kellerautomat ohne Keller"')
+		\item es gibt \underline{reguläre} Sprachen, die die Präfixeigenschaft nicht besitzen und damit in $L_\varepsilon(A)$ nicht enthalten sind (z.B. $\alpha=a|ab$)
+		\item es gibt \underline{reguläre} Sprachen, die die Präfixeigenschaft besitzen und damit in $L_\varepsilon(A)$ liegen (z.B. $\alpha=a|ba$)
+		\item es gibt Sprachen in $L_\varepsilon(A)$, die nicht regulär sind (z.B ${a^nb^n}$)
+	\end{itemize}
+\end{frame}
