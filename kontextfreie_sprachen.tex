@@ -21,42 +21,28 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Pumping-Lemma für kontextfreie Sprachen}
-	\begin{itemize}
-		\item Pumping-Lemma: für jede kontextfreie Sprache $L$ gilt\\
-		es existiert eine natürliche Zahl $n$ so, dass für alle $z \in L$ mit $|z|\geq n$ gilt:\\
-		$z$ lässt sich zerlegen in $z=uvwxy$ mit
-		\begin{itemize}
-			\item $|vx|\geq 1$
-			\item $|vwx| \leq n$
-			\item $uv^iwx^iy \in L, i=0, 1, 2, \ldots$
-		\end{itemize}
-		\item Beweis:
-		\begin{itemize}
-			\item wähle $n=2^m$, $m$: Anzahl der Nichtterminalsymbole, wenn sich G in Chomsky-Normalform befindet
-			\item mindestens eine Variable $A$ muss sich im Ableitungsbaum nach spätestens $m$ Schritten wiederholen;\\
-			$A\underset{G}{\Rightarrow}^*\omega_1 A \omega_2$, wähle $v: \omega_1 \underset{G}{\Rightarrow}^* v, x: \omega_2 \underset{G}{\Rightarrow}^* x, w: A \underset{G}{\Rightarrow}^* w$;\\
-			diese Ableitungen enthalten jeweils keine Wiederholungen von Variablen
-		\end{itemize}
-	\end{itemize}
+\begin{frame}{Beispiel: Erzeugung Chomsky-Normalform}
+	$G=(\{S, A, B\}, \{a, b\}, P, S)$\\
+	$P=\{$\\
+	\qquad\qquad $S\rightarrow bA|aB$\\
+	\qquad\qquad $A\rightarrow bAA|aS|a$\\
+	\qquad\qquad $B\rightarrow aBB|bS|b$\\
+	\qquad$\}$
 \end{frame}
 
-\begin{frame}{Beispiel: Pumping-Lemma für kontextfreie Sprachen}
-	$L=\{a^ib^ic^i \mid i\geq 1 \}$
-	\begin{itemize}
-		\item $L$ ist kontext-sensitiv: Beweis Typ-1-Grammatik\\
-		$G=(V, \Sigma, P, S), V=\{S, B, C\}$\\
-		$P=\{S\rightarrow aSBC | aBC, CB \rightarrow BC,$\\
-		\qquad $aB \rightarrow ab, bB \rightarrow bb, bC \rightarrow bc, cC \rightarrow cc \}$
-		\item $L$ ist nicht kontextfrei: Beweis Pumping-Lemma\\
-		wäre $L$ kontextfrei, sei $n$ das "`Pumping-$n$"'\\
-		wähle $z=a^nba^nca^n \in L, |z|=3n \geq n$\\
-		es ex. eine Zerlegung $z=uvwxa$ mit $|vx|\geq 1, |vwx| \leq n$\\
-		$\rightarrow$ $vwx$ kann höchstens zwei verschiedene Buchstaben enthalten\\
-		$\rightarrow$ in $uv^iwx^iy$ werden ein oder zwei Buchstaben "`aufgepumpt"', der dritte nicht\\
-		$\rightarrow$ $uv^iwx^iy \notin L$ für $i \neq 1$ \lightning 
-	\end{itemize}
-\end{frame}
+\note{
+	\begin{tabular}{rl}
+		alt & neu \\
+		$S \rightarrow bA$ & $D_b \rightarrow b, S \rightarrow X_bA$ \\
+		$S \rightarrow aB$ & $D_a \rightarrow a, S \rightarrow X_aB$ \\
+		$A \rightarrow bAA$ & $A \rightarrow X_bAA$ (muss weiter ersetzt werden) \\
+		$A \rightarrow aS$ & $A \rightarrow X_aS$ \\
+		$B \rightarrow aBB$ & $B \rightarrow X_aBB$ (muss weiter ersetzt werden)\\
+		$B \rightarrow bS$ & $B \rightarrow X_bS$ \\
+		$A \rightarrow X_bAA$ & $A \rightarrow X_bD_1, D_1 \rightarrow AA$\\
+		$B \rightarrow X_aBB$ & $B \rightarrow X_aD_2, D_2 \rightarrow BB$\\
+	\end{tabular}
+}
 
 \begin{frame}{Worterkennung: CYK-Algorithmus}
 	polynomiell auch für nichtdeterministische Sprachen
@@ -101,6 +87,43 @@
 		\end{itemize}
 	\end{columns}
 }
+
+\begin{frame}{Pumping-Lemma für kontextfreie Sprachen}
+	\begin{itemize}
+		\item Pumping-Lemma: für jede kontextfreie Sprache $L$ gilt\\
+		es existiert eine natürliche Zahl $n$ so, dass für alle $z \in L$ mit $|z|\geq n$ gilt:\\
+		$z$ lässt sich zerlegen in $z=uvwxy$ mit
+		\begin{itemize}
+			\item $|vx|\geq 1$
+			\item $|vwx| \leq n$
+			\item $uv^iwx^iy \in L, i=0, 1, 2, \ldots$
+		\end{itemize}
+		\item Beweis:
+		\begin{itemize}
+			\item wähle $n=2^m$, $m$: Anzahl der Nichtterminalsymbole, wenn sich G in Chomsky-Normalform befindet
+			\item mindestens eine Variable $A$ muss sich im Ableitungsbaum nach spätestens $m$ Schritten wiederholen;\\
+			$A\underset{G}{\Rightarrow}^*\omega_1 A \omega_2$, wähle $v: \omega_1 \underset{G}{\Rightarrow}^* v, x: \omega_2 \underset{G}{\Rightarrow}^* x, w: A \underset{G}{\Rightarrow}^* w$;\\
+			diese Ableitungen enthalten jeweils keine Wiederholungen von Variablen
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiel: Pumping-Lemma für kontextfreie Sprachen}
+	$L=\{a^ib^ic^i \mid i\geq 1 \}$
+	\begin{itemize}
+		\item $L$ ist kontext-sensitiv: Beweis Typ-1-Grammatik\\
+		$G=(V, \Sigma, P, S), V=\{S, B, C\}$\\
+		$P=\{S\rightarrow aSBC | aBC, CB \rightarrow BC,$\\
+		\qquad $aB \rightarrow ab, bB \rightarrow bb, bC \rightarrow bc, cC \rightarrow cc \}$
+		\item $L$ ist nicht kontextfrei: Beweis Pumping-Lemma\\
+		wäre $L$ kontextfrei, sei $n$ das "`Pumping-$n$"'\\
+		wähle $z=a^nb^nc^n \in L, |z|=3n \geq n$\\
+		es ex. eine Zerlegung $z=uvwxa$ mit $|vx|\geq 1, |vwx| \leq n$\\
+		$\rightarrow$ $vwx$ kann höchstens zwei verschiedene Buchstaben enthalten\\
+		$\rightarrow$ in $uv^iwx^iy$ werden ein oder zwei Buchstaben "`aufgepumpt"', der dritte nicht\\
+		$\rightarrow$ $uv^iwx^iy \notin L$ für $i \neq 1$ \lightning 
+	\end{itemize}
+\end{frame}
 
 \begin{frame}{Abschlusseigenschaften kontextfreier Sprachen}
 	\begin{itemize}
