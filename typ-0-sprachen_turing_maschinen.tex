@@ -1,1 +1,88 @@
 \section{Typ-0-Sprachen und Turing-Maschinen}
+
+\begin{frame}{Wortproblem}
+	\begin{itemize}
+		\item Wortproblem für Typ-0- bzw. Typ-1-Sprachen
+		\begin{itemize}
+			\item Wortproblem: gegeben: $w \in \Sigma^*$, Grammatik $G$; $w \in L(G)?$
+			\item Entscheidbarkeit des Wortproblems $w \in L$
+			\begin{itemize}
+				\item $L$ heißt entscheidbar gdw. es existiert ein Algorithmus, der für jedes $w \in \Sigma^*$ nach endlich vielen Schritten hält und die Antwort "`ja"' bzw. "`nein"' liefert
+				\item $L$ heißt semi-entscheidbar gdw. ex existiert ein Algorithmus, der für jedes $w \in L$ nach endlich vielen Schritten mit Antwort "`ja"' hält, für $w \notin L$ aber kein definiertes Antwortverhalten hat (z.B. gar nicht hält)
+			\end{itemize}
+			\item es gilt
+			\begin{itemize}
+				\item Das Wortproblem für Typ-1-Sprachen ist entscheidbar
+				\item das Wortproblem für Typ-0-Sprachen ist semi-entscheidbar
+			\end{itemize}
+		\end{itemize}
+		\item akzeptierender Automat für Typ-0-Sprachen: Turing-Maschine\\
+		(bzw. Linear beschränkter Automat (LBA) als Spezialfall für Typ-1-Sprachen)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Exkurs: Abzählbarkeit von Mengen}
+	\begin{itemize}
+		\item Mächtigkeit unendlicher Mengen A, B:
+		\begin{itemize}
+			\item $|A|\leq |B|$ gdw. es gibt eine injektive Abbildung $f: A \rightarrow B$
+			\item $|A| = |B|$ gdw. $|A|\leq |B|$ und $|B|\leq |A|$, d.h. es existiert eine bijektive Abbildung zwischen $A$ und $B$
+		\end{itemize}
+		\item $A$ heißt abzählbar gdw. $A$ ist endlich, oder $|A|=|\mathbb{N}|$, d.h. $A$ lässt sich bijektiv auf $\mathbb{N}$ oder eine Teilmenge von $\mathbb{N}$ abbilden
+		\item Die Menge aller geordneten Paare natürlicher Zahlen $\{(n,m)\mid n, m \in \mathbb{N}\}$ ist abzählbar
+		\item es gilt: sei $\Sigma$ endliches Alphabet, dann ist $\Sigma^*$ abzählbar
+		\item Folgerung: die Menge aller Algorithmen (Programm = Wort über einem endlichen Alphabet (z.B. binär)) ist abzählbar
+		\item Die Menge aller Sprachen über $\Sigma^*$ (d.h. $\mathcal{P}(\Sigma^*)$) ist überabzählbar
+		\item Folgerung: \emph{es gibt offensichtlich unentscheidbare Sprachen}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Semi-entscheidbare und rekursiv aufzählbare Sprachen}
+	\begin{itemize}
+		\item es gilt: $L$ ist entscheidbar gdw. $L$ und $\overline{L}$ sind semi-entscheidbar
+		\item Def: eine Sprache $L$ heißt \underline{rekursiv aufzählbar} gdw. es gibt eine berechenbare surjektive Funktion $f: \mathbb{N} \rightarrow L$, d.h. es gilt $L=\{f(1), f(2), \ldots\}$
+		\item Entscheidbare Sprachen werden alternativ auch als \underline{rekursive} Sprachen bezeichnet
+		\item es gilt: $L$ ist rekursiv aufzählbar gdw. $L$ ist semi-entscheidbar
+		\item es gilt: $L$ rekursiv aufzählbar $\rightarrow$ $L$ abzählbar; die Umkehrung gilt nicht
+		\item es gilt: die Typ-0-Sprachen sind genau die rekursiv aufzählbaren Sprachen
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Nichtdeterministische Turing-Maschinen}
+	\begin{itemize}
+		\item TM "`Hardware"' (Basismodell 1-Band-TM):
+		\begin{itemize}
+			\item Speicherband (unbeschränkt, oder halbseitig beschränkt); jede Speicherzelle kann ein Zeichen aus dem Bandalphabet aufnehmen
+			\item Lese-Schreib-Kopf: kann aktuelles Zeichen lesen und überschreiben; bewegt sich danach einen Schritt nach links oder rechts (L/R) oder bleibt stehen (N)
+		\end{itemize}
+		\item Spezifikation TM: $M=(S, \Sigma, \Gamma, \delta, s_0, \#, F)$
+		\begin{itemize}
+			\item [$S$:] Zustandsmenge
+			\item [$\Sigma$:] Terminalalphabet
+			\item[$\Gamma$:] Bandalphabet, $\Sigma \subset \Gamma$
+			\item[$\delta$:] Zustandsüberführungsrelation; $\delta \subseteq S \times \Gamma \times S \times \Gamma \times \{L, R, N\}$
+			\item[$s_0$:] Startzustand, $s_0 \in S$
+			\item[$\#$:] Blank-Symbol (Leerzeichen), $\# \in \Gamma \setminus \Sigma$
+			\item[$F$:] Menge von Endzuständen, $F \subseteq S$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Konfigurationsübergänge, Akzeptanzverhalten}
+	\begin{itemize}
+		\item Konfiguration:\\
+		$(s, u\underline{\alpha}v)$: Zustand $s$, Bandinhalt $u\alpha v$, Kopf unter $\alpha \in \Gamma$, $u,v \in \Gamma^*$
+		\item Konfigurationsübergänge: $\alpha, \beta, \rho, \omega \in \Gamma$, $u, v \in \Gamma^*$
+		\begin{itemize}
+			\item $(s_1, \alpha, s_2, \beta, R) \in \delta:$\qquad $(s_1, u\rho\underline{\alpha}\omega v) \mapsto (s_2, u\rho\beta\underline{\omega}v)$
+			\item $(s_1, \alpha, s_2, \beta, L) \in \delta:$\qquad $(s_1, u\rho\underline{\alpha}\omega v) \mapsto (s_2, u\underline{\rho}\beta\omega v)$
+			\item $(s_1, \alpha, s_2, \beta, N) \in \delta:$\qquad $(s_1, u\rho\underline{\alpha}\omega v) \mapsto (s_2, u\rho\underline{\beta}\omega v)$
+		\end{itemize}
+		\item Initialisierung:\\
+		Bandinhalt: $\#\#\# w\#\#\#\ldots$, Kopf unter erstem Buchstaben von $w$
+		\item TM akzeptiert $w$ (als Element von $L$), gdw. es existiert eine Folge von Konfigurationsübergängen, so dass TM in einem Endzustand hält
+		\begin{itemize}
+			\item "`TM hält"' bedeutet: in der jeweiligen Konfiguration gibt es keinen Folgeübergang
+		\end{itemize}
+	\end{itemize}
+\end{frame}
