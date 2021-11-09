@@ -86,3 +86,93 @@
 		\end{itemize}
 	\end{itemize}
 \end{frame}
+
+\begin{frame}{Varianten von TM}
+	\begin{itemize}
+		\item Ein-Band-TM\\
+		linksbeschränktes Band; unbeschränktes Band; Mehrspur-TM: LS-Köpfe fest verbunden
+		\item Mehr-Band-TM\\
+		$\delta(s, \{\sigma_1, \ldots, \sigma_k\}) = (s', \{\sigma_1', \ldots, \sigma_k'\},\{r_1,\ldots,r_k\})$\\
+		$\sigma_i \in \Gamma, \sigma_j' \in \Gamma, r_m \in \{L, R, N\}$, d.h. LS-Köpfe einzeln frei beweglich
+		\item Alle Varianten können sich gegenseitig simulieren und sind damit gleich mächtig
+		\item Bemerkung: Codierung Bandinhalt\\
+		natürliche Zahl $n \rightarrow |^n$ (unäre Darstellung, "`Bierdeckelnotation"'), oder Binärdarstellung
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{TM: Beispiel}
+	$$L=\{a^nb^n \mid n\geq 0\}$$
+	\begin{align*}
+		\delta = \{&(s_0, a, s_1, x, R), (s_0, x, s_0, x, R), (s_0, \#, s_f, \#, N),\\
+		&(s_1, x, s_1, x, R), (s_1, a, s_1, a, R), (s_1, b, s_2, x, R),\\
+		&(s_2, b, s_2, b, R), (s_2, \#, s_3, \#, L), (s_3, b, s_3, b, L),\\
+		&(s_3, x, s_3, x, L), (s_3, a, s_3, a, L), (s_3, \#, s_0, \#, R)\}
+	\end{align*}
+	\scriptsize
+	Arbeitsweise
+	\begin{itemize}
+		\item [$s_0$:] erstes verbliebenes $a$ wird durch Füllzeichen $x$ überschrieben
+		\item [$s_1$:] erstes verbliebenes $b$ wird durch Füllzeichen $x$ überschrieben
+		\item [$s_2$:] stellt sicher, dass bis zum Wortende nur $b$'s kommen
+		\item [$s_3$:] zurück zum Wortanfang
+		\item falls $w\in L$: am Schluss stehen nur noch $x$ auf dem Band; Übergang in akzeptierenden Zustand $s_f$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Linear beschränkte Automaten (LBA) und kontextsensitive Sprachen}
+	\begin{itemize}
+		\item LBA: TM, die den Bandbereich auf dem die Eingabe steht niemals verlässt (in-place)
+		\item es gilt (Satz von Kuroda): die von einem (nichtdeterministischem) LBA akzeptierten Sprachen sind die kontextsensitiven Sprachen (Typ-1).\\
+		Beweisidee:
+		\begin{itemize}
+			\item Sei $L$ Typ-1; $(u \rightarrow v) \in P, |u|\leq |v|$;\\
+			LBA: ersetzt (nichtdet.) Teilwort $v$ durch Teilwort $u$; überschreitet dabei Bandbegrenzung nicht; $w$ kann dabei auf $S$ reduziert werden, falls $w \in L$
+			\item sei $M$ LBA, der $L$ akzeptiert;\\
+			$G$: bilde Variablen $(s, c)$ mit $c \in \Gamma$;\\
+			$P$: sei z.B. $(s_1, a, s_2, b, L) \in \delta$, korrespondierende Typ-1-Regel in $P$: $c(s_1, a) \rightarrow (s_2, c)b$ für alle $c \in \Gamma$
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Turingmaschinen und Typ-0-Sprachen}
+	\begin{itemize}
+		\item es gilt: die durch allgemeine TM akzeptierten Sprachen sind genau die Typ-0-Sprachen\\
+		Beweis analog zu kontextsensitiven Sprachen unter Verzicht auf lineare Beschränktheit des Automaten bzw. Typ-1 Bedingung für Grammatik
+		\item Abgeschlossenheit
+		\begin{itemize}
+			\item Sowohl Typ-0-Sprachen wie auch speziell die Typ-1-Sprachen sind abgeschlossen unter Durchschnitt, Vereinigung, Konkatenation und Stern-Produkt
+			\item Typ-1-Sprachen \underline{sind} abgeschlossen unter Komplement
+			\item Typ-0-Sprachen \underline{sind nicht} abgeschlossen unter Komplement
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{eine entscheidbare Sprache, die nicht in $L_1$ liegt}
+	\begin{itemize}
+		\item Worte $w \in \Sigma^*$ sind aufzählbar: $w_1, w_2, \ldots$\\
+		Damit kann jedem Wort eineindeutig eine Nummer $i$ zugeordnet werden
+		\item Typ-1- (wie auch Typ-0-) Grammatiken sind Worte über einem erweiterten Alphabet $\Gamma = V \cup \Sigma \cup \{\rightarrow, ;\}$ und sind ebenfalls aufzählbar: $G_1, G_2, \ldots$\\
+		Damit existiert eine bijektive Abbildung $f(w_i) = G_i (= G_{w_i})$
+		\item Definiere $L_D=\{w \in \Sigma^* \mid w \notin L(G_w)\}$\\
+		es gilt:
+		\begin{itemize}
+			\item $L_D$ ist nicht Typ-1
+			\item $L_D$ ist entscheidbar
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Sprachklassen: Zusammenfassung und Ausblick}
+	\begin{columns}
+		\column{.5\textwidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{images/Sprachklassen_Typ0_Typ1}
+		\column{.5\textwidth}
+		\begin{itemize}
+			\item Typ-1-Sprachen sind entscheidbar
+			\item es gibt entscheidbare Sprachen, die Typ-0 aber nicht Typ-1 sind (z.B. $L_D$)
+			\item es gibt Typ-0-Sprachen, die nicht entscheidbar sind (z.B. $L_H$)
+			\item es gibt Sprachen, die nicht Typ-0 sind, d.h. nicht durch eine Grammatik erzeugt werden können (z.B. $\overline{L_H}$)
+		\end{itemize}
+	\end{columns}
+\end{frame}
