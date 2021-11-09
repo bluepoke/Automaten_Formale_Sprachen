@@ -69,35 +69,64 @@
 
 \begin{frame}{Zusammenhang mit kontextfreien Sprachen}
 	\begin{itemize}
-		\item zu jedem PDA lässt sich eine kontextfreie Grammatik konstruieren, die die gleiche Sprache generiert (s. \ref{Grammatik_aus_PDA})
+		\item zu jedem PDA lässt sich eine kontextfreie Grammatik konstruieren, die die gleiche Sprache generiert (siehe Folie \ref{Grammatik_aus_PDA})
 		\item zu jeder kontextfreien Grammatik lässt sich ein (i.Allg. nichtdeteministischer) PDA konstruieren, der die gleiche Sprache akzeptiert
 		\item Grundsätzlicher Zusammenhang mit kontextfreier Grammatik
 		\begin{itemize}
 			\item PDA kann mit Grammatik-Startsymbol $S$ als Kellerboden initialisiert werden
-			\item liegt Variable A oben auf Stack: per $\varepsilon$-Übergang durch rechte Seite einer Regel ersetzen
-			\item liegt Terminalsymbol $a$ oben auf Stack: mit gelesenem Symbol abgleichen; Löschen bei Übereinstimmung, sonst Kopie verwerfen
+			\item liegt Variable A oben auf Stack: per $\varepsilon$-Übergang durch rechte Seite einer Regel ersetzen (Produktion anwenden, dabei nichtdeterministisch raten)
+			\item liegt Terminalsymbol $a$ oben auf Stack: mit gelesenem Symbol abgleichen; Löschen bei Übereinstimmung, sonst Kopie verwerfen (matching Kellertop mit aktuellem Eingabezeichen)
 			\item Äquivalenter PDA ist i.Allg. nichtdeterministisch; lässt sich i.Allg. \underline{nicht} in einen deterministischen PDA äquivalent umrechnen
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Kontextfreie Grammatik, ausgehend von PDA, der mit leerem Keller akzeptiert}
+\note{
+	Nachfolgendes Beispiel: $$P=\{S\rightarrow aSa|bSb|\varepsilon\}$$
+}
+
+\begin{frame}{Beispiel: Umwandlung Typ-2-Grammatik $\rightarrow$ Kellerautomat}
+	Grammatik: $$P=\{S\rightarrow aSa|bSb|\varepsilon\}$$
+	Kellerautomat:\\
+	\centering
+	\begin{tikzpicture}
+		\node[state, initial] (s0) {$s_0$};
+		\node[state, right=of s0] (s1) {$s_1$};
+		\node[state, accepting, right=of s1] (s2) {$s_2$};
+		
+		\draw (s0) edge[above] node{$\varepsilon, \#/S\#$} (s1)
+			  (s1) edge[loop above, align=center] node{
+			  										$a,a/\varepsilon$\\
+			  										$b,b/\varepsilon$\\
+		  											$\varepsilon,S/aSa$\\
+	  												$\varepsilon,S/bSb$\\
+  													$\varepsilon,S/\varepsilon$} (s1)
+  			  (s1) edge[above] node{$\varepsilon,\#/\#$} (s2);
+	\end{tikzpicture}
+\end{frame}
+
+\note{
+	Sprache: Palindrome gerader Länge $L=\{w\tilde{w} \mid w \in \{a,b\}^*\}$
+}
+
+\begin{frame}{PDA, der mit leerem Keller akzeptiert $\rightarrow$ kontextfreie Grammatik}
 	\label{Grammatik_aus_PDA}
 	\begin{columns}
 		\column{.5\textwidth}
 		Regeln
 		\begin{itemize}
 			\item Startregel\\
-			$S\rightarrow [s_0, \#, s]$ für alle $s$
-			\item Übergang $(s,a,A,s_1,B_1\ldots B_m)$\\
-			$[s,A,s_{m+1}] \rightarrow a[s_1,B_1,s_2]\ldots[s_m,B_m,s_{m+1}]$ für alle Kombinationen $s_2,\ldots,s_{m+1}$
-			\item Übergang $(s,a,A,s_1,\varepsilon)$\\
-			$[s,A,s_1]\rightarrow a$
+			$S\rightarrow [s_0, \#, s_i]$ für alle $s_i \in S$
+			\item Übergang $(s_j,a,A,s_k,B_1\ldots B_m)$\\
+			$[s_j,A,s_{m+1}] \rightarrow a[s_k,B_1,s_l]\ldots[s_m,B_m,s_{m+1}]$ für alle Kombinationen $s_l,\ldots,s_{m+1}$
+			\item Übergang $(s_j,a,A,s_k,\varepsilon)$\\
+			$[s_j,A,s_k]\rightarrow a$
 		\end{itemize}
 		\column{.5\textwidth}
-		Beispiel $L=\{a^nb^n \mid n \geq q\}$\\
-		 $\delta\{(s_0,a,\#,s_0,A),(s_0,a,A,s_0,AA),$\\
+		Beispiel $L=\{a^nb^n \mid n \geq 1\}$\\
+		 $\delta=\{(s_0,a,\#,s_0,A),(s_0,a,A,s_0,AA),$\\
 		 \qquad$(s_0,b,A,s_1,\varepsilon),(s_1,b,A,s_1,\varepsilon)\}$\\
+		 \vspace{0.5em}
 		Regeln: $P=\{S \rightarrow [s_0,\#,s_0]|[s_0,\#,s_1],$\\
 			$[s_0,\#,s_0]\rightarrow a[s_0,A,s_0],$\\
 			$[s_0,\#,s_1]\rightarrow a[s_0,A,s_1],$\\
@@ -107,6 +136,38 @@
 			$[s_0,A,s_1]\rightarrow a[s_0,A,s_1][s_1,A,s_1],$\\
 			$[s_0,A,s_1]\rightarrow a[s_0,A,s_1][s_1,A,s_1],$\\
 			$[s_0,A,s_1]\rightarrow b, [s_1,A,s_1]\rightarrow b\}$
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Berechnung: PDA, der mit leerem Keller akzeptiert $\rightarrow$ kontextfreie Grammatik}
+	\begin{columns}
+		\column{.4\textwidth}
+		\begin{tikzpicture}
+			\node[state, initial] (s0) {$s_0$};
+			\node[state, right=of s0] (s1) {$s_1$};
+			\draw	(s0) edge[loop above] node{$a, \#/A$} (s0)
+			(s0) edge[loop below] node{$a, A/AA$} (s0)
+			(s0) edge[above] node{$b, A/\varepsilon$} (s1)
+			(s1) edge[loop above] node{$b,A/\varepsilon$} (s1);
+		\end{tikzpicture}
+		\begin{tabular}{ccccccccccccc}
+			& a &  & a &  & b &  & b &  \\
+			\hline
+			&  &  &  & A &  &  &  &  \\
+			\# &  & A &  & A &  & A &  &  \\
+			\hline
+			$s_0$ &  & $s_0$ &  & $s_1$ &  & $s_1$ &  & $s_1$ \\
+		\end{tabular}
+		\column{.6\textwidth}
+		\begin{itemize}
+			\item Kodierung von "`Aufgaben"'
+			\item Hauptaufgabe: Keller soll leer werden\\
+			Starten in $s_0$, \# soll "`abgebaut"' werden, Folgezustand ist egal: $[s_0, \#, s_0]$ bzw. $[s_0, \#, s_1]$
+			\item Kodierungen werden als Nichtterminalsymbole (aka Variablen) interpretiert\\
+			Startregeln: $S \rightarrow [s_0, \#, s_0]|[s_0, \#, s_1]$
+			\item analog Kodierung aller weiteren Übergänge des Automaten als Regeln, z.B. führt das Lesen eines $b$ im Zustand $s_0$ zum Abbau eines $A$ auf dem Stack:\\
+			$[s_0, A, s_0] \rightarrow b$
+		\end{itemize}
 	\end{columns}
 \end{frame}
 
