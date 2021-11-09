@@ -61,15 +61,23 @@
 \end{frame}
 
 \begin{frame}{Beispiel: CYK-Algorithmus}
-	$L=\{a^nb^n\mid n\geq 1\}$\\
-	$G=(\{A, B, C, S\}, \{a, b\}, P, S)$\\
-	$P=\{S \rightarrow AB|AC, C\rightarrow SB, A\rightarrow a, B\rightarrow b\}$
+	$$L=\{a^nb^n\mid n\geq 1\}$$
+	Zugehörige Grammatik in Chomsky-Normalform:
+	\begin{align*}
+		G=(&\{A, B, C, S\}, \{a, b\}, P, S)\\
+		P=\{&S \rightarrow AB,\\
+		    &S \rightarrow AC,\\
+		    &C\rightarrow SB,\\
+		    &A\rightarrow a,\\
+		    &B\rightarrow b\}
+	\end{align*}
+	
 \end{frame}
 
 \note{
 	Betrachten des Wortes $w=aabb$\\
 	\begin{columns}
-		\column{.5\textwidth}
+		\column{.3\textwidth}
 		\begin{itemize}
 			\item[$(a)$] $V[1,1]=\{A\}$
 			\item[$(a)$] $V[2,1]=\{A\}$
@@ -77,7 +85,7 @@
 			\item[$(b)$] $V[4,1]=\{B\}$
 			\item[$(aa)$] $V[1,2]=\varnothing$
 		\end{itemize}
-		\column{.5\textwidth}
+		\column{.3\textwidth}
 		\begin{itemize}
 			\item[$(ab)$] $V[2,2]=\{S\}$
 			\item[$(bb)$] $V[3,2]=\varnothing$
@@ -85,6 +93,22 @@
 			\item[$(abb)$] $V[2,3]=\{C\} (l=2)$
 			\item[$(aabb)$] $V[1,4]=\{S\} (l=1)$
 		\end{itemize}
+		\column{.4\textwidth}
+		\centering
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			$a$ & $a$ & $b$ & $b$ \\
+			\hline
+			\hline
+			$\{A\}$ & $\{A\}$ & $\{B\}$ & $\{B\}$ \\
+			\hline
+			$\varnothing$ & $\{S\}$ & $\varnothing$ &  \\
+			\hline
+			$\varnothing$ & $\{C\}$ &  &  \\
+			\hline
+			$\{S\}$ &  &  &  \\
+			\hline
+		\end{tabular}
 	\end{columns}
 }
 
