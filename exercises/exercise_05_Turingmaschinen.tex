@@ -24,10 +24,10 @@
 
 \newcommand{\Fach}{Theoretische Informatik I - Automaten und Formale Sprachen}
 \newcommand{\Name}{}
-\newcommand{\Seminargruppe}{5CS21-1}
-\newcommand{\Uebung}{3} %  <-- UPDATE ME
-\newcommand{\Uebungstitel}{Kellerautomaten} %  <-- UPDATE ME
-\newcommand{\Besprechungstermin}{24. November 2021}
+\newcommand{\Seminargruppe}{5CS21-1} %  <-- UPDATE ME
+\newcommand{\Uebung}{5} %  <-- UPDATE ME
+\newcommand{\Uebungstitel}{Turingmaschinen} %  <-- UPDATE ME
+\newcommand{\Besprechungstermin}{1. Dezember 2021} %  <-- UPDATE ME
 
 \setlength{\parindent}{0em}
 \topmargin -1.0cm
@@ -87,27 +87,23 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 	\Aufgabe{1}
-	Sind die folgenden Sprachen kontextfrei, bzw. sogar deterministisch kontextfrei? Begründen Sie Ihre Antwort, gegebenenfalls durch Angabe einer geeigneten Grammatik bzw. eines geeigneten Automaten.
 	
-	\begin{enumerate}[a)]
-		\item $L_1=\{a^ib^jc^k \mid i>j \textrm{ oder } j>k,\quad i,j,k\geq 0\}$
-		\item $L_2=\{ww \mid w\in \{a\}^*\}$
-		\item $L_3=\{ww \mid w\in \{a,b\}^*\}$
-	\end{enumerate}
+	Konstruieren Sie eine Turingmaschine, die das Wortproblem für die Sprache
+	$$L=\{a^nb^nc^nd^n \mid n\geq 0 \}$$ entscheidet.
 	
 	\Aufgabe{2}
-	Konstruieren Sie einen deterministischen PDA, der die Sprache\\$L=\{a^nb^m \mid m \leq 2n, \quad m,n\geq 1\}$ akzeptiert. Ist das mittels leerem Keller möglich?
+	
+	Konstruieren Sie eine Turingmaschine, die das Wortproblem für die Sprache
+	$$L=\{w\tilde{w} \mid w \in \{a,b\}^*\}$$ entscheidet.
 	
 	\Aufgabe{3}
-	Konstruieren Sie einen deterministischen PDA, der die Sprache der korrekt geklammerten Ausdrücke\\
-	$L=\{w=xy \in \{[,]\}^* \mid \textrm{Anzahl}(w,[)=\textrm{Anzahl}(w,]),$\\
-	\qquad und für jede Vorsilbe $x$ gilt: $\textrm{Anzahl}(x,[)\geq\textrm{Anzahl}(x,])\}$\\
-	akzeptiert. Kann das durch Akzeptanz mit leerem Keller erreicht werden?
+	
+	Konstruieren Sie eine 2-Band-Turingmaschine, die das Wortproblem für die Sprache
+	$$L=\{ww \mid w \in \{a,b\}^+\}$$ entscheidet.
 	
 	\Aufgabe{4}
-	Die Sprache $L=\{a^ib^ia^kb^k \mid i,k\geq 1\}$ ist deterministisch kontextfrei.\\
-	Lässt sich diese Sprache durch einen DPDA mit leerem Keller akzeptieren?\\
-	Entwickeln Sie einen DPDA mit dem geeigneten Akzeptanzverhalten.
 	
+	Konstruieren Sie eine Turingmaschine, die das Wortproblem für die Sprache
+	$$L=\{w \in \{a,b,c\}^*\mid |w|_a=|w|_b=|w|_c\}$$ entscheidet. Hierbei ist $|w|_a$ die Anzahl $a$'s im Wort $w$.
 \end{document}
 
