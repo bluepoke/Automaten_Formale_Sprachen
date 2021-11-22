@@ -4,6 +4,8 @@
 	\begin{itemize}
 		\item Vereinfachungen für kontextfreie Grammatiken $G$
 		\begin{itemize}
+			\item $\varepsilon$-Regeln eliminieren: $S \rightarrow aAb; A \rightarrow aS|\varepsilon$\\
+			wird zu	$S \rightarrow aAb|ab; A \rightarrow aS$
 			\item $G$ reduzieren: nutzlose Variablen eliminieren
 			\item Kettenregeln $A \rightarrow B$ entfernen
 		\end{itemize}
@@ -33,8 +35,8 @@
 \note{
 	\begin{tabular}{rl}
 		alt & neu \\
-		$S \rightarrow bA$ & $D_b \rightarrow b, S \rightarrow X_bA$ \\
-		$S \rightarrow aB$ & $D_a \rightarrow a, S \rightarrow X_aB$ \\
+		$S \rightarrow bA$ & $X_b \rightarrow b, S \rightarrow X_bA$ \\
+		$S \rightarrow aB$ & $X_a \rightarrow a, S \rightarrow X_aB$ \\
 		$A \rightarrow bAA$ & $A \rightarrow X_bAA$ (muss weiter ersetzt werden) \\
 		$A \rightarrow aS$ & $A \rightarrow X_aS$ \\
 		$B \rightarrow aBB$ & $B \rightarrow X_aBB$ (muss weiter ersetzt werden)\\
@@ -44,7 +46,7 @@
 	\end{tabular}
 }
 
-\begin{frame}{Worterkennung: CYK-Algorithmus}
+\begin{frame}{Worterkennung: Cocke-Younger-Kasami-Algorithmus (CYK)}
 	polynomiell auch für nichtdeterministische Sprachen
 	\begin{itemize}
 		\item Ziel: Worterkennung und Konstruktion Ableitungsbaum bottom-up
@@ -156,7 +158,7 @@
 			\item Vereinigung: $L_1\cup L_2$\qquad $S \rightarrow S_1|S_2$
 			\item Konkatenation: $L_1L_2$ \qquad $S\rightarrow S_1S_2$
 			\item Stern-Produkt: $L^*$ \qquad $S_0\rightarrow S|\varepsilon, S\rightarrow S_1|S_1S$
-			\item Spiegelung: ersetze in Chomsky-Normalform $A\rightarrow BC$ durch $A \rightarrow BC$
+			\item Spiegelung: ersetze in Chomsky-Normalform $A\rightarrow BC$ durch $A \rightarrow CB$
 		\end{itemize}
 		\item Kontextfreie Sprachen sind \underline{nicht} abgeschlossen unter
 		\begin{itemize}
