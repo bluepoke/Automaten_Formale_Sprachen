@@ -1,0 +1,155 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{fancyhdr}
+\usepackage{fancyheadings}
+\usepackage[ngerman,german]{babel}
+\usepackage{german}
+\usepackage[utf8]{inputenc}
+%\usepackage[latin1]{inputenc}
+\usepackage[active]{srcltx}
+\usepackage{algorithm}
+\usepackage[noend]{algorithmic}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{bbm}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{ifthen}
+\usepackage{listings}
+\usepackage{struktex}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows}
+
+% table placement
+\usepackage{placeins}
+
+\newcommand{\Fach}{Theoretische Informatik I - Automaten und Formale Sprachen}
+\newcommand{\Name}{}
+\newcommand{\Seminargruppe}{5CS21-1} %  <-- UPDATE ME
+\newcommand{\Uebung}{7} %  <-- UPDATE ME
+\newcommand{\Uebungstitel}{Extraaufgaben} %  <-- UPDATE ME
+\newcommand{\Besprechungstermin}{8. Dezember 2021} %  <-- UPDATE ME
+
+\setlength{\parindent}{0em}
+\topmargin -1.0cm
+\oddsidemargin 0cm
+\evensidemargin 0cm
+\setlength{\textheight}{9.2in}
+\setlength{\textwidth}{6.0in}
+
+%%%%%%%%%%%%%%%
+%% Aufgaben-COMMAND
+\newcommand{\Aufgabe}[1]{
+	{
+		\vspace*{0.5cm}
+		\textsf{\textbf{Aufgabe #1}}
+		\vspace*{0.2cm}
+		
+	}
+}
+%%%%%%%%%%%%%%
+\hypersetup{
+	pdftitle={\Fach{}: Übungsblatt \Uebung{}},
+	pdfauthor={\Name},
+	pdfborder={0 0 0}
+}
+
+\lstset{ %
+	language=java,
+	basicstyle=\footnotesize\tt,
+	showtabs=false,
+	tabsize=2,
+	captionpos=b,
+	breaklines=true,
+	extendedchars=true,
+	showstringspaces=false,
+	flexiblecolumns=true,
+}
+
+\title{Übungsblatt \Uebung{}}
+\author{\Name{}}
+
+\begin{document}
+	\thispagestyle{fancy}
+	\chead{\sf \large \Fach{} \\ \small \Name{}}
+	\chead{\sf \large \Fach{} \\ \small Seminargruppe \Seminargruppe{}}
+	\vspace*{0.2cm}
+	\begin{center}
+		\LARGE \sf \textbf{Übung \Uebung{}} \\
+		\vspace*{0.4cm}
+		\Large \sf \textbf{\Uebungstitel}\\
+		\vspace*{0.4cm}
+		\normalsize \rm Besprechungstermin: \Besprechungstermin
+	\end{center}
+	\vspace*{0.2cm}
+	
+	\tikzset {
+		->, % makes the edges directed
+		>=stealth, % makes the arrow heads bold
+		node distance=1cm and 1cm, % specifies the minimum distance between two nodes.
+		every state/.style={thick, fill=gray!10}, %properties for every 'state' node
+		initial text=$ $, % Remove text from start arrow
+	}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%% Aufgaben %%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\Aufgabe{Hornformeln}
+	
+	Gegeben sei folgende Formel:
+	$$(\neg A \lor \neg B \lor E) \land C \land A \land (\neg C \lor B) \land (\neg A \lor D) \land (\neg C \lor \neg D \lor A) \land \neg E \land \neg G$$
+	Prüfen Sie die Erfüllbarkeit mittels Markierungsalgorithmus und Hornklauselalgorithmus.
+	
+	\Aufgabe{DFA konstruieren}
+	
+	$$L_1=\{w \in \{a,b\}^* \mid \textrm{$w$ endet auf $a$ und $|w|$ ist gerade}\}$$
+	$$L_2=\{w \in \{a,b\}^* \mid \textrm{$w$ enthält nicht das Teilwort $bb$}\}$$
+	
+	\Aufgabe{DFA minimieren}
+	
+	Minimieren Sie den folgenden DFA:
+	
+	\begin{tikzpicture}
+		\node[state, initial] (1) {1};
+		\node[state, above right=of 1] (2) {2};
+		\node[state, accepting, right=2cm of 2] (3) {3};
+		\node[state, accepting, below right=of 1] (4) {4};
+		\node[state, right=2cm of 4] (5) {5};
+		\node[state, above right=of 5] (6) {6};
+		
+		\draw (1) edge[above left] node{a} (2)
+		      (1) edge[below left] node{b} (4)
+		      (2) edge[above] node{a} (3)
+		      (2) edge[left] node{b} (4)
+		      (3) edge[below right, bend left] node{a} (4)
+		      (3) edge[right] node{b} (5)
+		      (4) edge[above left, bend left] node{a} (3)
+		      (4) edge[below] node{b} (5)
+		      (5) edge[loop right] node{a,b} (5)
+		      (6) edge[above right] node{a} (3)
+		      (6) edge[below right] node{b} (5);
+	\end{tikzpicture}
+	
+	\pagebreak
+	
+	\Aufgabe{Pumping-Lemma für reguläre Sprachen)}
+	
+	Zeigen Sie, dass
+	$$L=\{a^nb^mv \mid v \in \{a\}^*, |v| \textrm{ ist ungerade und } n=2m\}$$
+	nicht regulär ist.
+	
+	\Aufgabe{CYK-Algorithmus}
+	
+	Gegeben sei die Grammatik $G=(\{S, A, B, C\}, \{a, b\}, S, P)$ mit
+	\begin{align*}
+		P:S\rightarrow & BB \mid AA\\
+		A\rightarrow & AB \mid AC \mid a\\
+		B\rightarrow & BA \mid CB \mid b\\
+		C\rightarrow & BC \mid c\\
+	\end{align*}
+	Prüfen Sie mit dem CYK-Algorithmus, ob das Wort $babcb$ in $L(G)$ enthalten ist.
+	
+\end{document}
+
