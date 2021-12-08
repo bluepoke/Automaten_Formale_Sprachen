@@ -41,13 +41,13 @@
 		\item Hierarchie von Grammatiken
 		\begin{itemize}
 			\item[\underline{Typ 0}:] Startwort besteht aus genau einer Variablen $S$,\\
-			es gibt keine Regeln der Art $\varepsilon \rightarrow u$ abgeleitet werden; $S$ darf dann auf keiner rechten Seite einer Regel vorkommen
+			es gibt keine Regeln der Art $\varepsilon \rightarrow u$ (Wörter dürfen nicht aus dem "`Nichts"' entstehen)
 			\item[\underline{Typ 1:}] (kontextsensitiv) Typ 0, und für alle Regeln $w_1 \rightarrow w_2$ gilt: $|w_1| \leq |w_2|$;\\
 			$S \rightarrow \varepsilon$ als Sonderregel erlaubt
 			\item[\underline{Typ 2:}] (kontextfrei) Typ 1, und für alle Regeln $w_1 \rightarrow w_2$ gilt: $w_1$ ist eine einzelne Variable
 			\item[\underline{Typ 3:}] (regulär) Typ 2, und für alle Regeln $w_1 \rightarrow w_2$ gilt: $w_2 \in \Sigma \cup \Sigma V$
 		\end{itemize}
-		\item \underline{$\varepsilon$-Sonderregel}: $\varepsilon$ darf nur aus Startsymbol $S$ abgeleitet werden; $S$ darf dann auf keiner rechten Seite einer Regel vorkommen
+		\item \underline{$\varepsilon$-Sonderregel}: $\varepsilon$ darf nur aus Startsymbol $S$ abgeleitet werden;\\$S$ darf dann auf keiner rechten Seite einer Regel vorkommen
 	\end{itemize}
 \end{frame}
 
