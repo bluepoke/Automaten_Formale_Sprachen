@@ -67,7 +67,7 @@
 			\end{tabular}
 			\caption{Wahrheitstafel der Grundoperationen}
 		\end{table}
-		logische Äquivalenz $F_1 \equiv F_2$: $F_1$ und $F_2$ haben gleichen Wahrheitswerteverlauf; z.B.\\
+		semantische Äquivalenz $F_1 \equiv F_2$: $F_1$ und $F_2$ haben gleichen Wahrheitswerteverlauf; z.B.\\
 		$A \rightarrow B \equiv \neg A \lor B$\\
 		$A \leftrightarrow B \equiv (A \rightarrow B) \land (B \rightarrow A)$
 \end{frame}
@@ -85,8 +85,8 @@
 
 \begin{frame}{Äquivalenz aussagenlogischer Formeln}
 	\begin{itemize}
-		\item Zwei Formeln $F$ und $G$ heißen äquivalent ($F \equiv G$), falls für alle Belegungen $I$ gilt: $I(F)=I(G)$
-		\item Äquivalenz kann bewiesen (oder widerlegt) werden durch aufstellen der jeweiligen Wahrheitstafeln
+		\item Zwei Formeln $F$ und $G$ heißen semantisch äquivalent ($F \equiv G$), falls für alle Belegungen $I$ gilt: $I(F)=I(G)$
+		\item Äquivalenz kann bewiesen (oder widerlegt) werden durch Aufstellen der jeweiligen Wahrheitstafeln
 		\item Beispiele
 		\begin{itemize}
 			\item $A \rightarrow B \equiv \neg A \lor B$
@@ -138,13 +138,13 @@
 			\item $\neg (A \land B) \equiv (\neg A \lor \neg B)$
 			\item $\neg (A \lor B) \equiv (\neg A \land \neg B)$
 		\end{itemize}
-		\item Tautologieregeln: sei $A$ Tautologie; $A\top$ bzw. $\models A$
+		\item Tautologieregeln: sei $A$ Tautologie; $A\top$ bzw. $\models A$ bzw. $A \equiv w$
 		\begin{itemize}
-			\item $(A \lor B) \equiv A$; $(A \land B) \equiv B$
+			\item $(A \lor B) \equiv (w \lor B) \equiv w \equiv A$; $(A \land B) \equiv (w \land B) \equiv B$
 		\end{itemize}
-		\item Kontradiktionsregeln: sei $A$ Kontradiktion; $A\bot$
+		\item Kontradiktionsregeln: sei $A$ Kontradiktion; $A\bot$ bzw. $A \equiv f$
 		\begin{itemize}
-			\item $(A \lor B) \equiv B$; $(A \land B) \equiv A$
+			\item $(A \lor B) \equiv (f \lor B) \equiv B$; $(A \land B) \equiv (f \land B) \equiv f \equiv A$
 		\end{itemize}
 	\end{itemize}
 \end{frame}
