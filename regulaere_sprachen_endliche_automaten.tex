@@ -24,7 +24,7 @@
 				\item das Wort vollständig gelesen wird und
 				\item sich $A$ danach in einem der vorab definierten Endzustände befindet
 			\end{itemize}
-			\item Wort wird nicht generiert (Grammatik) sonder akzeptiert (als zugehörig erkannt)
+			\item Wort wird nicht generiert (Grammatik) sondern akzeptiert (als zugehörig erkannt)
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -114,7 +114,7 @@
 		\item $\delta$ ist dann keine Abbildung, sondern eine allgemeinere Transitionsrelation:\\
 		\quad $\delta \subseteq (S \times \Sigma) \times S$
 		\item akzeptierte Sprache:\\
-		\quad $L(A)=\left\{w \in \Sigma^* \mid (s_0,w) \mapsto^* (S_f, \varepsilon), s_f \in F, s_0 \in S_0 \right\}$
+		\quad $L(A)=\left\{w \in \Sigma^* \mid (s_0,w) \mapsto^* (s_f, \varepsilon), s_f \in F, s_0 \in S_0 \right\}$
 		\begin{itemize}
 			\item $w$ wird akzeptiert, falls es eine akzeptierende Folge von Konfigurationsübergängen gibt; andere Folgen müssen nicht akzeptierend sein
 			\item $S_0:$ Menge von Startzuständen (mehrere sind erlaubt)
@@ -404,6 +404,7 @@
 		\item Kleene's Theorem (umformuliert)\\
 		\quad Eine Sprache $L'$ ist regulär gdw.\\
 		\quad es existiert ein regulärer Ausdruck $\alpha$ mit $L'=L(\alpha)$.
+		\item Siehe auch: https://stackoverflow.com/questions/1732348
 	\end{itemize}
 \end{frame}
 
