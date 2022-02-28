@@ -134,8 +134,7 @@
 			$[s_0,A,s_0]\rightarrow a[s_0,A,s_1][s_1,A,s_0],$\\
 			$[s_0,A,s_1]\rightarrow a[s_0,A,s_0][s_0,A,s_1],$\\
 			$[s_0,A,s_1]\rightarrow a[s_0,A,s_1][s_1,A,s_1],$\\
-			$[s_0,A,s_1]\rightarrow a[s_0,A,s_1][s_1,A,s_1],$\\
-			$[s_0,A,s_1]\rightarrow b, [s_1,A,s_1]\rightarrow b\}$
+			$[s_0,A,s_1]\rightarrow b,$\\ $[s_1,A,s_1]\rightarrow b\}$
 	\end{columns}
 \end{frame}
 
@@ -156,7 +155,7 @@
 			&  &  &  & A &  &  &  &  \\
 			\# &  & A &  & A &  & A &  &  \\
 			\hline
-			$s_0$ &  & $s_0$ &  & $s_1$ &  & $s_1$ &  & $s_1$ \\
+			$s_0$ &  & $s_0$ &  & $s_0$ &  & $s_1$ &  & $s_1$ \\
 		\end{tabular}
 		\column{.6\textwidth}
 		\begin{itemize}
@@ -165,8 +164,8 @@
 			Starten in $s_0$, \# soll "`abgebaut"' werden, Folgezustand ist egal: $[s_0, \#, s_0]$ bzw. $[s_0, \#, s_1]$
 			\item Kodierungen werden als Nichtterminalsymbole (aka Variablen) interpretiert\\
 			Startregeln: $S \rightarrow [s_0, \#, s_0]|[s_0, \#, s_1]$
-			\item analog Kodierung aller weiteren Übergänge des Automaten als Regeln, z.B. führt das Lesen eines $b$ im Zustand $s_0$ zum Abbau eines $A$ auf dem Stack:\\
-			$[s_0, A, s_0] \rightarrow b$
+			\item analog Kodierung aller weiteren Übergänge des Automaten als Regeln, z.B. führt das Lesen eines $b$ im Zustand $s_0$ zum Abbau eines $A$ auf dem Stack und Übergang in $s_1$:\\
+			$[s_0, A, s_1] \rightarrow b$
 		\end{itemize}
 	\end{columns}
 \end{frame}
