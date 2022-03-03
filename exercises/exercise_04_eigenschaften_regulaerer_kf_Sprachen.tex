@@ -89,10 +89,10 @@
 	Hinweis: Zur Lösung der Aufgaben 1 bis 5 dieser Serie greifen Sie auf das Pumping-Lemma bzw. die Abschlusseigenschaften der jeweiligen Sprachklasse zurück.
 	
 	\Aufgabe{1}
-	Zeigen Sie, dass die Sprache $L= \{z=scs \mid s \in \{a, b\}^* \}$ nicht regulär ist.
+	Zeigen Sie, dass die Sprache $L= \{scs \mid s \in \{a, b\}^* \}$ nicht regulär ist.
 	
 	\Aufgabe{2}
-	Zeigen Sie, dass die Sprache $L= \{z=scs \mid s \in \{a, b\}^* \}$ nicht kontextfrei ist.
+	Zeigen Sie, dass die Sprache $L= \{scs \mid s \in \{a, b\}^* \}$ nicht kontextfrei ist.
 	
 	\Aufgabe{3}
 	$L$ sei regulär und werde durch einen DFA mit 4 Zuständen akzeptiert. $L$ enthalte ein Wort der Länge 4. Ist $L$ unendlich? Begründen Sie die Antwort.
@@ -106,11 +106,11 @@
 	\pagebreak
 	\Aufgabe{6}
 	Gegeben sei
-	$$G=(\{S,A\},\{a,b,c\},P,S)$$
+	$$G=(\{S,A,B\},\{a,b,c\},P,S)$$
 	mit der Produktionsmenge $P$:
 	\begin{align*}
-		S \rightarrow & aAb\\
-		A \rightarrow & S | aaSc | \varepsilon\\
+		S \rightarrow & aAb \mid aBb\\
+		A \rightarrow & S \mid aaSc \mid B \mid \varepsilon\\
 	\end{align*}
 	Überführen Sie diese Grammatik in Chomsky-Normalform.
 	
@@ -125,6 +125,6 @@
 		X_b \rightarrow & b\\
 		X_c \rightarrow & c\\
 	\end{align*}
-	Prüfen Sie mittels CYK-Algorithmus, ob das Wort $aaabbbcc$ in $L(G)$ enthalten ist.
+	Prüfen Sie mittels CYK-Algorithmus, ob das Wort $aabacc$ in $L(G)$ enthalten ist.
 \end{document}
 
