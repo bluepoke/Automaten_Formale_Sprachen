@@ -204,3 +204,29 @@
 		\item es gibt Sprachen in $L_\varepsilon(A)$, die nicht regulär sind (z.B ${a^nb^n}$)
 	\end{itemize}
 \end{frame}
+
+\begin{frame}{Exkurs: DFA im RL}
+Pac-Man \footnote{Applications of Deterministic Finite Automata, Eric Gribkoff, \url{https://www.cs.ucdavis.edu/~rogaway/classes/120/spring13/eric-dfa.pdf}}
+		\begin{columns}
+			\column{.5\textwidth}
+		\begin{figure}
+			\includegraphics[width=0.6\linewidth]{images/Pac-Man}
+		\end{figure}
+		\column{.8\textwidth}
+		\begin{tikzpicture}
+			\node[state, initial] (w) {wander};
+			\node[state, right=3cm of w] (c) {chase};
+			\node[state, below=of w] (r) {return};
+			\node[state, below=of c, right=3.24cm of r]  (f) {flee};
+			
+			\draw
+				(w) edge[bend left=10, above] node{PM spotted} (c)
+				(w) edge[bend left=10, above] node{PM power-up} (f)
+				(c) edge[bend left=10, below] node{lost PM} (w)
+				(c) edge[right] node{PM power-up} (f)
+				(f) edge[bend left=10, below] node{PM power-dn} (w)
+				(f) edge[below] node{eaten by PM} (r)
+				(r) edge[left] node{reach base} (w);
+		\end{tikzpicture}
+	\end{columns}
+\end{frame}
