@@ -1,0 +1,108 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{fancyhdr}
+\usepackage{fancyheadings}
+\usepackage[ngerman,german]{babel}
+\usepackage{german}
+\usepackage[utf8]{inputenc}
+%\usepackage[latin1]{inputenc}
+\usepackage[active]{srcltx}
+\usepackage{algorithm}
+\usepackage[noend]{algorithmic}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{bbm}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{ifthen}
+\usepackage{listings}
+\usepackage{struktex}
+\usepackage{hyperref}
+
+% table placement
+\usepackage{placeins}
+
+\newcommand{\Fach}{Theoretische Informatik I - Automaten und Formale Sprachen}
+\newcommand{\Name}{}
+\newcommand{\Uebungsthema}{Turingmaschinen und Parser}
+\newcommand{\Uebungstitel}{Vertiefung in der Theoriephase} %  <-- UPDATE ME
+
+\setlength{\parindent}{0em}
+\topmargin -1.0cm
+\oddsidemargin 0cm
+\evensidemargin 0cm
+\setlength{\textheight}{9.2in}
+\setlength{\textwidth}{6.0in}
+
+%%%%%%%%%%%%%%%
+%% Aufgaben-COMMAND
+\newcommand{\Abschnitt}[1]{
+	{
+		\vspace*{0.5cm}
+		\textsf{\textbf{#1}}
+		\vspace*{0.2cm}
+		
+	}
+}
+%%%%%%%%%%%%%%
+\hypersetup{
+	pdftitle={\Fach{}: \Uebungstitel{} - \Uebungsthema},
+	pdfauthor={\Name},
+	pdfborder={0 0 0}
+}
+
+\lstset{ %
+	language=java,
+	basicstyle=\footnotesize\tt,
+	showtabs=false,
+	tabsize=2,
+	captionpos=b,
+	breaklines=true,
+	extendedchars=true,
+	showstringspaces=false,
+	flexiblecolumns=true,
+}
+
+\title{\Uebungstitel}
+\author{\Name{}}
+
+\begin{document}
+	\thispagestyle{fancy}
+	\chead{\sf \large \Fach{} \\ \small \Name{}}
+	\vspace*{0.2cm}
+	\begin{center}
+		\LARGE \sf \textbf{\Uebungstitel} \\
+		\vspace*{0.4cm}
+		\Large \sf \textbf{\Uebungsthema}\\
+		\vspace*{0.4cm}
+	\end{center}
+	\vspace*{0.2cm}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%% Aufgaben %%%%%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\Abschnitt{Aufgabe 1}
+	
+	In der Vorlesung wurde besprochen, wie eine 2-Band-Turingmaschine das Wortproblem für die Sprache
+	$$L=\{ww \mid w \in \{a,b\}^+\}$$ entscheidet. Da Mehrband-Turingmaschinen und Ein-Band-Turingmaschinen gleich mächtig sind, muss dieses Problem auch von einer Ein-Band-Turingmaschine entschieden werden können. Konstruieren Sie eine solche Turingmaschine.
+	
+	\Abschnitt{Vorbemerkungen zu Aufgabe 2}
+	
+	Parser wurden in der Vorlesung nicht thematisiert. Erarbeiten Sie sich die Inhalte des Papers \emph{LR(k)-Analyse für Pragmatiker} von Andreas Kunert, welches unter\\ \url{https://amor.cms.hu-berlin.de/~kunert/papers/lr-analyse/lr.pdf}\\ zur Verfügung steht. Sie sollten sich mindestens die Kapitel 1 bis 3 aneignen, um die folgenden Aufgabe lösen zu können.
+	
+	\Abschnitt{Aufgabe 2}
+	
+	Die präfixfreie Variate der Sprache $L$ der korrekt geklammerten Ausdrücke
+	$$L=\{(), (()), ((())), (()()), \ldots\}$$
+	enthält alle Worte $x$ mit gleicher Anzahl öffnender und schließender Klammern, wobei für jede echte Vorsilbe $u$ (mit $x=uy, y\neq\varepsilon$) die Zahl der öffnenden Klammern größer ist als die Zahl der schließenden Klammern.
+	
+	\begin{enumerate}[a)]
+		\item Entwickeln Sie für $L$ einen deterministischen PDA $A$, der $L$ mittels leerem Keller akzeptiert. \emph{Hinweis:} Dafür ist nur ein einziger Zustand erforderlich.
+		\item \emph{Berechnen} Sie aus dem PDA $A$ eine Typ-2-Grammatik $G$, die $L$ produziert.
+		\item Prüfen Sie, ob es sich bei $G$ um eine $LR(0)$-Grammatik handelt. Ermitteln Sie dazu den Zustandsübergangsgraph sowie die Parse-Tabelle.
+	\end{enumerate}
+	
+	
+\end{document}
+
