@@ -27,13 +27,25 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
-      # Compiles 
-      - name: Build Latex PDF and HTML
+      # Setup LaTeX environment 
+      - name: Install TeXLive
         run: |
           sudo apt update
           sudo apt install texlive-full
           mkdir ./public
           cp *.tex public/
+          cd public/
+          pdflatex AuFS.tex
+
+      # Copy Files
+      - name: Copy Files
+        run: |
+          cp *.tex public/
+          cp -r images/ public/
+          
+      # Build PDF
+      - name: Build PDF
+        run: |
           cd public/
           pdflatex AuFS.tex
   
