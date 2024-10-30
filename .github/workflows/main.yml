@@ -32,21 +32,10 @@ jobs:
         run: |
           sudo apt update
           sudo apt install texlive-full
-          mkdir ./public
-          cp *.tex public/
-          cd public/
-          pdflatex AuFS.tex
-
-      # Copy Files
-      - name: Copy Files
-        run: |
-          cp *.tex public/
-          cp -r images/ public/
           
       # Build PDF
       - name: Build PDF
         run: |
-          cd public/
           pdflatex AuFS.tex
   
       # Uploads the PDF
@@ -54,7 +43,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: PDF
-          path: public/AuFS.pdf
+          path: AuFS.pdf
 
       # Publishes the PDF as a release
       - name: Publish PDF
@@ -62,4 +51,4 @@ jobs:
         # if: startsWith(github.ref, 'refs/tags/')
         with:
           tag_name: Current
-          files: public/AuFS.pdf
+          files: AuFS.pdf
