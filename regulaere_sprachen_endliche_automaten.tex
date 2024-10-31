@@ -103,7 +103,7 @@
 		\quad $L(A) = \left\{w \in \Sigma^* \mid (s_0,w) \mapsto^* (s_f, \varepsilon), s_f \in F \right\}$
 		\item es gilt: reguläre Sprachen sind Teilmenge der Typ-3-Sprachen\\
 		\begin{itemize}
-			\item[Beweis:] konstruiere zu $A$ einen korrespondierende Grammatik $G=(S,\Sigma,P,S_0)$\\
+			\item[Beweis:] konstruiere zu $A$ eine korrespondierende Grammatik $G=(S,\Sigma,P,S_0)$\\
 			\item[$S:$] $S_i=s_i$, insbesondere $S_0=s_0$
 			\item[$P:$] für jeden Übergang $\delta(s,a)=s'$ die Regel $S \rightarrow aS'$\\
 			zusätzlich die Regeln $S \rightarrow a$, falls $s'$ Endzustand und $S_0 \rightarrow \varepsilon$, falls $s_0$ Endzustand
