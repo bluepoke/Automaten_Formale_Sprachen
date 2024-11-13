@@ -24,27 +24,15 @@
 \end{frame}
 
 \begin{frame}{Beispiel: Erzeugung Chomsky-Normalform}
-	$G=(\{S, A, B\}, \{a, b\}, P, S)$\\
+	$G=(\{S, A, B, C, D, E\}, \{a, b\}, P, S)$\\
 	$P=\{$\\
-	\qquad\qquad $S\rightarrow bA|aB$\\
-	\qquad\qquad $A\rightarrow bAA|aS|a$\\
-	\qquad\qquad $B\rightarrow aBB|bS|b$\\
+	\qquad\qquad $S \rightarrow bA \mid aB \mid C \mid Cb,$\\
+	\qquad\qquad $A \rightarrow bAA \mid aS \mid a \mid bE \mid bDb,$\\
+	\qquad\qquad $B \rightarrow aBB \mid bS \mid b,$\\
+	\qquad\qquad $C \rightarrow Cc \mid c,$\\
+	\qquad\qquad $D \rightarrow d \mid \varepsilon $\\
 	\qquad$\}$
 \end{frame}
-
-\note{
-	\begin{tabular}{rl}
-		alt & neu \\
-		$S \rightarrow bA$ & $X_b \rightarrow b, S \rightarrow X_bA$ \\
-		$S \rightarrow aB$ & $X_a \rightarrow a, S \rightarrow X_aB$ \\
-		$A \rightarrow bAA$ & $A \rightarrow X_bAA$ (muss weiter ersetzt werden) \\
-		$A \rightarrow aS$ & $A \rightarrow X_aS$ \\
-		$B \rightarrow aBB$ & $B \rightarrow X_aBB$ (muss weiter ersetzt werden)\\
-		$B \rightarrow bS$ & $B \rightarrow X_bS$ \\
-		$A \rightarrow X_bAA$ & $A \rightarrow X_bD_1, D_1 \rightarrow AA$\\
-		$B \rightarrow X_aBB$ & $B \rightarrow X_aD_2, D_2 \rightarrow BB$\\
-	\end{tabular}
-}
 
 \begin{frame}{Worterkennung: Cocke-Younger-Kasami-Algorithmus (CYK)}
 	polynomiell auch für nichtdeterministische Sprachen
