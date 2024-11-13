@@ -52,3 +52,5 @@ jobs:
         with:
           tag_name: Current
           files: AuFS.pdf
+          generate_release_notes: true
+          make_latest: true
