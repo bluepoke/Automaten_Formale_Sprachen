@@ -50,7 +50,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         # if: startsWith(github.ref, 'refs/tags/')
         with:
-          tag_name: Current
+          tag_name: ${{ github.ref_name }}-${{ github.run_number }}
           files: AuFS.pdf
           generate_release_notes: true
           make_latest: true
