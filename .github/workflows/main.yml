@@ -33,9 +33,11 @@ jobs:
           sudo apt update
           sudo apt install texlive-full
           
-      # Build PDF
+      # Build PDF (run multiple times to create indexes)
       - name: Build PDF
         run: |
+          pdflatex AuFS.tex
+          pdflatex AuFS.tex
           pdflatex AuFS.tex
   
       # Uploads the PDF
