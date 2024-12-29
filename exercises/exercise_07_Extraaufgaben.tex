@@ -26,10 +26,10 @@
 
 \newcommand{\Fach}{Theoretische Informatik I - Automaten und Formale Sprachen}
 \newcommand{\Name}{}
-\newcommand{\Seminargruppe}{5CS21-2} %  <-- UPDATE ME
+\newcommand{\Seminargruppe}{5CS24-1} %  <-- UPDATE ME
 \newcommand{\Uebung}{7} %  <-- UPDATE ME
-\newcommand{\Uebungstitel}{Extraaufgaben} %  <-- UPDATE ME
-\newcommand{\Besprechungstermin}{11.03.2022} %  <-- UPDATE ME
+\newcommand{\Uebungstitel}{Klausurvorbereitung - Teil 2} %  <-- UPDATE ME
+\newcommand{\Besprechungstermin}{03./04.12.2024} %  <-- UPDATE ME
 
 \setlength{\parindent}{0em}
 \topmargin -1.0cm
@@ -42,8 +42,8 @@
 %% Aufgaben-COMMAND
 \newcommand{\Aufgabe}[1]{
 	{
-		\vspace*{0.5cm}
-		\textsf{\textbf{Aufgabe #1}}
+		\vspace*{1cm}
+		\textsf{\textbf{Aufgabe: #1}}
 		\vspace*{0.2cm}
 		
 	}
@@ -79,8 +79,8 @@
 		\LARGE \sf \textbf{Übung \Uebung{}} \\
 		\vspace*{0.4cm}
 		\Large \sf \textbf{\Uebungstitel}\\
-		%\vspace*{0.4cm}
-		%\normalsize \rm Besprechungstermin: %\Besprechungstermin
+		\vspace*{0.4cm}
+		\normalsize \rm Besprechungstermin: \Besprechungstermin
 	\end{center}
 	\vspace*{0.2cm}
 	
@@ -91,65 +91,161 @@
 		every state/.style={thick, fill=gray!10}, %properties for every 'state' node
 		initial text=$ $, % Remove text from start arrow
 	}
+
+	Gewünscht waren folgende Themen:
+	
+	\begin{itemize}
+		\item Pumping-Lemmas
+		\item Hornformeln
+		\item Davis-Putnam-Regeln (Folie 52, $POS_L, NEG_L$)
+		\item NFA (Folie 68)
+		\item NFA $\rightarrow$ DFA
+		\item Typ-3 $\rightarrow$ NFA (Folie 75)
+		\item reguläre Ausdrücke
+		\item CNF erzeugen
+		\item CYK (komplexer)
+		\item Interpretation der Sprachdefinition
+		\item PDA
+		\item TM
+		\item Minimalautomat
+	\end{itemize}
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%% Aufgaben %%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
-	\Aufgabe{Hornformeln}
+	\pagebreak
 	
-	Gegeben sei folgende Formel:
-	$$(\neg A \lor \neg B \lor E) \land C \land A \land (\neg C \lor B) \land (\neg A \lor D) \land (\neg C \lor \neg D \lor A) \land \neg E \land \neg G$$
-	Prüfen Sie die Erfüllbarkeit mittels Markierungsalgorithmus und Hornklauselalgorithmus.
+	\Aufgabe{Hornformel}
 	
-	\Aufgabe{DFA konstruieren}
+	Gegeben ist die folgende Hornformel:
+	$$F=(A \lor \neg C) \land (\neg A \lor \neg C \lor \neg B) \land C \land (\neg C \lor B)$$
+	Prüfen Sie die Erfüllbarkeit von $F$ jeweils mittels Hornklauselalgorithmus und Markierungsalgorithmus! Notieren Sie die Schritte dabei nachvollziehbar!
 	
-	$$L_1=\{w \in \{a,b\}^* \mid \textrm{$w$ endet auf $a$ und $|w|$ ist gerade}\}$$
-	$$L_2=\{w \in \{a,b\}^* \mid \textrm{$w$ enthält nicht das Teilwort $bb$}\}$$
+		\Aufgabe{DFA minimieren}
 	
-	\Aufgabe{DFA minimieren}
-	
-	Minimieren Sie den folgenden DFA:
+	Minimieren Sie den folgenden DFA:\\
 	
 	\begin{tikzpicture}
-		\node[state, initial] (1) {1};
-		\node[state, above right=of 1] (2) {2};
-		\node[state, accepting, right=2cm of 2] (3) {3};
-		\node[state, accepting, below right=of 1] (4) {4};
-		\node[state, right=2cm of 4] (5) {5};
-		\node[state, above right=of 5] (6) {6};
+		\node[state, initial] (s1) {$s_1$};
+		\node[state, above right=of s1] (s2) {$s_2$};
+		\node[state, accepting, right=2cm of s2] (s3) {$s_3$};
+		\node[state, accepting, below right=of s1] (s4) {$s_4$};
+		\node[state, right=2cm of s4] (s5) {$s_5$};
+		\node[state, above right=of s5] (s6) {$s_6$};
 		
-		\draw (1) edge[above left] node{a} (2)
-		      (1) edge[below left] node{b} (4)
-		      (2) edge[above] node{a} (3)
-		      (2) edge[left] node{b} (4)
-		      (3) edge[below right, bend left] node{a} (4)
-		      (3) edge[right] node{b} (5)
-		      (4) edge[above left, bend left] node{a} (3)
-		      (4) edge[below] node{b} (5)
-		      (5) edge[loop right] node{a,b} (5)
-		      (6) edge[above right] node{a} (3)
-		      (6) edge[below right] node{b} (5);
+		\draw (s1) edge[above left] node{a} (s2)
+		(s1) edge[below left] node{b} (s4)
+		(s2) edge[above] node{a} (s3)
+		(s2) edge[left] node{b} (s4)
+		(s3) edge[below right, bend left] node{a} (s4)
+		(s3) edge[right] node{b} (s5)
+		(s4) edge[above left, bend left] node{a} (s3)
+		(s4) edge[below] node{b} (s5)
+		(s5) edge[loop right] node{a,b} (s5)
+		(s6) edge[above right] node{a} (s3)
+		(s6) edge[below right] node{b} (s5);
 	\end{tikzpicture}
+	
+	\Aufgabe{Regulärer Ausdruck}
+	
+	Geben Sie einen \emph{regulären Ausdruck} für folgende verbal beschriebene Sprache an:
+	\begin{itemize}
+		\item Alle Wörter der Sprache bestehen nur aus den Zeichen $0$ und $1$.
+		\item Das leere Wort gehört nicht zur Sprache.
+		\item Die Länge aller Wörter ist gerade.
+	\end{itemize}
+
+	\pagebreak
+	
+	\Aufgabe{Pumping-Lemma für reguläre Sprachen}
+	
+	Zeigen Sie, dass
+	$$L=\{a^ib^jv \mid v \in \{a\}^*, |v| \textrm{ ist ungerade } \land j=2i\}$$
+	über dem Alphabet $\Sigma=\{a,b\}$ nicht regulär ist.
+	
+	\Aufgabe{Pumping-Lemma für kontextfreie Sprachen}
+	
+	Zeigen Sie, dass
+	$$L=\{a^ib^jc^k \mid i<j<k\}$$
+	über dem Alphabet $\Sigma=\{a,b,c\}$ nicht kontextfrei ist.
+	
+	\Aufgabe{Chomsky-Normalform}
+	
+	Geben Sie die folgende Grammatik in der Chomsky-Normalform an:
+	\begin{align*}
+		S \rightarrow & a \mid bA\\
+		A \rightarrow & AB \mid bDA \mid B\\
+		B \rightarrow & a \mid b \mid bDE\\
+		C \rightarrow & AAA \mid \varepsilon\\	
+		D \rightarrow & bAC	
+	\end{align*}
+
+	\Aufgabe{CYK-Algorithmus}
+	
+	Gegeben sei die Grammatik $G=(\{S, A, B, C, D\}, \{a, b, c\}, S, P)$ mit
+	\begin{align*}
+		P:S\rightarrow & BB \mid AA\\
+		A\rightarrow & AD \mid AC \mid a\\
+		B\rightarrow & BA \mid CB \mid b\\
+		C\rightarrow & BC \mid c\\
+		D\rightarrow & AC \mid b
+	\end{align*}
+	Prüfen Sie mit dem CYK-Algorithmus, ob das Wort $babcba$ in $L(G)$ enthalten ist.
+
+	\pagebreak
+	
+	\Aufgabe{PDA}
+	
+	Die folgende Sprache über dem Alphabet $\Sigma=\{a, b, c\}$ ist deterministisch kontextfrei:
+	$$L = \left\{w_1w_2 \in \Sigma^* \mid w_1 \in \{a\}^* \land w_2 \in \{b, c\}^* \land |w_1|=|w_2|\right\}$$
+		
+	\begin{enumerate}[a)]
+		\item Konstruieren Sie einen deterministischen Kellerautomaten, der diese Sprache akzeptiert.
+		\item Ist die Akzeptanz mittels leerem Keller möglich? Begründen Sie Ihre Antwort.
+	\end{enumerate}
+
+
+	\Aufgabe{Turingmaschine}
+	
+	Konstruieren Sie eine Turingmaschine, die auf einem Eingabewort aus dem Alphabet $\Sigma = \{|, -\}$ eine Subtraktion $x-y$ durchführt. Dabei stehen Minuend $x$ und Subtrahend $y$ in Bierdeckelnotation hintereinander auf dem Band, getrennt vom Subtraktionsoperator $-$. Nach Abarbeitung des Programms soll nur noch das Ergebnis in	Bierdeckelnotation auf dem Band stehen.
+	
+	Gehen Sie davon aus, dass das Ergebnis der Operation immer größer Null ist, d.h. der Minuend $x$ ist bei jeder Eingabe größer als der Subtrahend $y$.
+	
+	\emph{Beispiel:} Das Eingabewort für die Operation $4-2$ ist auf dem Band notiert als:
+	$$\#||||-||\#$$
+	Nach Bearbeitung des Eingabewortes steht auf dem Band
+	$$\#||\#$$
+	und die Turingmaschine befindet sich in einem Endzustand.
 	
 	\pagebreak
 	
-	\Aufgabe{Pumping-Lemma für reguläre Sprachen)}
+	\Aufgabe{DFA minimieren (encore une fois)}
 	
-	Zeigen Sie, dass
-	$$L=\{a^nb^mv \mid v \in \{a\}^*, |v| \textrm{ ist ungerade und } n=2m\}$$
-	nicht regulär ist.
+	Minimieren Sie den folgenden DFA auf nachvollziehbare Weise:\\
 	
-	\Aufgabe{CYK-Algorithmus}
-	
-	Gegeben sei die Grammatik $G=(\{S, A, B, C\}, \{a, b\}, S, P)$ mit
-	\begin{align*}
-		P:S\rightarrow & BB \mid AA\\
-		A\rightarrow & AB \mid AC \mid a\\
-		B\rightarrow & BA \mid CB \mid b\\
-		C\rightarrow & BC \mid c\\
-	\end{align*}
-	Prüfen Sie mit dem CYK-Algorithmus, ob das Wort $babcb$ in $L(G)$ enthalten ist.
+	\begin{tikzpicture}
+		\node[state, initial] (s0) {$s_0$};
+		\node[state, above right=of s0] (s1) {$s_1$};
+		\node[state, below right=of s0] (s2) {$s_2$};
+		\node[state, accepting, right=2cm of s1] (s3) {$s_3$};
+		\node[state, accepting, right=2cm of s2] (s4) {$s_4$};
+		\node[state, accepting, below right=of s3] (s5) {$s_5$};
+		
+		\draw
+		(s0) edge[above left] node{0} (s1)
+		(s0) edge[below, bend right=75] node{1} (s4)
+		(s1) edge[loop below] node{0} (s1)
+		(s1) edge[above] node{1} (s3)
+		(s2) edge[above right] node{0} (s0)
+		(s2) edge[above left] node{1} (s3)
+		(s3) edge[left] node{0} (s4)
+		(s3) edge[above, bend right=75] node{1} (s0)
+		(s4) edge[loop below] node{0} (s4)
+		(s4) edge[above] node{1} (s2)
+		(s5) edge[loop right] node{0} (s5)
+		(s5) edge[below right] node{1} (s4);
+	\end{tikzpicture}
 	
 \end{document}
 
