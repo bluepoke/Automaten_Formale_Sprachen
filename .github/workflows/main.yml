@@ -29,7 +29,9 @@ jobs:
       
       - name: Setup TeX Live
         run: |
-          tlmgr install latexmk
+          sudo apt update
+          sudo apt install texlive-full
+          sudo tlmgr install latexmk
       
       # This replaces xu-cheng/latex-action and adds the -f option.
       # Run Latexmk with -f (force) to resolve references,
