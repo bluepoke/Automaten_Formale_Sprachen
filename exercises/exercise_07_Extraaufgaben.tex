@@ -16,7 +16,6 @@
 \usepackage{graphicx}
 \usepackage{ifthen}
 \usepackage{listings}
-\usepackage{struktex}
 \usepackage{hyperref}
 \usepackage{tikz}
 \usetikzlibrary{automata, positioning, arrows}
@@ -26,10 +25,10 @@
 
 \newcommand{\Fach}{Theoretische Informatik I - Automaten und Formale Sprachen}
 \newcommand{\Name}{}
-\newcommand{\Seminargruppe}{5CS24-1} %  <-- UPDATE ME
+\newcommand{\Seminargruppe}{5CS24-2} %  <-- UPDATE ME
 \newcommand{\Uebung}{7} %  <-- UPDATE ME
 \newcommand{\Uebungstitel}{Klausurvorbereitung - Teil 2} %  <-- UPDATE ME
-\newcommand{\Besprechungstermin}{03./04.12.2024} %  <-- UPDATE ME
+\newcommand{\Besprechungstermin}{12.03.2025} %  <-- UPDATE ME
 
 \setlength{\parindent}{0em}
 \topmargin -1.0cm
@@ -96,18 +95,9 @@
 	
 	\begin{itemize}
 		\item Pumping-Lemmas
-		\item Hornformeln
-		\item Davis-Putnam-Regeln (Folie 52, $POS_L, NEG_L$)
-		\item NFA (Folie 68)
-		\item NFA $\rightarrow$ DFA
-		\item Typ-3 $\rightarrow$ NFA (Folie 75)
 		\item reguläre Ausdrücke
-		\item CNF erzeugen
-		\item CYK (komplexer)
-		\item Interpretation der Sprachdefinition
 		\item PDA
 		\item TM
-		\item Minimalautomat
 	\end{itemize}
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -116,36 +106,36 @@
 	
 	\pagebreak
 	
-	\Aufgabe{Hornformel}
-	
-	Gegeben ist die folgende Hornformel:
-	$$F=(A \lor \neg C) \land (\neg A \lor \neg C \lor \neg B) \land C \land (\neg C \lor B)$$
-	Prüfen Sie die Erfüllbarkeit von $F$ jeweils mittels Hornklauselalgorithmus und Markierungsalgorithmus! Notieren Sie die Schritte dabei nachvollziehbar!
-	
-		\Aufgabe{DFA minimieren}
-	
-	Minimieren Sie den folgenden DFA:\\
-	
-	\begin{tikzpicture}
-		\node[state, initial] (s1) {$s_1$};
-		\node[state, above right=of s1] (s2) {$s_2$};
-		\node[state, accepting, right=2cm of s2] (s3) {$s_3$};
-		\node[state, accepting, below right=of s1] (s4) {$s_4$};
-		\node[state, right=2cm of s4] (s5) {$s_5$};
-		\node[state, above right=of s5] (s6) {$s_6$};
-		
-		\draw (s1) edge[above left] node{a} (s2)
-		(s1) edge[below left] node{b} (s4)
-		(s2) edge[above] node{a} (s3)
-		(s2) edge[left] node{b} (s4)
-		(s3) edge[below right, bend left] node{a} (s4)
-		(s3) edge[right] node{b} (s5)
-		(s4) edge[above left, bend left] node{a} (s3)
-		(s4) edge[below] node{b} (s5)
-		(s5) edge[loop right] node{a,b} (s5)
-		(s6) edge[above right] node{a} (s3)
-		(s6) edge[below right] node{b} (s5);
-	\end{tikzpicture}
+%	\Aufgabe{Hornformel}
+%	
+%	Gegeben ist die folgende Hornformel:
+%	$$F=(A \lor \neg C) \land (\neg A \lor \neg C \lor \neg B) \land C \land (\neg C \lor B)$$
+%	Prüfen Sie die Erfüllbarkeit von $F$ jeweils mittels Hornklauselalgorithmus und Markierungsalgorithmus! Notieren Sie die Schritte dabei nachvollziehbar!
+%	
+%		\Aufgabe{DFA minimieren}
+%	
+%	Minimieren Sie den folgenden DFA:\\
+%	
+%	\begin{tikzpicture}
+%		\node[state, initial] (s1) {$s_1$};
+%		\node[state, above right=of s1] (s2) {$s_2$};
+%		\node[state, accepting, right=2cm of s2] (s3) {$s_3$};
+%		\node[state, accepting, below right=of s1] (s4) {$s_4$};
+%		\node[state, right=2cm of s4] (s5) {$s_5$};
+%		\node[state, above right=of s5] (s6) {$s_6$};
+%		
+%		\draw (s1) edge[above left] node{a} (s2)
+%		(s1) edge[below left] node{b} (s4)
+%		(s2) edge[above] node{a} (s3)
+%		(s2) edge[left] node{b} (s4)
+%		(s3) edge[below right, bend left] node{a} (s4)
+%		(s3) edge[right] node{b} (s5)
+%		(s4) edge[above left, bend left] node{a} (s3)
+%		(s4) edge[below] node{b} (s5)
+%		(s5) edge[loop right] node{a,b} (s5)
+%		(s6) edge[above right] node{a} (s3)
+%		(s6) edge[below right] node{b} (s5);
+%	\end{tikzpicture}
 	
 	\Aufgabe{Regulärer Ausdruck}
 	
@@ -156,12 +146,12 @@
 		\item Die Länge aller Wörter ist gerade.
 	\end{itemize}
 
-	\pagebreak
+%	\pagebreak
 	
 	\Aufgabe{Pumping-Lemma für reguläre Sprachen}
 	
 	Zeigen Sie, dass
-	$$L=\{a^ib^jv \mid v \in \{a\}^*, |v| \textrm{ ist ungerade } \land j=2i\}$$
+	$$L=\{a^ib^jv \mid v \in \{a\}^* \land |v| \textrm{ ist ungerade } \land j=2i\}$$
 	über dem Alphabet $\Sigma=\{a,b\}$ nicht regulär ist.
 	
 	\Aufgabe{Pumping-Lemma für kontextfreie Sprachen}
@@ -170,30 +160,30 @@
 	$$L=\{a^ib^jc^k \mid i<j<k\}$$
 	über dem Alphabet $\Sigma=\{a,b,c\}$ nicht kontextfrei ist.
 	
-	\Aufgabe{Chomsky-Normalform}
-	
-	Geben Sie die folgende Grammatik in der Chomsky-Normalform an:
-	\begin{align*}
-		S \rightarrow & a \mid bA\\
-		A \rightarrow & AB \mid bDA \mid B\\
-		B \rightarrow & a \mid b \mid bDE\\
-		C \rightarrow & AAA \mid \varepsilon\\	
-		D \rightarrow & bAC	
-	\end{align*}
+%	\Aufgabe{Chomsky-Normalform}
+%	
+%	Geben Sie die folgende Grammatik in der Chomsky-Normalform an:
+%	\begin{align*}
+%		S \rightarrow & a \mid bA\\
+%		A \rightarrow & AB \mid bDA \mid B\\
+%		B \rightarrow & a \mid b \mid bDE\\
+%		C \rightarrow & AAA \mid \varepsilon\\	
+%		D \rightarrow & bAC	
+%	\end{align*}
 
-	\Aufgabe{CYK-Algorithmus}
-	
-	Gegeben sei die Grammatik $G=(\{S, A, B, C, D\}, \{a, b, c\}, S, P)$ mit
-	\begin{align*}
-		P:S\rightarrow & BB \mid AA\\
-		A\rightarrow & AD \mid AC \mid a\\
-		B\rightarrow & BA \mid CB \mid b\\
-		C\rightarrow & BC \mid c\\
-		D\rightarrow & AC \mid b
-	\end{align*}
-	Prüfen Sie mit dem CYK-Algorithmus, ob das Wort $babcba$ in $L(G)$ enthalten ist.
+%	\Aufgabe{CYK-Algorithmus}
+%	
+%	Gegeben sei die Grammatik $G=(\{S, A, B, C, D\}, \{a, b, c\}, S, P)$ mit
+%	\begin{align*}
+%		P:S\rightarrow & BB \mid AA\\
+%		A\rightarrow & AD \mid AC \mid a\\
+%		B\rightarrow & BA \mid CB \mid b\\
+%		C\rightarrow & BC \mid c\\
+%		D\rightarrow & AC \mid b
+%	\end{align*}
+%	Prüfen Sie mit dem CYK-Algorithmus, ob das Wort $babcba$ in $L(G)$ enthalten ist.
 
-	\pagebreak
+%	\pagebreak
 	
 	\Aufgabe{PDA}
 	
@@ -205,10 +195,11 @@
 		\item Ist die Akzeptanz mittels leerem Keller möglich? Begründen Sie Ihre Antwort.
 	\end{enumerate}
 
+	\pagebreak
 
 	\Aufgabe{Turingmaschine}
 	
-	Konstruieren Sie eine Turingmaschine, die auf einem Eingabewort aus dem Alphabet $\Sigma = \{|, -\}$ eine Subtraktion $x-y$ durchführt. Dabei stehen Minuend $x$ und Subtrahend $y$ in Bierdeckelnotation hintereinander auf dem Band, getrennt vom Subtraktionsoperator $-$. Nach Abarbeitung des Programms soll nur noch das Ergebnis in	Bierdeckelnotation auf dem Band stehen.
+	Konstruieren Sie eine Turingmaschine, die auf einem Eingabewort aus dem Alphabet $\Sigma = \{|, -\}$ eine Subtraktion $x-y$ durchführt. Dabei stehen Minuend $x$ und Subtrahend $y$ in Bierdeckelnotation hintereinander auf dem Band, getrennt vom Subtraktionsoperator $-$. Nach Abarbeitung des Programms soll nur noch das Ergebnis in Bierdeckelnotation auf dem Band stehen.
 	
 	Gehen Sie davon aus, dass das Ergebnis der Operation immer größer Null ist, d.h. der Minuend $x$ ist bei jeder Eingabe größer als der Subtrahend $y$.
 	
@@ -218,34 +209,34 @@
 	$$\#||\#$$
 	und die Turingmaschine befindet sich in einem Endzustand.
 	
-	\pagebreak
-	
-	\Aufgabe{DFA minimieren (encore une fois)}
-	
-	Minimieren Sie den folgenden DFA auf nachvollziehbare Weise:\\
-	
-	\begin{tikzpicture}
-		\node[state, initial] (s0) {$s_0$};
-		\node[state, above right=of s0] (s1) {$s_1$};
-		\node[state, below right=of s0] (s2) {$s_2$};
-		\node[state, accepting, right=2cm of s1] (s3) {$s_3$};
-		\node[state, accepting, right=2cm of s2] (s4) {$s_4$};
-		\node[state, accepting, below right=of s3] (s5) {$s_5$};
-		
-		\draw
-		(s0) edge[above left] node{0} (s1)
-		(s0) edge[below, bend right=75] node{1} (s4)
-		(s1) edge[loop below] node{0} (s1)
-		(s1) edge[above] node{1} (s3)
-		(s2) edge[above right] node{0} (s0)
-		(s2) edge[above left] node{1} (s3)
-		(s3) edge[left] node{0} (s4)
-		(s3) edge[above, bend right=75] node{1} (s0)
-		(s4) edge[loop below] node{0} (s4)
-		(s4) edge[above] node{1} (s2)
-		(s5) edge[loop right] node{0} (s5)
-		(s5) edge[below right] node{1} (s4);
-	\end{tikzpicture}
+%	\pagebreak
+%	
+%	\Aufgabe{DFA minimieren (encore une fois)}
+%	
+%	Minimieren Sie den folgenden DFA auf nachvollziehbare Weise:\\
+%	
+%	\begin{tikzpicture}
+%		\node[state, initial] (s0) {$s_0$};
+%		\node[state, above right=of s0] (s1) {$s_1$};
+%		\node[state, below right=of s0] (s2) {$s_2$};
+%		\node[state, accepting, right=2cm of s1] (s3) {$s_3$};
+%		\node[state, accepting, right=2cm of s2] (s4) {$s_4$};
+%		\node[state, accepting, below right=of s3] (s5) {$s_5$};
+%		
+%		\draw
+%		(s0) edge[above left] node{0} (s1)
+%		(s0) edge[below, bend right=75] node{1} (s4)
+%		(s1) edge[loop below] node{0} (s1)
+%		(s1) edge[above] node{1} (s3)
+%		(s2) edge[above right] node{0} (s0)
+%		(s2) edge[above left] node{1} (s3)
+%		(s3) edge[left] node{0} (s4)
+%		(s3) edge[above, bend right=75] node{1} (s0)
+%		(s4) edge[loop below] node{0} (s4)
+%		(s4) edge[above] node{1} (s2)
+%		(s5) edge[loop right] node{0} (s5)
+%		(s5) edge[below right] node{1} (s4);
+%	\end{tikzpicture}
 	
 \end{document}
 
