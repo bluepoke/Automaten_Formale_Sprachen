@@ -28,10 +28,16 @@ jobs:
       - uses: actions/checkout@v4
       
       # Setup LaTeX environment 
-      - name: Install TeXLive
-        run: |
-          sudo apt update
-          sudo apt install texlive-full
+      # Incompatible latex versions can be fixed by not installing TextLive manually.
+      #- name Install TeXLive
+      #  run |
+      #    sudo apt update
+      #    sudo apt install texlive-full
+      
+      # Or try to update per tlmgr if texlive has to be installed manually
+      #- name Update TeX Live Packages
+      #  run 
+      #    tlmgr update --all
           
       # Build PDF (run multiple times to create indexes)
       #- name Build PDF 
