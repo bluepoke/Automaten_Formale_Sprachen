@@ -16,7 +16,6 @@
 \usepackage{graphicx}
 \usepackage{ifthen}
 \usepackage{listings}
-\usepackage{struktex}
 \usepackage{hyperref}
 
 % table placement
@@ -24,10 +23,8 @@
 
 \newcommand{\Fach}{Theoretische Informatik I - Automaten und Formale Sprachen}
 \newcommand{\Name}{}
-\newcommand{\Seminargruppe}{5CS24-1} %  <-- UPDATE ME
 \newcommand{\Uebung}{5} %  <-- UPDATE ME
 \newcommand{\Uebungstitel}{Turingmaschinen} %  <-- UPDATE ME
-\newcommand{\Besprechungstermin}{02.12.2024} %  <-- UPDATE ME
 
 \setlength{\parindent}{0em}
 \topmargin -1.0cm
@@ -70,21 +67,24 @@
 
 \begin{document}
 	\thispagestyle{fancy}
-	\chead{\sf \large \Fach{} \\ \small \Name{}}
-	\chead{\sf \large \Fach{} \\ \small Seminargruppe \Seminargruppe{}}
+	\chead{\sf \large \Fach{}}
 	\vspace*{0.2cm}
 	\begin{center}
 		\LARGE \sf \textbf{Übung \Uebung{}} \\
 		\vspace*{0.4cm}
 		\Large \sf \textbf{\Uebungstitel}\\
-		\vspace*{0.4cm}
-		\normalsize \rm Besprechungstermin: \Besprechungstermin
 	\end{center}
 	\vspace*{0.2cm}
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%% Aufgaben %%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\vspace*{0.5cm}
+	\textsf{\textbf{Hinweis}}
+	\vspace*{0.2cm}
+	
+	Ist kein spezifischer Typ einer Turingmaschine in einer Aufgabe gefordert, so ist eine 1-Band-Turingmaschine zu bevorzugen.
 	
 	\Aufgabe{1}
 	
@@ -100,6 +100,8 @@
 	
 	Konstruieren Sie eine 2-Band-Turingmaschine, die das Wortproblem für die Sprache
 	$$L=\{ww \mid w \in \{a,b\}^+\}$$ entscheidet.
+	
+	Gehen Sie davon aus, dass das Wort zu Beginn auf dem ersten Band stehe, das zweite Band sei leer.
 	
 	\Aufgabe{4}
 	
