@@ -25,7 +25,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       # Setup LaTeX environment 
       - name: Install TeXLive
@@ -34,15 +34,24 @@ jobs:
           sudo apt install texlive-full
           
       # Build PDF (run multiple times to create indexes)
-      - name: Build PDF
-        run: |
-          pdflatex AuFS.tex
-          pdflatex AuFS.tex
-          pdflatex AuFS.tex
+      #- name Build PDF 
+      #  run |
+      #    pdflatex AuFS.tex
+      #    pdflatex AuFS.tex
+      #    pdflatex AuFS.tex
+          
+      # Build PDF Alternative
+      # The action automatically performs multiple compilations and BibTeX/biber runs to correct the table of contents, references, and page numbers.
+      - name: Build PDF 
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: AuFS.tex
+          
+          
   
       # Uploads the PDF
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: PDF
           path: AuFS.pdf
