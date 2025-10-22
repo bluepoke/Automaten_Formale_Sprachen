@@ -28,17 +28,13 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup TeX Live
-        uses: teatime-dev/setup-texlive@v3
-        with:
-          # Installs the full TeX Live version
-          packages: |
-            latexmk
-            scheme-full
+        run: |
+          tlmgr install latexmk
       
       # This replaces xu-cheng/latex-action and adds the -f option.
       # Run Latexmk with -f (force) to resolve references,
       # and -interaction=nonstopmode to not stop on errors.
-      - name: Build PDF (Force compilation with -f) 🚀
+      - name: Build PDF (Force compilation with -f)
         run: |
 
           latexmk -pdf -f -interaction=nonstopmode AuFS.tex
