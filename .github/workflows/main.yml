@@ -27,6 +27,23 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
       
+      - name: Setup TeX Live
+        uses: teatime-dev/setup-texlive@v3
+        with:
+          # Installs the full TeX Live version
+          packages: |
+            latexmk
+            scheme-full
+      
+      # This replaces xu-cheng/latex-action and adds the -f option.
+      # Run Latexmk with -f (force) to resolve references,
+      # and -interaction=nonstopmode to not stop on errors.
+      - name: Build PDF (Force compilation with -f) 🚀
+        run: |
+
+          latexmk -pdf -f -interaction=nonstopmode AuFS.tex
+      
+      
       # Setup LaTeX environment 
       # Incompatible latex versions can be fixed by not installing TextLive manually.
       #- name Install TeXLive
@@ -45,15 +62,6 @@ jobs:
       #    pdflatex AuFS.tex
       #    pdflatex AuFS.tex
       #    pdflatex AuFS.tex
-          
-      # Build PDF Alternative
-      # The action automatically performs multiple compilations and BibTeX/biber runs to correct the table of contents, references, and page numbers.
-      - name: Build PDF 
-        uses: xu-cheng/latex-action@v2
-        with:
-          root_file: AuFS.tex
-          
-          
   
       # Uploads the PDF
       - name: Upload artifact
