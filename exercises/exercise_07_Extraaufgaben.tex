@@ -25,10 +25,8 @@
 
 \newcommand{\Fach}{Theoretische Informatik I - Automaten und Formale Sprachen}
 \newcommand{\Name}{}
-\newcommand{\Seminargruppe}{5CS24-2} %  <-- UPDATE ME
 \newcommand{\Uebung}{7} %  <-- UPDATE ME
 \newcommand{\Uebungstitel}{Klausurvorbereitung - Teil 2} %  <-- UPDATE ME
-\newcommand{\Besprechungstermin}{12.03.2025} %  <-- UPDATE ME
 
 \setlength{\parindent}{0em}
 \topmargin -1.0cm
@@ -71,15 +69,12 @@
 
 \begin{document}
 	\thispagestyle{fancy}
-	\chead{\sf \large \Fach{} \\ \small \Name{}}
-	\chead{\sf \large \Fach{} \\ \small Seminargruppe \Seminargruppe{}}
+	\chead{\sf \large \Fach{}}
 	\vspace*{0.2cm}
 	\begin{center}
 		\LARGE \sf \textbf{Übung \Uebung{}} \\
 		\vspace*{0.4cm}
 		\Large \sf \textbf{\Uebungstitel}\\
-		\vspace*{0.4cm}
-		\normalsize \rm Besprechungstermin: \Besprechungstermin
 	\end{center}
 	\vspace*{0.2cm}
 	
@@ -94,10 +89,12 @@
 	Gewünscht waren folgende Themen:
 	
 	\begin{itemize}
-		\item Pumping-Lemmas
-		\item reguläre Ausdrücke
-		\item PDA
-		\item TM
+		\item Minimalautomat
+		\item CYK
+		\item DPDA
+		\item berechnende TM
+		\item Resolution (keine Kontradiktion)
+		\item Keine Pumping-Lemmas?
 	\end{itemize}
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -112,53 +109,41 @@
 %	$$F=(A \lor \neg C) \land (\neg A \lor \neg C \lor \neg B) \land C \land (\neg C \lor B)$$
 %	Prüfen Sie die Erfüllbarkeit von $F$ jeweils mittels Hornklauselalgorithmus und Markierungsalgorithmus! Notieren Sie die Schritte dabei nachvollziehbar!
 %	
-%		\Aufgabe{DFA minimieren}
-%	
-%	Minimieren Sie den folgenden DFA:\\
-%	
-%	\begin{tikzpicture}
-%		\node[state, initial] (s1) {$s_1$};
-%		\node[state, above right=of s1] (s2) {$s_2$};
-%		\node[state, accepting, right=2cm of s2] (s3) {$s_3$};
-%		\node[state, accepting, below right=of s1] (s4) {$s_4$};
-%		\node[state, right=2cm of s4] (s5) {$s_5$};
-%		\node[state, above right=of s5] (s6) {$s_6$};
-%		
-%		\draw (s1) edge[above left] node{a} (s2)
-%		(s1) edge[below left] node{b} (s4)
-%		(s2) edge[above] node{a} (s3)
-%		(s2) edge[left] node{b} (s4)
-%		(s3) edge[below right, bend left] node{a} (s4)
-%		(s3) edge[right] node{b} (s5)
-%		(s4) edge[above left, bend left] node{a} (s3)
-%		(s4) edge[below] node{b} (s5)
-%		(s5) edge[loop right] node{a,b} (s5)
-%		(s6) edge[above right] node{a} (s3)
-%		(s6) edge[below right] node{b} (s5);
-%	\end{tikzpicture}
+		\Aufgabe{DFA minimieren}
 	
-	\Aufgabe{Regulärer Ausdruck}
+	Minimieren Sie den folgenden DFA:\\
 	
-	Geben Sie einen \emph{regulären Ausdruck} für folgende verbal beschriebene Sprache an:
-	\begin{itemize}
-		\item Alle Wörter der Sprache bestehen nur aus den Zeichen $0$ und $1$.
-		\item Das leere Wort gehört nicht zur Sprache.
-		\item Die Länge aller Wörter ist gerade.
-	\end{itemize}
+	\begin{tikzpicture}
+		\node[state, initial] (s1) {$s_1$};
+		\node[state, above right=of s1] (s2) {$s_2$};
+		\node[state, accepting, right=2cm of s2] (s3) {$s_3$};
+		\node[state, accepting, below right=of s1] (s4) {$s_4$};
+		\node[state, right=2cm of s4] (s5) {$s_5$};
+		\node[state, above right=of s5] (s6) {$s_6$};
+		
+		\draw (s1) edge[above left] node{a} (s2)
+		(s1) edge[below left] node{b} (s4)
+		(s2) edge[above] node{a} (s3)
+		(s2) edge[left] node{b} (s4)
+		(s3) edge[below right, bend left] node{a} (s4)
+		(s3) edge[right] node{b} (s5)
+		(s4) edge[above left, bend left] node{a} (s3)
+		(s4) edge[below] node{b} (s5)
+		(s5) edge[loop right] node{a,b} (s5)
+		(s6) edge[above right] node{a} (s3)
+		(s6) edge[below right] node{b} (s5);
+	\end{tikzpicture}
+	
+%	\Aufgabe{Regulärer Ausdruck}
+%	
+%	Geben Sie einen \emph{regulären Ausdruck} für folgende verbal beschriebene Sprache an:
+%	\begin{itemize}
+%		\item Alle Wörter der Sprache bestehen nur aus den Zeichen $0$ und $1$.
+%		\item Das leere Wort gehört nicht zur Sprache.
+%		\item Die Länge aller Wörter ist gerade.
+%	\end{itemize}
 
 %	\pagebreak
-	
-	\Aufgabe{Pumping-Lemma für reguläre Sprachen}
-	
-	Zeigen Sie, dass
-	$$L=\{a^ib^jv \mid v \in \{a\}^* \land |v| \textrm{ ist ungerade } \land j=2i\}$$
-	über dem Alphabet $\Sigma=\{a,b\}$ nicht regulär ist.
-	
-	\Aufgabe{Pumping-Lemma für kontextfreie Sprachen}
-	
-	Zeigen Sie, dass
-	$$L=\{a^ib^jc^k \mid i<j<k\}$$
-	über dem Alphabet $\Sigma=\{a,b,c\}$ nicht kontextfrei ist.
 	
 %	\Aufgabe{Chomsky-Normalform}
 %	
@@ -171,19 +156,35 @@
 %		D \rightarrow & bAC	
 %	\end{align*}
 
-%	\Aufgabe{CYK-Algorithmus}
-%	
-%	Gegeben sei die Grammatik $G=(\{S, A, B, C, D\}, \{a, b, c\}, S, P)$ mit
-%	\begin{align*}
-%		P:S\rightarrow & BB \mid AA\\
-%		A\rightarrow & AD \mid AC \mid a\\
-%		B\rightarrow & BA \mid CB \mid b\\
-%		C\rightarrow & BC \mid c\\
-%		D\rightarrow & AC \mid b
-%	\end{align*}
-%	Prüfen Sie mit dem CYK-Algorithmus, ob das Wort $babcba$ in $L(G)$ enthalten ist.
+	\Aufgabe{CYK-Algorithmus}
+	
+	Gegeben sei die Grammatik $G=(\{S, A, B, C, D\}, \{a, b, c\}, S, P)$ mit
+	\begin{align*}
+		P:S\rightarrow & AB \mid BC\\
+		A\rightarrow & a \mid BB \mid BS\\
+		B\rightarrow & b \mid CD \mid DA\\
+		C\rightarrow & c \mid AS \mid BD\\
+		D\rightarrow & a \mid CB \mid AA
+	\end{align*}
+	Prüfen Sie mit dem CYK-Algorithmus, ob das Wort $bacaac$ in $L(G)$ enthalten ist.\\
+	
+	CYK-Demo: \url{https://www.cip.ifi.lmu.de/~lindebar/}
+	
+	\begin{verbatim}
+		S -> AB | BC
+		A -> a | BB | BS
+		B -> b | CD | DA
+		C -> c | AS | BD
+		D -> a | CB | AA
+	\end{verbatim}
+	
+	\Aufgabe{Resolution}
+	
+	Prüfen Sie mittels Resolution, ob die folgende Formel eine Tautologie ist:
+	
+	$$(A\land \neg B \land C) \lor E \lor (\neg A \land D \land \neg E) \lor (B \land C \land \neg D) \lor C \lor \neg B$$
 
-%	\pagebreak
+	\pagebreak
 	
 	\Aufgabe{PDA}
 	
@@ -194,8 +195,9 @@
 		\item Konstruieren Sie einen deterministischen Kellerautomaten, der diese Sprache akzeptiert.
 		\item Ist die Akzeptanz mittels leerem Keller möglich? Begründen Sie Ihre Antwort.
 	\end{enumerate}
+	
 
-	\pagebreak
+%	\pagebreak
 
 	\Aufgabe{Turingmaschine}
 	
@@ -208,6 +210,18 @@
 	Nach Bearbeitung des Eingabewortes steht auf dem Band
 	$$\#||\#$$
 	und die Turingmaschine befindet sich in einem Endzustand.
+	
+	\Aufgabe{Pumping-Lemma für reguläre Sprachen}
+	
+	Zeigen Sie, dass
+	$$L=\{a^ib^jv \mid v \in \{a\}^* \land |v| \textrm{ ist ungerade } \land j=2i\}$$
+	über dem Alphabet $\Sigma=\{a,b\}$ nicht regulär ist.
+	
+	\Aufgabe{Pumping-Lemma für kontextfreie Sprachen}
+	
+	Zeigen Sie, dass
+	$$L=\{a^ib^jc^k \mid i<j<k\}$$
+	über dem Alphabet $\Sigma=\{a,b,c\}$ nicht kontextfrei ist.
 	
 %	\pagebreak
 %	
