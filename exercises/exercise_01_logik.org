@@ -1,0 +1,109 @@
+#+LATEX_COMPILER: xelatex
+#+LATEX_CLASS: scrartcl
+#+LATEX_CLASS_OPTIONS: [a4paper,14pt,ngerman]
+#+OPTIONS: ':t toc:nil title:nil
+
+#+LANGUAGE: de
+
+#+LATEX_HEADER: \usepackage{polyglossia}
+#+LATEX_HEADER: \setdefaultlanguage{german}
+#+LATEX_HEADER: \PolyglossiaSetup{german}{shorthands=on}
+#+LATEX_HEADER: \AtBeginDocument{\let\babelprovide\relax}
+#+LATEX_HEADER: \AtBeginDocument{\let\shorthandon\relax}
+#+LATEX_HEADER: \AtBeginDocument{\let\shorthandoff\relax}
+#+LATEX_HEADER: \setmainfont{Gentium Book Basic}
+#+LATEX_HEADER: \setsansfont{Latin Modern Sans}
+#+LATEX_HEADER: \setmonofont{Latin Modern Mono}
+#+LATEX_HEADER: \usepackage{fancyhdr}
+#+LATEX_HEADER: \usepackage{graphicx}
+#+LATEX_HEADER: \usepackage{amsmath,amssymb}
+#+LATEX_HEADER: \usepackage{xcolor}
+#+LATEX_HEADER: \usepackage{xurl}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \setstretch{1.3}
+#+title: Übungsblatt 1
+
+* *Übung 1*
+** *Logik*
+*** *Aufgabe 1*
+
+Welche der folgenden aussagenlogischen Ausdrücke sind Tautologien?
+
+1) \((a \leftrightarrow b) \leftrightarrow (\neg b \leftrightarrow c)\)
+
+2) \(\neg ((a \lor b) \rightarrow c) \lor c\)
+
+3) \(((a \rightarrow b) \land (b \rightarrow c)) \rightarrow (a \rightarrow c)\)
+
+*** *Aufgabe 2*
+
+Gegeben sei die Wahrheitstafel für eine Funktion \(F\).
+
+| A | B | C | F |
+|---+---+---+---|
+| f | f | f | w |
+| f | f | w | f |
+| f | w | f | w |
+| f | w | w | w |
+| w | f | f | f |
+| w | f | w | w |
+| w | w | f | f |
+| w | w | w | w |
+
+1. Bestimmen Sie aussagenlogische Formeln in DNF und KNF, die diesen
+   Wahrheitswerteverlauf haben.
+
+2. Minimieren Sie DNF und KNF unter Verwendung eines KV-Diagramms.
+
+*** *Aufgabe 3*
+
+Auszug aus dem Plädoyer einer Anwältin:
+
+1. Wenn der Mandant schuldig ist, dann war das Messer im Schrank.
+
+2. Das Messer war nicht im Schrank oder Emma hat das Messer gesehen.
+
+3. Wenn das Messer am 1.10. nicht dort war konnte Emma es nicht sehen.
+
+4. Wenn das Messer am 1.10. dort war, dann war sowohl das Messer im
+   Schrank als auch der Hammer im Stall.
+
+5. Alle wissen, dass der Hammer nicht im Stall war.
+
+6. Deshalb ist mein Mandant unschuldig.
+
+Wenden Sie logisches Schließen an, um zu zeigen, ob der Mandant schuldig
+war.
+
+*** *Aufgabe 4*
+
+Prüfen Sie, ob aus den Prämissen \(A \rightarrow B\) und \(B\) die
+Gültigkeit von \(A\) folgt.
+
+*** *Aufgabe 5*
+
+Untersuchen Sie die Korrektheit des folgenden Schlusses:
+
+1. Wenn John schwimmen war, dann verlor er seine Brille und ging nicht
+   ins Kino.
+
+2. Wenn John zu viel Fleisch gegessen hat und nicht ins Kino ging, dann
+   wird er eine Magenverstimmung erleiden.
+
+3. Also: Wenn John zu viel Fleisch gegessen hat und schwimmen war, dann
+   wird er eine Magenverstimmung erleiden.
+
+*** *Aufgabe 6*
+
+Zeigen Sie mittels Resolution, dass
+\[F=(\neg A \land \neg B \land C) \lor (\neg A \land \neg C) \lor (B \land C) \lor A\]
+eine Tautologie ist.
+
+*** *Aufgabe 7*
+
+Prüfen Sie die Erfüllbarkeit der folgenden Klauselmenge:
+\[S = \left\{\{A, \neg B, C\}, \{B, C\}, \{\neg A, C\}, \{B, \neg C\}, \{\neg C\}\right\}\]
+Führen Sie dazu die Resolution durch. Bestimmen Sie die
+Resolutionsmengen \[S_i=RES_{L_i}(S_{i-1}), S_0=S\] für eine geeignete
+Folge der Literale.

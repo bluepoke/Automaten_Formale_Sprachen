@@ -1,0 +1,281 @@
+*** Kellerautomaten (PDA, i.Allg. nichtdeterministisch)
+
+- Grundidee Kellerautomat (PDA, push-down automaton)
+
+  - FA wird erweitert um einen zusätzlichen Kellerspeicher (Stack,
+    Stapel) mit unbeschränkter Kapazität
+
+  - Stack: Datenstruktur mit den Methoden pop und push (LIFO-Prinzip)
+
+  - pop: oberstes Zeichen wird gelesen und gelöscht
+
+  - push: neues Zeichen wird auf den Stack geschrieben
+
+- Konfigurationsübergänge
+
+  - Nächstes Zeichen des Eingabewortes sowie oberstes Symbol auf Stack
+    werden gelesen
+
+  - abhängig davon erfolgt Zustandsübergang, und es werden (i.Allg.
+    mehrere) push-Operationen ausgeführt
+
+  - möglich sind auch \(\varepsilon\)-Übergänge: Zustandsübergang und
+    Stack- Operationen ohne Weiterlesen des Eingabewortes
+
+*** Spezifikation PDA
+
+- Spezifikation nichtdeterministischer PDA\\
+  \(A_{PDA}=(S, \Sigma, \Gamma, \delta, s_0, \#, F)\)
+
+  - \(S\): Zustandsmenge
+
+  - \(\Sigma\): Terminalalphabet
+
+  - \(\Gamma\): Kelleralphabet
+
+  - \(\delta\): Zustandsüberführungsrelation,
+    \(\delta \subseteq S \times \Sigma \times \Gamma \times S \times \Gamma^*\)
+
+  - \(\#\): Kellerboden-Symbol, \(\# \in \Gamma\)
+
+  - \(s_0\): Startzustand, \(s_0 \in S\)
+
+  - \(F\): Menge von Endzuständen
+
+- Konfiguration: \((s, u, \gamma)\)
+
+- Konfigurationsübergang:
+  \((s_1, av, A\beta) \mapsto (s_2, v, \alpha\beta)\)
+
+\begin{tikzpicture}
+	\node[state] (s1) {$s_1$};
+	\node[state, right=of s1] (s2) {$s_2$};
+		
+	\draw (s1) edge[above] node{$a, A/\alpha$} (s2);
+\end{tikzpicture}
+
+*** Akzeptierte Sprache
+
+- Akzeptanzverhalten
+
+  - per Endzustand akzeptierte Sprache\\
+    \(L(A)=\{w \in \Sigma^* \mid (s_0, w, \#) \mapsto^* (s_f, \varepsilon, \beta), s_f \in F, \beta \in \Gamma^*\}\)\\
+    d.h. Keller muss nicht leer sein
+
+  - durch leeren Keller akzeptierte Sprache\\
+    (beachte: auch der Kellerboden wird gelöscht!)\\
+    \(L_\varepsilon(A)=\{w \in \Sigma^*\mid (s_0, w, \#) \mapsto^* (q, \varepsilon, \varepsilon), q \in S\}\)\\
+    d.h. Zustand am Wortende kann beliebig sein
+
+- die beiden Akzeptanzbedingungen sind wie folgt äquivalent:
+
+  - zu jedem nichtdet. PDA \(K\) gibt es einen PDA \(K'\) mit
+    \(L(K) = L_\varepsilon(K')\)
+
+  - zu jedem nichtdet. PDA \(K\) gibt es einen PDA \(K'\) mit
+    \(L(K') = L_\varepsilon(K)\)
+
+*** Zusammenhang mit kontextfreien Sprachen
+
+- zu jedem PDA lässt sich eine kontextfreie Grammatik konstruieren, die
+  die gleiche Sprache generiert (siehe Folie  [[#Grammatik_aus_PDA]] \pageref{Grammatik_aus_PDA}) 
+
+- zu jeder kontextfreien Grammatik lässt sich ein (i.Allg.
+  nichtdeteministischer) PDA konstruieren, der die gleiche Sprache
+  akzeptiert
+
+- Grundsätzlicher Zusammenhang mit kontextfreier Grammatik
+
+  - PDA kann mit Grammatik-Startsymbol \(S\) als Kellerboden
+    initialisiert werden
+
+  - liegt Variable A oben auf Stack: per \(\varepsilon\)-Übergang durch
+    rechte Seite einer Regel ersetzen (Produktion anwenden, dabei
+    nichtdeterministisch raten)
+
+  - liegt Terminalsymbol \(a\) oben auf Stack: mit gelesenem Symbol
+    abgleichen; Löschen bei Übereinstimmung, sonst Kopie verwerfen
+    (matching Kellertop mit aktuellem Eingabezeichen)
+
+  - Äquivalenter PDA ist i.Allg. nichtdeterministisch; lässt sich
+    i.Allg. _nicht_ in einen deterministischen PDA äquivalent umrechnen
+
+*** Beispiel: Umwandlung Typ-2-Grammatik \(\rightarrow\) Kellerautomat
+
+Grammatik:
+\[P=\{ S\rightarrow \varepsilon \mid X, \quad X \rightarrow aXa\mid bXb \mid aa \mid bb\}\]
+Kellerautomat:\\
+
+\begin{tikzpicture}
+	\node[state, initial] (s0) {$s_0$};
+	\node[state, right=of s0] (s1) {$s_1$};
+	\node[state, accepting, below=of s1] (s2) {$s_2$};
+	\draw (s0) edge[above] node{$\varepsilon, \#/S\#$} (s1)
+	      (s1) edge[loop right, align=center] node{
+			$a,a/\varepsilon$\\
+			$b,b/\varepsilon$\\
+			$\varepsilon,X/bb$\\
+			$\varepsilon,X/aa$\\
+			$\varepsilon,X/bXb$\\
+			$\varepsilon,X/aXa$\\
+			$\varepsilon,S/X$\\
+                        $\varepsilon,S/\varepsilon$} (s1)
+  			(s1) edge[left] node{$\varepsilon,\#/\#$} (s2);
+\end{tikzpicture}
+
+*** PDA, der mit leerem Keller akzeptiert \(\rightarrow\) kontextfreie Grammatik
+:PROPERTIES:
+:CUSTOM_ID: Grammatik_aus_PDA
+:END:
+
+Regeln
+
+- Startregel\\
+  \(S\rightarrow [s_0, \#, s_i]\) für alle \(s_i \in S\)
+
+- Übergang \((s_j,a,A,s_k,B_1\ldots B_m)\)\\
+  \([s_j,A,s_{m+1}] \rightarrow a[s_k,B_1,s_l]\ldots[s_m,B_m,s_{m+1}]\)
+  für alle Kombinationen \(s_l,\ldots,s_{m+1}\)
+
+- Übergang \((s_j,a,A,s_k,\varepsilon)\)\\
+  \([s_j,A,s_k]\rightarrow a\)
+
+Beispiel:
+
+\(L=\{a^nb^n \mid n \geq 1\}\)\\
+\(\delta=\{(s_0,a,\#,s_0,A),(s_0,a,A,s_0,AA),\)\\
+\((s_0,b,A,s_1,\varepsilon),(s_1,b,A,s_1,\varepsilon)\}\)\\
+
+Regeln:
+
+\(P=\{S \rightarrow [s_0,\#,s_0]|[s_0,\#,s_1],\)\\
+\([s_0,\#,s_0]\rightarrow a[s_0,A,s_0],\)\\
+\([s_0,\#,s_1]\rightarrow a[s_0,A,s_1],\)\\
+\([s_0,A,s_0]\rightarrow a[s_0,A,s_0][s_0,A,s_0],\)\\
+\([s_0,A,s_0]\rightarrow a[s_0,A,s_1][s_1,A,s_0],\)\\
+\([s_0,A,s_1]\rightarrow a[s_0,A,s_0][s_0,A,s_1],\)\\
+\([s_0,A,s_1]\rightarrow a[s_0,A,s_1][s_1,A,s_1],\)\\
+\([s_0,A,s_1]\rightarrow b,\)\\
+\([s_1,A,s_1]\rightarrow b\}\)
+
+*** Berechnung: PDA, der mit leerem Keller akzeptiert \(\rightarrow\) kontextfreie Grammatik
+
+\begin{tikzpicture}
+	\node[state, initial] (s0) {$s_0$};
+	\node[state, right=of s0] (s1) {$s_1$};
+	\draw	(s0) edge[loop above] node{$a, \#/A$} (s0)
+	(s0) edge[loop below] node{$a, A/AA$} (s0)
+	(s0) edge[above] node{$b, A/\varepsilon$} (s1)
+	(s1) edge[loop above] node{$b,A/\varepsilon$} (s1);
+\end{tikzpicture}
+
+|         | a |         | a |         | b |         | b |         |  |  |  |  |
+|---------+---+---------+---+---------+---+---------+---+---------+--+--+--+--|
+|         |   |         |   | A       |   |         |   |         |  |  |  |  |
+| ​#       |   | A       |   | A       |   | A       |   |         |  |  |  |  |
+| \(s_0\) |   | \(s_0\) |   | \(s_0\) |   | \(s_1\) |   | \(s_1\) |  |  |  |  |
+
+- Kodierung von "Aufgaben"
+
+- Hauptaufgabe: Keller soll leer werden\\
+  Starten in \(s_0\), # soll "abgebaut" werden, Folgezustand ist egal:
+  \([s_0, \#, s_0]\) bzw. \([s_0, \#, s_1]\)
+
+- Kodierungen werden als Nichtterminalsymbole (aka Variablen)
+  interpretiert\\
+  Startregeln: \(S \rightarrow [s_0, \#, s_0]|[s_0, \#, s_1]\)
+
+- analog Kodierung aller weiteren Übergänge des Automaten als Regeln,
+  z.B. führt das Lesen eines \(b\) im Zustand \(s_0\) zum Abbau eines
+  \(A\) auf dem Stack und Übergang in \(s_1\):\\
+  \([s_0, A, s_1] \rightarrow b\)
+
+*** Deterministische Kellerautomaten (DPDA): Problemstellung
+
+- Für praktische Anwendungen (Parser) wird ein im wesentlichen lineares
+  Laufzeitverhalten angestrebt
+
+- Die Simulation nichtdeterministischer Automaten zeigt i.Allg. ein
+  exponentielles Verhalten
+
+- Lässt sich jeder nichtdet. Kellerautomat in einen äquivalenten det.
+  Kellerautomaten umschreiben?\\
+  _nein:_ z.B. \(L=\{w\tilde{w} \mid w\in \Sigma^*\}\) ist kontextfrei,
+  aber nicht durch det. PDA akzeptierbar
+
+- _Deterministisch kontextfreie Sprachen_ sind solche, die durch einen
+  deterministischen Kellerautomaten (per Endzustand) akzeptiert werden.
+  Sie bilden damit eine _Unterklasse_ der kontextfreien Sprachen.
+
+*** Deterministische Kellerautomaten
+
+- Spezifikation:\\
+  deterministische Zustandsüberführungsfunktion;
+  _\(\varepsilon\)-Übergänge erlaubt_\\
+  insoweit gilt (für \(a \in \Sigma, A \in \Gamma\)):
+  \(|\delta(s, a, A)| + |\delta(s, \varepsilon, A)| \leq 1\) (d.h.: für
+  jede Konfiguration \((s, ax, A\rho)\) gibt es höchstens eine
+  Folgekonfiguration)
+
+- Nichtäquivalenz von Akzeptanz per leerem Keller bzw. Endzustand bei
+  det. PDA:\\
+  führt bei DPDA _nicht_ zur gleichen Sprachklasse
+
+- Definition: Präfixeigenschaft\\
+  Die Sprache \(L\) hat die Präfixeigenschaft gdw. für alle \(w \in L\)
+  gilt:\\
+  Ist \(x\) echtes Präfix von \(w\) (d.h. \(w=xy, y \neq \varepsilon\))
+  dann gilt \(x \notin L\)
+
+- Es gilt: deterministisch kontextfreie Sprachen, die durch DPDA per
+  leerem Keller akzeptiert werden können, sind genau die mit
+  Präfixeigenschaft
+
+*** Beziehungen zwischen Sprachklassen
+
+- Die det. kontextfreien Sprachen \(L_\varepsilon(A)\) (mit
+  Präfixeigenschaft, Akzeptanz per leerem Keller) sind echt in den det.
+  kontextfreien Sprachen \(L(A)\) (Akzeptanz per Endzustand) enthalten
+
+- _reguläre_ Sprachen sind echt in den det. kontextfreien Sprachen
+  enthalten ( FA ist "Kellerautomat ohne Keller")
+
+- es gibt _reguläre_ Sprachen, die die Präfixeigenschaft nicht besitzen
+  und damit in \(L_\varepsilon(A)\) nicht enthalten sind (z.B.
+  \(\alpha=a|ab\))
+
+- es gibt _reguläre_ Sprachen, die die Präfixeigenschaft besitzen und
+  damit in \(L_\varepsilon(A)\) liegen (z.B. \(\alpha=a|ba\))
+
+- es gibt Sprachen in \(L_\varepsilon(A)\), die nicht regulär sind (z.B
+  \({a^nb^n}\))
+
+*** Exkurs: (N)FA im RL Pac-Man [fn:3]
+
+[[file:images/Pac-Man.png]]
+
+\begin{tikzpicture}
+	\node[state, initial] (w) {wander};
+	\node[state, right=3cm of w] (c) {chase};
+	\node[state, below=of w] (r) {return};
+	\node[state, below=of c, right=3.24cm of r]  (f) {flee};
+			
+	\draw
+		(w) edge[bend left=10, above] node{PM spotted} (c)
+		(w) edge[bend left=10, above] node{PM power-up} (f)
+		(c) edge[bend left=10, below] node{lost PM} (w)
+		(c) edge[right] node{PM power-up} (f)
+		(f) edge[bend left=10, below] node{PM power-dn} (w)
+		(f) edge[below] node{eaten by PM} (r)
+		(r) edge[left] node{reach base} (w);
+\end{tikzpicture}
+
+*** Exkurs: PDA im RL Drehkreuz
+
+#+begin_center
+[[file:images/turnstile.png]]
+
+#+end_center
+
+
+[fn:3] Applications of Deterministic Finite Automata, Eric Gribkoff, [[https://www.cs.ucdavis.edu/~rogaway/classes/120/spring13/eric-dfa.pdf]]

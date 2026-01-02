@@ -1,0 +1,110 @@
+#+LATEX_COMPILER: xelatex
+#+LATEX_CLASS: scrartcl
+#+LATEX_CLASS_OPTIONS: [a4paper,14pt,ngerman]
+#+OPTIONS: ':t toc:nil title:nil
+
+#+LANGUAGE: de
+
+#+LATEX_HEADER: \usepackage{polyglossia}
+#+LATEX_HEADER: \setdefaultlanguage{german}
+#+LATEX_HEADER: \PolyglossiaSetup{german}{shorthands=on}
+#+LATEX_HEADER: \AtBeginDocument{\let\babelprovide\relax}
+#+LATEX_HEADER: \AtBeginDocument{\let\shorthandon\relax}
+#+LATEX_HEADER: \AtBeginDocument{\let\shorthandoff\relax}
+#+LATEX_HEADER: \setmainfont{Gentium Book Basic}
+#+LATEX_HEADER: \setsansfont{Latin Modern Sans}
+#+LATEX_HEADER: \setmonofont{Latin Modern Mono}
+#+LATEX_HEADER: \usepackage{fancyhdr}
+#+LATEX_HEADER: \usepackage{graphicx}
+#+LATEX_HEADER: \usepackage{amsmath,amssymb}
+#+LATEX_HEADER: \usepackage{xcolor}
+#+LATEX_HEADER: \usepackage{xurl}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \setstretch{1.3}
+#+title: Übungsblatt 6
+
+* *Übung 6*
+** *Klausurvorbereitung*
+
+*** *Aufgabe 1*
+
+Zeigen Sie mittels Resolution, dass die Formel
+\[F=(\neg P \land \neg Q \land R) \lor (\neg P \land \neg R) \lor (Q \land R) \lor P\]
+eine Tautologie ist.
+
+*** *Aufgabe 2*
+
+1) Konstruieren Sie einen DFA, der die Wörter über \(\Sigma=\{0,1\}\)
+   akzeptiert, die die Zeichenfolge 11010 enthalten.
+
+2) Konstruieren Sie einen DFA, der folgende Sprache akzeptiert:
+   \[L=\{w \in \{a,b\}^* \mid w \textrm{ enthält mindestens ein $a$ und ein $b$}\}\]
+
+*** *Aufgabe 3*
+
+Gegeben ist folgender Automat: \\
+\[\begin{aligned}
+        A=(&\{s_0, s_1, s_2, s_3, s_4\}, \{0,1\}, \delta, s_0, \{s_3, s_4\})\\
+        \delta=\{&(s_0,0,s_1),(s_0,1,s_2),\\
+                 &(s_1,0,s_2),(s_1,1,s_3),\\
+                 &(s_2,0,s_1),(s_2,1,s_3),\\
+                 &(s_3,0,s_1),(s_3,1,s_4),\\
+                 &(s_4,0,s_2),(s_4,1,s_4)\}\\
+\end{aligned}\]
+
+Ermitteln Sie zu \(A\) den Minimalautomaten!
+
+*** *Aufgabe 4*
+
+Zeigen Sie, dass die Sprache \[L=\{a^ib^k \mid k > i\}\] nicht regulär
+ist.
+
+*** *Aufgabe 5*
+
+Geben Sie die folgende Grammatik in der Chomsky-Normalform an: \\
+
+\[\begin{aligned}
+        S \rightarrow & a \mid bA\\
+        A \rightarrow & AB \mid bDA \mid B\\
+        B \rightarrow & a \mid b \mid bDE\\
+        C \rightarrow & AAA \mid \varepsilon\\  
+        D \rightarrow & bAC 
+\end{aligned}\]
+
+*** *Aufgabe 6*
+
+Gegeben sei die Grammatik \(G=(\{S, A, B, C, D\}, \{a, b, c\}, S, P)\)
+mit: \\
+
+\[\begin{aligned}
+        P=\{S\rightarrow & BB \mid AA,\\
+        A\rightarrow & AD \mid AC \mid a,\\
+        B\rightarrow & BA \mid CB \mid b,\\
+        C\rightarrow & BC \mid c,\\
+        D\rightarrow & AC \mid b\}  
+\end{aligned}\]
+
+Prüfen Sie mit dem CYK-Algorithmus, ob das Wort \(babcba\) in \(L(G)\) enthalten ist.
+
+*** *Aufgabe 7*
+
+Gegeben ist folgende Sprache:
+
+\[L=\{w \in \{a,b\}^* \mid |w|_a=|w|_b\}\]
+
+1) Konstruieren Sie einen deterministischen Kellerautomaten, der diese
+   Sprache akzeptiert.
+
+2) Kann man auch einen DPDA konstruieren, der die Sprache mittels leerem
+   Keller akzeptiert?
+
+*** *Aufgabe 8*
+
+Konstruieren Sie eine 1-Band-Turingmaschine, die eine Multiplikation
+natürlicher Zahlen berechnet. Die Eingabe soll dabei in
+Bierdeckelnotation erfolgen. Als Beispiel sei die Rechnung \(3\cdot2\)
+genannt. Auf dem Band steht dann zu Beginn: =#|||=\(\cdot\)=||#=
+
+Nach der Abarbeitung durch die TM soll auf dem Band das Ergebnis stehen,
+hier also die Zahl \(6\) bzw. =#||||||#=

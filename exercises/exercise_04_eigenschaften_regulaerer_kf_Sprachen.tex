@@ -1,126 +1,109 @@
-\documentclass[a4paper,12pt]{article}
-\usepackage{fancyhdr}
-\usepackage{fancyheadings}
-\usepackage[ngerman,german]{babel}
-\usepackage{german}
-\usepackage[utf8]{inputenc}
-%\usepackage[latin1]{inputenc}
-\usepackage[active]{srcltx}
-\usepackage{algorithm}
-\usepackage[noend]{algorithmic}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{bbm}
-\usepackage{enumerate}
+% Created 2025-12-31 Mi 14:02
+% Intended LaTeX compiler: xelatex
+\documentclass[a4paper,14pt,ngerman]{scrartcl}
 \usepackage{graphicx}
-\usepackage{ifthen}
-\usepackage{listings}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{capt-of}
 \usepackage{hyperref}
-
-% table placement
-\usepackage{placeins}
-
-\newcommand{\Fach}{Theoretische Informatik I - Automaten und Formale Sprachen}
-\newcommand{\Name}{}
-\newcommand{\Uebung}{4} %  <-- UPDATE ME
-\newcommand{\Uebungstitel}{Eigenschaften regulärer bzw. kontextfreier Sprachen, Chomsky-Normalform und CYK-Algorithmus} %  <-- UPDATE ME
-
-\setlength{\parindent}{0em}
-\topmargin -1.0cm
-\oddsidemargin 0cm
-\evensidemargin 0cm
-\setlength{\textheight}{9.2in}
-\setlength{\textwidth}{6.0in}
-
-%%%%%%%%%%%%%%%
-%% Aufgaben-COMMAND
-\newcommand{\Aufgabe}[1]{
-	{
-		\vspace*{0.5cm}
-		\textsf{\textbf{Aufgabe #1}}
-		\vspace*{0.2cm}
-		
-	}
-}
-%%%%%%%%%%%%%%
+\usepackage{polyglossia}
+\usepackage{polyglossia}
+\setmainlanguage[variant=german]{german}
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+\PolyglossiaSetup{german}{shorthands=on}
+\AtBeginDocument{\let\babelprovide\relax}
+\AtBeginDocument{\let\shorthandon\relax}
+\AtBeginDocument{\let\shorthandoff\relax}
+\setmainfont{Gentium Book Basic}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{xurl}
+\usepackage{listings}
+\usepackage{setspace}
+\setstretch{1.3}
+\author{Elias}
+\date{\today}
+\title{Übungsblatt 4}
 \hypersetup{
-	pdftitle={\Fach{}: Übungsblatt \Uebung{}},
-	pdfauthor={\Name},
-	pdfborder={0 0 0}
-}
-
-\lstset{ %
-	language=java,
-	basicstyle=\footnotesize\tt,
-	showtabs=false,
-	tabsize=2,
-	captionpos=b,
-	breaklines=true,
-	extendedchars=true,
-	showstringspaces=false,
-	flexiblecolumns=true,
-}
-
-\title{Übungsblatt \Uebung{}}
-\author{\Name{}}
-
+ pdfauthor={Elias},
+ pdftitle={Übungsblatt 4},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 30.1 (Org mode 9.7.11)}, 
+ pdflang={German}}
 \begin{document}
-	\thispagestyle{fancy}
-	\chead{\sf \large \Fach{}}
-	\vspace*{0.2cm}
-	\begin{center}
-		\LARGE \sf \textbf{Übung \Uebung{}} \\
-		\vspace*{0.4cm}
-		\Large \sf \textbf{\Uebungstitel}\\
-	\end{center}
-	\vspace*{0.2cm}
-	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%% Aufgaben %%%%%%%%%%%%%%%%%%%%%%%%
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-	Hinweis: Zur Lösung der Aufgaben 1 bis 5 dieser Serie greifen Sie auf das Pumping-Lemma bzw. die Abschlusseigenschaften der jeweiligen Sprachklasse zurück.
-	
-	\Aufgabe{1}
-	Zeigen Sie, dass die Sprache $L= \{scs \mid s \in \{a, b\}^* \}$ nicht regulär ist.
-	
-	\Aufgabe{2}
-	Zeigen Sie, dass die Sprache $L= \{scs \mid s \in \{a, b\}^* \}$ nicht kontextfrei ist.
-	
-	\Aufgabe{3}
-	$L$ sei regulär und werde durch einen DFA mit 4 Zuständen akzeptiert. $L$ enthalte ein Wort der Länge 4. Ist $L$ unendlich? Begründen Sie die Antwort.
-	
-	\Aufgabe{4}
-	Seien $L_1, L_2 \subseteq \Sigma^*$ zwei Sprachen. $L_1$ und $L=L_1 \cup L_2$ seien regulär.
-	
-	Es gelte $L_1 \cap L_2 = \varnothing$. Beweisen Sie: $L_2$ ist regulär.
-	
-	\Aufgabe{5}
-	Zeigen Sie: die folgende Sprache ist nicht kontextfrei: $$L=\{w \in \{a, b, c\}^* \mid |w|_a=|w|_b=|w|_c\}$$ Dabei bezeichnet $|w|_a$ die Anzahl von $a$'s im Wort $w$.
-	
-	\pagebreak
-	\Aufgabe{6}
-	Gegeben sei
-	$$G=(\{S,A,B\},\{a,b,c\},P,S)$$
-	mit der Produktionsmenge $P$:
-	\begin{align*}
-		S \rightarrow & aAb \mid aBb\\
-		A \rightarrow & S \mid aaSc \mid B \mid \varepsilon\\
-	\end{align*}
-	Überführen Sie diese Grammatik in Chomsky-Normalform.
-	
-	\Aufgabe{7}
-	Gegeben sei folgende Grammatik $G$ in Chomsky-Normalform:
-	\begin{align*}
-		S \rightarrow & AB\\
-		A \rightarrow & X_aX_b \mid X_aC\\
-		C \rightarrow & AX_a\\
-		B \rightarrow & c \mid X_cB\\
-		X_a \rightarrow & a\\
-		X_b \rightarrow & b\\
-		X_c \rightarrow & c\\
-	\end{align*}
-	Prüfen Sie mittels CYK-Algorithmus, ob das Wort $aabacc$ in $L(G)$ enthalten ist.
-\end{document}
 
+\section{\textbf{Übung 4}}
+\label{sec:orgdde6126}
+\subsection{\textbf{Eigenschaften regulärer bzw. kontextfreier Sprachen, Chomsky-Normalform und CYK-Algorithmus}}
+\label{sec:org1723bd6}
+
+Hinweis: Zur Lösung der Aufgaben 1 bis 5 dieser Serie greifen Sie auf
+das Pumping-Lemma bzw. die Abschlusseigenschaften der jeweiligen
+Sprachklasse zurück.
+\subsubsection{\textbf{Aufgabe 1}}
+\label{sec:org503ec37}
+
+Zeigen Sie, dass die Sprache \(L= \{scs \mid s \in \{a, b\}^* \}\) nicht
+regulär ist.
+\subsubsection{\textbf{Aufgabe 2}}
+\label{sec:org7960b9e}
+
+Zeigen Sie, dass die Sprache \(L= \{scs \mid s \in \{a, b\}^* \}\) nicht
+kontextfrei ist.
+\subsubsection{\textbf{Aufgabe 3}}
+\label{sec:orga99f31f}
+
+\(L\) sei regulär und werde durch einen DFA mit 4 Zuständen akzeptiert.
+\(L\) enthalte ein Wort der Länge 4. Ist \(L\) unendlich? Begründen Sie
+die Antwort.
+\subsubsection{\textbf{Aufgabe 4}}
+\label{sec:org5fb9a1d}
+
+Seien \(L_1, L_2 \subseteq \Sigma^*\) zwei Sprachen. \(L_1\) und
+\(L=L_1 \cup L_2\) seien regulär.
+
+Es gelte \(L_1 \cap L_2 = \varnothing\). Beweisen Sie: \(L_2\) ist
+regulär.
+\subsubsection{\textbf{Aufgabe 5}}
+\label{sec:orge66526e}
+
+Zeigen Sie: die folgende Sprache ist nicht kontextfrei:
+\[L=\{w \in \{a, b, c\}^* \mid |w|_a=|w|_b=|w|_c\}\] Dabei bezeichnet
+\(|w|_a\) die Anzahl von \(a\)'s im Wort \(w\).
+\subsubsection{\textbf{Aufgabe 6}}
+\label{sec:org0cbbd44}
+
+Gegeben sei \[G=(\{S,A,B\},\{a,b,c\},P,S)\] mit der Produktionsmenge
+\(P\): \\
+
+\[\begin{aligned}
+        S \rightarrow & aAb \mid aBb\\
+        A \rightarrow & S \mid aaSc \mid B \mid \varepsilon\\
+\end{aligned}\]
+
+Überführen Sie diese Grammatik in Chomsky-Normalform.
+\subsubsection{\textbf{Aufgabe 7}}
+\label{sec:org2d31cfa}
+
+Gegeben sei folgende Grammatik \(G\) in Chomsky-Normalform: \\
+
+\[\begin{aligned}
+        S \rightarrow & AB\\
+        A \rightarrow & X_aX_b \mid X_aC\\
+        C \rightarrow & AX_a\\
+        B \rightarrow & c \mid X_cB\\
+        X_a \rightarrow & a\\
+        X_b \rightarrow & b\\
+        X_c \rightarrow & c\\
+\end{aligned}\]
+
+Prüfen Sie mittels CYK-Algorithmus, ob das Wort \(aabacc\) in \(L(G)\) enthalten ist.
+\end{document}

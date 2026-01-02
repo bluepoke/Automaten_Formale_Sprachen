@@ -1,0 +1,174 @@
+*** Typ-2 Grammatiken: Normalformen
+
+- Vereinfachungen für kontextfreie Grammatiken \(G\)
+
+  - \(\varepsilon\)-Regeln eliminieren:
+    \(S \rightarrow aAb; A \rightarrow aS|\varepsilon\)\\
+    wird zu \(S \rightarrow aAb|ab; A \rightarrow aS\)
+
+  - \(G\) reduzieren: nutzlose Variablen eliminieren
+
+  - Kettenregeln \(A \rightarrow B\) entfernen
+
+- Chomsky-Normalform
+
+  - zu jeder \(\varepsilon\)-freien, reduzierten kontextfreien Grammatik
+    \(G\) ohne Kettenregeln lässt sich eine äquivalente Grammatik \(G'\)
+    angeben, die nur Regeln der Art \(A \rightarrow a\) bzw.
+    \(A \rightarrow BC\) enthält.
+
+  - Konstuktion: Ausgangspunkt
+    \(A\rightarrow X_1X_2 \ldots X_m, m\geq 2, X_i \in V \cup \Sigma\)
+
+    - für \(X_i=a\in \Sigma\) neue Variable \(X_a\) mit
+      \(X_a \rightarrow a\) einführen
+
+    - verbleibende Regeln
+      \(A \rightarrow B_1B_2\ldots B_m, B_i \in V, m\geq 3\):\\
+      ersetze
+      \(A \rightarrow B_1D_1, D_1\rightarrow B_2D_2, \ldots, D_{m-2}\rightarrow B_{m-1}B_m\)
+      (\(D_i\) neue Variablen)
+
+- Greibach-Normalform: Regeln vom Typ
+  \(A \rightarrow aB_1B_2 \ldots B_m|a\)
+
+*** Beispiel: Erzeugung Chomsky-Normalform
+
+\(G=(\{S, A, B, C, D, E\}, \{a, b\}, P, S)\)\\
+\(P=\{\)\\
+\(S \rightarrow bA \mid aB \mid C \mid Cb,\)\\
+\(A \rightarrow bAA \mid aS \mid a \mid bE \mid bDb,\)\\
+\(B \rightarrow aBB \mid bS \mid b,\)\\
+\(C \rightarrow Cc \mid c,\)\\
+\(D \rightarrow d \mid \varepsilon\)\\
+\(\}\)
+
+*** Worterkennung: Cocke-Younger-Kasami-Algorithmus (CYK)
+
+polynomiell auch für nichtdeterministische Sprachen
+
+- Ziel: Worterkennung und Konstruktion Ableitungsbaum bottom-up
+
+- Ausgangspunkt: \(G\) in Chomsky-Normalform,
+  \(w=a_1a_2 \ldots a_n \in \Sigma^*\)
+
+- definiere
+  \(V[i,j]:=\{A \in V \mid A \underset{G}{\Rightarrow}^* w_{ij} \}\)
+  mit\\
+  \(w_{ij}=a_ia_{i+1}\ldots a_{i+j-1}, |w_{ij}|=j, 1\leq i \leq n, 1\leq j \leq n+1-i\)
+
+- es gilt: \(w\in L\) gdw. \(S \in V[1,n]\)
+
+- schrittweise Berechnung (Rückführung auf kürzere Teilworte)\\
+  \(j=1: V[i,1]=\{X \in V \mid (X\rightarrow a_i) \in P\}\)\\
+  \(j>1: V[i,j]=\bigcup_{l=1}^{j-1}\{A\in V\mid \exists (A\rightarrow BC): B \in V[i,l] \land C \in V[i+l, j-l] \}\)
+
+- Wortproblem mit polynomiellem Zeitaufwand \(O(n^3)\) lösbar
+
+- Grammatik ist mehrdeutig, falls ein \(V[i,j]\) mehrere Einträge hat,
+  die von \(S\) aus erreicht werden können
+
+*** Beispiel: CYK-Algorithmus
+
+\[L=\{a^nb^n\mid n\geq 1\}\] Zugehörige
+Grammatik in Chomsky-Normalform: \\
+\[\begin{aligned}
+	G=(&\{A, B, C, S\}, \{a, b\}, P, S)\\
+	P=\{&S \rightarrow AB,\\
+	    &S \rightarrow AC,\\
+	    &C\rightarrow SB,\\
+	    &A\rightarrow a,\\
+	    &B\rightarrow b\}
+\end{aligned}\]
+
+*** Pumping-Lemma für kontextfreie Sprachen
+
+- Pumping-Lemma: für jede kontextfreie Sprache \(L\) gilt\\
+  es existiert eine natürliche Zahl \(n\) so, dass für alle \(z \in L\)
+  mit \(|z|\geq n\) gilt:\\
+  \(z\) lässt sich zerlegen in \(z=uvwxy\) mit
+
+  - \(|vx|\geq 1\)
+
+  - \(|vwx| \leq n\)
+
+  - \(uv^iwx^iy \in L, i=0, 1, 2, \ldots\)
+
+- Beweis:
+
+  - wähle \(n=2^m\), \(m\): Anzahl der Nichtterminalsymbole, wenn sich G
+    in Chomsky-Normalform befindet
+
+  - mindestens eine Variable \(A\) muss sich im Ableitungsbaum nach
+    spätestens \(m\) Schritten wiederholen;\\
+    \(A\underset{G}{\Rightarrow}^*\omega_1 A \omega_2\), wähle
+    \(v: \omega_1 \underset{G}{\Rightarrow}^* v, x: \omega_2 \underset{G}{\Rightarrow}^* x, w: A \underset{G}{\Rightarrow}^* w\);\\
+    diese Ableitungen enthalten jeweils keine Wiederholungen von
+    Variablen
+
+*** Beispiel: Pumping-Lemma für kontextfreie Sprachen
+
+\(L=\{a^ib^ic^i \mid i\geq 1 \}\)
+
+- \(L\) ist kontext-sensitiv: Beweis Typ-1-Grammatik\\
+  \(G=(V, \Sigma, P, S), V=\{S, B, C\}\)\\
+  \(P=\{S\rightarrow aSBC | aBC, CB \rightarrow BC,\)\\
+  \(aB \rightarrow ab, bB \rightarrow bb, bC \rightarrow bc, cC \rightarrow cc \}\)
+
+- \(L\) ist nicht kontextfrei: Beweis Pumping-Lemma\\
+  wäre \(L\) kontextfrei, sei \(n\) das "Pumping-\(n\)"\\
+  wähle \(z=a^nb^nc^n \in L, |z|=3n \geq n\)\\
+  es ex. eine Zerlegung \(z=uvwxy\) mit \(|vx|\geq 1, |vwx| \leq n\)\\
+  \(\rightarrow\) \(vwx\) kann höchstens zwei verschiedene Buchstaben
+  enthalten\\
+  \(\rightarrow\) in \(uv^iwx^iy\) werden ein oder zwei Buchstaben
+  "aufgepumpt", der dritte nicht\\
+  \(\rightarrow\) \(uv^iwx^iy \notin L\) für \(i \neq 1\)
+
+*** Abschlusseigenschaften kontextfreier Sprachen
+
+- Kontextfreie Sprachen sind abgeschlossen unter
+
+  - Vereinigung: \(L_1\cup L_2\)\(S \rightarrow S_1|S_2\)
+
+  - Konkatenation: \(L_1L_2\) \(S\rightarrow S_1S_2\)
+
+  - Stern-Produkt: \(L^*\)
+    \(S_0\rightarrow S|\varepsilon, S\rightarrow S_1|S_1S\)
+
+  - Spiegelung: ersetze in Chomsky-Normalform \(A\rightarrow BC\) durch
+    \(A \rightarrow CB\)
+
+- Kontextfreie Sprachen sind _nicht_ abgeschlossen unter
+
+  - Durchschnitt\\
+    Gegenbeispiel:
+    \(L_1=\{a^kb^kc^l\mid k,l\geq 0\}, L_2=\{a^kb^lc^l\mid k,l\geq 0\}\)
+    sind kontextfrei\\
+    \(L=L_1\cap L_2\) ist nicht kontextfrei
+
+  - Komplement\\
+    \(L_1 \cap L_2 = \overline{\overline{L_1} \cup \overline{L_2}}\):
+    Abgeschlossenheit unter Vereinigung und Komplement würde zu
+    Abgeschlossenheit unter Durchschnitt führen\\
+    \(\rightarrow\) Widerspruch zu a)
+
+*** Abschlusseigenschaften deterministisch kontextfreier Sprachen
+
+1) Deterministisch kontextfreie Sprachen sind abgeschlossen unter
+   Komplementbildung (beachte: Akzeptanz durch Endzustand!)
+
+2) Deterministisch kontextfreie Sprachen sind _nicht_ abgeschlossen
+   unter
+
+   1. Durchschnitt \(L_1 \cap L_2\)
+
+   2. Konkatenation \(L_1L_2\)
+
+   3. Stern-Produkt \(L^*\)
+
+   4. Vereinigung \(L_1 \cup L_2\)
+
+3) \(L_1 \cap L_2\) ist allerdings det. kontextfrei (bzw. kontextfrei)
+   falls \(L_1\) regulär und \(L_2\) det. kontextfrei (bzw. kontextfrei)
+   ist

@@ -1,0 +1,747 @@
+*** Syntax
+:PROPERTIES:
+:CUSTOM_ID: syntax
+:END:
+
+- /Aussage:/ Satz, der entweder wahr (\(w\)) oder falsch (\(f\)) ist;
+  Aussagenvariable \(A\); Wahrheitswert \(w(A)\)
+
+- /Syntax:/ Induktive Definition korrekt gebildeter aussagenlogischer
+  Formeln F über Variablenmenge \(V=\{A, B, \ldots\}\):
+
+  - Die Booleschen Wahrheitswerte \(w\) und \(f\) sind Formeln
+
+  - Jede Variable aus \(V\) ist eine Formel: /Atome/
+
+  - Negation: \(\neg F\) ist eine Formel
+
+  - Konjunktion: \((F_1 \land F_2)\) ist eine Formel
+
+  - Disjunktion: \((F_1 \lor F_2)\) ist eine Formel
+
+  - Implikation: \((F_1 \rightarrow F_2)\) ist eine Formel
+
+  - Äquivalenz: \((F_1 \leftrightarrow F_2)\) ist eine Formel
+
+  - andere Verknüpfungen bilden keine Formel
+
+*** Präzedenzregeln
+
+Vereinbarung zur Reduzierung von Klammern
+
+- Bindung (analog "Punkt vor Strich"-Rechnung)
+
+  - \(\neg\) bindet stärker als \(\land\)
+
+  - \(\land\) bindet stärker als \(\lor\)
+
+  - \(\lor\) bindet stärker als \(\rightarrow\) und \(\leftrightarrow\)
+
+- Operatoren gleicher Stärke: Auswertung linksassoziativ; z.B.\\
+  \((A \lor B \lor C)\) steht für \(((A \lor B) \lor C)\)
+
+- äußere Klammer weglassen:
+  \((((A \lor B) \rightarrow C) \land B) \mapsto (A \lor B \rightarrow C) \land B\)
+
+*** Semantik
+:PROPERTIES:
+:CUSTOM_ID: semantik
+:END:
+
+aussagenlogischen Formeln wird eine Bedeutung zugeordnet
+
+- Def. Belegung (Interpretation) \(I: V \rightarrow \{f, w\}\)\\
+  den Atomen wird jeweils ein konkreter Wahrheitswert zugeordnet
+
+- schrittweise (über die Bewertung von Teilformeln) lassen sich dann
+  zusammengesetzte Formeln bewerten:
+
+  - \(I(\neg F)=w\) falls \(I(F)=f\), sonst \(I(\neg F)=f\)
+
+  - \(I(F \land G)=w\) falls \(I(F)=w\) und \(I(G)=w\), sonst
+    \(I(F \land G)=f\)
+
+  - \(I(F \lor G)=w\) falls \(I(F)=w\) oder \(I(G)=w\), sonst
+    \(I(F \lor G)=f\)
+
+  - \(I(F \rightarrow G)=w\) falls \(I(F)=f\) oder \(I(G)=w\), sonst
+    \(I(F \rightarrow G)=f\)
+
+  - \(I(F \leftrightarrow G)=w\) falls \(I(F)=I(G)\), sonst
+    \(I(F \leftrightarrow G)=f\)
+
+*** Semantik: Darstellung per Wahrheitstafel
+
+Wahrheitstafel enthält zeilenweise alle möglichen Belegungen
+
+| \(A\) | \(B\) | \(\neg A\) | \(A \land B\) | \(A \lor B\) | \(A \rightarrow B\) | \(A \leftrightarrow B\) |
+|-------+-------+------------+---------------+--------------+---------------------+-------------------------|
+| f     | f     | w          | f             | f            | w                   | w                       |
+| f     | w     | w          | f             | w            | w                   | f                       |
+| w     | f     | f          | f             | w            | f                   | f                       |
+| w     | w     | f          | w             | w            | w                   | w                       |
+#+caption: Wahrheitstafel der Grundoperationen
+
+semantische Äquivalenz \(F_1 \equiv F_2\): \(F_1\) und \(F_2\) haben
+gleichen Wahrheitswerteverlauf;
+z.B.\\
+\(A \rightarrow B \equiv \neg A \lor B\)\\
+\(A \leftrightarrow B \equiv (A \rightarrow B) \land (B \rightarrow A)\)
+
+*** Erfüllbarkeit, Tautologie, Kontradiktion
+
+- Sei \(F\) eine Formel und \(I\) eine Belegung. Falls \(I\) für alle in
+  \(F\) vorkommenden Atome definiert ist, so heißt \(I\) _zu \(F\)
+  passend_
+
+- Falls \(I\) zu \(F\) passend ist, und es gilt \(I(F)=w\), dann heißt
+  \(I\) _Modell für \(F\)_; Schreibweise: \(I \models F\)
+
+- \(F\) heißt _erfüllbar_, falls \(F\) mindestens ein Modell besitzt;
+  sonst heißt \(F\) _unerfüllbar_ (Kontradiktion; Schreibweise
+  \(F\bot\))
+
+- \(F\) heißt gültig bzw. _Tautologie_, falls jede zu \(F\) passende
+  Belegung \(I\) ein Modell für \(F\) ist; Schreibweise \(\models F\)
+  oder \(F\top\)\\
+  Beispiel: \((A \land B) \rightarrow A\)
+
+- es gilt: \(F\) ist Tautologie gdw. \(\neg F\) ist Kontradiktion
+
+*** Äquivalenz aussagenlogischer Formeln
+:PROPERTIES:
+:CUSTOM_ID: äquivalenz
+:END:
+
+- Zwei Formeln \(F\) und \(G\) heißen semantisch äquivalent
+  (\(F \equiv G\)), falls für alle Belegungen \(I\) gilt: \(I(F)=I(G)\)
+
+- Äquivalenz kann bewiesen (oder widerlegt) werden durch Aufstellen der
+  jeweiligen Wahrheitstafeln
+
+- Beispiele
+
+  - \(A \rightarrow B \equiv \neg A \lor B\)
+
+  - \(A \leftrightarrow B \equiv (A \land B) \lor (\neg A \land \neg B) \equiv (A \rightarrow B) \land (B \rightarrow A)\)
+
+- Ersetzbarkeitstheorem:\\
+  enthält eine Formel \(F\) eine Teilformel \(G\) und wird \(G\) durch
+  eine äquivalente Formel ersetzt, so entsteht eine zu \(F\) äquivalente
+  Formel
+
+*** Äquivalenzen als Rechenregeln
+
+- Idempotenz
+
+  - \((A \land A) \equiv A\)
+
+  - \((A \lor A) \equiv A\)
+
+- Kommutativgesetz
+
+  - \((A \land B) \equiv (B \land A)\)
+
+  - \((A \lor B) \equiv (B \lor A)\)
+
+- Assoziativgesetz
+
+  - \((A \land (B \land C)) \equiv ((A \land B) \land C)\)
+
+  - \((A \lor (B \lor C)) \equiv ((A \lor B) \lor C)\)
+
+- Distributivgesetz
+
+  - \((A \land (B \lor C)) \equiv ((A \land B) \lor (A \land C))\)
+
+  - \((A \lor (B \land C)) \equiv ((A \lor B) \land (A \lor C))\)
+
+*** Äquivalenzen als Rechenregeln (Fortsetzung)
+
+- Absorptionsgesetz
+
+  - \((A \land (A \lor B)) \equiv A\)
+
+  - \((A \lor (A \land B)) \equiv A\)
+
+- Doppelnegation
+
+  - \(\neg \neg A \equiv A\)
+
+- deMorgansche Regeln
+
+  - \(\neg (A \land B) \equiv (\neg A \lor \neg B)\)
+
+  - \(\neg (A \lor B) \equiv (\neg A \land \neg B)\)
+
+- Tautologieregeln: sei \(A\) Tautologie; \(A\top\) bzw. \(\models A\)
+  bzw. \(A \equiv w\)
+
+  - \((A \lor B) \equiv (w \lor B) \equiv w \equiv A\);
+    \((A \land B) \equiv (w \land B) \equiv B\)
+
+- Kontradiktionsregeln: sei \(A\) Kontradiktion; \(A\bot\) bzw.
+  \(A \equiv f\)
+
+  - \((A \lor B) \equiv (f \lor B) \equiv B\);
+    \((A \land B) \equiv (f \land B) \equiv f \equiv A\)
+
+*** Beispiel: direkter Beweis der Gültigkeit einer Formel (als Alternative zur Wahrheitstafel)
+
+\[\begin{aligned}
+	F &=& (A \land (A \rightarrow B)) \rightarrow B\\
+	  &\equiv& \neg (A \land (A \rightarrow B)) \lor B\\
+	  &\equiv& \neg (A \land (\neg A \lor B)) \lor B\\
+	  &\equiv& \neg A \lor \neg(\neg A \lor B) \lor B\\
+	  &\equiv& \neg A \lor (A \land \neg B) \lor B\\
+	  &\equiv& \neg A \lor (A \lor B) \land (\neg B \lor B)\\
+	  &\equiv& \neg A \lor (A \lor B) \land w\\
+	  &\equiv& \neg A \lor A \lor B\\
+	  &\equiv& w \lor B\\
+	  &\equiv& w		
+\end{aligned}\]
+
+
+| \(A\) | \(B\) | \(A \rightarrow B\) | \(A \land (A \rightarrow B)\) | \(F\) |
+|-------+-------+---------------------+-------------------------------+-------|
+| f     | f     | w                   | f                             | w     |
+| f     | w     | w                   | f                             | w     |
+| w     | f     | f                   | f                             | w     |
+| w     | w     | w                   | w                             | w     |
+
+*** Normalformen
+
+- /Literal:/ Aussagenvariable \(A\) ("positives Literal") oder negierte
+  Aussagenvariable \(\neg A\) ("negatives Literal")
+
+- /Negationsnormalform (NNF)/: Formel \(F\) ist in NNF, falls
+  \(\rightarrow\) und \(\leftrightarrow\) aufgelöst sind und alle
+  Negationszeichen \(\neg\) unmittelbar vor einer Aussagenvariable
+  stehen.\\
+  beachte: NNF ist nicht eindeutig
+
+- /Monom:/ Konjunktion von Literalen, d.h. Formel der Art\\
+  \(\bigwedge_iL_i=L_1\land L_2\land\ldots\land L_k\)
+
+- /Klausel:/ Disjunktion von Literalen, d.h. Formel der Art\\
+  \(\bigvee_iL_i=L_1\lor L_2\lor\ldots\lor L_k\)
+
+*** Disjunktive Normalform (DNF) und Konjunktive Normalform (KNF)
+
+- Disjunktive Normalform /DNF:/ Disjunktion von Konjunktionen
+  (Monomen)\\
+  \(F=\bigvee_i\left(\bigwedge_jL_{ij}\right)\)
+
+- Konjunktive Normalform /KNF:/ Konjunktion von Disjunktionen
+  (Klauseln)\\
+  \(F=\bigwedge_i\left(\bigvee_jL_{ij}\right)\)
+
+- Für jede Formel existiert eine äquivalente Formel in KNF und eine
+  äquivalente Formel in DNF
+
+  - Erzeuge NNF \(\mapsto\) DNF bzw. KNF\\
+    DNF: ersetze Ausdrücke der Art \((F \land (G \lor H))\) durch
+    \((F \land G) \lor (F \land H)\) solange solche Teilformen
+    existieren\\
+    KNF: ersetze Ausdrücke der Art \((F \lor (G \land H))\) durch
+    \((F \lor G) \land (F \lor H)\) solange solche Teilformeln
+    existieren
+
+*** Konstruktion kanonische DNF/KNF aus Wahrheitstafel
+
+- /Kanonische/ DNF bzw. KNF: jede Aussagenvariable kommt in jedem Monom
+  bzw. jeder Klausel genau einmal vor (positiv oder negativ)
+
+- Kanonische NF lassen sich aus der Wahrheitstafel der Formel ablesen
+
+  - Kanonische DNF (KDNF)
+
+    - Je ein Monom für jede Belegung mit Wahrheitswert \(w\)
+
+    - Setze \(L_j=A_j\), falls \(w(A_j)=w\), \(L_j=\neg A_j\) sonst
+
+  - Kanonische KNF (KKNF)
+
+    - Je eine Klausel für jede Belegung mit Wahrheitswert \(f\)
+
+    - Setze \(L_j=\neg A_j\), falls \(w(A_j)=w\), \(L_j=A_j\) sonst
+
+- Übungsbeispiel (KNF, aber nicht kanonisch)\\
+  \(F=\neg B \land (A \lor \neg C)\)
+
+*** Beispiel: Konstruktion von KDNF und KKNF aus Wahrheitstafel
+
+#+begin_center
+| A | B | C | F |
+|---+---+---+---|
+| 0 | 0 | 0 | 1 |
+| 0 | 0 | 1 | 0 |
+| 0 | 1 | 0 | 0 |
+| 0 | 1 | 1 | 0 |
+| 1 | 0 | 0 | 1 |
+| 1 | 0 | 1 | 1 |
+| 1 | 1 | 0 | 0 |
+| 1 | 1 | 1 | 0 |
+
+#+end_center
+
+- Werte für F=1 auslesen
+  \[(\neg A \land \neg B \land \neg C) \lor (A \land \neg B \land \neg C) \lor (A \land \neg B \land C)\]
+
+- Werte für F=0 auslesen und Literale negieren \\
+   \[\begin{aligned}
+  	&(A \lor B \lor \neg C) \land (A \lor \neg B \lor C) \land \\
+  	&(A \lor \neg B \lor \neg C) \land (\neg A \lor \neg B \lor C) \land (\neg A \lor \neg B \lor \neg C)			
+  \end{aligned}\]
+
+- Minimierung der KKNF und KDNF durch Karnaugh-Veitch-Diagramm möglich
+  (dann aber i.d.R. nicht mehr kanonisch)
+
+*** Beispiel: Karnaugh-Tafel
+
+Karnaugh-Tafel für \(F=\neg B \land (A \lor \neg C)\)
+
+#+begin_center
+|            | \(AB\) | \(\neg A B\) | \(\neg A \neg B\) | \(A \neg B\) |
+|------------+--------+--------------+-------------------+--------------|
+| \(C\)      | 0      | 0            | 0                 | 1            |
+| \(\neg C\) | 0      | 0            | 1                 | 1            |
+
+#+end_center
+
+*** Abgeleitete Formeln:
+
+- Einsen zu Blöcken (Größe \(2^n\)) und die Variablen im Block
+  weglassen, die sowohl positiv als auch negativ vertreten sind.
+  Variablen mit Konjunktion verknüpfen, Blöcke mit Disjunktion:\\
+  \((\neg B \land \neg C) \lor (A \land \neg B)\)
+
+- Wie DNF, aber: Nullen zu Blöcken, Variablen negieren, Verknüpfungen
+  umkehren\\
+  \((\neg B) \land (A \lor \neg C)\)
+
+*** Aussagenlogische Formeln in Java
+
+- Datentyp =boolean=\\
+  =p,q; //zulässige Werte: true, false=
+
+- Logische Verküpfungen\\
+
+  UND: =&&=\\
+  ODER: =||=\\
+  NICHT: =!=
+
+- Beispiel\\
+  =boolean p,q;=\\
+  =int x = 8;=\\
+  =p = false;=\\
+  =q = x == 10; // false=\\
+  =p = (p || q) && x < 10; // false=
+
+- Vorrangregeln: =!= bindet stärker als =&&= bindet stärker als =||=
+
+** Mengen/Relationen
+:PROPERTIES:
+:CUSTOM_ID: mengenrelationen
+:END:
+
+*** Exkurs: Mengen
+
+- /Menge:/ Zusammenfassung unterschiedlicher Objekte (Elemente) zu einer
+  Einheit
+
+- /Bezeichner:/
+  \(M=\left\{x \in G \mid \textrm{Bedingung}_1, \textrm{Bedingung}_2, \ldots \right\}\);
+  \(G\): Grundmenge
+
+- Beispiel:
+  \(M=\left\{n \in \mathbb{N} \mid n^2-3n+2=0 \right\}=\left\{1,2\right\}\)
+
+- /Leere Menge:/ \(\varnothing=\left\{{}\right\}\)
+
+- /Teilmengen:/ \(A \subseteq B\) gdw. \(x \in A \rightarrow x \in B\)
+  für alle \(x \in G\)
+
+- /Gleichheit von Mengen:/ \(A=B\) gdw.
+  \(A \subseteq B \land B \subseteq A\)\\
+  z.B. \(A = \left\{a, b, a\right\}, B = \left\{b, a\right\}\) es gilt:
+  \(A = B\)
+
+- /Mächtigkeit (endlicher) Mengen:/\\
+  \(|M|=\) Anzahl verschiedener Elemente von \(M\); z.B.
+  \(|\left\{a, b, a\right\}|=2\)
+
+*** Mengenverknüpfungen
+
+- Durchschnitt:
+  \(A \cap B = \left\{x \mid x \in A \land x \in B\right\}\)
+
+- Vereinigung: \(A \cup B = \left\{x \mid x \in A \lor x \in B\right\}\)
+
+- Differenz:
+  \(A \setminus B = \left\{x \mid x \in A \land x \notin B\right\}\)\\
+  insbesondere: Komplement \(A'= \bar{A} = G \setminus A\)
+
+- es gelten Kommutativ-, Assoziativ- und Distributivgesetze,
+  insbesondere\\
+  \(A \cap \left(B \cup C\right) = \left(A \cap B\right) \cup \left(A \cap C\right)\)\\
+  \(A \cup \left(B \cap C\right) = \left(A \cup B\right) \cap \left(A \cup C\right)\)
+
+- Potenzmenge \(P(M) =\) Menge aller Teilmengen von M, z.B.\\
+  \(M=\left\{a, b, c\right\}\)\\
+  \(P(M)=\left\{\varnothing, \{a\}, \{b\}, \{c\}, \{a,b\}, \{a,c\}, \{b,c\}, \{a,b,c\}\right\}\)\\
+  es gilt: \(|P(M)|=2^{|M|}\)
+
+*** Relationen Begriffsbestimmungen
+
+- Kartesisches Produkt zweier Mengen \(A, B\)\\
+  Menge aller geordneten Paare
+  \((a,b): A \times B = \left\{(a,b) \mid a \in A, b \in B\right\}\)
+
+- Binäre Relation \(R\) zwischen \(A\) und \(B\)\\
+  \(R \subseteq A \times B\), Sprechweise: \((a,b) \in R \Rightarrow a\)
+  und \(b\) stehen in Relation \(R\)
+
+- Darstellungen: Tabelle, Pfeildiagramm
+
+- Produkt (Komposition) \(R_1 \circ R_2\)\\
+  sei \(R_1 \subseteq A \times B, R_2 \subseteq B \times C\)\\
+  \(R_1 \circ R_2 = \left\{(a,c) \mid \textrm{es ex. ein } b \in B \textrm{ mit } (a,b) \in R_1, (b,c) \in R_2\right\}\)
+
+- Inverse Relation \(R^{-1}\)\\
+  sei
+  \(R \subseteq A \times B \Rightarrow R^{-1}\subseteq B \times A\)\\
+  \(R^{-1}=(b,a) \mid a \in A, b \in B, (a,b) \in R\)
+
+*** Binäre Relationen /in einer/ Menge \(M: R \subset M \times M\)
+
+- Bezeichnung: es gelte \(a,b,c \in M\)
+
+- /Identität \(I\):/ \(I=\left\{(a,a) \mid a \in M\right\}\)
+
+- \(R\) heißt /reflexiv/ gdw. \(I \subseteq R\)
+
+- \(R\) heißt /symmetrisch/ gdw. \((a,b) \in R \rightarrow (b,a) \in R\)
+
+- \(R\) heißt /asymmetrisch/ gdw.
+  \((a,b) \in R \rightarrow (b,a) \notin R\)
+
+- \(R\) heißt /antisymmetrisch/ gdw.
+  \((a,b) \in R \land (b,a) \in R \rightarrow a = b\)
+
+- \(R\) heißt /transitiv/ gdw.
+  \(((a,b) \in R \land (b,c) \in R) \rightarrow (a,c) \in R\)
+
+- /Transitive Hülle/ \(T\) von \(R\)\\
+  \(T=\{(a,b) \mid (a,b) \in R, \textrm{ oder: es gibt } c_0, c_1, \ldots, c_m \in M\)\\
+  \(\textrm{mit } (a,c_0) \in R, (c_0, c_1) \in R, \ldots, (c_m,b) \in R\}\)
+
+*** Beispiel: Reflexivität
+
+- Reflexivität: Jedes Element der Relation steht mit sich selbst in
+  Relation.
+
+  - "\(=\)": \(a=a\)
+
+  - "Studenten mit gleicher Punktzahl in einer Klausur": Jeder Student
+    hat die gleiche Punktzahl wie er selbst.
+
+  - Darstellung als Tabelle und Graph:\\
+  
+    #+ATTR_LATEX: :align |c|c|c|c|c|
+    |   | A | B | C | D |
+    |---+---+---+---+---|
+    | A | X |   |   |   |
+    | B |   | X |   |   |
+    | C |   |   | X |   |
+    | D |   |   |   | X |
+
+    \begin{tikzpicture}
+		\node[state] (A) {$A$};
+		\node[state, right=1cm of A] (B) {$B$};
+		\node[state, below=1cm of A] (C) {$C$};
+		\node[state, right=1cm of C] (D) {$D$};
+					
+		\draw	(A) edge[loop above] (A);
+		\draw	(B) edge[loop above] (B);
+		\draw	(C) edge[loop above] (C);
+		\draw	(D) edge[loop above] (D);
+     \end{tikzpicture}
+
+*** Beispiel: Symmetrie
+
+- Symmetrie: zwei Elemente, die in Relation stehen, stehen umgekehrt
+  auch in Relation.
+
+  - "\(=\)": \(a=b\quad\rightarrow\quad b=a\)
+
+  - "Geschwister": Anna ist Geschwister von Charlie. Dann ist Charlie
+    auch Geschwister von Anna.
+
+  - Darstellung als Tabelle und Graph:\\
+
+    #+ATTR_LATEX: :align |c|c|c|c|c|
+    |   | A | B | C | D |
+    |---+---+---+---+---|
+    | A |   |   | X |   |
+    | B |   |   |   | X |
+    | C | X |   |   |   |
+    | D |   | X |   |   |
+    
+    \begin{tikzpicture}
+		\node[state] (A) {$A$};
+		\node[state, right=1cm of A] (B) {$B$};
+		\node[state, below=1cm of A] (C) {$C$};
+		\node[state, right=1cm of C] (D) {$D$};
+					
+		\draw	(A) edge[bend left] (C);
+		\draw	(B) edge[bend left] (D);
+		\draw	(C) edge[bend left] (A);
+		\draw	(D) edge[bend left] (B);
+    \end{tikzpicture}
+
+*** Beispiel: Transitivität
+
+- Transitivität: Wenn ein Element mit einem anderen in Relation steht,
+  und dieses wiederum mit einem dritten, so steht auch das erste mit dem
+  dritten Element in Relation.
+
+  - "\(=\)": \(a=b \land b=d \rightarrow a=d\)
+
+  - "Vorfahren": Albert ist Vorfahr von Brunhilde. Brunhilde ist Vorfahr
+    von Diana. Dann ist Albert auch Vorfahr von Diana.
+
+  - Darstellung als Graph (in Tabelle nicht gut zu sehen):\\
+    \begin{tikzpicture}
+	\node[state] (A) {$A$};
+	\node[state, right=1cm of A] (B) {$B$};
+	\node[state, below=1cm of A] (C) {$C$};
+	\node[state, right=1cm of C] (D) {$D$};
+					
+	\draw	(A) -- (B);
+	\draw	(B) -- (D);
+	\draw	(A) -- (D);
+    \end{tikzpicture}
+
+*** Äquivalenzrelationen
+
+- Definition: \(R\) in \(M\) heißt Äquivalenzrelation in \(M\) gdw.
+  \(R\) ist reflexiv, symmetrisch und transitiv
+
+- Äquivalenzklassen: \(R[x]=\{y \mid (x,y) \in R\}\) heißt
+  Äquivalenzklasse von \(x\) bezüglich \(R\);\\
+  es gilt: zwei Äquivalenzklassen \(R[x], R[y]\) sind entweder identisch
+  oder disjunkt
+
+- Beispiel (Zahlentheorie): Kongruenz\\
+  zwei ganze Zahlen \(a,b\) heißen kongruent bzgl. \(m \in \mathbb{N}\)
+  gdw. sie haben bei Division durch \(m\) den gleichen Rest\\
+  Schreibweise: \(a \equiv b\ (\mathrm{mod}\ m)\)\\
+  Rechenregeln: sei
+  \(a \equiv a'\ (\mathrm{mod}\ m), b \equiv b'\ (\mathrm{mod}\ m)\)\\
+  \(a+b\equiv a'+b'\ (\mathrm{mod}\ m), a \cdot b \equiv a' \cdot b'\ (\mathrm{mod}\ m)\)
+
+*** Abbildungen
+
+- Sei \(R\) eine Relation zwischen den Mengen \(A,B\)
+
+  - \(R\) heißt /linkseindeutig/ gdw.
+    \((a_1,b)\in R\land (a_2,b)\in R \rightarrow a_1=a_2\)
+
+  - \(R\) heißt /rechtseindeutig/ gdw.
+    \((a,b_1)\in R\land (a,b_2)\in R \rightarrow b_1=b_2\)
+
+- Eine /Abbildung/ \(f\) von \(A\) /in/ die Menge \(B\) entspricht einer
+  rechtseindeutigen Relation \(F\) zwischen \(A\) und \(B\), für die es
+  zu jedem \(a\in A\) ein \(b\in B\) gibt mit \((a,b) \in F\)\\
+  Bezeichnung: \(f: A \rightarrow B\) bzw. \(b=f(a)\)
+
+- Eine Abbildung \(f\) heißt /surjektiv/ (Abbildung /auf/ \(B\)), wenn
+  es zu jedem \(b\in B\) ein \(a\in A\) gibt mit \(b=f(a)\).\\
+  Schreibweise: \(B = f(A)\)
+
+- Eine Abbildung \(f\) heißt /injektiv/ (eineindeutig), wenn die
+  zugehörige Relation \(F\) auch linkseindeutig ist
+
+- Eine Abbildung \(f\) heißt /bijektiv/, wenn sie surjektiv und injektiv
+  ist. Die inverse Relation \(F^{-1}\) erklärt dann die inverse
+  Abbildung \(a = f^{-1}(b)\) bzw. \(A=f^{-1}(B)\)
+
+** Boolesche Rechenregeln
+:PROPERTIES:
+:CUSTOM_ID: boolesche-rechenregeln
+:END:
+
+*** Boolesche Algebra: Rechenregeln
+
+/Abstrakte Definition/\\
+Boolesche Algebra \((B, +, \times, \kappa)\)
+
+- \(B\): Grundmenge, enthält insbesondere 0 und 1
+
+- \(+\) und \(\times\): zweistellige Operationen auf \(B\)
+
+- \(\kappa\): einstellige Operation auf \(B\) (Komplement)
+
+- dazu gelten die folgenden vier Rechengesetze \((a,b,c\in B)\)
+
+/vorausgesetzte Rechenregeln/\\
+
+- Kommutativgesetze\\
+  \(a+b=b+a\), \(a \times b=b \times a\)
+
+- Distributivgesetze\\
+  \(a \times (b + c) = (a \times b) + (a\times c)\)\\
+  \(a + (b \times c) = (a + b) \times (a + c)\)\\
+
+- Neutralitätsgesetze\\
+  \(a \times 1 = a\), \(a + 0 = a\)
+
+- Komplementgesetze \(a + \kappa(a) = 1\), \(a \times \kappa(a) = 0\)
+
+*** Beispiele
+
+- Potenzmenge; \(B=P(M)\)\\
+  \(+:\cup\), \(\times:\cap\), \(\kappa(A):M\setminus A\),
+  \(0:\varnothing\), \(1:M\)
+
+- \(B\): Menge der n-stelligen aussagenlogischen Formeln\\
+  (gebildet aus maximal n verschiedenen Aussagenvariablen, zzgl. \(w\),
+  \(f\))\\
+  \(+:\lor\), \(\times:\land\), \(\kappa:\neg\), \(0:f\), \(1:w\)
+
+- Schaltfunktionen-Algebra
+
+*** Abgeleitete Rechenregeln für Boolesche Ausdrücke
+
+- Dualitätsprinzip der Booleschen Algebra:\\
+  zu jeder Rechenregel existiert eine zweite (duale) Rechenregel, die
+  durch Vertauschung \(+\) mit \(\times\) und \(0\) mit \(1\) entsteht
+
+- Regeln\\
+
+  Idempotenz: \(a+a=a\) \(a\times a = a\)\\
+  Dominanzgesetz: \(a+1=1\) \(a\times 0 = 0\)\\
+  Absorptionsgesetz: \(a+(a\times b) = a\) \(a \times (a + b) = a\)\\
+  Gleichungsvereinfachung: aus \(b+a=c+a\) und
+  \(b+\kappa(a)=c+\kappa(a)\)\\
+  folgt \(b=c\)\\
+  Assoziativgesetz: \(a+(b+c)=(a+b)+c\)\\
+  \(a\times (b\times c)=(a\times b)\times c\)\\
+  De Morgansche Gesetze: \(\kappa(a+b) = \kappa(a) \times \kappa(b)\)\\
+  \(\kappa(a\times b) = \kappa(a) + \kappa(b)\)
+
+*** Beweisbeispiele
+
+\[\begin{aligned}
+	a+a&=a\\
+	a+a&=(a+a)\times 1\\
+	   &=(a+a)\times (a+\kappa(a))\\
+	   &=a+(a\times \kappa(a))\\
+	   &=a+0\\
+	   &=a		
+\end{aligned}\]
+
+\[\begin{aligned}
+	a+1&=1\\
+	a+1&=(a+1)\times 1\\
+	&=(a+1)\times (a+\kappa(a))\\
+	&=a+(1\times \kappa(a))\\
+	&=a+\kappa(a)\\
+	&=1	
+\end{aligned}\]
+
+\[\begin{aligned}
+	a+(a\times b)&=a\\
+	a+(a\times b)&=(a\times 1)+(a\times b)\\
+	&=a\times (1+b)\\
+	&=a\times 1\\
+	&=a\\	
+\end{aligned}\]
+
+*** Beispiel: Schaltfunktionen-Algebra
+
+- Jeder n-stellige Boolesche Ausdruck stellt eine n-stellige
+  Schaltfunktion \(f(x_1,\ldots,x_n)\), d.h.
+  \(f:\left\{0,1\right\}^n\rightarrow\left\{0,1\right\}\) dar
+
+- Bezeichnungen an Stelle
+  \(f,w,\lor,\land,\neg:0,1,+,\cdot,\textrm{Überstrich}\)
+
+- Schaltfunktionen-Algebra:\\
+  \(B=\) Menge aller n-stelligen Schaltfunktionen\\
+  \(0:f\equiv 0\)\\
+  \(1:f\equiv 1\)\\
+  \(+:\mathrm{Max}[f,g](x_1,\ldots,x_n)=\mathrm{max}\left\{f(x_1,\ldots,x_n),g(x_1,\ldots,x_n)\right\}\)
+  (zeilenweise)\\
+  \(\cdot:\mathrm{Min}[f,g](x_1,\ldots,x_n)=\mathrm{min}\left\{f(x_1,\ldots,x_n),g(x_1,\ldots,x_n)\right\}\)
+  (zeilenweise)\\
+  \(\kappa : \kappa [f](x_1,\ldots,x_n)=1-f(x_1,\ldots,x_n)\)
+
+*** Gatter IEC 60617-12
+
+| AND  | \(Y=A\cdot B=AB\)                      | (0,0) node[and port] (gate) (gate.in 1) node[left](i1) A (gate.in 2) node[left](i2) B (gate.out) node[right](o) Y;  |
+| OR   | \(Y=A+B\)                              | (0,0) node[or port] (gate) (gate.in 1) node[left](i1) A (gate.in 2) node[left](i2) B (gate.out) node[right](o) Y;   |
+| NOT  | \(Y=\overline{A}\)                     | (0,0) node[not port] (gate) (gate.in 1) node[left](i1) A (gate.out) node[right](o) Y;                               |
+| NAND | \(Y=\overline{AB}\)                    | (0,0) node[nand port] (gate) (gate.in 1) node[left](i1) A (gate.in 2) node[left](i2) B (gate.out) node[right](o) Y; |
+| NOR  | \(Y=\overline{A+B}\)                   | (0,0) node[nor port] (gate) (gate.in 1) node[left](i1) A (gate.in 2) node[left](i2) B (gate.out) node[right](o) Y;  |
+| XOR  | \(Y=A\overline{B}+\overline{A}B\)      | (0,0) node[xor port] (gate) (gate.in 1) node[left](i1) A (gate.in 2) node[left](i2) B (gate.out) node[right](o) Y;  |
+| XNOR | \(Y=(\overline{A}+B)(A+\overline{B})\) | (0,0) node[xnor port] (gate) (gate.in 1) node[left](i1) A (gate.in 2) node[left](i2) B (gate.out) node[right](o) Y; |
+
+*** Beispiele
+\begin{circuitikz}
+	\draw
+	(0,0) coordinate[label={[below]$x_1$}](x1)
+	(0.5,0) coordinate[label={[below]$x_2$}](x2)
+	(1,0) coordinate[label={[below]$x_3$}](x3)
+		
+	(0,6) coordinate(x1End)
+	(.5,6) coordinate(x2End)
+	(1,6) coordinate(x3End)
+		
+	(x1) -| (x1End)
+	(x2) -| (x2End)
+	(x3) -| (x3End)
+		
+	(3,1) node[and port] (Aandx1x2) {}
+	(3,3) node[or port] (Borx2x3) {}
+	(5,2) node[and port] (AandB) {}
+	(3,5) node[nor port] (nor) {}
+	(7,4) node[and port] (andAll) {}
+		
+	(Aandx1x2.in 1) to[short, -*] (x1 |- Aandx1x2.in 1)
+	(Aandx1x2.in 2) to[short, -*] (x2 |- Aandx1x2.in 2)
+		
+	(Borx2x3.in 1) to[short, -*] (x2 |- Borx2x3.in 1)
+	(Borx2x3.in 2) to[short, -*] (x3 |- Borx2x3.in 2)
+		
+	(nor.in 1) to[short, -*] (x2 |- nor.in 1)
+	(nor.in 2) to[short, -*] (x3 |- nor.in 2)
+
+	(Aandx1x2.out) -- (AandB.in 2)
+	(Borx2x3.out) -- (AandB.in 1)
+	(nor.out) -- (andAll.in 1)
+	(AandB.out) -- (andAll.in 2)
+
+	(andAll.out) node[right](y) {y}
+	;
+\end{circuitikz}
+
+*** George Boole (\textborn 1815, \textdied 1864)
+
+- englischer Mathematiker (Autodidakt), Logiker und Philosoph
+
+- Einbettung der Logik in die Mathematik
+
+- wurde Mathematikprofessor, ohne selbst studiert zu haben
+
+- Schriften:
+
+  - /The Mathematical Analysis of Logic/ (1847)
+
+  - /An Investigation of the Laws of Thought/ (1854)
+
+[[file:images/George_Boole_color.jpg]][fn:1]
+
+[fn:1] [[https://commons.wikimedia.org/wiki/File:George_Boole_color.jpg]]
+

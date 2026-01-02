@@ -1,70 +1,50 @@
-% Created 2025-12-31 Mi 14:03
-% Intended LaTeX compiler: xelatex
-\documentclass[a4paper,14pt,ngerman]{scrartcl}
-\usepackage{graphicx}
-\usepackage{longtable}
-\usepackage{wrapfig}
-\usepackage{rotating}
-\usepackage[normalem]{ulem}
-\usepackage{capt-of}
-\usepackage{hyperref}
-\usepackage{polyglossia}
-\usepackage{polyglossia}
-\setmainlanguage[variant=german]{german}
-\usepackage{polyglossia}
-\setdefaultlanguage{german}
-\PolyglossiaSetup{german}{shorthands=on}
-\AtBeginDocument{\let\babelprovide\relax}
-\AtBeginDocument{\let\shorthandon\relax}
-\AtBeginDocument{\let\shorthandoff\relax}
-\setmainfont{Gentium Book Basic}
-\setsansfont{Latin Modern Sans}
-\setmonofont{Latin Modern Mono}
-\usepackage{fancyhdr}
-\usepackage{graphicx}
-\usepackage{amsmath,amssymb}
-\usepackage{xcolor}
-\usepackage{xurl}
-\usepackage{listings}
-\usepackage{setspace}
-\setstretch{1.3}
-\usepackage{circuitikz}
-\usepackage{tikz}
-\usetikzlibrary{automata, positioning, arrows}
-\author{Elias}
-\date{\today}
-\title{Übungsblatt 7}
-\hypersetup{
- pdfauthor={Elias},
- pdftitle={Übungsblatt 7},
- pdfkeywords={},
- pdfsubject={},
- pdfcreator={Emacs 30.1 (Org mode 9.7.11)}, 
- pdflang={German}}
-\begin{document}
+#+LATEX_COMPILER: xelatex
+#+LATEX_CLASS: scrartcl
+#+LATEX_CLASS_OPTIONS: [a4paper,14pt,ngerman]
+#+OPTIONS: ':t toc:nil title:nil
 
-\section{\textbf{Übung 7}}
-\label{sec:org70138ea}
-\subsection{\textbf{Klausurvorbereitung - Teil 2}}
-\label{sec:org6bcbe94}
+#+LANGUAGE: de
+
+#+LATEX_HEADER: \usepackage{polyglossia}
+#+LATEX_HEADER: \setdefaultlanguage{german}
+#+LATEX_HEADER: \PolyglossiaSetup{german}{shorthands=on}
+#+LATEX_HEADER: \AtBeginDocument{\let\babelprovide\relax}
+#+LATEX_HEADER: \AtBeginDocument{\let\shorthandon\relax}
+#+LATEX_HEADER: \AtBeginDocument{\let\shorthandoff\relax}
+#+LATEX_HEADER: \setmainfont{Gentium Book Basic}
+#+LATEX_HEADER: \setsansfont{Latin Modern Sans}
+#+LATEX_HEADER: \setmonofont{Latin Modern Mono}
+#+LATEX_HEADER: \usepackage{fancyhdr}
+#+LATEX_HEADER: \usepackage{graphicx}
+#+LATEX_HEADER: \usepackage{amsmath,amssymb}
+#+LATEX_HEADER: \usepackage{xcolor}
+#+LATEX_HEADER: \usepackage{xurl}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \setstretch{1.3}
+#+LATEX_HEADER: \usepackage{circuitikz}
+#+LATEX_HEADER: \usepackage{tikz}
+#+LATEX_HEADER: \usetikzlibrary{automata, positioning, arrows}
+#+title: Übungsblatt 7
+
+* *Übung 7*
+** *Klausurvorbereitung - Teil 2*
 
 Gewünscht waren folgende Themen:
 
-\begin{itemize}
-\item Minimalautomat
+- Minimalautomat
 
-\item CYK
+- CYK
 
-\item DPDA
+- DPDA
 
-\item berechnende TM
+- berechnende TM
 
-\item Resolution (keine Kontradiktion)
+- Resolution (keine Kontradiktion)
 
-\item Keine Pumping-Lemmas?
-\end{itemize}
-\subsubsection{\textbf{Aufgabe: DFA minimieren}}
-\label{sec:orgd002df0}
+- Keine Pumping-Lemmas?
+
+*** *Aufgabe: DFA minimieren*
 
 Minimieren Sie den folgenden DFA:\\
 \begin{tikzpicture}
@@ -87,8 +67,8 @@ Minimieren Sie den folgenden DFA:\\
 		(s6) edge[above right] node{a} (s3)
 		(s6) edge[below right] node{b} (s5);
 \end{tikzpicture}
-\subsubsection{\textbf{Aufgabe: CYK-Algorithmus}}
-\label{sec:org3f293cc}
+
+*** *Aufgabe: CYK-Algorithmus*
 
 Gegeben sei die Grammatik \(G=(\{S, A, B, C, D\}, \{a, b, c\}, S, P)\)
 mit \\
@@ -101,38 +81,36 @@ mit \\
 \end{aligned}\]
 
 Prüfen Sie mit dem CYK-Algorithmus, ob das Wort \(bacaac\) in \(L(G)\) enthalten ist.\\
-CYK-Demo: \url{https://www.cip.ifi.lmu.de/\~lindebar/}
+CYK-Demo: [[https://www.cip.ifi.lmu.de/~lindebar/]]
 
-\begin{verbatim}
-S -> AB | BC
-A -> a | BB | BS
-B -> b | CD | DA
-C -> c | AS | BD
-D -> a | CB | AA
-\end{verbatim}
-\subsubsection{\textbf{Aufgabe: Resolution}}
-\label{sec:org4d94baf}
+#+begin_example
+        S -> AB | BC
+        A -> a | BB | BS
+        B -> b | CD | DA
+        C -> c | AS | BD
+        D -> a | CB | AA
+#+end_example
+
+*** *Aufgabe: Resolution*
 
 Prüfen Sie mittels Resolution, ob die folgende Formel eine Tautologie
 ist:
 
 \[(A\land \neg B \land C) \lor E \lor (\neg A \land D \land \neg E) \lor (B \land C \land \neg D) \lor C \lor \neg B\]
-\subsubsection{\textbf{Aufgabe: PDA}}
-\label{sec:orgaeac29e}
+
+*** *Aufgabe: PDA*
 
 Die folgende Sprache über dem Alphabet \(\Sigma=\{a, b, c\}\) ist
 deterministisch kontextfrei:
 \[L = \left\{w_1w_2 \in \Sigma^* \mid w_1 \in \{a\}^* \land w_2 \in \{b, c\}^* \land |w_1|=|w_2|\right\}\]
 
-\begin{enumerate}
-\item Konstruieren Sie einen deterministischen Kellerautomaten, der diese
-Sprache akzeptiert.
+1) Konstruieren Sie einen deterministischen Kellerautomaten, der diese
+   Sprache akzeptiert.
 
-\item Ist die Akzeptanz mittels leerem Keller möglich? Begründen Sie Ihre
-Antwort.
-\end{enumerate}
-\subsubsection{\textbf{Aufgabe: Turingmaschine}}
-\label{sec:orgcd66ef9}
+2) Ist die Akzeptanz mittels leerem Keller möglich? Begründen Sie Ihre
+   Antwort.
+
+*** *Aufgabe: Turingmaschine*
 
 Konstruieren Sie eine Turingmaschine, die auf einem Eingabewort aus dem
 Alphabet \(\Sigma = \{|, -\}\) eine Subtraktion \(x-y\) durchführt.
@@ -145,19 +123,18 @@ Gehen Sie davon aus, dass das Ergebnis der Operation immer größer Null
 ist, d.h. der Minuend \(x\) ist bei jeder Eingabe größer als der
 Subtrahend \(y\).
 
-\emph{Beispiel:} Das Eingabewort für die Operation \(4-2\) ist auf dem Band
+/Beispiel:/ Das Eingabewort für die Operation \(4-2\) ist auf dem Band
 notiert als: \[\#||||-||\#\] Nach Bearbeitung des Eingabewortes steht
 auf dem Band \[\#||\#\] und die Turingmaschine befindet sich in einem
 Endzustand.
-\subsubsection{\textbf{Aufgabe: Pumping-Lemma für reguläre Sprachen}}
-\label{sec:org73c09f3}
+
+*** *Aufgabe: Pumping-Lemma für reguläre Sprachen*
 
 Zeigen Sie, dass
 \[L=\{a^ib^jv \mid v \in \{a\}^* \land |v| \textrm{ ist ungerade } \land j=2i\}\]
 über dem Alphabet \(\Sigma=\{a,b\}\) nicht regulär ist.
-\subsubsection{\textbf{Aufgabe: Pumping-Lemma für kontextfreie Sprachen}}
-\label{sec:orgb59dbe2}
+
+*** *Aufgabe: Pumping-Lemma für kontextfreie Sprachen*
 
 Zeigen Sie, dass \[L=\{a^ib^jc^k \mid i<j<k\}\] über dem Alphabet
 \(\Sigma=\{a,b,c\}\) nicht kontextfrei ist.
-\end{document}

@@ -1,0 +1,262 @@
+*** Wortproblem
+
+- Wortproblem für Typ-0- bzw. Typ-1-Sprachen
+
+  - Wortproblem: gegeben: \(w \in \Sigma^*\), Grammatik \(G\);
+    \(w \in L(G)?\)
+
+  - Entscheidbarkeit des Wortproblems \(w \in L\)
+
+    - \(L\) heißt entscheidbar gdw. es existiert ein Algorithmus, der
+      für jedes \(w \in \Sigma^*\) nach endlich vielen Schritten hält
+      und die Antwort "ja" bzw. "nein" liefert
+
+    - \(L\) heißt semi-entscheidbar gdw. ex existiert ein Algorithmus,
+      der für jedes \(w \in L\) nach endlich vielen Schritten mit
+      Antwort "ja" hält, für \(w \notin L\) aber kein definiertes
+      Antwortverhalten hat (z.B. gar nicht hält)
+
+  - es gilt
+
+    - Das Wortproblem für Typ-1-Sprachen ist entscheidbar
+
+    - das Wortproblem für Typ-0-Sprachen ist semi-entscheidbar
+
+- akzeptierender Automat für Typ-0-Sprachen: Turing-Maschine\\
+  (bzw. Linear beschränkter Automat (LBA) als Spezialfall für
+  Typ-1-Sprachen)
+
+*** Exkurs: Abzählbarkeit von Mengen
+
+- Mächtigkeit unendlicher Mengen A, B:
+
+  - \(|A|\leq |B|\) gdw. es gibt eine injektive Abbildung
+    \(f: A \rightarrow B\)
+
+  - \(|A| = |B|\) gdw. \(|A|\leq |B|\) und \(|B|\leq |A|\), d.h. es
+    existiert eine bijektive Abbildung zwischen \(A\) und \(B\)
+
+- \(A\) heißt abzählbar gdw. \(A\) ist endlich, oder
+  \(|A|=|\mathbb{N}|\), d.h. \(A\) lässt sich bijektiv auf
+  \(\mathbb{N}\) oder eine Teilmenge von \(\mathbb{N}\) abbilden
+
+- Die Menge aller geordneten Paare natürlicher Zahlen
+  \(\{(n,m)\mid n, m \in \mathbb{N}\}\) ist abzählbar
+
+- es gilt: sei \(\Sigma\) endliches Alphabet, dann ist \(\Sigma^*\)
+  abzählbar
+
+- Folgerung: die Menge aller Algorithmen (Programm = Wort über einem
+  endlichen Alphabet (z.B. binär)) ist abzählbar
+
+- Die Menge aller Sprachen über \(\Sigma^*\) (d.h.
+  \(\mathcal{P}(\Sigma^*)\)) ist überabzählbar
+
+- Folgerung: /es gibt offensichtlich unentscheidbare Sprachen/
+
+*** Semi-entscheidbare und rekursiv aufzählbare Sprachen
+
+- es gilt: \(L\) ist entscheidbar gdw. \(L\) und \(\overline{L}\) sind
+  semi-entscheidbar
+
+- Def: eine Sprache \(L\) heißt _rekursiv aufzählbar_ gdw. es gibt eine
+  berechenbare surjektive Funktion \(f: \mathbb{N} \rightarrow L\), d.h.
+  es gilt \(L=\{f(1), f(2), \ldots\}\)
+
+- Entscheidbare Sprachen werden alternativ auch als _rekursive_ Sprachen
+  bezeichnet
+
+- es gilt: \(L\) ist rekursiv aufzählbar gdw. \(L\) ist
+  semi-entscheidbar
+
+- es gilt: \(L\) rekursiv aufzählbar \(\rightarrow\) \(L\) abzählbar;
+  die Umkehrung gilt nicht
+
+- es gilt: die Typ-0-Sprachen sind genau die rekursiv aufzählbaren
+  Sprachen
+
+*** Nichtdeterministische Turing-Maschinen
+
+- TM "Hardware" (Basismodell 1-Band-TM):
+
+  - Speicherband (unbeschränkt, oder halbseitig beschränkt); jede
+    Speicherzelle kann ein Zeichen aus dem Bandalphabet aufnehmen
+
+  - Lese-Schreib-Kopf: kann aktuelles Zeichen lesen und überschreiben;
+    bewegt sich danach einen Schritt nach links oder rechts (L/R) oder
+    bleibt stehen (N)
+
+- Spezifikation TM: \(M=(S, \Sigma, \Gamma, \delta, s_0, \#, F)\)
+
+  - Zustandsmenge
+
+  - Terminalalphabet
+
+  - Bandalphabet, \(\Sigma \subset \Gamma\)
+
+  - Zustandsüberführungsrelation;
+    \(\delta \subseteq S \times \Gamma \times S \times \Gamma \times \{L, R, N\}\)
+
+  - Startzustand, \(s_0 \in S\)
+
+  - Blank-Symbol (Leerzeichen), \(\# \in \Gamma \setminus \Sigma\)
+
+  - Menge von Endzuständen, \(F \subseteq S\)
+
+*** Konfigurationsübergänge, Akzeptanzverhalten
+
+- Konfiguration:\\
+  \((s, u\underline{\alpha}v)\): Zustand \(s\), Bandinhalt
+  \(u\alpha v\), Kopf unter \(\alpha \in \Gamma\), \(u,v \in \Gamma^*\)
+
+- Konfigurationsübergänge: \(\alpha, \beta, \rho, \omega \in \Gamma\),
+  \(u, v \in \Gamma^*\)
+
+  - \((s_1, \alpha, s_2, \beta, R) \in \delta:\)\((s_1, u\rho\underline{\alpha}\omega v) \mapsto (s_2, u\rho\beta\underline{\omega}v)\)
+
+  - \((s_1, \alpha, s_2, \beta, L) \in \delta:\)\((s_1, u\rho\underline{\alpha}\omega v) \mapsto (s_2, u\underline{\rho}\beta\omega v)\)
+
+  - \((s_1, \alpha, s_2, \beta, N) \in \delta:\)\((s_1, u\rho\underline{\alpha}\omega v) \mapsto (s_2, u\rho\underline{\beta}\omega v)\)
+
+- Initialisierung:\\
+  Bandinhalt: \(\#\#\# w\#\#\#\ldots\), Kopf unter erstem Buchstaben von
+  \(w\)
+
+- TM akzeptiert \(w\) (als Element von \(L\)), gdw. es existiert eine
+  Folge von Konfigurationsübergängen, so dass TM in einem Endzustand
+  hält
+
+  - "TM hält" bedeutet: in der jeweiligen Konfiguration gibt es keinen
+    Folgeübergang
+
+*** Varianten von TM
+
+- Ein-Band-TM\\
+  linksbeschränktes Band; unbeschränktes Band; Mehrspur-TM: LS-Köpfe
+  fest verbunden
+
+- Mehr-Band-TM\\
+  \(\delta(s, \{\sigma_1, \ldots, \sigma_k\}) = (s', \{\sigma_1', \ldots, \sigma_k'\},\{r_1,\ldots,r_k\})\)\\
+  \(\sigma_i \in \Gamma, \sigma_j' \in \Gamma, r_m \in \{L, R, N\}\),
+  d.h. LS-Köpfe einzeln frei beweglich
+
+- Alle Varianten können sich gegenseitig simulieren und sind damit
+  gleich mächtig
+
+- Bemerkung: Codierung Bandinhalt\\
+  natürliche Zahl \(n \rightarrow |^n\) (unäre Darstellung,
+  "Bierdeckelnotation"), oder Binärdarstellung
+
+*** TM: Beispiel
+
+\[L=\{a^nb^n \mid n\geq 0\}\] \\
+
+\[\begin{aligned}
+	\delta = \{&(s_0, a, s_1, x, R), (s_0, x, s_0, x, R), (s_0, \#, s_f, \#, N),\\
+	&(s_1, x, s_1, x, R), (s_1, a, s_1, a, R), (s_1, b, s_2, x, R),\\
+	&(s_2, b, s_2, b, R), (s_2, \#, s_3, \#, L), (s_3, b, s_3, b, L),\\
+	&(s_3, x, s_3, x, L), (s_3, a, s_3, a, L), (s_3, \#, s_0, \#, R)\}
+\end{aligned}\]
+
+Arbeitsweise:
+
+- erstes verbliebenes \(a\) wird durch Füllzeichen \(x\) überschrieben
+
+- erstes verbliebenes \(b\) wird durch Füllzeichen \(x\) überschrieben
+
+- stellt sicher, dass bis zum Wortende nur \(b\)'s kommen
+
+- zurück zum Wortanfang
+
+- falls \(w\in L\): am Schluss stehen nur noch \(x\) auf dem Band;
+  Übergang in akzeptierenden Zustand \(s_f\)
+
+*** Linear beschränkte Automaten (LBA) und kontextsensitive Sprachen
+
+- LBA: TM, die den Bandbereich auf dem die Eingabe steht niemals
+  verlässt (in-place)
+
+- es gilt (Satz von Kuroda): die von einem (nichtdeterministischem) LBA
+  akzeptierten Sprachen sind die kontextsensitiven Sprachen (Typ-1).\\
+  Beweisidee:
+
+  - Sei \(L\) Typ-1; \((u \rightarrow v) \in P, |u|\leq |v|\);\\
+    LBA: ersetzt (nichtdet.) Teilwort \(v\) durch Teilwort \(u\);
+    überschreitet dabei Bandbegrenzung nicht; \(w\) kann dabei auf \(S\)
+    reduziert werden, falls \(w \in L\)
+
+  - sei \(M\) LBA, der \(L\) akzeptiert;\\
+    \(G\): bilde Variablen \((s, c)\) mit \(c \in \Gamma\);\\
+    \(P\): sei z.B. \((s_1, a, s_2, b, L) \in \delta\),
+    korrespondierende Typ-1-Regel in \(P\):
+    \(c(s_1, a) \rightarrow (s_2, c)b\) für alle \(c \in \Gamma\)
+
+*** Turingmaschinen und Typ-0-Sprachen
+
+- es gilt: die durch allgemeine TM akzeptierten Sprachen sind genau die
+  Typ-0-Sprachen\\
+  Beweis analog zu kontextsensitiven Sprachen unter Verzicht auf lineare
+  Beschränktheit des Automaten bzw. Typ-1 Bedingung für Grammatik
+
+- Abgeschlossenheit
+
+  - Sowohl Typ-0-Sprachen wie auch speziell die Typ-1-Sprachen sind
+    abgeschlossen unter Durchschnitt, Vereinigung, Konkatenation und
+    Stern-Produkt
+
+  - Typ-1-Sprachen _sind_ abgeschlossen unter Komplement
+
+  - Typ-0-Sprachen _sind nicht_ abgeschlossen unter Komplement
+
+*** Eine entscheidbare Sprache, die nicht in \(L_1\) liegt
+
+- Worte \(w \in \Sigma^*\) sind aufzählbar: \(w_1, w_2, \ldots\)\\
+  Damit kann jedem Wort eineindeutig eine Nummer \(i\) zugeordnet werden
+
+- Typ-1- (wie auch Typ-0-) Grammatiken sind Worte über einem erweiterten
+  Alphabet \(\Gamma = V \cup \Sigma \cup \{\rightarrow, ;\}\) und sind
+  ebenfalls aufzählbar: \(G_1, G_2, \ldots\)\\
+  Damit existiert eine bijektive Abbildung \(f(w_i) = G_i (= G_{w_i})\)
+
+- Definiere \(L_D=\{w \in \Sigma^* \mid w \notin L(G_w)\}\)\\
+  es gilt:
+
+  - \(L_D\) ist nicht Typ-1
+
+  - \(L_D\) ist entscheidbar
+
+*** Sprachklassen: Zusammenfassung und Ausblick
+
+[[file:images/Sprachklassen_Typ0_Typ1.pdf]]
+
+- Typ-1-Sprachen sind entscheidbar
+
+- es gibt entscheidbare Sprachen, die Typ-0 aber nicht Typ-1 sind (z.B.
+  \(L_D\))
+
+- es gibt Typ-0-Sprachen, die nicht entscheidbar sind (z.B. \(L_H\))
+
+- es gibt Sprachen, die nicht Typ-0 sind, d.h. nicht durch eine
+  Grammatik erzeugt werden können (z.B. \(\overline{L_H}\))
+
+*** Alan Mathison Turing (\textborn 1912, \textdied 1954)
+
+- englischer Mathematiker, Logiker, Kryptoanalytiker, Informatiker
+
+- Erfinder der Turingmaschine
+
+- Mitbegründer der Theoretischen Informatik
+
+- Entwickler des Turing-Tests
+
+- Knackte die Enigma-Verschlüsselung im Zweiten Weltkrieg
+
+- Schriften:
+
+  - /On Computable Numbers, with an Application to the
+    Entscheidungsproblem/ (1936)
+
+[[file:images/Alan_Turing_(1951)_(crop).jpg]][fn:4]
+
+[fn:4] [[https://commons.wikimedia.org/wiki/File:Alan_Turing_(1951)_(crop).jpg]]
+

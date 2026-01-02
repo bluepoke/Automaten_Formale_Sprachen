@@ -1,0 +1,100 @@
+#+LATEX_COMPILER: xelatex
+#+LATEX_CLASS: scrartcl
+#+LATEX_CLASS_OPTIONS: [a4paper,14pt,ngerman]
+#+OPTIONS: ':t toc:nil title:nil
+
+#+LANGUAGE: de
+
+#+LATEX_HEADER: \usepackage{polyglossia}
+#+LATEX_HEADER: \setdefaultlanguage{german}
+#+LATEX_HEADER: \PolyglossiaSetup{german}{shorthands=on}
+#+LATEX_HEADER: \AtBeginDocument{\let\babelprovide\relax}
+#+LATEX_HEADER: \AtBeginDocument{\let\shorthandon\relax}
+#+LATEX_HEADER: \AtBeginDocument{\let\shorthandoff\relax}
+#+LATEX_HEADER: \setmainfont{Gentium Book Basic}
+#+LATEX_HEADER: \setsansfont{Latin Modern Sans}
+#+LATEX_HEADER: \setmonofont{Latin Modern Mono}
+#+LATEX_HEADER: \usepackage{fancyhdr}
+#+LATEX_HEADER: \usepackage{graphicx}
+#+LATEX_HEADER: \usepackage{amsmath,amssymb}
+#+LATEX_HEADER: \usepackage{xcolor}
+#+LATEX_HEADER: \usepackage{xurl}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \setstretch{1.3}
+
+#+title: Vorbereitung in der Praxisphase
+
+* *Vorbereitung in der Praxisphase*
+** *Zahlensysteme und Mengen*
+*** *Zahlensysteme*
+
+Unser Alltag basiert auf dem Zehnersystem, einem Zahlensystem, das auf
+der Zahl zehn aufgebaut ist. In der Informatik werden ebenfalls
+Zahlensysteme verwendet, hierbei ist jedoch die Basis zehn oftmals
+ungeeignet. Es kommen häufig das Dual- und das Hexadezimalsystem zum
+Einsatz. Das Dualsystem wird häufig auch als Binärsystem bezeichnet.
+
+In den Kapiteln 1.4.1 und 1.4.2 des Buches /Grundkurs Informatik/[fn:1],
+das als ebook in der Bibliothek verfügbar ist, werden diese
+Zahlensysteme gut verdeutlicht.
+
+Machen Sie sich mit den Inhalten der Buchkapitel vertraut und lösen Sie
+die folgende Aufgabe.
+
+**** *Aufgabe 1*
+
+Wandeln Sie die Zahl \(5937_{10}\) vom Dezimalsystem in folgende
+Zahlensysteme um:
+
+1) Das Dualsystem,
+
+2) das Hexadezimalsystem und
+
+3) das Zahlensystem zur Basis 7.
+
+Geben Sie dabei die Rechenschritte detailliert und nachvollziehbar an.
+
+*** *Mengen*
+
+In der Vorlesung werden Sie sehr häufig mit Mengen in Kontakt kommen. Um
+bereits im Vorhinein ein grundlegendes Verständnis davon zu erhalten,
+was eine Menge ist und wie die Notation hierfür aussieht, sollten Sie
+sich Kapitel 1.1 des Buches /Mathematik für Informatiker/[fn:2]
+verinnerlichen. Weiterhin lesen Sie Kapitel 3.1, welches Ihnen die Menge
+der natürlichen Zahlen \(\mathbb{N}\) näher bringt.
+
+**** *Aufgabe 2*
+
+Notieren Sie repräsentative Teilmengen der folgenden Mengen mit jeweils
+mindestens 8 Elementen:
+
+1) Die natürlichen Zahlen \(\mathbb{N}\),
+
+2) die ganzen Zahlen \(\mathbb{Z}\),
+
+3) die rationalen Zahlen \(\mathbb{Q}\) und
+
+4) die reellen Zahlen \(\mathbb{R}\).
+
+**** *Aufgabe 3*
+
+Gegeben seien zwei Mengen \(A=\{a, b, x, y\}\) und \(B=\{a, b, c, d\}\).
+
+1) Bilden Sie die Vereinigung \(A \cup B\).
+
+2) Bilden Sie die Schnittmenge \(A \cap B\).
+
+3) Bilden Sie die Differenz \(A \setminus B\).
+
+4) Bilden Sie das kartesische Produkt \(A \times B\).
+
+5) Bilden Sie das kartesische Produkt \(B \times A\).
+
+[fn:1] Hartmut Ernst, Jochen Schmidt und Gerd Beneken (2023): Grundkurs
+       Informatik, 6. Auflage, Springer Vieweg Wiesbaden,
+       [[https://doi.org/10.1007/978-3-658-41779-6]]
+
+[fn:2] Peter Hartmann (2019): Mathematik für Informatiker, 7. Auflage,
+       Springer Vieweg Wiesbaden,
+       [[https://doi.org/10.1007/978-3-658-26524-3]]

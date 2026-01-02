@@ -1,0 +1,152 @@
+*** Logische Folgerungen (Beweise)
+
+- logischer Schluss
+
+  - aus einer Reihe von Annahmen \(A_1,\ldots,A_n\) (Voraussetzungen,
+    Prämissen) soll eine Schlussfolgerung \(B\) (Konklusion) gezogen
+    werden
+
+  - formelmäßig ausgedrückt:
+    \(A_1 \land \ldots \land A_n \rightarrow B\)
+
+  - Bezeichnung: \(\left\{A_1, A_2, \ldots, A_n\right\} \models B\) bzw.
+    \(A_1, A_2, \ldots, A_n \models B\)
+
+- Beweisfolge
+
+  - Aus einer Menge von Prämissen oder bereits abgeleiteten Aussagen
+    werden durch Anwendung von Ableitungsregeln neue Aussagen
+    abgeleitet, die im Weiteren ebenfalls benutzt werden können;
+    entspricht Kettenschluss
+    \(((A_1 \rightarrow A_2) \land (A_2 \rightarrow A_3)) \rightarrow (A_1 \rightarrow A_3)\)
+
+  - Ableitungsregeln sind entweder Äquivalenzregeln (äquivalente
+    Ersetzungen gemäß Boolescher Rechenregeln) oder Schlussregeln
+    (geeignete Tautologien)
+
+*** Schlussregeln
+
+- \((A \land (A \rightarrow B)) \rightarrow B\) (Modus ponens)\\
+  "wenn A gilt und aus A folgt B, dann gilt B"
+
+- \(((A \rightarrow B) \land \neg B) \rightarrow \neg A\) (Modus
+  tollens)\\
+  "wenn aus A B folgt und B nicht gilt, dann gilt A nicht"
+
+- \(A \land B \rightarrow (A \land B)\) (Konjunktion)\\
+  "wenn A und B bereits gezeigt sind, dann gilt auch die Verknüpfung
+  \(A \land B\)"
+
+- \(A \land B \rightarrow A\) (Vereinfachung)\\
+  "wenn A und B gelten, dann gilt insbesondere auch A"
+
+- \(A \rightarrow (A \lor B)\) (Ausdehnung)\\
+  "ist A bereits gezeigt, dann gilt auch A oder B"
+
+*** Bemerkungen und Beispiel
+
+- Zweckmäßige Tipps
+
+  - Formeln \(\neg (A \land B)\) bzw. \(\neg (A \lor B)\) umschreiben
+    als \((\neg A \lor \neg B)\) bzw. \((\neg A \land \neg B)\)
+
+  - \(A \lor B\) überführen in Implikation \(\neg A \rightarrow B\)
+
+  - Ist als Konklusion B eine Implikation zu zeigen, d.h.\\
+    \((A_1 \land \ldots \land A_k) \rightarrow (C \rightarrow D)\), dann
+    kann stattdessen auch\\
+    \((A_1 \land \ldots \land A_k) \rightarrow D\) gezeigt werden
+
+- Beispiel\\
+  es gelten die Prämissen:
+  \(A, B \rightarrow C, (A \land B) \rightarrow (D \lor \neg C), B\);\\
+  zeige: \(D\)
+
+*** Beweistypen (deduktiv)
+
+1. _direkter Beweis_ \(A \rightarrow B\)
+
+2. Beweis durch _Umkehrschluss_ (Kontraposition): zeige
+   \(\neg B \rightarrow \neg A\)
+
+3. _Widerspruchsbeweis:_ zeige \((A \land \neg B) \rightarrow f\)
+
+4. _Äqzivalenzbeweis:_\\
+   zu zeigen: \(A \leftrightarrow B\)\\
+   stattdessen:\\
+   \(A \rightarrow B\) und \(B \rightarrow A\) bzw. \(A \rightarrow B\)
+   und \(\neg A \rightarrow \neg B\)
+
+5. Beweis durch _Fallunterscheidung:_\\
+   zeige A durch \(B \rightarrow A\) und \(\neg B \rightarrow A\)
+
+6. Beweis _atomararer Aussagen:_\\
+   zeige A durch \(w \rightarrow A\) bzw. \(\neg A \rightarrow f\)
+
+*** Erläuterungen
+
+1. da \(A \rightarrow B\) nur falsch sein kann für \(I(A)=w\) und
+   \(I(B)=f\), genügt es, \(A\) als wahr anzunehmen und \(I(B)=w\) zu
+   zeigen (\(B\) abzuleiten)
+
+2. \((\neg B \rightarrow \neg A) \equiv A \rightarrow B\)
+
+3. \((A \land \neg B) \rightarrow f \equiv A \rightarrow B\)
+
+4. \(A \leftrightarrow B \equiv (A \rightarrow B) \land (B \rightarrow A)\)
+
+5. \(A \equiv (B \rightarrow A) \land (\neg B \rightarrow A)\)
+
+6. \(A \equiv w \rightarrow A \equiv \neg A \rightarrow f\)
+
+*** Exkurs: Methode der vollständigen Induktion
+
+- sei \(A(n), n=0,1,\ldots\) eine Folge von Aussagen, die zu beweisen
+  sind
+
+- Induktionsbeweis
+
+  - Induktionsbasis: zeige \(A(0)\)
+
+  - zeige für alle \(n: A(n) \rightarrow A(n+1)\)
+
+  - alternative Formulierung
+
+    - Induktionsvoraussetzung: \(A(n)\) für ein beliebig gewähltes n
+
+    - Induktionsschluss: zeige \(A(n+1)\) aus \(A(n)\)
+
+- Verallgemeinerte vollständige Induktion
+
+  - Zeige \(A(0)\)
+
+  - Zeige
+    \(A(0) \land A(1) \land \ldots \land A(n) \rightarrow A(n+1)\)\\
+    zum Beweis von \(A(n)\) kann auf die Gültigkeit von \(A(m)\) für
+    beliebige \(m<n\) zurückgegriffen werden
+
+*** Beispiele Beweistechniken seien \(a, b\) natürliche Zahlen
+
+- direkter Beweis: wenn \(a\) teilbar ist durch 6, dann ist \(a\) auch
+  teilbar durch 3
+
+- Beweis durch Kontraposition: wenn \(a^2\) ungerade, dann auch \(a\)
+
+- Widerspruchsbeweis: wenn \(a\) und \(b\) gerade, dann auch
+  \(a \cdot b\)
+
+- Äquivalenzbeweis: \(a\) ist gerade genau dann wenn \(a^2\) gerade ist
+
+- Beweis durch Fallunterscheidung: \(a^2\) geteilt durch \(4\) liefert
+  Rest \(1\) oder \(0\)
+
+- Beweis atomarer Aussagen: \(\sqrt{2}\) ist keine rationale Zahl
+
+- Induktionsbeweis:
+
+  - zeige: \(s_n := \sum_{i=1}^{n}i=\frac{n(n+1)}{2}\) (dazu auch
+    direkten Beweis)
+
+  - Fibonacci-Folge: \(f_1=1, f_2=1, f_n=f_{n-1}+f_{n-2} (n>2)\)\\
+    zeige: \(f_n=\frac{1}{\sqrt{5}}(A^n-B^n)\) mit
+    \(A=\frac{1+\sqrt{5}}{2}\) und \(B=\frac{1-\sqrt{5}}{2}\)

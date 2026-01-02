@@ -1,111 +1,76 @@
-\documentclass[a4paper,12pt]{article}
-\usepackage{fancyhdr}
-\usepackage{fancyheadings}
-\usepackage[ngerman,german]{babel}
-\usepackage{german}
-\usepackage[utf8]{inputenc}
-%\usepackage[latin1]{inputenc}
-\usepackage[active]{srcltx}
-\usepackage{algorithm}
-\usepackage[noend]{algorithmic}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{bbm}
-\usepackage{enumerate}
+% Created 2025-12-31 Mi 14:02
+% Intended LaTeX compiler: xelatex
+\documentclass[a4paper,14pt,ngerman]{scrartcl}
 \usepackage{graphicx}
-\usepackage{ifthen}
-\usepackage{listings}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{capt-of}
 \usepackage{hyperref}
-
-% table placement
-\usepackage{placeins}
-
-\newcommand{\Fach}{Theoretische Informatik I - Automaten und Formale Sprachen}
-\newcommand{\Name}{}
-\newcommand{\Uebung}{5} %  <-- UPDATE ME
-\newcommand{\Uebungstitel}{Turingmaschinen} %  <-- UPDATE ME
-
-\setlength{\parindent}{0em}
-\topmargin -1.0cm
-\oddsidemargin 0cm
-\evensidemargin 0cm
-\setlength{\textheight}{9.2in}
-\setlength{\textwidth}{6.0in}
-
-%%%%%%%%%%%%%%%
-%% Aufgaben-COMMAND
-\newcommand{\Aufgabe}[1]{
-	{
-		\vspace*{0.5cm}
-		\textsf{\textbf{Aufgabe #1}}
-		\vspace*{0.2cm}
-		
-	}
-}
-%%%%%%%%%%%%%%
+\usepackage{polyglossia}
+\usepackage{polyglossia}
+\setmainlanguage[variant=german]{german}
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+\PolyglossiaSetup{german}{shorthands=on}
+\AtBeginDocument{\let\babelprovide\relax}
+\AtBeginDocument{\let\shorthandon\relax}
+\AtBeginDocument{\let\shorthandoff\relax}
+\setmainfont{Gentium Book Basic}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{xurl}
+\usepackage{listings}
+\usepackage{setspace}
+\setstretch{1.3}
+\author{Elias}
+\date{\today}
+\title{Übungsblatt 5}
 \hypersetup{
-	pdftitle={\Fach{}: Übungsblatt \Uebung{}},
-	pdfauthor={\Name},
-	pdfborder={0 0 0}
-}
-
-\lstset{ %
-	language=java,
-	basicstyle=\footnotesize\tt,
-	showtabs=false,
-	tabsize=2,
-	captionpos=b,
-	breaklines=true,
-	extendedchars=true,
-	showstringspaces=false,
-	flexiblecolumns=true,
-}
-
-\title{Übungsblatt \Uebung{}}
-\author{\Name{}}
-
+ pdfauthor={Elias},
+ pdftitle={Übungsblatt 5},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 30.1 (Org mode 9.7.11)}, 
+ pdflang={German}}
 \begin{document}
-	\thispagestyle{fancy}
-	\chead{\sf \large \Fach{}}
-	\vspace*{0.2cm}
-	\begin{center}
-		\LARGE \sf \textbf{Übung \Uebung{}} \\
-		\vspace*{0.4cm}
-		\Large \sf \textbf{\Uebungstitel}\\
-	\end{center}
-	\vspace*{0.2cm}
-	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%% Aufgaben %%%%%%%%%%%%%%%%%%%%%%%%
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-	\vspace*{0.5cm}
-	\textsf{\textbf{Hinweis}}
-	\vspace*{0.2cm}
-	
-	Ist kein spezifischer Typ einer Turingmaschine in einer Aufgabe gefordert, so ist eine 1-Band-Turingmaschine zu bevorzugen.
-	
-	\Aufgabe{1}
-	
-	Konstruieren Sie eine Turingmaschine, die das Wortproblem für die Sprache
-	$$L=\{a^nb^nc^nd^n \mid n\geq 0 \}$$ entscheidet.
-	
-	\Aufgabe{2}
-	
-	Konstruieren Sie eine Turingmaschine, die das Wortproblem für die Sprache
-	$$L=\{w\tilde{w} \mid w \in \{a,b\}^*\}$$ entscheidet.
-	
-	\Aufgabe{3}
-	
-	Konstruieren Sie eine 2-Band-Turingmaschine, die das Wortproblem für die Sprache
-	$$L=\{ww \mid w \in \{a,b\}^+\}$$ entscheidet.
-	
-	Gehen Sie davon aus, dass das Wort zu Beginn auf dem ersten Band stehe, das zweite Band sei leer.
-	
-	\Aufgabe{4}
-	
-	Konstruieren Sie eine Turingmaschine, die das Wortproblem für die Sprache
-	$$L=\{w \in \{a,b,c\}^*\mid |w|_a=|w|_b=|w|_c\}$$ entscheidet. Hierbei ist $|w|_a$ die Anzahl $a$'s im Wort $w$.
-\end{document}
 
+\section{\textbf{Übung 5}}
+\label{sec:orgbb12862}
+\subsection{\textbf{Turingmaschinen}}
+\label{sec:orgd7bc67b}
+
+\textbf{Hinweis}
+
+Ist kein spezifischer Typ einer Turingmaschine in einer Aufgabe
+gefordert, so ist eine 1-Band-Turingmaschine zu bevorzugen.
+\subsubsection{\textbf{Aufgabe 1}}
+\label{sec:org6fd52be}
+
+Konstruieren Sie eine Turingmaschine, die das Wortproblem für die
+Sprache \[L=\{a^nb^nc^nd^n \mid n\geq 0 \}\] entscheidet.
+\subsubsection{\textbf{Aufgabe 2}}
+\label{sec:org41b1261}
+
+Konstruieren Sie eine Turingmaschine, die das Wortproblem für die
+Sprache \[L=\{w\tilde{w} \mid w \in \{a,b\}^*\}\] entscheidet.
+\subsubsection{\textbf{Aufgabe 3}}
+\label{sec:org6366497}
+
+Konstruieren Sie eine 2-Band-Turingmaschine, die das Wortproblem für die
+Sprache \[L=\{ww \mid w \in \{a,b\}^+\}\] entscheidet.
+
+Gehen Sie davon aus, dass das Wort zu Beginn auf dem ersten Band stehe,
+das zweite Band sei leer.
+\subsubsection{\textbf{Aufgabe 4}}
+\label{sec:orge1756a1}
+
+Konstruieren Sie eine Turingmaschine, die das Wortproblem für die
+Sprache \[L=\{w \in \{a,b,c\}^*\mid |w|_a=|w|_b=|w|_c\}\] entscheidet.
+Hierbei ist \(|w|_a\) die Anzahl \(a\)'s im Wort \(w\).
+\end{document}

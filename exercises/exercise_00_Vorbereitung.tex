@@ -1,137 +1,125 @@
-\documentclass[a4paper,12pt]{article}
-\usepackage{fancyhdr}
-\usepackage{fancyheadings}
-\usepackage[ngerman,german]{babel}
-\usepackage{german}
-\usepackage[utf8]{inputenc}
-%\usepackage[latin1]{inputenc}
-\usepackage[active]{srcltx}
-\usepackage{algorithm}
-\usepackage[noend]{algorithmic}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{bbm}
-\usepackage{enumerate}
+% Created 2025-12-31 Mi 14:00
+% Intended LaTeX compiler: xelatex
+\documentclass[a4paper,14pt,ngerman]{scrartcl}
 \usepackage{graphicx}
-\usepackage{ifthen}
-\usepackage{listings}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{capt-of}
 \usepackage{hyperref}
-
-% footnotes at the end of page
-\usepackage[bottom]{footmisc}
-
-% table placement
-\usepackage{placeins}
-
-\newcommand{\Fach}{Theoretische Informatik I - Automaten und Formale Sprachen}
-\newcommand{\Name}{}
-\newcommand{\Uebungsthema}{Zahlensysteme und Mengen}
-\newcommand{\Uebungstitel}{Vorbereitung in der Praxisphase} %  <-- UPDATE ME
-
-\setlength{\parindent}{0em}
-\topmargin -1.0cm
-\oddsidemargin 0cm
-\evensidemargin 0cm
-\setlength{\textheight}{9.2in}
-\setlength{\textwidth}{6.0in}
-
-%%%%%%%%%%%%%%%
-%% Aufgaben-COMMAND
-\newcommand{\Abschnitt}[1]{
-	{
-		\vspace*{0.5cm}
-		\textsf{\textbf{#1}}
-		\vspace*{0.2cm}
-		
-	}
-}
-%%%%%%%%%%%%%%
+\usepackage{polyglossia}
+\usepackage{polyglossia}
+\setmainlanguage[variant=german]{german}
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+\PolyglossiaSetup{german}{shorthands=on}
+\AtBeginDocument{\let\babelprovide\relax}
+\AtBeginDocument{\let\shorthandon\relax}
+\AtBeginDocument{\let\shorthandoff\relax}
+\setmainfont{Gentium Book Basic}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{xurl}
+\usepackage{listings}
+\usepackage{setspace}
+\setstretch{1.3}
+\author{Elias}
+\date{\today}
+\title{Vorbereitung in der Praxisphase}
 \hypersetup{
-	pdftitle={\Fach{}: \Uebungstitel{} - \Uebungsthema},
-	pdfauthor={\Name},
-	pdfborder={0 0 0}
-}
-
-\lstset{ %
-	language=java,
-	basicstyle=\footnotesize\tt,
-	showtabs=false,
-	tabsize=2,
-	captionpos=b,
-	breaklines=true,
-	extendedchars=true,
-	showstringspaces=false,
-	flexiblecolumns=true,
-}
-
-\title{\Uebungstitel}
-\author{\Name{}}
-
+ pdfauthor={Elias},
+ pdftitle={Vorbereitung in der Praxisphase},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 30.1 (Org mode 9.7.11)}, 
+ pdflang={German}}
 \begin{document}
-	\thispagestyle{fancy}
-	\chead{\sf \large \Fach{} \\ \small \Name{}}
-	\vspace*{0.2cm}
-	\begin{center}
-		\LARGE \sf \textbf{\Uebungstitel} \\
-		\vspace*{0.4cm}
-		\Large \sf \textbf{\Uebungsthema}\\
-		\vspace*{0.4cm}
-	\end{center}
-	\vspace*{0.2cm}
-	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%% Aufgaben %%%%%%%%%%%%%%%%%%%%%%%%
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-	\Abschnitt{Zahlensysteme}
-	
-	Unser Alltag basiert auf dem Zehnersystem, einem Zahlensystem, das auf der Zahl zehn aufgebaut ist. In der Informatik werden ebenfalls Zahlensysteme verwendet, hierbei ist jedoch die Basis zehn oftmals ungeeignet. Es kommen häufig das Dual- und das Hexadezimalsystem zum Einsatz. Das Dualsystem wird häufig auch als Binärsystem bezeichnet.
-	
-	In den Kapiteln 1.4.1 und 1.4.2 des Buches \emph{Grundkurs Informatik}\footnote{Hartmut Ernst, Jochen Schmidt und Gerd Beneken (2023): Grundkurs Informatik, 6. Auflage, Springer Vieweg Wiesbaden, \url{https://doi.org/10.1007/978-3-658-41779-6}}, das als ebook in der Bibliothek verfügbar ist, werden diese Zahlensysteme gut verdeutlicht.
-	
-	Machen Sie sich mit den Inhalten der Buchkapitel vertraut und lösen Sie die folgende Aufgabe.
-	
-	\Abschnitt{Aufgabe 1}
-	
-	Wandeln Sie die Zahl $5937_{10}$ vom Dezimalsystem in folgende Zahlensysteme um:
-	
-	\begin{enumerate}[a)]
-		\item Das Dualsystem,
-		\item das Hexadezimalsystem und
-		\item das Zahlensystem zur Basis 7.
-	\end{enumerate}
-		
-	Geben Sie dabei die Rechenschritte detailliert und nachvollziehbar an.
-	
-	\pagebreak
-	
-	\Abschnitt{Mengen}
-	
-	In der Vorlesung werden Sie sehr häufig mit Mengen in Kontakt kommen. Um bereits im Vorhinein ein grundlegendes Verständnis davon zu erhalten, was eine Menge ist und wie die Notation hierfür aussieht, sollten Sie sich Kapitel 1.1 des Buches \emph{Mathematik für Informatiker}\footnote{Peter Hartmann (2019): Mathematik für Informatiker, 7. Auflage, Springer Vieweg Wiesbaden, \url{https://doi.org/10.1007/978-3-658-26524-3}} verinnerlichen. Weiterhin lesen Sie Kapitel 3.1, welches Ihnen die Menge der natürlichen Zahlen $\mathbb{N}$ näher bringt.
-	
-	\Abschnitt{Aufgabe 2}
-	
-	Notieren Sie repräsentative Teilmengen der folgenden Mengen mit jeweils mindestens 8 Elementen:
-	
-	\begin{enumerate}[a)]
-		\item Die natürlichen Zahlen $\mathbb{N}$,
-		\item die ganzen Zahlen $\mathbb{Z}$,
-		\item die rationalen Zahlen $\mathbb{Q}$ und
-		\item die reellen Zahlen $\mathbb{R}$.
-	\end{enumerate}
-	
-	\Abschnitt{Aufgabe 3}
-	
-	Gegeben seien zwei Mengen $A=\{a, b, x, y\}$ und $B=\{a, b, c, d\}$.
-	
-	\begin{enumerate}[a)]
-		\item Bilden Sie die Vereinigung $A \cup B$.
-		\item Bilden Sie die Schnittmenge $A \cap B$.
-		\item Bilden Sie die Differenz $A \setminus B$.
-		\item Bilden Sie das kartesische Produkt $A \times B$.
-		\item Bilden Sie das kartesische Produkt $B \times A$.
-	\end{enumerate}
-	
-\end{document}
 
+\section{\textbf{Vorbereitung in der Praxisphase}}
+\label{sec:orgbf29881}
+\subsection{\textbf{Zahlensysteme und Mengen}}
+\label{sec:org3d402bb}
+\subsubsection{\textbf{Zahlensysteme}}
+\label{sec:orgbc6d1ba}
+
+Unser Alltag basiert auf dem Zehnersystem, einem Zahlensystem, das auf
+der Zahl zehn aufgebaut ist. In der Informatik werden ebenfalls
+Zahlensysteme verwendet, hierbei ist jedoch die Basis zehn oftmals
+ungeeignet. Es kommen häufig das Dual- und das Hexadezimalsystem zum
+Einsatz. Das Dualsystem wird häufig auch als Binärsystem bezeichnet.
+
+In den Kapiteln 1.4.1 und 1.4.2 des Buches \emph{Grundkurs Informatik}\footnote{Hartmut Ernst, Jochen Schmidt und Gerd Beneken (2023): Grundkurs
+Informatik, 6. Auflage, Springer Vieweg Wiesbaden,
+\url{https://doi.org/10.1007/978-3-658-41779-6}},
+das als ebook in der Bibliothek verfügbar ist, werden diese
+Zahlensysteme gut verdeutlicht.
+
+Machen Sie sich mit den Inhalten der Buchkapitel vertraut und lösen Sie
+die folgende Aufgabe.
+\begin{enumerate}
+\item \textbf{Aufgabe 1}
+\label{sec:org903cb66}
+
+Wandeln Sie die Zahl \(5937_{10}\) vom Dezimalsystem in folgende
+Zahlensysteme um:
+
+\begin{enumerate}
+\item Das Dualsystem,
+
+\item das Hexadezimalsystem und
+
+\item das Zahlensystem zur Basis 7.
+\end{enumerate}
+
+Geben Sie dabei die Rechenschritte detailliert und nachvollziehbar an.
+\end{enumerate}
+\subsubsection{\textbf{Mengen}}
+\label{sec:org0dff8d6}
+
+In der Vorlesung werden Sie sehr häufig mit Mengen in Kontakt kommen. Um
+bereits im Vorhinein ein grundlegendes Verständnis davon zu erhalten,
+was eine Menge ist und wie die Notation hierfür aussieht, sollten Sie
+sich Kapitel 1.1 des Buches \emph{Mathematik für Informatiker}\footnote{Peter Hartmann (2019): Mathematik für Informatiker, 7. Auflage,
+Springer Vieweg Wiesbaden,
+\url{https://doi.org/10.1007/978-3-658-26524-3}}
+verinnerlichen. Weiterhin lesen Sie Kapitel 3.1, welches Ihnen die Menge
+der natürlichen Zahlen \(\mathbb{N}\) näher bringt.
+\begin{enumerate}
+\item \textbf{Aufgabe 2}
+\label{sec:orgc58ee4b}
+
+Notieren Sie repräsentative Teilmengen der folgenden Mengen mit jeweils
+mindestens 8 Elementen:
+
+\begin{enumerate}
+\item Die natürlichen Zahlen \(\mathbb{N}\),
+
+\item die ganzen Zahlen \(\mathbb{Z}\),
+
+\item die rationalen Zahlen \(\mathbb{Q}\) und
+
+\item die reellen Zahlen \(\mathbb{R}\).
+\end{enumerate}
+\item \textbf{Aufgabe 3}
+\label{sec:org8bf9769}
+
+Gegeben seien zwei Mengen \(A=\{a, b, x, y\}\) und \(B=\{a, b, c, d\}\).
+
+\begin{enumerate}
+\item Bilden Sie die Vereinigung \(A \cup B\).
+
+\item Bilden Sie die Schnittmenge \(A \cap B\).
+
+\item Bilden Sie die Differenz \(A \setminus B\).
+
+\item Bilden Sie das kartesische Produkt \(A \times B\).
+
+\item Bilden Sie das kartesische Produkt \(B \times A\).
+\end{enumerate}
+\end{enumerate}
+\end{document}

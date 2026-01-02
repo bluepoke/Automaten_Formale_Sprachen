@@ -1,0 +1,84 @@
+#+LATEX_COMPILER: xelatex
+#+LATEX_CLASS: scrartcl
+#+LATEX_CLASS_OPTIONS: [a4paper,14pt,ngerman]
+#+OPTIONS: ':t toc:nil title:nil
+
+#+LANGUAGE: de
+
+#+LATEX_HEADER: \usepackage{polyglossia}
+#+LATEX_HEADER: \setdefaultlanguage{german}
+#+LATEX_HEADER: \PolyglossiaSetup{german}{shorthands=on}
+#+LATEX_HEADER: \AtBeginDocument{\let\babelprovide\relax}
+#+LATEX_HEADER: \AtBeginDocument{\let\shorthandon\relax}
+#+LATEX_HEADER: \AtBeginDocument{\let\shorthandoff\relax}
+#+LATEX_HEADER: \setmainfont{Gentium Book Basic}
+#+LATEX_HEADER: \setsansfont{Latin Modern Sans}
+#+LATEX_HEADER: \setmonofont{Latin Modern Mono}
+#+LATEX_HEADER: \usepackage{fancyhdr}
+#+LATEX_HEADER: \usepackage{graphicx}
+#+LATEX_HEADER: \usepackage{amsmath,amssymb}
+#+LATEX_HEADER: \usepackage{xcolor}
+#+LATEX_HEADER: \usepackage{xurl}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \setstretch{1.3}
+#+title: Übungsblatt 2
+
+* *Übung 2*
+** *Grammatiken, endliche Automaten, reguläre Sprachen*
+*** *Aufgabe 1*
+
+Welche Sprache \(L(G)\) wird durch die folgende Grammatik \(G\) erzeugt?
+Ist die Grammatik eindeutig? Falls nein: lässt sich für diese Sprache
+eine eindeutige Grammatik angeben? Von welchem Typ ist die Sprache?
+
+\[\begin{aligned}
+        G&=\left(\left\{S,A,B\right\},\left\{a,b,c\right\},P,S\right)\\
+        P&=\left\{S \rightarrow aB \mid Ac, A \rightarrow ab, B \rightarrow bc\right\} 
+\end{aligned}\]
+
+*** *Aufgabe 2*
+
+Ist die Sprache
+\(L = \left\{b^na^{2m} \mid n,m \in \mathbb{N}_0\right\}\) regulär?
+Beantworten Sie die Frage vom Standpunkt einer erzeugenden Grammatik,
+sowie von dem eines akzeptierenden Automaten.
+
+*** *Aufgabe 3*
+
+Konstruieren Sie einen DFA, der alle Worte über \(\{0,1\}\) erkennt, die
+den String \(101\) _nicht_ als Teilwort enthalten.
+
+*** *Aufgabe 4*
+
+Konstruieren Sie einen DFA, der die Menge aller natürlichen Zahlen
+kongruent zu Null (mod 5) akzeptiert. Eingabe ist jeweils eine
+natürliche Zahl in Dualdarstellung.
+
+*** *Aufgabe 5*
+
+Geben Sie eine Typ-3 Grammatik an, die die durch folgenden Automaten
+akzeptierte Sprache produziert. Beschreiben Sie die akzeptierte Sprache
+verbal. Ermitteln sie den Minimalautomaten zu \(A\).
+
+\[\begin{aligned}
+        A&=\left(\left\{s_0,s_1,s_2,s_3,s_4\right\},\left\{0,1\right\},\delta,s_0,\left\{s_3,s_4\right\}\right)\\
+        \delta &=\{(s_0,0,s_1),(s_0,1,s_2),(s_1,0,s_2),(s_1,1,s_3),(s_2,0,s_1),(s_2,1,s_3),\\
+        &\qquad(s_3,0,s_1),(s_3,1,s_4),(s_4,0,s_2),(s_4,1,s_4)\}
+\end{aligned}\]
+
+*** *Aufgabe 6*
+
+Konstruieren Sie zu folgendem nichtdeterministischem endlichem Automaten
+\[A=(\{p,q,r\}, \{a,b\}, \delta, p, \{r\})\] mit der mengenwertigen Übergangsfunktion \(\delta\)
+
+#+begin_center
+| \(\delta\) | \(p\)       | \(q\)         | \(r\)       |
+|------------+-------------+---------------+-------------|
+| \(a\)      | \(\{p,q\}\) | \(\{p,q,r\}\) | \(\{\}\)    |
+| \(b\)      | \(\{r\}\)   | \(\{\}\)      | \(\{q,r\}\) |
+
+#+end_center
+
+einen äquivalenten deterministischen Automaten.\\
+Ermitteln Sie zu diesem DFA den Minimalautomaten.

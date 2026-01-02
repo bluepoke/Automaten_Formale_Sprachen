@@ -1,130 +1,107 @@
-\documentclass[a4paper,12pt]{article}
-\usepackage{fancyhdr}
-\usepackage{fancyheadings}
-\usepackage[ngerman,german]{babel}
-\usepackage{german}
-\usepackage[utf8]{inputenc}
-%\usepackage[latin1]{inputenc}
-\usepackage[active]{srcltx}
-\usepackage{algorithm}
-\usepackage[noend]{algorithmic}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{bbm}
-\usepackage{enumerate}
+% Created 2025-12-31 Mi 14:01
+% Intended LaTeX compiler: xelatex
+\documentclass[a4paper,14pt,ngerman]{scrartcl}
 \usepackage{graphicx}
-\usepackage{ifthen}
-\usepackage{listings}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{capt-of}
 \usepackage{hyperref}
-
-% table placement
-\usepackage{placeins}
-
-\newcommand{\Fach}{Theoretische Informatik I - Automaten und Formale Sprachen}
-\newcommand{\Name}{}
-\newcommand{\Uebung}{2} %  <-- UPDATE ME
-\newcommand{\Uebungstitel}{Grammatiken, endliche Automaten, reguläre Sprachen} %  <-- UPDATE ME
-
-\setlength{\parindent}{0em}
-\topmargin -1.0cm
-\oddsidemargin 0cm
-\evensidemargin 0cm
-\setlength{\textheight}{9.2in}
-\setlength{\textwidth}{6.0in}
-
-%%%%%%%%%%%%%%%
-%% Aufgaben-COMMAND
-\newcommand{\Aufgabe}[1]{
-	{
-		\vspace*{0.5cm}
-		\textsf{\textbf{Aufgabe #1}}
-		\vspace*{0.2cm}
-		
-	}
-}
-%%%%%%%%%%%%%%
+\usepackage{polyglossia}
+\usepackage{polyglossia}
+\setmainlanguage[variant=german]{german}
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+\PolyglossiaSetup{german}{shorthands=on}
+\AtBeginDocument{\let\babelprovide\relax}
+\AtBeginDocument{\let\shorthandon\relax}
+\AtBeginDocument{\let\shorthandoff\relax}
+\setmainfont{Gentium Book Basic}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{xurl}
+\usepackage{listings}
+\usepackage{setspace}
+\setstretch{1.3}
+\author{Elias}
+\date{\today}
+\title{Übungsblatt 2}
 \hypersetup{
-	pdftitle={\Fach{}: Übungsblatt \Uebung{}},
-	pdfauthor={\Name},
-	pdfborder={0 0 0}
-}
-
-\lstset{ %
-	language=java,
-	basicstyle=\footnotesize\tt,
-	showtabs=false,
-	tabsize=2,
-	captionpos=b,
-	breaklines=true,
-	extendedchars=true,
-	showstringspaces=false,
-	flexiblecolumns=true,
-}
-
-\title{Übungsblatt \Uebung{}}
-\author{\Name{}}
-
+ pdfauthor={Elias},
+ pdftitle={Übungsblatt 2},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 30.1 (Org mode 9.7.11)}, 
+ pdflang={German}}
 \begin{document}
-	\thispagestyle{fancy}
-	\chead{\sf \large \Fach{}}
-	\vspace*{0.2cm}
-	\begin{center}
-		\LARGE \sf \textbf{Übung \Uebung{}} \\
-		\vspace*{0.4cm}
-		\Large \sf \textbf{\Uebungstitel}\\
-	\end{center}
-	\vspace*{0.2cm}
-	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%% Aufgaben %%%%%%%%%%%%%%%%%%%%%%%%
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-	
-	\Aufgabe{1}
-	Welche Sprache $L(G)$ wird durch die folgende Grammatik $G$ erzeugt? Ist die Grammatik eindeutig? Falls nein: lässt sich für diese Sprache eine eindeutige Grammatik angeben? Von welchem Typ ist die Sprache?
-	
-	\begin{align*}
-		G&=\left(\left\{S,A,B\right\},\left\{a,b,c\right\},P,S\right)\\
-		P&=\left\{S \rightarrow aB \mid Ac, A \rightarrow ab, B \rightarrow bc\right\}
-	\end{align*}
 
-	\Aufgabe{2}
-	Ist die Sprache $L = \left\{b^na^{2m} \mid n,m \in \mathbb{N}_0\right\}$ regulär? Beantworten Sie die Frage vom Standpunkt einer erzeugenden Grammatik, sowie von dem eines akzeptierenden Automaten.
-	
-	\Aufgabe{3}
-	Konstruieren Sie einen DFA, der alle Worte über $\{0,1\}$ erkennt, die den String $101$ \underline{nicht} als Teilwort enthalten.
-	
-	\Aufgabe{4}
-	Konstruieren Sie einen DFA, der die Menge aller natürlichen Zahlen kongruent zu Null (mod 5) akzeptiert. Eingabe ist jeweils eine natürliche Zahl in Dualdarstellung.
-	
-	\Aufgabe{5}
-	Geben Sie eine Typ-3 Grammatik an, die die durch folgenden Automaten akzeptierte Sprache produziert. Beschreiben Sie die akzeptierte Sprache verbal. Ermitteln sie den Minimalautomaten zu $A$.
-	
-	\begin{align*}
-		A&=\left(\left\{s_0,s_1,s_2,s_3,s_4\right\},\left\{0,1\right\},\delta,s_0,\left\{s_3,s_4\right\}\right)\\
-		\delta &=\{(s_0,0,s_1),(s_0,1,s_2),(s_1,0,s_2),(s_1,1,s_3),(s_2,0,s_1),(s_2,1,s_3),\\
-		&\qquad(s_3,0,s_1),(s_3,1,s_4),(s_4,0,s_2),(s_4,1,s_4)\}
-	\end{align*}
+\section{\textbf{Übung 2}}
+\label{sec:orgae6ceff}
+\subsection{\textbf{Grammatiken, endliche Automaten, reguläre Sprachen}}
+\label{sec:orgd0fa655}
+\subsubsection{\textbf{Aufgabe 1}}
+\label{sec:org6c6bd17}
 
-	\pagebreak
-	
-	\Aufgabe{6}
-	Konstruieren Sie zu folgendem nichtdeterministischem endlichem Automaten
-	$$A=(\{p,q,r\}, \{a,b\}, \delta, p, \{r\})$$
-	mit der mengenwertigen Übergangsfunktion $\delta$
-	\begin{center}
-		\begin{tabular}{|l|l|l|l|}
-			\hline
-			$\delta$ & $p$ & $q$ & $r$ \\
-			\hline
-			$a$ & $\{p,q\}$ & $\{p,q,r\}$ & $\{\}$ \\
-			\hline
-			$b$ & $\{r\}$ & $\{\}$ & $\{q,r\}$ \\
-			\hline
-		\end{tabular}
-	\end{center}
-	einen äquivalenten deterministischen Automaten.\\
-	Ermitteln Sie zu diesem DFA den Minimalautomaten. 
+Welche Sprache \(L(G)\) wird durch die folgende Grammatik \(G\) erzeugt?
+Ist die Grammatik eindeutig? Falls nein: lässt sich für diese Sprache
+eine eindeutige Grammatik angeben? Von welchem Typ ist die Sprache?
+
+\[\begin{aligned}
+        G&=\left(\left\{S,A,B\right\},\left\{a,b,c\right\},P,S\right)\\
+        P&=\left\{S \rightarrow aB \mid Ac, A \rightarrow ab, B \rightarrow bc\right\} 
+\end{aligned}\]
+\subsubsection{\textbf{Aufgabe 2}}
+\label{sec:org6d6eee4}
+
+Ist die Sprache
+\(L = \left\{b^na^{2m} \mid n,m \in \mathbb{N}_0\right\}\) regulär?
+Beantworten Sie die Frage vom Standpunkt einer erzeugenden Grammatik,
+sowie von dem eines akzeptierenden Automaten.
+\subsubsection{\textbf{Aufgabe 3}}
+\label{sec:orgb8ad5da}
+
+Konstruieren Sie einen DFA, der alle Worte über \(\{0,1\}\) erkennt, die
+den String \(101\) \uline{nicht} als Teilwort enthalten.
+\subsubsection{\textbf{Aufgabe 4}}
+\label{sec:org6f0a90d}
+
+Konstruieren Sie einen DFA, der die Menge aller natürlichen Zahlen
+kongruent zu Null (mod 5) akzeptiert. Eingabe ist jeweils eine
+natürliche Zahl in Dualdarstellung.
+\subsubsection{\textbf{Aufgabe 5}}
+\label{sec:orgc1e48da}
+
+Geben Sie eine Typ-3 Grammatik an, die die durch folgenden Automaten
+akzeptierte Sprache produziert. Beschreiben Sie die akzeptierte Sprache
+verbal. Ermitteln sie den Minimalautomaten zu \(A\).
+
+\[\begin{aligned}
+        A&=\left(\left\{s_0,s_1,s_2,s_3,s_4\right\},\left\{0,1\right\},\delta,s_0,\left\{s_3,s_4\right\}\right)\\
+        \delta &=\{(s_0,0,s_1),(s_0,1,s_2),(s_1,0,s_2),(s_1,1,s_3),(s_2,0,s_1),(s_2,1,s_3),\\
+        &\qquad(s_3,0,s_1),(s_3,1,s_4),(s_4,0,s_2),(s_4,1,s_4)\}
+\end{aligned}\]
+\subsubsection{\textbf{Aufgabe 6}}
+\label{sec:orgf8047b6}
+
+Konstruieren Sie zu folgendem nichtdeterministischem endlichem Automaten
+\[A=(\{p,q,r\}, \{a,b\}, \delta, p, \{r\})\] mit der mengenwertigen Übergangsfunktion \(\delta\)
+
+\begin{center}
+\begin{center}
+\begin{tabular}{llll}
+\(\delta\) & \(p\) & \(q\) & \(r\)\\
+\hline
+\(a\) & \(\{p,q\}\) & \(\{p,q,r\}\) & \(\{\}\)\\
+\(b\) & \(\{r\}\) & \(\{\}\) & \(\{q,r\}\)\\
+\end{tabular}
+\end{center}
+\end{center}
+
+einen äquivalenten deterministischen Automaten.\\
+Ermitteln Sie zu diesem DFA den Minimalautomaten.
 \end{document}
-

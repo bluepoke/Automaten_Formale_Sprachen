@@ -1,0 +1,66 @@
+#+LATEX_COMPILER: xelatex
+#+LATEX_CLASS: scrartcl
+#+LATEX_CLASS_OPTIONS: [a4paper,14pt,ngerman]
+#+OPTIONS: ':t toc:nil title:nil
+
+#+LANGUAGE: de
+
+#+LATEX_HEADER: \usepackage{polyglossia}
+#+LATEX_HEADER: \setdefaultlanguage{german}
+#+LATEX_HEADER: \PolyglossiaSetup{german}{shorthands=on}
+#+LATEX_HEADER: \AtBeginDocument{\let\babelprovide\relax}
+#+LATEX_HEADER: \AtBeginDocument{\let\shorthandon\relax}
+#+LATEX_HEADER: \AtBeginDocument{\let\shorthandoff\relax}
+#+LATEX_HEADER: \setmainfont{Gentium Book Basic}
+#+LATEX_HEADER: \setsansfont{Latin Modern Sans}
+#+LATEX_HEADER: \setmonofont{Latin Modern Mono}
+#+LATEX_HEADER: \usepackage{fancyhdr}
+#+LATEX_HEADER: \usepackage{graphicx}
+#+LATEX_HEADER: \usepackage{amsmath,amssymb}
+#+LATEX_HEADER: \usepackage{xcolor}
+#+LATEX_HEADER: \usepackage{xurl}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \setstretch{1.3}
+
+#+title: Übungsblatt 3
+
+* *Übung 3*
+** *Kellerautomaten*
+*** *Aufgabe 1*
+
+Sind die folgenden Sprachen kontextfrei, bzw. sogar deterministisch
+kontextfrei? Begründen Sie Ihre Antwort, gegebenenfalls durch Angabe
+einer geeigneten Grammatik bzw. eines geeigneten Automaten.
+
+1) \(L_1=\{a^ib^jc^k \mid i>j \textrm{ oder } j>k,\quad i,j,k\geq 0\}\)
+
+2) \(L_2=\{ww \mid w\in \{a\}^*\}\)
+
+3) \(L_3=\{ww \mid w\in \{a,b\}^*\}\)
+
+*** *Aufgabe 2*
+
+Konstruieren Sie einen deterministischen PDA, der die Sprache\\
+\(L=\{a^nb^m \mid m \leq 2n, \quad m,n\geq 1\}\) akzeptiert. Ist das
+mittels leerem Keller möglich?
+
+*** *Aufgabe 3*
+
+Konstruieren Sie einen deterministischen PDA, der die Sprache der
+korrekt geklammerten Ausdrücke\\
+\(L=\{w=xy \in \{[,]\}^* \mid \textrm{Anzahl}(w,[)=\textrm{Anzahl}(w,]),\)\\
+und für jede Vorsilbe \(x\) gilt:
+\(\textrm{Anzahl}(x,[)\geq\textrm{Anzahl}(x,])\}\)\\
+akzeptiert.
+
+Kann das durch Akzeptanz mit leerem Keller erreicht werden? Begründen
+Sie!
+
+*** *Aufgabe 4*
+
+Die Sprache \(L=\{a^ib^ia^kb^k \mid i,k\geq 1\}\) ist deterministisch
+kontextfrei.\\
+Lässt sich diese Sprache durch einen DPDA mit leerem Keller
+akzeptieren?\\
+Entwickeln Sie einen DPDA mit dem geeigneten Akzeptanzverhalten.

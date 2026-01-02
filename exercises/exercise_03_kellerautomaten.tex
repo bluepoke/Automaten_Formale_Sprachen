@@ -1,109 +1,87 @@
-\documentclass[a4paper,12pt]{article}
-\usepackage{fancyhdr}
-\usepackage{fancyheadings}
-\usepackage[ngerman,german]{babel}
-\usepackage{german}
-\usepackage[utf8]{inputenc}
-%\usepackage[latin1]{inputenc}
-\usepackage[active]{srcltx}
-\usepackage{algorithm}
-\usepackage[noend]{algorithmic}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{bbm}
-\usepackage{enumerate}
+% Created 2025-12-31 Mi 14:01
+% Intended LaTeX compiler: xelatex
+\documentclass[a4paper,14pt,ngerman]{scrartcl}
 \usepackage{graphicx}
-\usepackage{ifthen}
-\usepackage{listings}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{capt-of}
 \usepackage{hyperref}
-
-% table placement
-\usepackage{placeins}
-
-\newcommand{\Fach}{Theoretische Informatik I - Automaten und Formale Sprachen}
-\newcommand{\Name}{}
-\newcommand{\Uebung}{3} %  <-- UPDATE ME
-\newcommand{\Uebungstitel}{Kellerautomaten} 
-
-\setlength{\parindent}{0em}
-\topmargin -1.0cm
-\oddsidemargin 0cm
-\evensidemargin 0cm
-\setlength{\textheight}{9.2in}
-\setlength{\textwidth}{6.0in}
-
-%%%%%%%%%%%%%%%
-%% Aufgaben-COMMAND
-\newcommand{\Aufgabe}[1]{
-	{
-		\vspace*{0.5cm}
-		\textsf{\textbf{Aufgabe #1}}
-		\vspace*{0.2cm}
-		
-	}
-}
-%%%%%%%%%%%%%%
+\usepackage{polyglossia}
+\usepackage{polyglossia}
+\setmainlanguage[variant=german]{german}
+\usepackage{polyglossia}
+\setdefaultlanguage{german}
+\PolyglossiaSetup{german}{shorthands=on}
+\AtBeginDocument{\let\babelprovide\relax}
+\AtBeginDocument{\let\shorthandon\relax}
+\AtBeginDocument{\let\shorthandoff\relax}
+\setmainfont{Gentium Book Basic}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{xurl}
+\usepackage{listings}
+\usepackage{setspace}
+\setstretch{1.3}
+\author{Elias}
+\date{\today}
+\title{Übungsblatt 3}
 \hypersetup{
-	pdftitle={\Fach{}: Übungsblatt \Uebung{}},
-	pdfauthor={\Name},
-	pdfborder={0 0 0}
-}
-
-\lstset{ %
-	language=java,
-	basicstyle=\footnotesize\tt,
-	showtabs=false,
-	tabsize=2,
-	captionpos=b,
-	breaklines=true,
-	extendedchars=true,
-	showstringspaces=false,
-	flexiblecolumns=true,
-}
-
-\title{Übungsblatt \Uebung{}}
-\author{\Name{}}
-
+ pdfauthor={Elias},
+ pdftitle={Übungsblatt 3},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 30.1 (Org mode 9.7.11)}, 
+ pdflang={German}}
 \begin{document}
-	\thispagestyle{fancy}
-	\chead{\sf \large \Fach{}}
-	\vspace*{0.2cm}
-	\begin{center}
-		\LARGE \sf \textbf{Übung \Uebung{}} \\
-		\vspace*{0.4cm}
-		\Large \sf \textbf{\Uebungstitel}\\
-	\end{center}
-	\vspace*{0.2cm}
-	
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%% Aufgaben %%%%%%%%%%%%%%%%%%%%%%%%
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-	\Aufgabe{1}
-	Sind die folgenden Sprachen kontextfrei, bzw. sogar deterministisch kontextfrei? Begründen Sie Ihre Antwort, gegebenenfalls durch Angabe einer geeigneten Grammatik bzw. eines geeigneten Automaten.
-	
-	\begin{enumerate}[a)]
-		\item $L_1=\{a^ib^jc^k \mid i>j \textrm{ oder } j>k,\quad i,j,k\geq 0\}$
-		\item $L_2=\{ww \mid w\in \{a\}^*\}$
-		\item $L_3=\{ww \mid w\in \{a,b\}^*\}$
-	\end{enumerate}
-	
-	\Aufgabe{2}
-	Konstruieren Sie einen deterministischen PDA, der die Sprache\\$L=\{a^nb^m \mid m \leq 2n, \quad m,n\geq 1\}$ akzeptiert. Ist das mittels leerem Keller möglich?
-	
-	\Aufgabe{3}
-	Konstruieren Sie einen deterministischen PDA, der die Sprache der korrekt geklammerten Ausdrücke\\
-	$L=\{w=xy \in \{[,]\}^* \mid \textrm{Anzahl}(w,[)=\textrm{Anzahl}(w,]),$\\
-	\qquad und für jede Vorsilbe $x$ gilt: $\textrm{Anzahl}(x,[)\geq\textrm{Anzahl}(x,])\}$\\
-	akzeptiert.
-	
-	Kann das durch Akzeptanz mit leerem Keller erreicht werden? Begründen Sie!
-	
-	\Aufgabe{4}
-	Die Sprache $L=\{a^ib^ia^kb^k \mid i,k\geq 1\}$ ist deterministisch kontextfrei.\\
-	Lässt sich diese Sprache durch einen DPDA mit leerem Keller akzeptieren?\\
-	Entwickeln Sie einen DPDA mit dem geeigneten Akzeptanzverhalten.
-	
-\end{document}
 
+\section{\textbf{Übung 3}}
+\label{sec:org8ccd51c}
+\subsection{\textbf{Kellerautomaten}}
+\label{sec:org7be88d3}
+\subsubsection{\textbf{Aufgabe 1}}
+\label{sec:orgb4ce2b1}
+
+Sind die folgenden Sprachen kontextfrei, bzw. sogar deterministisch
+kontextfrei? Begründen Sie Ihre Antwort, gegebenenfalls durch Angabe
+einer geeigneten Grammatik bzw. eines geeigneten Automaten.
+
+\begin{enumerate}
+\item \(L_1=\{a^ib^jc^k \mid i>j \textrm{ oder } j>k,\quad i,j,k\geq 0\}\)
+
+\item \(L_2=\{ww \mid w\in \{a\}^*\}\)
+
+\item \(L_3=\{ww \mid w\in \{a,b\}^*\}\)
+\end{enumerate}
+\subsubsection{\textbf{Aufgabe 2}}
+\label{sec:orgc9cec8a}
+
+Konstruieren Sie einen deterministischen PDA, der die Sprache\\
+\(L=\{a^nb^m \mid m \leq 2n, \quad m,n\geq 1\}\) akzeptiert. Ist das
+mittels leerem Keller möglich?
+\subsubsection{\textbf{Aufgabe 3}}
+\label{sec:orgf447778}
+
+Konstruieren Sie einen deterministischen PDA, der die Sprache der
+korrekt geklammerten Ausdrücke\\
+\(L=\{w=xy \in \{[,]\}^* \mid \textrm{Anzahl}(w,[)=\textrm{Anzahl}(w,]),\)\\
+und für jede Vorsilbe \(x\) gilt:
+\(\textrm{Anzahl}(x,[)\geq\textrm{Anzahl}(x,])\}\)\\
+akzeptiert.
+
+Kann das durch Akzeptanz mit leerem Keller erreicht werden? Begründen
+Sie!
+\subsubsection{\textbf{Aufgabe 4}}
+\label{sec:org175aca2}
+
+Die Sprache \(L=\{a^ib^ia^kb^k \mid i,k\geq 1\}\) ist deterministisch
+kontextfrei.\\
+Lässt sich diese Sprache durch einen DPDA mit leerem Keller
+akzeptieren?\\
+Entwickeln Sie einen DPDA mit dem geeigneten Akzeptanzverhalten.
+\end{document}

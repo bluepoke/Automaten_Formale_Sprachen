@@ -1,0 +1,121 @@
+#+LATEX_COMPILER: xelatex
+#+TITLE: Automaten und Formale Sprachen
+#+SUBTITLE: Theoretische Informatik 1
+#+AUTHOR: Peter Kossek
+#+EMAIL: e0030414@edu.dhsn.de
+#+INSTITUTE: Duale Hochschule Sachsen, Studienakademie Leipzig
+#+DATE: \today
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [17pt, aspectratio=169]
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act)
+#+OPTIONS: H:3 toc:t num:t
+#+LANGUAGE: de
+
+#+LATEX_HEADER: \usepackage{polyglossia}
+#+LATEX_HEADER: \setdefaultlanguage{german}
+#+LATEX_HEADER: \setmainfont{Gentium Book Basic}
+#+LATEX_HEADER: \setsansfont{Latin Modern Sans}
+#+LATEX_HEADER: \setmonofont{Latin Modern Mono}
+#+LATEX_HEADER: \usetheme[sectionpage=progressbar,subsectionpage=progressbar,progressbar=frametitle]{metropolis}
+
+#+LATEX_HEADER: \usepackage{varioref}
+#+LATEX_HEADER: \usepackage{circuitikz}
+#+LATEX_HEADER: \usepackage{tikz}
+#+LATEX_HEADER: \usetikzlibrary{automata, positioning, arrows}
+#+LATEX_HEADER: \usepackage{graphicx}
+#+LATEX_HEADER: \usepackage{amsmath,amssymb}
+#+LATEX_HEADER: \usepackage[normalem]{ulem}
+#+LATEX_HEADER: \usepackage{xcolor}
+#+LATEX_HEADER: \usepackage{xurl}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{tabularx}
+#+LATEX_HEADER: \newcolumntype{Y}{>{\centering\arraybackslash}X}
+#+LATEX_HEADER: \usepackage{marvosym}
+#+LATEX_HEADER: \usepackage{qrcode}
+
+#+LATEX_HEADER: % Beamer & Style Setup
+#+LATEX_HEADER: \definecolor{myColor}{HTML}{4477AA}
+#+LATEX_HEADER: \definecolor{pitchblack}{HTML}{000000}
+#+LATEX_HEADER: \setbeamercolor{alerted text}{fg=myColor}
+#+LATEX_HEADER: \setbeamercolor{frametitle}{bg=pitchblack, fg=white}
+#+LATEX_HEADER: \setbeamertemplate{section in toc}[sections numbered]
+#+LATEX_HEADER: \setbeamertemplate{subsection in toc}[subsections numbered]
+#+LATEX_HEADER: \makeatletter
+#+LATEX_HEADER: \setlength{\metropolis@titleseparator@linewidth}{1pt}
+#+LATEX_HEADER: \setlength{\metropolis@progressonsectionpage@linewidth}{2pt}
+#+LATEX_HEADER: \setlength{\metropolis@progressinheadfoot@linewidth}{2pt}
+#+LATEX_HEADER: \@addtoreset{figure}{section}
+#+LATEX_HEADER: \@addtoreset{table}{section}
+#+LATEX_HEADER: \makeatother
+#+LATEX_HEADER: \renewcommand{\thefigure}{\thesection.\arabic{figure}}
+#+LATEX_HEADER: \renewcommand{\thetable}{\thesection.\arabic{table}}
+
+#+BEGIN_EXPORT latex
+\maketitle
+#+END_EXPORT
+
+#+INCLUDE: "./title.org" :minlevel 1
+
+
+* Aussagenlogik
+:PROPERTIES:
+:CUSTOM_ID: aussagenlogik
+:END:
+
+** Aussagenlogische Formeln
+:PROPERTIES:
+:CUSTOM_ID: aussagenlogische-formeln
+:END:
+
+#+INLCLUDE: "./logik.org" :minlevel 1
+
+
+* Logischer Schluss
+:PROPERTIES:
+:CUSTOM_ID: logischer-schluss
+:END:
+
+#+INCLUDE: "./logischer_schluss.org" :minlevel 1
+
+
+* Erfüllbarkeit aussagenlogischer Formeln
+:PROPERTIES:
+:CUSTOM_ID: erfüllbarkeit-aussagenlogischer-formeln
+:END:
+
+#+INCLUDE: "./einfuehrung_sprachen_grammatiken.org" :minlevel 1
+
+* Reguläre Sprachen und Endliche Automaten
+:PROPERTIES:
+:CUSTOM_ID: reguläre-sprachen-und-endliche-automaten
+:END:
+
+#+INCLUDE: "./regulaere_sprachen_endliche_automaten.org" :minlevel 1
+
+* Kellerautomaten
+:PROPERTIES:
+:CUSTOM_ID: kellerautomaten
+:END:
+
+#+INCLUDE: "./kellerautomaten.org" :minlevel 1
+
+* Kontextfreie Sprachen
+:PROPERTIES:
+:CUSTOM_ID: kontextfreie-sprachen
+:END:
+
+#+INCLUDE: "./kontextfreie_sprachen.org" :minlevel 1
+
+* Typ-0-Sprachen und Turing-Maschinen
+:PROPERTIES:
+:CUSTOM_ID: typ-0-sprachen-und-turing-maschinen
+:END:
+
+#+INCLUDE: "./typ-0-sprachen_turing_maschinen.org" :minlevel 1
+
+* Abschluss
+:PROPERTIES:
+:CUSTOM_ID: abschluss
+:END:
+
+#+INCLUDE: "./abschluss.org" minlevel 1
