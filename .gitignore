@@ -315,3 +315,7 @@ TSWLatexianTemp*
 # so it is not source code and should not be checked in.
 /AuFS.tex
 
+# Gleiches gilt für die Übungsblätter: exercises/exercise_*.tex wird per
+# Org-Export aus dem jeweiligen exercise_*.org erzeugt (siehe BUILD.md).
+exercises/*.tex
+
