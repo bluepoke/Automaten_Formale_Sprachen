@@ -3,7 +3,9 @@
 :CUSTOM_ID: orga
 :END:
 - Vorlesungen
+- Tafelbild
 - Übungen
+- Anwesenheit
 - Fragen jeder Art
 - besondere Bedürfnisse
   
@@ -17,8 +19,11 @@
 \begin{columns}
 \column{.8\textwidth}
 \begin{itemize}
-\item Script zur Vorlesung \\
-{\small \url{https://github.com/bluepoke/Automaten_Formale_Sprachen/releases/latest}}
+\item Script zur Vorlesung
+\begin{itemize}
+\item {\small \url{https://github.com/bluepoke/Automaten_Formale_Sprachen/releases/latest}}
+\item {\small \url{https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/32431800327/CourseNode/1725762633373559011/AuFS.pdf}}
+\end{itemize}
 \item Grundlage der Vorlesung
 \begin{itemize}
 \item Schöning, U.: \textit{Logik für Informatiker}
@@ -32,7 +37,12 @@
 \end{itemize}
 \end{itemize}
 \column{.2\textwidth}
-\qrcode[height=0.9\textwidth]{https://github.com/bluepoke/Automaten_Formale_Sprachen/releases/latest}
+\centering
+\qrcode[height=0.9\textwidth]{https://github.com/bluepoke/Automaten_Formale_Sprachen/releases/latest} \\
+GitHub\\
+\vspace{1cm}
+\qrcode[height=0.9\textwidth]{https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/32431800327/CourseNode/1725762633373559011/AuFS.pdf}\\
+OPAL
 \end{columns}
 #+END_EXPORT
 
