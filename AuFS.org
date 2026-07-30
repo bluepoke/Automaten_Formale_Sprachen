@@ -1,4 +1,4 @@
-#+LATEX_COMPILER: xelatex
+#+LATEX_COMPILER: pdflatex
 #+TITLE: Automaten und Formale Sprachen
 #+SUBTITLE: Theoretische Informatik 1
 #+AUTHOR: Peter Kossek
@@ -6,20 +6,17 @@
 #+INSTITUTE: Duale Hochschule Sachsen, Studienakademie Leipzig
 #+DATE: \today
 #+LATEX_CLASS: beamer
-#+LATEX_CLASS_OPTIONS: [17pt, aspectratio=169]
+#+LATEX_CLASS_OPTIONS: [18pt, aspectratio=169]
 #+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act)
 #+OPTIONS: H:3 toc:t num:t
 #+LANGUAGE: de
 
-#+LATEX_HEADER: \usepackage{polyglossia}
-#+LATEX_HEADER: \setdefaultlanguage{german}
-#+LATEX_HEADER: \setmainfont{Gentium Book Basic}
-#+LATEX_HEADER: \setsansfont{Latin Modern Sans}
-#+LATEX_HEADER: \setmonofont{Latin Modern Mono}
+#+LATEX_HEADER: \usepackage[ngerman]{babel}
 #+LATEX_HEADER: \usetheme[sectionpage=progressbar,subsectionpage=progressbar,progressbar=frametitle]{metropolis}
 
 #+LATEX_HEADER: \usepackage{varioref}
 #+LATEX_HEADER: \usepackage{circuitikz}
+#+LATEX_HEADER: \ctikzset{logic ports=european, tripoles/european not symbol=ieee circle}
 #+LATEX_HEADER: \usepackage{tikz}
 #+LATEX_HEADER: \usetikzlibrary{automata, positioning, arrows}
 #+LATEX_HEADER: \usepackage{graphicx}
@@ -51,10 +48,13 @@
 #+LATEX_HEADER: \renewcommand{\thetable}{\thesection.\arabic{table}}
 
 #+BEGIN_EXPORT latex
-\maketitle
+% babel/ngerman aktiviert das " als Kurzbefehl (u.a. für ß, Umlaute);
+% ohne diese Zeile werden gerade Anführungszeichen im Fließtext
+% (z.B. "Studenten...") dadurch verstümmelt.
+\shorthandoff{"}
 #+END_EXPORT
 
-#+INCLUDE: "./title.org" :minlevel 1
+#+INCLUDE: "./title.org" :minlevel 3
 
 
 * Aussagenlogik
@@ -67,7 +67,7 @@
 :CUSTOM_ID: aussagenlogische-formeln
 :END:
 
-#+INLCLUDE: "./logik.org" :minlevel 1
+#+INCLUDE: "./logik.org" :minlevel 2
 
 
 * Logischer Schluss
@@ -75,7 +75,7 @@
 :CUSTOM_ID: logischer-schluss
 :END:
 
-#+INCLUDE: "./logischer_schluss.org" :minlevel 1
+#+INCLUDE: "./logischer_schluss.org" :minlevel 3
 
 
 * Erfüllbarkeit aussagenlogischer Formeln
@@ -83,39 +83,46 @@
 :CUSTOM_ID: erfüllbarkeit-aussagenlogischer-formeln
 :END:
 
-#+INCLUDE: "./einfuehrung_sprachen_grammatiken.org" :minlevel 1
+#+INCLUDE: "./erfuellbarkeit.org" :minlevel 3
+
+* Einführung: Sprachen und Grammatiken
+:PROPERTIES:
+:CUSTOM_ID: einführung-sprachen-und-grammatiken
+:END:
+
+#+INCLUDE: "./einfuehrung_sprachen_grammatiken.org" :minlevel 3
 
 * Reguläre Sprachen und Endliche Automaten
 :PROPERTIES:
 :CUSTOM_ID: reguläre-sprachen-und-endliche-automaten
 :END:
 
-#+INCLUDE: "./regulaere_sprachen_endliche_automaten.org" :minlevel 1
+#+INCLUDE: "./regulaere_sprachen_endliche_automaten.org" :minlevel 3
 
 * Kellerautomaten
 :PROPERTIES:
 :CUSTOM_ID: kellerautomaten
 :END:
 
-#+INCLUDE: "./kellerautomaten.org" :minlevel 1
+#+INCLUDE: "./kellerautomaten.org" :minlevel 3
 
 * Kontextfreie Sprachen
 :PROPERTIES:
 :CUSTOM_ID: kontextfreie-sprachen
 :END:
 
-#+INCLUDE: "./kontextfreie_sprachen.org" :minlevel 1
+#+INCLUDE: "./kontextfreie_sprachen.org" :minlevel 3
 
 * Typ-0-Sprachen und Turing-Maschinen
 :PROPERTIES:
 :CUSTOM_ID: typ-0-sprachen-und-turing-maschinen
 :END:
 
-#+INCLUDE: "./typ-0-sprachen_turing_maschinen.org" :minlevel 1
+#+INCLUDE: "./typ-0-sprachen_turing_maschinen.org" :minlevel 3
 
 * Abschluss
 :PROPERTIES:
 :CUSTOM_ID: abschluss
 :END:
 
-#+INCLUDE: "./abschluss.org" minlevel 1
+#+INCLUDE: "./abschluss.org" :minlevel 3

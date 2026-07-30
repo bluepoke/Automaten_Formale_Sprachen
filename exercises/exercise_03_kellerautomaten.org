@@ -1,19 +1,12 @@
-#+LATEX_COMPILER: xelatex
+#+LATEX_COMPILER: pdflatex
 #+LATEX_CLASS: scrartcl
 #+LATEX_CLASS_OPTIONS: [a4paper,14pt,ngerman]
 #+OPTIONS: ':t toc:nil title:nil
 
 #+LANGUAGE: de
 
-#+LATEX_HEADER: \usepackage{polyglossia}
-#+LATEX_HEADER: \setdefaultlanguage{german}
-#+LATEX_HEADER: \PolyglossiaSetup{german}{shorthands=on}
-#+LATEX_HEADER: \AtBeginDocument{\let\babelprovide\relax}
-#+LATEX_HEADER: \AtBeginDocument{\let\shorthandon\relax}
-#+LATEX_HEADER: \AtBeginDocument{\let\shorthandoff\relax}
-#+LATEX_HEADER: \setmainfont{Gentium Book Basic}
-#+LATEX_HEADER: \setsansfont{Latin Modern Sans}
-#+LATEX_HEADER: \setmonofont{Latin Modern Mono}
+#+LATEX_HEADER: \usepackage[ngerman]{babel}
+#+LATEX_HEADER: \shorthandoff{"}
 #+LATEX_HEADER: \usepackage{fancyhdr}
 #+LATEX_HEADER: \usepackage{graphicx}
 #+LATEX_HEADER: \usepackage{amsmath,amssymb}

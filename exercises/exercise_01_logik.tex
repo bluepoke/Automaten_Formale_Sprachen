@@ -1,25 +1,18 @@
-% Created 2025-12-31 Mi 14:01
-% Intended LaTeX compiler: xelatex
+% Created 2026-07-30 Do 10:29
+% Intended LaTeX compiler: pdflatex
 \documentclass[a4paper,14pt,ngerman]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{longtable}
 \usepackage{wrapfig}
 \usepackage{rotating}
 \usepackage[normalem]{ulem}
-\usepackage{capt-of}
+\usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{hyperref}
-\usepackage{polyglossia}
-\usepackage{polyglossia}
-\setmainlanguage[variant=german]{german}
-\usepackage{polyglossia}
-\setdefaultlanguage{german}
-\PolyglossiaSetup{german}{shorthands=on}
-\AtBeginDocument{\let\babelprovide\relax}
-\AtBeginDocument{\let\shorthandon\relax}
-\AtBeginDocument{\let\shorthandoff\relax}
-\setmainfont{Gentium Book Basic}
-\setsansfont{Latin Modern Sans}
-\setmonofont{Latin Modern Mono}
+\usepackage[ngerman]{babel}
+\shorthandoff{"}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
 \usepackage{amsmath,amssymb}
@@ -36,16 +29,16 @@
  pdftitle={Übungsblatt 1},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 30.1 (Org mode 9.7.11)}, 
+ pdfcreator={Emacs 30.2 (Org mode 9.7.11)}, 
  pdflang={German}}
 \begin{document}
 
 \section{\textbf{Übung 1}}
-\label{sec:orge217e78}
+\label{sec:orgd1ceeb3}
 \subsection{\textbf{Logik}}
-\label{sec:org29e84eb}
+\label{sec:org0102367}
 \subsubsection{\textbf{Aufgabe 1}}
-\label{sec:orgef07ed2}
+\label{sec:orgcd61ea2}
 
 Welche der folgenden aussagenlogischen Ausdrücke sind Tautologien?
 
@@ -57,7 +50,7 @@ Welche der folgenden aussagenlogischen Ausdrücke sind Tautologien?
 \item \(((a \rightarrow b) \land (b \rightarrow c)) \rightarrow (a \rightarrow c)\)
 \end{enumerate}
 \subsubsection{\textbf{Aufgabe 2}}
-\label{sec:org966b51b}
+\label{sec:orgfddd82b}
 
 Gegeben sei die Wahrheitstafel für eine Funktion \(F\).
 
@@ -83,7 +76,7 @@ Wahrheitswerteverlauf haben.
 \item Minimieren Sie DNF und KNF unter Verwendung eines KV-Diagramms.
 \end{enumerate}
 \subsubsection{\textbf{Aufgabe 3}}
-\label{sec:orgc2382c0}
+\label{sec:org58642a1}
 
 Auszug aus dem Plädoyer einer Anwältin:
 
@@ -105,12 +98,12 @@ Schrank als auch der Hammer im Stall.
 Wenden Sie logisches Schließen an, um zu zeigen, ob der Mandant schuldig
 war.
 \subsubsection{\textbf{Aufgabe 4}}
-\label{sec:org1ab5513}
+\label{sec:org0fcc26c}
 
 Prüfen Sie, ob aus den Prämissen \(A \rightarrow B\) und \(B\) die
 Gültigkeit von \(A\) folgt.
 \subsubsection{\textbf{Aufgabe 5}}
-\label{sec:orgdaca77d}
+\label{sec:org64bfda5}
 
 Untersuchen Sie die Korrektheit des folgenden Schlusses:
 
@@ -125,13 +118,13 @@ wird er eine Magenverstimmung erleiden.
 wird er eine Magenverstimmung erleiden.
 \end{enumerate}
 \subsubsection{\textbf{Aufgabe 6}}
-\label{sec:org0441500}
+\label{sec:org2a981cf}
 
 Zeigen Sie mittels Resolution, dass
 \[F=(\neg A \land \neg B \land C) \lor (\neg A \land \neg C) \lor (B \land C) \lor A\]
 eine Tautologie ist.
 \subsubsection{\textbf{Aufgabe 7}}
-\label{sec:org22df4b9}
+\label{sec:org424aa0f}
 
 Prüfen Sie die Erfüllbarkeit der folgenden Klauselmenge:
 \[S = \left\{\{A, \neg B, C\}, \{B, C\}, \{\neg A, C\}, \{B, \neg C\}, \{\neg C\}\right\}\]

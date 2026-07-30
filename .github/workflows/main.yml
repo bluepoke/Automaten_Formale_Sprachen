@@ -1,67 +1,83 @@
-# adapted from https://gist.github.com/m516/550faa3a080c6c2d5daadc4678d81a79
+name: Build and Release PDF
 
-name: Build and Deploy LaTeX Project
+permissions:
+  contents: write
 
-permissions: write-all
-
-# Controls when the workflow will run
+# Läuft bei jedem Push/PR auf main sowie manuell über den "Actions"-Tab.
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-      
-      # Setup LaTeX environment 
-      - name: Install TeXLive
+      - name: Repository auschecken
+        uses: actions/checkout@v7
+
+      # AuFS.org und die exercises/*.org sind die Quelle der Wahrheit. Emacs'
+      # eingebautes Org-Mode exportiert daraus die eigentlichen LaTeX-Dokumente,
+      # bevor sie kompiliert werden. Dafür genügt "emacs-nox" (ohne GUI) inkl.
+      # des mitgelieferten Org-Mode und ox-beamer-Backends - keine private
+      # Emacs-Konfiguration nötig.
+      - name: Emacs installieren
+        run: sudo apt-get update && sudo apt-get install -y emacs-nox
+
+      - name: Vorlesungsfolien (AuFS.org) zu LaTeX exportieren
         run: |
-          sudo apt update
-          sudo apt install texlive-full
-          
-      # Build PDF (run multiple times to create indexes)
-      #- name Build PDF 
-      #  run |
-      #    pdflatex AuFS.tex
-      #    pdflatex AuFS.tex
-      #    pdflatex AuFS.tex
-          
-      # Build PDF Alternative
-      # The action automatically performs multiple compilations and BibTeX/biber runs to correct the table of contents, references, and page numbers.
-      - name: Build PDF 
-        uses: xu-cheng/latex-action@v2
+          emacs --batch AuFS.org -l org -l ox-beamer \
+            --eval '(org-export-to-file (quote beamer) "AuFS.tex")'
+
+      # Die Übungsblätter nutzen die KOMA-Script-Klasse scrartcl, die Org von
+      # Haus aus nicht kennt ("Unknown LaTeX class"). exercises/org-export-setup.el
+      # registriert sie und entschärft den capt-of/KOMA-Konflikt - siehe die
+      # Kommentare dort. So bleibt der Export von einer privaten ~/.emacs
+      # unabhängig und in CI wie lokal identisch.
+      - name: Übungsblätter (exercises/*.org) zu LaTeX exportieren
+        working-directory: exercises
+        run: |
+          for f in exercise_*.org; do
+            base="${f%.org}"
+            emacs --batch -l ./org-export-setup.el "$f" -l org \
+              --eval "(org-export-to-file (quote latex) \"${base}.tex\")"
+          done
+
+      # Kompiliert in einem eigenen Docker-Container mit vollständigem
+      # TeXLive (latexmk übernimmt automatisch die nötigen Mehrfachläufe
+      # für Inhaltsverzeichnis/Referenzen). Ein separates "texlive"-Setup
+      # auf dem Runner selbst ist dafür nicht nötig.
+      - name: Vorlesungsfolien kompilieren
+        uses: xu-cheng/latex-action@v4
         with:
           root_file: AuFS.tex
-          
-          
-  
-      # Uploads the PDF
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+
+      - name: Übungsblätter kompilieren
+        uses: xu-cheng/latex-action@v4
         with:
-          name: PDF
+          root_file: exercises/exercise_*.tex
+
+      - name: Vorlesungsfolien als Artifact hochladen
+        uses: actions/upload-artifact@v7
+        with:
+          name: AuFS-PDF
           path: AuFS.pdf
 
-      # Publishes the PDF as a release
-      - name: Publish PDF
-        uses: softprops/action-gh-release@v1
-        # if: startsWith(github.ref, 'refs/tags/')
+      - name: Übungsblätter als Artifact hochladen
+        uses: actions/upload-artifact@v7
+        with:
+          name: Uebungsblaetter-PDF
+          path: exercises/exercise_*.pdf
+
+      - name: Release veröffentlichen
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ github.ref_name }}-${{ github.run_number }}
-          files: AuFS.pdf
+          files: |
+            AuFS.pdf
+            exercises/exercise_*.pdf
           generate_release_notes: true
           make_latest: true

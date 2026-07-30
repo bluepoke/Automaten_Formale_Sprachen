@@ -446,27 +446,46 @@ Karnaugh-Tafel für \(F=\neg B \land (A \lor \neg C)\)
   - "Studenten mit gleicher Punktzahl in einer Klausur": Jeder Student
     hat die gleiche Punktzahl wie er selbst.
 
-  - Darstellung als Tabelle und Graph:\\
-  
-    #+ATTR_LATEX: :align |c|c|c|c|c|
-    |   | A | B | C | D |
-    |---+---+---+---+---|
-    | A | X |   |   |   |
-    | B |   | X |   |   |
-    | C |   |   | X |   |
-    | D |   |   |   | X |
+  - Darstellung als Tabelle und Graph:
 
-    \begin{tikzpicture}
-		\node[state] (A) {$A$};
-		\node[state, right=1cm of A] (B) {$B$};
-		\node[state, below=1cm of A] (C) {$C$};
-		\node[state, right=1cm of C] (D) {$D$};
-					
-		\draw	(A) edge[loop above] (A);
-		\draw	(B) edge[loop above] (B);
-		\draw	(C) edge[loop above] (C);
-		\draw	(D) edge[loop above] (D);
-     \end{tikzpicture}
+#+BEGIN_EXPORT latex
+\tikzset{
+	->,
+	>=stealth,
+	node distance=2cm and 2cm,
+	every state/.style={thick, fill=gray!10},
+	initial text=$ $,
+}
+\vspace{1em}
+\begin{columns}
+\column{.2\textwidth}
+\begin{tabularx}{\textwidth}{|Y|Y|Y|Y|Y|}
+\hline
+& A & B & C & D \\
+\hline
+A & X &  &  &  \\
+\hline
+B &  & X &  &  \\
+\hline
+C &  &  & X &  \\
+\hline
+D &  &  &  & X \\
+\hline
+\end{tabularx}
+\column{.3\textwidth}
+\begin{tikzpicture}
+	\node[state] (A) {$A$};
+	\node[state, right=1cm of A] (B) {$B$};
+	\node[state, below=1cm of A] (C) {$C$};
+	\node[state, right=1cm of C] (D) {$D$};
+
+	\draw	(A) edge[loop above] (A);
+	\draw	(B) edge[loop above] (B);
+	\draw	(C) edge[loop above] (C);
+	\draw	(D) edge[loop above] (D);
+\end{tikzpicture}
+\end{columns}
+#+END_EXPORT
 
 *** Beispiel: Symmetrie
 
@@ -478,27 +497,46 @@ Karnaugh-Tafel für \(F=\neg B \land (A \lor \neg C)\)
   - "Geschwister": Anna ist Geschwister von Charlie. Dann ist Charlie
     auch Geschwister von Anna.
 
-  - Darstellung als Tabelle und Graph:\\
+  - Darstellung als Tabelle und Graph:
 
-    #+ATTR_LATEX: :align |c|c|c|c|c|
-    |   | A | B | C | D |
-    |---+---+---+---+---|
-    | A |   |   | X |   |
-    | B |   |   |   | X |
-    | C | X |   |   |   |
-    | D |   | X |   |   |
-    
-    \begin{tikzpicture}
-		\node[state] (A) {$A$};
-		\node[state, right=1cm of A] (B) {$B$};
-		\node[state, below=1cm of A] (C) {$C$};
-		\node[state, right=1cm of C] (D) {$D$};
-					
-		\draw	(A) edge[bend left] (C);
-		\draw	(B) edge[bend left] (D);
-		\draw	(C) edge[bend left] (A);
-		\draw	(D) edge[bend left] (B);
-    \end{tikzpicture}
+#+BEGIN_EXPORT latex
+\tikzset{
+	->,
+	>=stealth,
+	node distance=2cm and 2cm,
+	every state/.style={thick, fill=gray!10},
+	initial text=$ $,
+}
+\vspace{1em}
+\begin{columns}
+\column{.2\textwidth}
+\begin{tabularx}{\textwidth}{|Y|Y|Y|Y|Y|}
+\hline
+& A & B & C & D \\
+\hline
+A &  &  & X &  \\
+\hline
+B &  &  &  & X \\
+\hline
+C & X &  &  &  \\
+\hline
+D &  & X &  &  \\
+\hline
+\end{tabularx}
+\column{.3\textwidth}
+\begin{tikzpicture}
+	\node[state] (A) {$A$};
+	\node[state, right=1cm of A] (B) {$B$};
+	\node[state, below=1cm of A] (C) {$C$};
+	\node[state, right=1cm of C] (D) {$D$};
+
+	\draw	(A) edge[bend left] (C);
+	\draw	(B) edge[bend left] (D);
+	\draw	(C) edge[bend left] (A);
+	\draw	(D) edge[bend left] (B);
+\end{tikzpicture}
+\end{columns}
+#+END_EXPORT
 
 *** Beispiel: Transitivität
 
@@ -511,17 +549,28 @@ Karnaugh-Tafel für \(F=\neg B \land (A \lor \neg C)\)
   - "Vorfahren": Albert ist Vorfahr von Brunhilde. Brunhilde ist Vorfahr
     von Diana. Dann ist Albert auch Vorfahr von Diana.
 
-  - Darstellung als Graph (in Tabelle nicht gut zu sehen):\\
-    \begin{tikzpicture}
+  - Darstellung als Graph (in Tabelle nicht gut zu sehen):
+
+#+BEGIN_EXPORT latex
+\tikzset{
+	->,
+	>=stealth,
+	node distance=2cm and 2cm,
+	every state/.style={thick, fill=gray!10},
+	initial text=$ $,
+}
+\vspace{1em}
+\begin{tikzpicture}
 	\node[state] (A) {$A$};
 	\node[state, right=1cm of A] (B) {$B$};
 	\node[state, below=1cm of A] (C) {$C$};
 	\node[state, right=1cm of C] (D) {$D$};
-					
+
 	\draw	(A) -- (B);
 	\draw	(B) -- (D);
 	\draw	(A) -- (D);
-    \end{tikzpicture}
+\end{tikzpicture}
+#+END_EXPORT
 
 *** Äquivalenzrelationen
 
@@ -574,30 +623,32 @@ Karnaugh-Tafel für \(F=\neg B \land (A \lor \neg C)\)
 
 *** Boolesche Algebra: Rechenregeln
 
-/Abstrakte Definition/\\
-Boolesche Algebra \((B, +, \times, \kappa)\)
-
-- \(B\): Grundmenge, enthält insbesondere 0 und 1
-
-- \(+\) und \(\times\): zweistellige Operationen auf \(B\)
-
-- \(\kappa\): einstellige Operation auf \(B\) (Komplement)
-
-- dazu gelten die folgenden vier Rechengesetze \((a,b,c\in B)\)
-
-/vorausgesetzte Rechenregeln/\\
-
-- Kommutativgesetze\\
-  \(a+b=b+a\), \(a \times b=b \times a\)
-
-- Distributivgesetze\\
-  \(a \times (b + c) = (a \times b) + (a\times c)\)\\
-  \(a + (b \times c) = (a + b) \times (a + c)\)\\
-
-- Neutralitätsgesetze\\
-  \(a \times 1 = a\), \(a + 0 = a\)
-
-- Komplementgesetze \(a + \kappa(a) = 1\), \(a \times \kappa(a) = 0\)
+#+BEGIN_EXPORT latex
+\begin{columns}
+\column{.5\textwidth}
+\emph{Abstrakte Definition}\\
+Boolesche Algebra $(B, +, \times, \kappa)$
+\begin{itemize}
+\item $B$: Grundmenge, enthält insbesondere 0 und 1
+\item $+$ und $\times$: zweistellige Operationen auf $B$
+\item $\kappa$: einstellige Operation auf $B$ (Komplement)
+\item dazu gelten die folgenden vier Rechengesetze $(a,b,c\in B)$
+\end{itemize}
+\column{.5\textwidth}
+\emph{vorausgesetzte Rechenregeln}\\
+\begin{itemize}
+\item Kommutativgesetze\\
+	$a+b=b+a$, $a \times b=b \times a$
+\item Distributivgesetze\\
+	$a \times (b + c) = (a \times b) + (a\times c)$\\
+	$a + (b \times c) = (a + b) \times (a + c)$\\
+\item Neutralitätsgesetze\\
+	$a \times 1 = a$, $a + 0 = a$
+\item Komplementgesetze
+	$a + \kappa(a) = 1$, $a \times \kappa(a) = 0$
+\end{itemize}
+\end{columns}
+#+END_EXPORT
 
 *** Beispiele
 
@@ -633,31 +684,36 @@ Boolesche Algebra \((B, +, \times, \kappa)\)
 
 *** Beweisbeispiele
 
-\[\begin{aligned}
+#+BEGIN_EXPORT latex
+\begin{columns}
+\column{.3\textwidth}
+\begin{align*}
 	a+a&=a\\
 	a+a&=(a+a)\times 1\\
 	   &=(a+a)\times (a+\kappa(a))\\
 	   &=a+(a\times \kappa(a))\\
 	   &=a+0\\
-	   &=a		
-\end{aligned}\]
-
-\[\begin{aligned}
+	   &=a
+\end{align*}
+\column{.3\textwidth}
+\begin{align*}
 	a+1&=1\\
 	a+1&=(a+1)\times 1\\
 	&=(a+1)\times (a+\kappa(a))\\
 	&=a+(1\times \kappa(a))\\
 	&=a+\kappa(a)\\
-	&=1	
-\end{aligned}\]
-
-\[\begin{aligned}
+	&=1
+\end{align*}
+\column{.3\textwidth}
+\begin{align*}
 	a+(a\times b)&=a\\
 	a+(a\times b)&=(a\times 1)+(a\times b)\\
 	&=a\times (1+b)\\
 	&=a\times 1\\
-	&=a\\	
-\end{aligned}\]
+	&=a\\
+\end{align*}
+\end{columns}
+#+END_EXPORT
 
 *** Beispiel: Schaltfunktionen-Algebra
 
@@ -679,14 +735,22 @@ Boolesche Algebra \((B, +, \times, \kappa)\)
   \(\kappa : \kappa [f](x_1,\ldots,x_n)=1-f(x_1,\ldots,x_n)\)
 
 *** Gatter IEC 60617-12
+:PROPERTIES:
+:BEAMER_OPT: shrink=10
+:END:
 
-| AND  | \(Y=A\cdot B=AB\)                      | (0,0) node[and port] (gate) (gate.in 1) node[left](i1) A (gate.in 2) node[left](i2) B (gate.out) node[right](o) Y;  |
-| OR   | \(Y=A+B\)                              | (0,0) node[or port] (gate) (gate.in 1) node[left](i1) A (gate.in 2) node[left](i2) B (gate.out) node[right](o) Y;   |
-| NOT  | \(Y=\overline{A}\)                     | (0,0) node[not port] (gate) (gate.in 1) node[left](i1) A (gate.out) node[right](o) Y;                               |
-| NAND | \(Y=\overline{AB}\)                    | (0,0) node[nand port] (gate) (gate.in 1) node[left](i1) A (gate.in 2) node[left](i2) B (gate.out) node[right](o) Y; |
-| NOR  | \(Y=\overline{A+B}\)                   | (0,0) node[nor port] (gate) (gate.in 1) node[left](i1) A (gate.in 2) node[left](i2) B (gate.out) node[right](o) Y;  |
-| XOR  | \(Y=A\overline{B}+\overline{A}B\)      | (0,0) node[xor port] (gate) (gate.in 1) node[left](i1) A (gate.in 2) node[left](i2) B (gate.out) node[right](o) Y;  |
-| XNOR | \(Y=(\overline{A}+B)(A+\overline{B})\) | (0,0) node[xnor port] (gate) (gate.in 1) node[left](i1) A (gate.in 2) node[left](i2) B (gate.out) node[right](o) Y; |
+#+BEGIN_EXPORT latex
+\centering
+\begin{tabular}{llc}
+AND		& $Y=A\cdot B=AB$ & \begin{circuitikz}\draw	(0,0) node[and port] (gate) {} (gate.in 1) node[left](i1) {A}	(gate.in 2) node[left](i2) {B} (gate.out) node[right](o) {Y};	\end{circuitikz} \\
+OR		& $Y=A+B$ & \begin{circuitikz}\draw	(0,0) node[or port] (gate) {} (gate.in 1) node[left](i1) {A}	(gate.in 2) node[left](i2) {B} (gate.out) node[right](o) {Y};	\end{circuitikz} \\
+NOT		& $Y=\overline{A}$ & \begin{circuitikz}\draw	(0,0) node[not port] (gate) {} (gate.in 1) node[left](i1) {A} (gate.out) node[right](o) {Y};	\end{circuitikz} \\
+NAND	& $Y=\overline{AB}$ & \begin{circuitikz}\draw	(0,0) node[nand port] (gate) {} (gate.in 1) node[left](i1) {A}	(gate.in 2) node[left](i2) {B} (gate.out) node[right](o) {Y};	\end{circuitikz} \\
+NOR		& $Y=\overline{A+B}$ & \begin{circuitikz}\draw	(0,0) node[nor port] (gate) {} (gate.in 1) node[left](i1) {A}	(gate.in 2) node[left](i2) {B} (gate.out) node[right](o) {Y};	\end{circuitikz} \\
+XOR		& $Y=A\overline{B}+\overline{A}B$ & \begin{circuitikz}\draw	(0,0) node[xor port] (gate) {} (gate.in 1) node[left](i1) {A}	(gate.in 2) node[left](i2) {B} (gate.out) node[right](o) {Y};	\end{circuitikz} \\
+XNOR	& $Y=(\overline{A}+B)(A+\overline{B})$ & \begin{circuitikz}\draw	(0,0) node[xnor port] (gate) {} (gate.in 1) node[left](i1) {A}	(gate.in 2) node[left](i2) {B} (gate.out) node[right](o) {Y};	\end{circuitikz} \\
+\end{tabular}
+#+END_EXPORT
 
 *** Beispiele
 \begin{circuitikz}
@@ -729,19 +793,22 @@ Boolesche Algebra \((B, +, \times, \kappa)\)
 
 *** George Boole (\textborn 1815, \textdied 1864)
 
-- englischer Mathematiker (Autodidakt), Logiker und Philosoph
-
-- Einbettung der Logik in die Mathematik
-
-- wurde Mathematikprofessor, ohne selbst studiert zu haben
-
-- Schriften:
-
-  - /The Mathematical Analysis of Logic/ (1847)
-
-  - /An Investigation of the Laws of Thought/ (1854)
-
-[[file:images/George_Boole_color.jpg]][fn:1]
-
-[fn:1] [[https://commons.wikimedia.org/wiki/File:George_Boole_color.jpg]]
+#+BEGIN_EXPORT latex
+\begin{columns}
+\column{.75\textwidth}
+\begin{itemize}
+\item englischer Mathematiker (Autodidakt), Logiker und Philosoph
+\item Einbettung der Logik in die Mathematik
+\item wurde Mathematikprofessor, ohne selbst studiert zu haben
+\item Schriften:
+\begin{itemize}
+\item \emph{The Mathematical Analysis of Logic} (1847)
+\item \emph{An Investigation of the Laws of Thought} (1854)
+\end{itemize}
+\end{itemize}
+\column{.25\textwidth}
+\centering
+\includegraphics[width=0.9\linewidth]{images/George_Boole_color.jpg}\footnote[frame]{\href{https://commons.wikimedia.org/wiki/File:George_Boole_color.jpg}{Quelle: Wikimedia Commons}}
+\end{columns}
+#+END_EXPORT
 

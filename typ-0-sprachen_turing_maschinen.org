@@ -158,18 +158,17 @@
 	&(s_3, x, s_3, x, L), (s_3, a, s_3, a, L), (s_3, \#, s_0, \#, R)\}
 \end{aligned}\]
 
-Arbeitsweise:
-
-- erstes verbliebenes \(a\) wird durch Füllzeichen \(x\) überschrieben
-
-- erstes verbliebenes \(b\) wird durch Füllzeichen \(x\) überschrieben
-
-- stellt sicher, dass bis zum Wortende nur \(b\)'s kommen
-
-- zurück zum Wortanfang
-
-- falls \(w\in L\): am Schluss stehen nur noch \(x\) auf dem Band;
-  Übergang in akzeptierenden Zustand \(s_f\)
+#+BEGIN_EXPORT latex
+\scriptsize
+Arbeitsweise
+\begin{itemize}
+\item [$s_0$:] erstes verbliebenes $a$ wird durch Füllzeichen $x$ überschrieben
+\item [$s_1$:] erstes verbliebenes $b$ wird durch Füllzeichen $x$ überschrieben
+\item [$s_2$:] stellt sicher, dass bis zum Wortende nur $b$'s kommen
+\item [$s_3$:] zurück zum Wortanfang
+\item falls $w\in L$: am Schluss stehen nur noch $x$ auf dem Band; Übergang in akzeptierenden Zustand $s_f$
+\end{itemize}
+#+END_EXPORT
 
 *** Linear beschränkte Automaten (LBA) und kontextsensitive Sprachen
 
@@ -227,36 +226,40 @@ Arbeitsweise:
 
 *** Sprachklassen: Zusammenfassung und Ausblick
 
-[[file:images/Sprachklassen_Typ0_Typ1.pdf]]
-
-- Typ-1-Sprachen sind entscheidbar
-
-- es gibt entscheidbare Sprachen, die Typ-0 aber nicht Typ-1 sind (z.B.
-  \(L_D\))
-
-- es gibt Typ-0-Sprachen, die nicht entscheidbar sind (z.B. \(L_H\))
-
-- es gibt Sprachen, die nicht Typ-0 sind, d.h. nicht durch eine
-  Grammatik erzeugt werden können (z.B. \(\overline{L_H}\))
+#+BEGIN_EXPORT latex
+\begin{columns}
+\column{.5\textwidth}
+\centering
+\includegraphics[width=0.9\linewidth]{images/Sprachklassen_Typ0_Typ1.pdf}
+\column{.5\textwidth}
+\begin{itemize}
+\item Typ-1-Sprachen sind entscheidbar
+\item es gibt entscheidbare Sprachen, die Typ-0 aber nicht Typ-1 sind (z.B. $L_D$)
+\item es gibt Typ-0-Sprachen, die nicht entscheidbar sind (z.B. $L_H$)
+\item es gibt Sprachen, die nicht Typ-0 sind, d.h. nicht durch eine Grammatik erzeugt werden können (z.B. $\overline{L_H}$)
+\end{itemize}
+\end{columns}
+#+END_EXPORT
 
 *** Alan Mathison Turing (\textborn 1912, \textdied 1954)
 
-- englischer Mathematiker, Logiker, Kryptoanalytiker, Informatiker
-
-- Erfinder der Turingmaschine
-
-- Mitbegründer der Theoretischen Informatik
-
-- Entwickler des Turing-Tests
-
-- Knackte die Enigma-Verschlüsselung im Zweiten Weltkrieg
-
-- Schriften:
-
-  - /On Computable Numbers, with an Application to the
-    Entscheidungsproblem/ (1936)
-
-[[file:images/Alan_Turing_(1951)_(crop).jpg]][fn:4]
-
-[fn:4] [[https://commons.wikimedia.org/wiki/File:Alan_Turing_(1951)_(crop).jpg]]
+#+BEGIN_EXPORT latex
+\begin{columns}
+\column{.75\textwidth}
+\begin{itemize}
+\item englischer Mathematiker, Logiker, Kryptoanalytiker, Informatiker
+\item Erfinder der Turingmaschine
+\item Mitbegründer der Theoretischen Informatik
+\item Entwickler des Turing-Tests
+\item Knackte die Enigma-Verschlüsselung im Zweiten Weltkrieg
+\item Schriften:
+\begin{itemize}
+\item \emph{On Computable Numbers, with an Application to the Entscheidungsproblem} (1936)
+\end{itemize}
+\end{itemize}
+\column{.25\textwidth}
+\centering
+\includegraphics[width=0.9\linewidth]{images/Alan_Turing_(1951)_(crop).jpg}\footnote[frame]{\href{https://commons.wikimedia.org/wiki/File:Alan_Turing_(1951)_(crop).jpg}{Quelle: Wikimedia Commons}}
+\end{columns}
+#+END_EXPORT
 

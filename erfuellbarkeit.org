@@ -1,0 +1,195 @@
+*** Entscheidungsproblem SAT
+
+- Ist eine gegebene aussagenlogische Formel erfüllbar / nicht erfüllbar?
+
+- Gesucht sind /Algorithmen/ (Verfahren, Handlungsanweisungen), die für
+  eine (beliebige) aussagenlogische Formel als Eingabe nach endlich
+  vielen Schritten mit (korrekter) Aussage ja/nein terminieren.
+
+- trivialer Algorithmus: Berechnung der Wahrheitstafel \(\rightarrow\)
+  nicht effizient
+
+- Bemerkung: jede aussagenlogische Formel lässt sich effizient in eine
+  erfüllbarkeitsäquivalente Formel in KNF umschreiben (unter Einführung
+  zusätzlicher Variablen) \(\rightarrow\) betrachte im weiteren Formeln
+  in KNF
+
+*** Klauselmengen
+
+- Mengennotation für Formeln in KNF\\
+  ersetze Klausel \(L_{i1} \lor L_{i2} \lor \ldots\) durch
+  \(C_i = \left\{L_{i1}, L_{i2}, \ldots\right\}\) und Formel \(F\) in
+  KNF durch Klauselmenge \(S=\left\{C_1, C_2, \ldots\right\}\)
+
+- Belegung \(I\) lässt sich ebenfalls als Menge darstellen:\\
+  z.B. \(I(x_1)=w, I(x_2)=f, \ldots\)\\
+  dann Schreibweise \(I=\left\{x_1, \overline{x_2}, \ldots\right\}\)
+
+- Belegung \(I\) ist Modell der Klausel \(C_i\) gdw.
+  \(I \cap C_i \neq \varnothing\).\\
+  Belegung \(I\) ist Modell der Klauselmenge \(S\) gdw.
+  \(I \cap C_i \neq \varnothing\) für alle \(C_i \in S\).
+
+*** Hornformeln
+
+- Definition: \(F\) ist Hornformel gdw. \(F\) ist in KNF und jede
+  Klausel enthält höchstens ein positives Literal.
+
+- Beispiel:
+  \(F_1=(A \lor \neg B) \land (\neg C \lor \neg A \lor D) \land (\neg A \lor \neg B) \land D \land \neg E\)
+
+- Es gilt: jede Hornformel lässt sich äquivalent in eine Konjunktion von
+  Implikationen ("Regeln") umformen
+
+- Beispiel:
+  \(F_1=(B \rightarrow A) \land (A \land C \rightarrow D) \land (A \land B \rightarrow f) \land (w \rightarrow D) \land (E \rightarrow f)\)
+
+- Eine Menge von Hornklauseln heißt auch Logikprogramm
+
+  - Tatsachenklausel: ein positives und kein negatives Literal
+
+  - Prozedurklausel (Regel): ein positives und mindestens ein negatives
+    Literal
+
+  - Zielklausel (Frageklausel): negative Klausel (ohne positives
+    Literal)
+
+*** Beweismethodik
+
+- Zeige Gültigkeit einer regelbasierten aussagenlogischen Formel durch
+  Nichterfüllbarkeit von \(\neg F\)
+
+- Beispiel: es gelten die Prämissen \(B, B \rightarrow A\) und
+  \((A \land B) \rightarrow C\); logisches Schließen liefert \(A\) und
+  daraus auch \(C\); also ist\\
+  \(F=(B \land (B \rightarrow A) \land (A \land B \rightarrow C)) \rightarrow (A \land C)\)\\
+  eine Tautologie. Es gilt\\
+  \(\neg F = B \land (B \rightarrow A) \land (A \land B \rightarrow C) \land (\neg A \lor \neg C)\)\\
+  das ist Hornformel, mit Zielklausel
+  \((\neg A \lor \neg C) \equiv ((A \land C) \rightarrow f)\)
+
+- Anstelle die Gültigkeit von F direkt zu beweisen, zeige die
+  Nichterfüllbarkeit der Hornformel \(\neg F\)
+
+*** Erfüllbarkeitstest (Markierungsalgorithmus)
+
+Sei F Konjunktion von Implikationen
+
+1. Für alle Teilformeln der Art \(w \rightarrow A\): markiere in allen
+   Teilformeln auftretende \(A\)
+
+2. while (es gibt Teilformeln der Art
+
+   1. \(A_1 \land A_2 \land \ldots \land A_n \rightarrow B\) bzw.
+      \(1 \rightarrow B\) oder
+
+   2. \(A_1 \land A_2 \land \ldots \land A_n \rightarrow f\)\\
+      mit: alle \(A_i\) markiert, \(B\) nicht markiert)\\
+      if (Fall (i)) markiere alle B\\
+      else (Fall (ii)) Rückgabe „unerfüllbar, STOP\\
+      end
+
+   end\\
+   Rückgabe "erfüllbar"\\
+   STOP
+
+*** Beispiel: Markierungsalgorithmus
+
+\[F=(\neg A \lor \neg B \lor \neg D) \land \neg E \land (\neg C \lor A) \land C \land B \land (\neg G \lor D) \land G\]
+
+*** Erfüllbarkeitstest (Hornklauselalgorithmus)
+
+Sei \(S\) Menge von Hornklauseln\\
+while (\(S\) enthält eine positive Klausel \(\left\{A_i\right\}\))\\
+entferne alle Klauseln, die \(A_i\) enhalten\\
+und entferne \(\overline{A_i}\) aus den verbliebenen Klauseln\\
+end\\
+if (\(S\) enhält die leere Klausel \(\Box\))\\
+Rückgabe "unerfüllbar"\\
+else Rückgabe "erfüllbar"\\
+end
+
+*** Erfüllbarkeit allgemeiner Klauselmengen: Davis-Putnam-Regeln
+
+- Sei \(S=\left\{K_1, \ldots, K_k\right\}\) Klauselmenge, \(L\) ein
+  Literal, \(\overline{L}\) das negierte Literal. Definiere:
+
+  - \(S_L^+=\left\{K_j \in S \mid L \in K_j\right\}, S_L^-=\left\{K_j \in S \mid \overline{L} \in K_j\right\}, S_L^0=\left\{K_j \in S \mid L, \overline{L} \notin K_j\right\}\)
+
+  - \(POS_L(S)=S_L^0 \bigcup \left\{K_j \setminus \left\{L\right\} \mid K_j \in S_L^+\right\}; NEG_L(S)=S_L^0 \bigcup \left\{K_j \setminus \left\{\overline{L}\right\} \mid K_j \in S_L^-\right\}\)
+
+- Es gilt: Die Klauselmenge \(S\) ist erfüllbar gdw. wenigstens eine der
+  beiden Klauselmengen \(POS_L(S)\) und \(NEG_L(S)\) erfüllbar ist
+
+  - Vorteil: Anzahl der Literale wird schrittweise reduziert
+
+  - Nachteil: in jedem Schritt verdoppelt sich i.A. die Zahl der
+    Klauselmengen (vielfach aber auch nicht, s.u.)
+
+- Spezialfälle
+
+  - \(S_L^-=\varnothing\): S erfüllbar gdw. \(NEG_L(S)=S_L^0\) erfüllbar
+    (analog für \(S_L^+=\varnothing\))
+
+  - Unit-Regel: falls \(\left\{L\right\} \in S\), dann \(S\) erfüllbar
+    gdw. \(NEG_L(S)\) erfüllbar
+
+*** Resolution
+
+- Beweis der Unerfüllbarkeit allgemeiner Klauselmengen durch Herleitung
+  der leeren Klausel
+
+- Definition: Resolvente
+
+  - sei \(L\) ein Literal und \(\overline{L}\) das negierte Literal
+
+  - sei \(K_1\) eine Klausel, die \(L\) enthält, \(K_2\) eine Klausel,
+    die \(\overline{L}\) enthält
+
+  - dann heißt die Klausel
+    \(RES_L(K_1, K_2)=\left(K_1 \setminus \left\{L\right\}\right) \cup \left(K_2 \setminus \left\{\overline{L}\right\}\right)\)
+
+  - Gesprochen: "Resolvente der Klauseln \(K_1\) und \(K_2\) nach \(L\)"
+
+  - Notation: \(\left\{K_1, K_2\right\} \vdash_{res} RES_L\)
+
+- Resolutionslemma\\
+  sei \(I\) ein Modell von \(K_1\) und \(K_2\), dann ist \(I\) auch
+  Modell von \(RES_L(K_1, K_2)\), d.h.
+  \(I \cap K_1 \neq \varnothing \land I \cap K_2 \neq \varnothing \rightarrow I \cap RES_L(K_1, K_2) \neq \varnothing\)
+
+*** Grundresolutionstheorem
+
+- Zu \(S\) erfüllbarkeitsäquivalente Klauselmenge \(RES_L(S)\)
+
+  - sei \(S\) Klauselmenge; \(n\) Anzahl der Variablen; definiere:\\
+    \(RES_L(S)=S_L^0 \bigcup \left\{RES_L(K_1, K_2) \mid K_1 \in S_L^+, K_2 \in S_L^-\right\}\)
+
+  - beachte: \(RES_L(S)\) enhält \(L\) bzw. \(\overline{L}\) nicht mehr
+
+  - es gilt: \(S\) ist erfüllbar gdw. \(RES_L(S)\) ist erfüllbar
+
+- Grundresolutionstheorem: eine Klauselmenge \(S\) ist unerfüllbar gdw.
+  \(S\) lässt sich mittels Resolution widerlegen, d.h. die leere Klausel
+  ist herleitbar
+
+- Systematische Durchführung:\\
+  \(S_0=S\), \(S_i=RES_{L_i}\left(S_{i-1}\right)\); alle
+  \(S_i, i \leq n\) sind erfüllbarkeitsäquivalent\\
+  \(S_n\) enthält kein Literal mehr, d.h. \(S_n=\varnothing\)
+  (erfüllbar) oder \(S_n=\left\{\Box\right\}\) (unerfüllbar)
+
+*** Resolution: Beispiel und Hinweis
+
+- Ist folgende Formel (un-)erfüllbar?:
+  \((\neg A \lor B) \land (\neg B \lor C) \land A \land \neg C\)
+
+- *Vorsicht!*
+
+  - \(\left\{A, \neg B\right\}\) und \(\left\{\neg A, B\right\}\) haben
+    als Resolvente *nicht* \(\Box\)! Es wird immer nur ein
+    (komplementäres) Literal entfernt!
+
+  - \(\left\{B, \neg B\right\}\) führt nicht zu \(\Box\)! Es werden
+    immer zwei Klauseln benötigt!
+

@@ -1,25 +1,18 @@
-% Created 2025-12-31 Mi 14:03
-% Intended LaTeX compiler: xelatex
+% Created 2026-07-30 Do 10:29
+% Intended LaTeX compiler: pdflatex
 \documentclass[a4paper,14pt,ngerman]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{longtable}
 \usepackage{wrapfig}
 \usepackage{rotating}
 \usepackage[normalem]{ulem}
-\usepackage{capt-of}
+\usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{hyperref}
-\usepackage{polyglossia}
-\usepackage{polyglossia}
-\setmainlanguage[variant=german]{german}
-\usepackage{polyglossia}
-\setdefaultlanguage{german}
-\PolyglossiaSetup{german}{shorthands=on}
-\AtBeginDocument{\let\babelprovide\relax}
-\AtBeginDocument{\let\shorthandon\relax}
-\AtBeginDocument{\let\shorthandoff\relax}
-\setmainfont{Gentium Book Basic}
-\setsansfont{Latin Modern Sans}
-\setmonofont{Latin Modern Mono}
+\usepackage[ngerman]{babel}
+\shorthandoff{"}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
 \usepackage{amsmath,amssymb}
@@ -36,16 +29,16 @@
  pdftitle={Vertiefung in der Praxisphase},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 30.1 (Org mode 9.7.11)}, 
+ pdfcreator={Emacs 30.2 (Org mode 9.7.11)}, 
  pdflang={German}}
 \begin{document}
 
 \section{\textbf{Vertiefung in der Praxisphase}}
-\label{sec:org090c0ed}
+\label{sec:orgc0a2988}
 \subsection{\textbf{Turingmaschinen und Parser}}
-\label{sec:org2f43142}
+\label{sec:org35055a2}
 \subsubsection{\textbf{Aufgabe 1}}
-\label{sec:org9395092}
+\label{sec:org21c5d60}
 
 In der Vorlesung wurde besprochen, wie eine 2-Band-Turingmaschine das
 Wortproblem für die Sprache \[L=\{ww \mid w \in \{a,b\}^+\}\]
@@ -54,7 +47,7 @@ gleich mächtig sind, muss dieses Problem auch von einer
 Ein-Band-Turingmaschine entschieden werden können. Konstruieren Sie eine
 solche Turingmaschine.
 \subsubsection{\textbf{Vorbemerkungen zu Aufgabe 2}}
-\label{sec:orgae12cfd}
+\label{sec:orgc193ebd}
 
 Parser wurden in der Vorlesung nicht thematisiert. Erarbeiten Sie sich
 die Inhalte des Papers \emph{LR(k)-Analyse für Pragmatiker} von Andreas
@@ -63,7 +56,7 @@ Kunert, welches unter\\
 zur Verfügung steht. Sie sollten sich mindestens die Kapitel 1 bis 3
 aneignen, um die folgenden Aufgabe lösen zu können.
 \subsubsection{\textbf{Aufgabe 2}}
-\label{sec:orgb49236e}
+\label{sec:org4d5f754}
 
 Die präfixfreie Variante der Sprache \(L\) der korrekt geklammerten
 Ausdrücke \[L=\{(), (()), ((())), (()()), \ldots\}\] enthält alle Worte

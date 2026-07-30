@@ -1,25 +1,18 @@
-% Created 2025-12-31 Mi 14:01
-% Intended LaTeX compiler: xelatex
+% Created 2026-07-30 Do 10:29
+% Intended LaTeX compiler: pdflatex
 \documentclass[a4paper,14pt,ngerman]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{longtable}
 \usepackage{wrapfig}
 \usepackage{rotating}
 \usepackage[normalem]{ulem}
-\usepackage{capt-of}
+\usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{hyperref}
-\usepackage{polyglossia}
-\usepackage{polyglossia}
-\setmainlanguage[variant=german]{german}
-\usepackage{polyglossia}
-\setdefaultlanguage{german}
-\PolyglossiaSetup{german}{shorthands=on}
-\AtBeginDocument{\let\babelprovide\relax}
-\AtBeginDocument{\let\shorthandon\relax}
-\AtBeginDocument{\let\shorthandoff\relax}
-\setmainfont{Gentium Book Basic}
-\setsansfont{Latin Modern Sans}
-\setmonofont{Latin Modern Mono}
+\usepackage[ngerman]{babel}
+\shorthandoff{"}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
 \usepackage{amsmath,amssymb}
@@ -36,16 +29,16 @@
  pdftitle={Übungsblatt 2},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 30.1 (Org mode 9.7.11)}, 
+ pdfcreator={Emacs 30.2 (Org mode 9.7.11)}, 
  pdflang={German}}
 \begin{document}
 
 \section{\textbf{Übung 2}}
-\label{sec:orgae6ceff}
+\label{sec:org6f5c327}
 \subsection{\textbf{Grammatiken, endliche Automaten, reguläre Sprachen}}
-\label{sec:orgd0fa655}
+\label{sec:org09a10c1}
 \subsubsection{\textbf{Aufgabe 1}}
-\label{sec:org6c6bd17}
+\label{sec:org80ec6be}
 
 Welche Sprache \(L(G)\) wird durch die folgende Grammatik \(G\) erzeugt?
 Ist die Grammatik eindeutig? Falls nein: lässt sich für diese Sprache
@@ -56,25 +49,25 @@ eine eindeutige Grammatik angeben? Von welchem Typ ist die Sprache?
         P&=\left\{S \rightarrow aB \mid Ac, A \rightarrow ab, B \rightarrow bc\right\} 
 \end{aligned}\]
 \subsubsection{\textbf{Aufgabe 2}}
-\label{sec:org6d6eee4}
+\label{sec:org6f69683}
 
 Ist die Sprache
 \(L = \left\{b^na^{2m} \mid n,m \in \mathbb{N}_0\right\}\) regulär?
 Beantworten Sie die Frage vom Standpunkt einer erzeugenden Grammatik,
 sowie von dem eines akzeptierenden Automaten.
 \subsubsection{\textbf{Aufgabe 3}}
-\label{sec:orgb8ad5da}
+\label{sec:org7f4aa6b}
 
 Konstruieren Sie einen DFA, der alle Worte über \(\{0,1\}\) erkennt, die
 den String \(101\) \uline{nicht} als Teilwort enthalten.
 \subsubsection{\textbf{Aufgabe 4}}
-\label{sec:org6f0a90d}
+\label{sec:org6952c30}
 
 Konstruieren Sie einen DFA, der die Menge aller natürlichen Zahlen
 kongruent zu Null (mod 5) akzeptiert. Eingabe ist jeweils eine
 natürliche Zahl in Dualdarstellung.
 \subsubsection{\textbf{Aufgabe 5}}
-\label{sec:orgc1e48da}
+\label{sec:org46911f5}
 
 Geben Sie eine Typ-3 Grammatik an, die die durch folgenden Automaten
 akzeptierte Sprache produziert. Beschreiben Sie die akzeptierte Sprache
@@ -86,7 +79,7 @@ verbal. Ermitteln sie den Minimalautomaten zu \(A\).
         &\qquad(s_3,0,s_1),(s_3,1,s_4),(s_4,0,s_2),(s_4,1,s_4)\}
 \end{aligned}\]
 \subsubsection{\textbf{Aufgabe 6}}
-\label{sec:orgf8047b6}
+\label{sec:orgbddc5c0}
 
 Konstruieren Sie zu folgendem nichtdeterministischem endlichem Automaten
 \[A=(\{p,q,r\}, \{a,b\}, \delta, p, \{r\})\] mit der mengenwertigen Übergangsfunktion \(\delta\)

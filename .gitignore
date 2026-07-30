@@ -277,6 +277,8 @@ TSWLatexianTemp*
 # auto folder when using emacs and auctex
 ./auto/*
 *.el
+# wird für den Org->LaTeX-Export der Übungsblätter gebraucht (CI + lokal)
+!exercises/org-export-setup.el
 
 # expex forward references with \gathertags
 *-tags.tex
@@ -307,4 +309,9 @@ TSWLatexianTemp*
 ### Bash Scripts ###
 # required to use local testing scripts
 .sh
+
+### Generated Files ###
+# AuFS.tex is generated via Org export from AuFS.org (locally and in CI),
+# so it is not source code and should not be checked in.
+/AuFS.tex
 

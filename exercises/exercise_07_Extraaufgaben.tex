@@ -1,25 +1,18 @@
-% Created 2025-12-31 Mi 14:03
-% Intended LaTeX compiler: xelatex
+% Created 2026-07-30 Do 10:29
+% Intended LaTeX compiler: pdflatex
 \documentclass[a4paper,14pt,ngerman]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{longtable}
 \usepackage{wrapfig}
 \usepackage{rotating}
 \usepackage[normalem]{ulem}
-\usepackage{capt-of}
+\usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{hyperref}
-\usepackage{polyglossia}
-\usepackage{polyglossia}
-\setmainlanguage[variant=german]{german}
-\usepackage{polyglossia}
-\setdefaultlanguage{german}
-\PolyglossiaSetup{german}{shorthands=on}
-\AtBeginDocument{\let\babelprovide\relax}
-\AtBeginDocument{\let\shorthandon\relax}
-\AtBeginDocument{\let\shorthandoff\relax}
-\setmainfont{Gentium Book Basic}
-\setsansfont{Latin Modern Sans}
-\setmonofont{Latin Modern Mono}
+\usepackage[ngerman]{babel}
+\shorthandoff{"}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
 \usepackage{amsmath,amssymb}
@@ -39,14 +32,14 @@
  pdftitle={Übungsblatt 7},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 30.1 (Org mode 9.7.11)}, 
+ pdfcreator={Emacs 30.2 (Org mode 9.7.11)}, 
  pdflang={German}}
 \begin{document}
 
 \section{\textbf{Übung 7}}
-\label{sec:org70138ea}
+\label{sec:orgb9bd514}
 \subsection{\textbf{Klausurvorbereitung - Teil 2}}
-\label{sec:org6bcbe94}
+\label{sec:org7b362dd}
 
 Gewünscht waren folgende Themen:
 
@@ -64,7 +57,7 @@ Gewünscht waren folgende Themen:
 \item Keine Pumping-Lemmas?
 \end{itemize}
 \subsubsection{\textbf{Aufgabe: DFA minimieren}}
-\label{sec:orgd002df0}
+\label{sec:org5bda3af}
 
 Minimieren Sie den folgenden DFA:\\
 \begin{tikzpicture}
@@ -88,7 +81,7 @@ Minimieren Sie den folgenden DFA:\\
 		(s6) edge[below right] node{b} (s5);
 \end{tikzpicture}
 \subsubsection{\textbf{Aufgabe: CYK-Algorithmus}}
-\label{sec:org3f293cc}
+\label{sec:org97c75ab}
 
 Gegeben sei die Grammatik \(G=(\{S, A, B, C, D\}, \{a, b, c\}, S, P)\)
 mit \\
@@ -111,14 +104,14 @@ C -> c | AS | BD
 D -> a | CB | AA
 \end{verbatim}
 \subsubsection{\textbf{Aufgabe: Resolution}}
-\label{sec:org4d94baf}
+\label{sec:orgae02c67}
 
 Prüfen Sie mittels Resolution, ob die folgende Formel eine Tautologie
 ist:
 
 \[(A\land \neg B \land C) \lor E \lor (\neg A \land D \land \neg E) \lor (B \land C \land \neg D) \lor C \lor \neg B\]
 \subsubsection{\textbf{Aufgabe: PDA}}
-\label{sec:orgaeac29e}
+\label{sec:org3fe1e9d}
 
 Die folgende Sprache über dem Alphabet \(\Sigma=\{a, b, c\}\) ist
 deterministisch kontextfrei:
@@ -132,7 +125,7 @@ Sprache akzeptiert.
 Antwort.
 \end{enumerate}
 \subsubsection{\textbf{Aufgabe: Turingmaschine}}
-\label{sec:orgcd66ef9}
+\label{sec:org8594292}
 
 Konstruieren Sie eine Turingmaschine, die auf einem Eingabewort aus dem
 Alphabet \(\Sigma = \{|, -\}\) eine Subtraktion \(x-y\) durchführt.
@@ -150,13 +143,13 @@ notiert als: \[\#||||-||\#\] Nach Bearbeitung des Eingabewortes steht
 auf dem Band \[\#||\#\] und die Turingmaschine befindet sich in einem
 Endzustand.
 \subsubsection{\textbf{Aufgabe: Pumping-Lemma für reguläre Sprachen}}
-\label{sec:org73c09f3}
+\label{sec:orge6db03b}
 
 Zeigen Sie, dass
 \[L=\{a^ib^jv \mid v \in \{a\}^* \land |v| \textrm{ ist ungerade } \land j=2i\}\]
 über dem Alphabet \(\Sigma=\{a,b\}\) nicht regulär ist.
 \subsubsection{\textbf{Aufgabe: Pumping-Lemma für kontextfreie Sprachen}}
-\label{sec:orgb59dbe2}
+\label{sec:org56bf883}
 
 Zeigen Sie, dass \[L=\{a^ib^jc^k \mid i<j<k\}\] über dem Alphabet
 \(\Sigma=\{a,b,c\}\) nicht kontextfrei ist.
