@@ -125,19 +125,19 @@
 			\item keine Linksrekursion ($A \rightarrow A\alpha$)
 			\item für Regel-Alternativen $A \rightarrow \alpha_1 \mid \alpha_2$: disjunkte $FIRST_k$-Mengen
 		\end{itemize}
-		\item Hilfsmittel: $FIRST$-Menge (mögliche Anfangssymbole einer Ableitung) und $FOLLOW$-Menge (mögliche Nachfolgesymbole einer Variable) $\rightarrow$ Parsertabelle $S \times \Sigma \rightarrow P$ (Variable $\times$ Vorschau $\rightarrow$ anzuwendende Regel)
+		\item Hilfsmittel: $FIRST$-Menge (mögliche Anfangssymbole einer Ableitung) und $FOLLOW$-Menge (mögliche Nachfolgesymbole einer Variable) $\rightarrow$ Parsertabelle $V \times \Sigma \rightarrow P$ (Variable $\times$ Vorschau $\rightarrow$ anzuwendende Regel)
 		\item Realisierung: rekursiver Abstieg (\emph{recursive descent}, eine Prozedur je Variable) oder tabellengesteuert (Kellerautomat + Tabelle)
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Beispiel: LL(1)-Parser}
-	$G=(\{E,E',T,T',F\}, \{+,*,(,),id\}, P, E)$\\
-	$P=\{E \rightarrow TE', \quad E' \rightarrow {+}TE' \mid \varepsilon, \quad T \rightarrow FT',$\\
-	\qquad$T' \rightarrow {*}FT' \mid \varepsilon, \quad F \rightarrow (E) \mid id\}$\\[0.5em]
+	$G=(\{S,E,T,T',F\}, \{+,*,(,),id\}, P, S)$\\
+	$P=\{S \rightarrow TE, \quad E \rightarrow {+}TE \mid \varepsilon, \quad T \rightarrow FT',$\\
+	\qquad$T' \rightarrow {*}FT' \mid \varepsilon, \quad F \rightarrow (S) \mid id\}$\\[0.5em]
 	Linksableitung von $w=id+id*id$ (stets am weitesten links stehende Variable ersetzt):\\
 	\footnotesize
-	$E \Rightarrow TE' \Rightarrow FT'E' \Rightarrow id\,T'E' \Rightarrow id\,E' \Rightarrow id{+}TE' \Rightarrow id{+}FT'E'$\\
-	$\Rightarrow id{+}id\,T'E' \Rightarrow id{+}id{*}FT'E' \Rightarrow id{+}id{*}id\,T'E' \Rightarrow id{+}id{*}id\,E' \Rightarrow id{+}id{*}id$
+	$S \Rightarrow TE \Rightarrow FT'E \Rightarrow id\,T'E \Rightarrow id\,E \Rightarrow id{+}TE \Rightarrow id{+}FT'E$\\
+	$\Rightarrow id{+}id\,T'E \Rightarrow id{+}id{*}FT'E \Rightarrow id{+}id{*}id\,T'E \Rightarrow id{+}id{*}id\,E \Rightarrow id{+}id{*}id$
 \end{frame}
 
 \begin{frame}{LR-Parser (Bottom-Up)}
@@ -162,15 +162,15 @@
 		\hline
 		Stack & Rest-Eingabe & Aktion \\
 		\hline
-		\$ & $id+id$\$ & shift \\
-		\$$id$ & $+id$\$ & reduce $T\rightarrow id$ \\
-		\$$T$ & $+id$\$ & reduce $E\rightarrow T$ \\
-		\$$E$ & $+id$\$ & shift \\
-		\$$E{+}$ & $id$\$ & shift \\
-		\$$E{+}id$ & \$ & reduce $T\rightarrow id$ \\
-		\$$E{+}T$ & \$ & reduce $E\rightarrow E{+}T$ \\
-		\$$E$ & \$ & reduce $S\rightarrow E$ \\
-		\$$S$ & \$ & akzeptiert \\
+		\# & $id+id$ & shift \\
+		\#$id$ & $+id$ & reduce $T\rightarrow id$ \\
+		\#$T$ & $+id$ & reduce $E\rightarrow T$ \\
+		\#$E$ & $+id$ & shift \\
+		\#$E{+}$ & $id$ & shift \\
+		\#$E{+}id$ &  & reduce $T\rightarrow id$ \\
+		\#$E{+}T$ &  & reduce $E\rightarrow E{+}T$ \\
+		\#$E$ &  & reduce $S\rightarrow E$ \\
+		\#$S$ &  & akzeptiert \\
 		\hline
 	\end{tabular}
 \end{frame}
