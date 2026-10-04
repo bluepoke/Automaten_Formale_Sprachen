@@ -103,6 +103,89 @@
 	Weiteres Beispiel: $S\rightarrow AB; A\rightarrow BA\mid a; B\rightarrow CC\mid b; C\rightarrow AB\mid c; w=caccab$
 }
 
+\subsection{Praktische Parser-Algorithmen}
+
+\begin{frame}{Exkurs: LL- und LR-Parser}
+	\begin{itemize}
+		\item CYK: allgemein für jede kontextfreie Grammatik anwendbar, aber $O(n^3)$
+		\item in der Praxis (Compilerbau): deterministische, lineare ($O(n)$) Parser für geeignete Teilklassen kontextfreier Grammatiken
+		\item zwei Grundprinzipien
+		\begin{itemize}
+			\item \textbf{Top-Down (LL-Parser)}: Konstruktion des Ableitungsbaums von der Wurzel zu den Blättern, Linksableitung
+			\item \textbf{Bottom-Up (LR-Parser)}: Konstruktion des Ableitungsbaums von den Blättern zur Wurzel, (umgekehrt rekonstruierte) Rechtsableitung
+		\end{itemize}
+		\item Namensgebung $LL(k)$/$LR(k)$: \underline{L}eft-to-right scan der Eingabe, \underline{L}inks- bzw. \underline{R}echtsableitung, $k$ Symbole Vorschau (Lookahead)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{LL-Parser (Top-Down)}
+	\begin{itemize}
+		\item Prinzip: beginnend beim Startsymbol wird stets die am weitesten links stehende Variable ersetzt (Linksableitung); die passende Regel wird anhand der nächsten $k$ Eingabesymbole vorausschauend bestimmt
+		\item Voraussetzung ($LL(k)$-Eigenschaft der Grammatik), u.a.
+		\begin{itemize}
+			\item keine Linksrekursion ($A \rightarrow A\alpha$)
+			\item für Regel-Alternativen $A \rightarrow \alpha_1 \mid \alpha_2$: disjunkte $FIRST_k$-Mengen
+		\end{itemize}
+		\item Hilfsmittel: $FIRST$-Menge (mögliche Anfangssymbole einer Ableitung) und $FOLLOW$-Menge (mögliche Nachfolgesymbole einer Variable) $\rightarrow$ Parsertabelle $V \times \Sigma \rightarrow P$ (Variable $\times$ Vorschau $\rightarrow$ anzuwendende Regel)
+		\item Realisierung: rekursiver Abstieg (\emph{recursive descent}, eine Prozedur je Variable) oder tabellengesteuert (Kellerautomat + Tabelle)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiel: LL(1)-Parser}
+	$G=(\{S,E,T,T',F\}, \{+,*,(,),id\}, P, S)$\\
+	$P=\{S \rightarrow TE, \quad E \rightarrow {+}TE \mid \varepsilon, \quad T \rightarrow FT',$\\
+	\qquad$T' \rightarrow {*}FT' \mid \varepsilon, \quad F \rightarrow (S) \mid id\}$\\[0.5em]
+	Linksableitung von $w=id+id*id$ (stets am weitesten links stehende Variable ersetzt):\\
+	\footnotesize
+	$S \Rightarrow TE \Rightarrow FT'E \Rightarrow id\,T'E \Rightarrow id\,E \Rightarrow id{+}TE \Rightarrow id{+}FT'E$\\
+	$\Rightarrow id{+}id\,T'E \Rightarrow id{+}id{*}FT'E \Rightarrow id{+}id{*}id\,T'E \Rightarrow id{+}id{*}id\,E \Rightarrow id{+}id{*}id$
+\end{frame}
+
+\begin{frame}{LR-Parser (Bottom-Up)}
+	\begin{itemize}
+		\item Prinzip: \emph{Shift-Reduce-Parsing} mit Stack
+		\begin{itemize}
+			\item \textbf{Shift}: nächstes Eingabesymbol auf den Stack legen
+			\item \textbf{Reduce}: steht die rechte Seite einer Regel ("`Handle"') oben auf dem Stack, wird sie durch die linke Seite ersetzt
+		\end{itemize}
+		\item Ergebnis: (umgekehrt rekonstruierte) Rechtsableitung
+		\item Varianten wachsender Mächtigkeit/Tabellengröße: $LR(0)$, $SLR(1)$, $LALR(1)$, $LR(1)$
+		\item mächtiger als $LL(k)$: erkennt größere Klasse (deterministisch) kontextfreier Grammatiken, u.a. auch linksrekursive
+		\item im Kern ein deterministischer Kellerautomat (DPDA), gesteuert über eine Zustands-/Aktionstabelle
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiel: LR-Parser (Shift-Reduce)}
+	Grammatik: $S \rightarrow E, \quad E \rightarrow E+T \mid T, \quad T \rightarrow id$\\
+	Eingabe $w=id+id$:\\[0.3em]
+	\centering
+	\begin{tabular}{|l|l|l|}
+		\hline
+		Stack & Rest-Eingabe & Aktion \\
+		\hline
+		\# & $id+id$ & shift \\
+		\#$id$ & $+id$ & reduce $T\rightarrow id$ \\
+		\#$T$ & $+id$ & reduce $E\rightarrow T$ \\
+		\#$E$ & $+id$ & shift \\
+		\#$E{+}$ & $id$ & shift \\
+		\#$E{+}id$ &  & reduce $T\rightarrow id$ \\
+		\#$E{+}T$ &  & reduce $E\rightarrow E{+}T$ \\
+		\#$E$ &  & reduce $S\rightarrow E$ \\
+		\#$S$ &  & akzeptiert \\
+		\hline
+	\end{tabular}
+\end{frame}
+
+\begin{frame}{LL- vs. LR-Parser: Vergleich}
+	\begin{itemize}
+		\item Ableitung: LL $\rightarrow$ Linksableitung (top-down), LR $\rightarrow$ Rechtsableitung, rückwärts rekonstruiert (bottom-up)
+		\item Grammatikklassen: jede $LL(k)$-Grammatik ist auch $LR(k)$, umgekehrt gilt das nicht $\rightarrow$ LR ist strikt mächtiger
+		\item Implementierung: LL oft handgeschrieben (rekursiver Abstieg), LR meist werkzeuggeneriert (Parsertabellen)
+		\item Werkzeuge (Beispiele): ANTLR ($LL(*)$) vs. yacc/bison, CUP (LALR)
+		\item gemeinsam: beide benötigen $O(n)$ Zeit (im Gegensatz zu CYK mit $O(n^3)$), dafür nur für Teilklassen kontextfreier Sprachen anwendbar
+	\end{itemize}
+\end{frame}
+
 \begin{frame}{Pumping-Lemma für kontextfreie Sprachen}
 	\begin{itemize}
 		\item Pumping-Lemma: für jede kontextfreie Sprache $L$ gilt\\

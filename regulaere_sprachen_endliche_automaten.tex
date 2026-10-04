@@ -301,12 +301,11 @@
 		\begin{tabbing}
 			\hspace{5cm}\=\kill
 		$G=(V,\Sigma, P, S_0)$	\> $FA=(S, \Sigma, \delta, s_0, F)$\\ 
-			\> intialisiere: $S=V \cup \left\{f\right\}, s_0=S_0, \delta=\varnothing$\\ 
-			\> $F=\left\{f\right\}$ (neues Symbol $f$)\\ 
+			\> initialisiere: $S=V \cup \left\{f\right\}, s_0=S_0, \delta=\varnothing$\\ 
+			\> $F=\left\{f\right\}$ (neuer Zustand $f$)\\ 
 		Regel $A \rightarrow aB$	\> füge ein: $(A, a, B) \in \delta$\\ 
 		Regel $A \rightarrow a$	\> füge ein: $(A, a, f) \in \delta$\\ 
-		Regel $S_0 \rightarrow \varepsilon \mid S_1$	\> füge $S_0$ in $F$ ein; für $S_1$ die Regeln für $S_0$\\ 
-			\> einsetzen (Kettenregel); $S_1$ verbleibt als Zustand
+		Regel $S_0 \rightarrow \varepsilon$	\> füge $S_0$ in $F$ ein
 		\end{tabbing} 
 	\end{itemize}
 \end{frame}
@@ -409,6 +408,111 @@
 					(s4) edge[loop right] node{0,1} (s4);
 		\end{tikzpicture}
 	\end{columns}
+\end{frame}
+
+\subsection{Automaten mit Ausgabe}
+
+\begin{frame}{Exkurs: Automaten mit Ausgabe}
+	\begin{itemize}
+		\item bisher: Automaten als \emph{Akzeptoren} $\rightarrow$ Ausgabe ist binär (Wort akzeptiert / nicht akzeptiert)
+		\item Erweiterung: Automaten erzeugen während der Verarbeitung zusätzlich Symbole eines Ausgabealphabets $\Delta$ (\emph{Transduktoren})
+		\item Anwendungen
+		\begin{itemize}
+			\item sequentielle Schaltungen (Steuerungen, Protokolle)
+			\item lexikalische Analyse (Erzeugung von Token)
+			\item Ein-/Ausgabetransformationen allgemein
+		\end{itemize}
+		\item zwei Standardmodelle: \emph{Mealy-Automat} (Ausgabe an Übergängen) und \emph{Moore-Automat} (Ausgabe an Zuständen)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Mealy-Automat}
+	\begin{itemize}
+		\item Spezifikation eines Mealy-Automaten $M$:\\
+		$M=\left(S, \Sigma, \Delta, \delta, \lambda, s_0\right)$
+		\begin{itemize}
+			\item $S$: endliche Menge von Zuständen
+			\item $\Sigma$: Eingabealphabet, $\Delta$: Ausgabealphabet
+			\item $\delta:S \times \Sigma \rightarrow S$ Überführungsfunktion
+			\item $\lambda:S \times \Sigma \rightarrow \Delta$ Ausgabefunktion (an Übergänge gebunden)
+			\item $s_0$: Startzustand (kein $F$ nötig, da keine Akzeptanz sondern Transduktion)
+		\end{itemize}
+		\item Ausgabe zu Eingabewort $w=a_1a_2\ldots a_n$ mit Zustandsfolge $s_0,s_1,\ldots,s_n$ ($s_i=\delta(s_{i-1},a_i)$):\\
+		\quad $\lambda(s_0,a_1)\,\lambda(s_1,a_2)\cdots\lambda(s_{n-1},a_n)$, \quad Länge $=|w|$
+		\item graphische Darstellung: Kantenbeschriftung "`Eingabe / Ausgabe"'
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiel: Mealy-Automat}
+	Erkennung überlappender Vorkommen von "`aa"' in $w \in \{a,b\}^*$ (Ausgabe 1 bei Erkennung, sonst 0)
+	\begin{columns}
+		\column{.5\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\node[state, initial] (s0) {$s_0$};
+			\node[state, right=of s0] (s1) {$s_1$};
+
+			\draw	(s0) edge[loop above] node{$b/0$} (s0)
+					(s0) edge[above] node{$a/0$} (s1)
+					(s1) edge[loop above] node{$a/1$} (s1)
+					(s1) edge[bend left=40, below] node{$b/0$} (s0);
+		\end{tikzpicture}
+		\column{.5\textwidth}
+		$w=baaab$\\
+		Zustandsfolge: $s_0,s_0,s_1,s_1,s_1,s_0$\\
+		Ausgabe: $0\,0\,1\,1\,0$
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Moore-Automat}
+	\begin{itemize}
+		\item Spezifikation eines Moore-Automaten $M$:\\
+		$M=\left(S, \Sigma, \Delta, \delta, \lambda, s_0\right)$
+		\begin{itemize}
+			\item $S, \Sigma, \Delta, \delta, s_0$ wie beim Mealy-Automat
+			\item $\lambda:S \rightarrow \Delta$ Ausgabefunktion (an \underline{Zustände} gebunden)
+		\end{itemize}
+		\item Ausgabe zu Eingabewort $w=a_1a_2\ldots a_n$ mit Zustandsfolge $s_0,s_1,\ldots,s_n$:\\
+		\quad $\lambda(s_0)\,\lambda(s_1)\cdots\lambda(s_n)$, \quad Länge $=|w|+1$ (Ausgabe bereits im Startzustand)
+		\item graphische Darstellung: Zustandsbeschriftung "`Zustand / Ausgabe"'
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Beispiel: Moore-Automat}
+	gleiche Sprache wie zuvor: Erkennung überlappender Vorkommen von "`aa"'
+	\begin{columns}
+		\column{.5\textwidth}
+		\centering
+		\begin{tikzpicture}[node distance=1.1cm and 1.1cm]
+			\node[state, initial] (s0) {$s_0/0$};
+			\node[state, right=of s0] (s1) {$s_1/0$};
+			\node[state, right=of s1] (s2) {$s_2/1$};
+
+			\draw	(s0) edge[loop above] node{$b$} (s0)
+					(s0) edge[above] node{$a$} (s1)
+					(s1) edge[above] node{$a$} (s2)
+					(s1) edge[bend left=40, below] node{$b$} (s0)
+					(s2) edge[loop above] node{$a$} (s2)
+					(s2) edge[bend left=60, below] node{$b$} (s0);
+		\end{tikzpicture}
+		\column{.5\textwidth}
+		$w=baaab$\\
+		Zustandsfolge: $s_0,s_0,s_1,s_2,s_2,s_0$\\
+		Ausgabe: $0\,0\,0\,1\,1\,0$
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Mealy- vs. Moore-Automat}
+	\begin{itemize}
+		\item beide Modelle sind \underline{gleich mächtig}: zu jedem Mealy-Automaten existiert ein äquivalenter Moore-Automat und umgekehrt
+		\item Unterschiede
+		\begin{itemize}
+			\item Ausgabelänge: Mealy $|w|$, Moore $|w|+1$
+			\item Moore-Ausgabe hängt nur vom Zustand ab $\rightarrow$ oft mehr Zustände nötig (siehe Beispiel: 2 vs. 3 Zustände)
+		\end{itemize}
+		\item Umwandlung Mealy $\rightarrow$ Moore: für jeden Zustand $s$ und jede an ihm anliegende Ausgabe einen neuen Zustand erzeugen (Zustands-Splitting)
+		\item Umwandlung Moore $\rightarrow$ Mealy: Ausgabe eines Zustands wird auf alle eingehenden Übergänge verschoben; erste Ausgabe (am Startzustand) entfällt
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Abgeschlossenheit regulärer Sprachen}
