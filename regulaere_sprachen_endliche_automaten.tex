@@ -60,7 +60,12 @@
 	\end{itemize}
 \end{frame}
 
+\note{
+	Determinismus: in jedem Zustand für jedes mögliche Zeichen genau ein Übergang
+}
+
 \begin{frame}{Beispiel DFA}
+	\label{frm:dfa}
 	\begin{align*}
 		A &= (S, \Sigma, \delta, s_0, F)\\
 		S &= \left\{s_0, s_1, s_2, s_3\right\}\\
@@ -72,22 +77,22 @@
 \end{frame}
 
 \note{
-\begin{tikzpicture}
-	\node[state, initial] (s0) {$s_0$};
-	\node[state, right=of s0] (s1) {$s_1$};
-	\node[state, below=of s1] (s2) {$s_2$};
-	\node[state, accepting, below=of s0] (s3) {$s_3$};
-	
-	\draw (s0) edge[bend left, above] node{a} (s1);
-	\draw (s0) edge[bend left, right] node{b} (s3);
-	\draw (s1) edge[bend left, right] node{a} (s2);
-	\draw (s1) edge[bend left, below] node{b} (s0);
-	\draw (s2) edge[bend left, below] node{a} (s3);
-	\draw (s2) edge[bend left, left] node{b} (s1);
-	\draw (s3) edge[bend left, left] node{a} (s0);
-	\draw (s3) edge[bend left, above] node{b} (s2);
-	
-\end{tikzpicture}
+	\begin{tikzpicture}
+		\node[state, initial] (s0) {$s_0$};
+		\node[state, right=of s0] (s1) {$s_1$};
+		\node[state, below=of s1] (s2) {$s_2$};
+		\node[state, accepting, below=of s0] (s3) {$s_3$};
+		
+		\draw (s0) edge[bend left, above] node{a} (s1);
+		\draw (s0) edge[bend left, right] node{b} (s3);
+		\draw (s1) edge[bend left, right] node{a} (s2);
+		\draw (s1) edge[bend left, below] node{b} (s0);
+		\draw (s2) edge[bend left, below] node{a} (s3);
+		\draw (s2) edge[bend left, left] node{b} (s1);
+		\draw (s3) edge[bend left, left] node{a} (s0);
+		\draw (s3) edge[bend left, above] node{b} (s2);
+		
+	\end{tikzpicture}
 }
 
 \begin{frame}{Durch DFA akzeptierte Sprachen: Reguläre Sprachen}
@@ -111,6 +116,16 @@
 		\end{itemize}
 	\end{itemize}
 \end{frame}
+
+\note{
+	\begin{itemize}
+		\item Beispiel aus Folie \ref{frm:dfa} verwenden
+		\item Regeln farblich markieren in erzeugter Grammatik (ist Typ-3)
+		\item Ableitungsbaum $\rightarrow$ Wörter aus Grammatik erzeugen
+		\item zusätzliches Beispiel:\\
+		$L=\left\{w \in \{x,y,z\}^* \mid w\textrm{ beginnt mit }x\textrm{ und endet mit }z\right\}$
+	\end{itemize}
+}
 
 \begin{frame}{Nichtdeterministische endliche Automaten (NFA)}
 	\begin{itemize}
@@ -211,6 +226,13 @@
 	\end{itemize}
 \end{frame}
 
+\note{
+	\begin{enumerate}
+		\item Betrachtung aller Übergänge (mit überflüssigen Zuständen)
+		\item Betrachtung nur erreichbarer Zustände (von Startzustand aus)
+	\end{enumerate}
+}
+
 \begin{frame}{Beispiel: Umwandlung NFA in DFA (Zustandsgraph)}
 	\begin{columns}
 		\column{.5\textwidth}
@@ -288,6 +310,19 @@
 		\end{tabbing} 
 	\end{itemize}
 \end{frame}
+
+\note{
+	Grammatik zu Automat aus Folie \ref{frm:dfa}:
+	\begin{align*}
+		G=(&V,\Sigma, P, S)\\
+		\Sigma=\{&a,b\}\\
+		V=(&S_0,S_1,S_2,S_3)\\
+		P=\{&S_0\rightarrow aS_1 \mid bS_3 \mid b,\\
+		   &S_1\rightarrow aS_2 \mid bS_0,\\
+		   &S_2\rightarrow aS_3 \mid bS_1 \mid a,\\
+		   &S_3\rightarrow aS_0 \mid bS_2\}
+	\end{align*}
+}
 
 \begin{frame}{Minimalautomat}
 	\begin{itemize}

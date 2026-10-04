@@ -519,11 +519,22 @@ Beispiel DNF/KNF durch Umformung:
 			es gilt: zwei Äquivalenzklassen $R[x], R[y]$ sind entweder identisch oder disjunkt
 		\item Beispiel (Zahlentheorie): Kongruenz\\
 			zwei ganze Zahlen $a,b$ heißen kongruent bzgl. $m \in \mathbb{N}$ gdw. sie haben bei Division durch $m$ den gleichen Rest\\
-			Schreibweise: $a \equiv b\ (\mathrm{mod}\ m)$\\
-			Rechenregeln: sei $a \equiv a'\ (\mathrm{mod}\ m), b \equiv b'\ (\mathrm{mod}\ m)$\\
-			$a+b\equiv a'+b'\ (\mathrm{mod}\ m), a \cdot b \equiv a' \cdot b'\ (\mathrm{mod}\ m)$
+			Schreibweise: $a \equiv b\ \pmod{m}$\\
+			Rechenregeln: sei $a \equiv a'\ \pmod{m}, b \equiv b'\ \pmod{m}$\\
+			$a+b\equiv a'+b'\ \pmod{m}, a \cdot b \equiv a' \cdot b'\ \pmod{m}$
 	\end{itemize}
 \end{frame}
+
+\note{
+	\begin{align*}
+		R &= \left\{(x,y)\mid x \equiv y \pmod{3}\right\}\\
+		  &=\left\{(0,0),(1,1),(2,2),(0,3),(1,4),(2,5),\ldots\right\}\\[2ex]
+		R[0]&=\left\{3,6,9,\ldots\right\}\\
+		R[1]&=\left\{1,4,7,\ldots\right\}\\
+		R[2]&=\left\{2,5,8,\ldots\right\}
+	\end{align*}
+}
+
 
 \begin{frame}{Abbildungen}
 	\begin{itemize}

@@ -100,6 +100,7 @@
 			\hline
 		\end{tabular}
 	\end{columns}
+	Weiteres Beispiel: $S\rightarrow AB; A\rightarrow BA\mid a; B\rightarrow CC\mid b; C\rightarrow AB\mid c; w=caccab$
 }
 
 \begin{frame}{Pumping-Lemma für kontextfreie Sprachen}
@@ -122,8 +123,13 @@
 	\end{itemize}
 \end{frame}
 
+\note{
+	Nachfolgendes Beispiel:\\
+	$L=\left\{a^kb^kc^k\mid k \geq 1\right\}$
+}
+
 \begin{frame}{Beispiel: Pumping-Lemma für kontextfreie Sprachen}
-	$L=\{a^ib^ic^i \mid i\geq 1 \}$
+	$L=\{a^kb^kc^k \mid k \geq 1 \}$
 	\begin{itemize}
 		\item $L$ ist kontext-sensitiv: Beweis Typ-1-Grammatik\\
 		$G=(V, \Sigma, P, S), V=\{S, B, C\}$\\
