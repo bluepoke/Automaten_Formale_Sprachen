@@ -46,7 +46,7 @@
 		$j=1: V[i,1]=\{X \in V \mid (X\rightarrow a_i) \in P\}$\\
 		$j>1: V[i,j]=\bigcup_{l=1}^{j-1}\{A\in V\mid \exists (A\rightarrow BC): B \in V[i,l] \land C \in V[i+l, j-l] \}$
 		\item Wortproblem mit polynomiellem Zeitaufwand $O(n^3)$ lösbar
-		\item Grammatik ist mehrdeutig, falls ein Eintrag $A \in V[i,j]$ auf mehr als eine Weise entsteht
+		\item reduzierte Grammatik ist mehrdeutig, falls ein Eintrag $A \in V[i,j]$ auf mehr als eine Weise entsteht
 	\end{itemize}
 \end{frame}
 

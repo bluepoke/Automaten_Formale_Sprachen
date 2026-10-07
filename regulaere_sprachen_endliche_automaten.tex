@@ -315,7 +315,7 @@
 	\begin{align*}
 		G=(&V,\Sigma, P, S)\\
 		\Sigma=\{&a,b\}\\
-		V=(&S_0,S_1,S_2,S_3)\\
+		V=\{&S_0,S_1,S_2,S_3\}\\
 		P=\{&S_0\rightarrow aS_1 \mid bS_3 \mid b,\\
 		   &S_1\rightarrow aS_2 \mid bS_0,\\
 		   &S_2\rightarrow aS_3 \mid bS_1 \mid a,\\
@@ -329,6 +329,7 @@
 		Ziel: konstruiere einen äquivalenten DFA mit geringster Anzahl von Zuständen
 		\item Konstruktion
 		\begin{enumerate}
+			\item Entferne nicht erreichbare Zustände
 			\item Beginne mit einer Partition $P_1=\left\{S_{11}, S_{12}\right\}$ der Zustandsmenge $S$ in $S_{11}=F, S_{12}=S \setminus F$
 			\item bilde aus $P_i=\left\{S_{i1},\ldots,S_{ik}\right\}$ die Partition $P_{i+1}$ durch folgende Verfeinerung:\\
 			teile $S_{ij}$, falls es in $S_{ij}$ Zustände $s$ und $s'$ gibt mit:\\
@@ -509,7 +510,7 @@
 		\item Gibt Kaugummi bei 2€ aus
 	\end{itemize}
 	Mealy: Kombinierte Ausgabe von Produkt und Wechselgeld\\
-	Moore: Zusätzliche Zustände zur Ausgabe von Produkt und Wechselgeld, Spontanüberäange
+	Moore: Zusätzliche Zustände zur Ausgabe von Produkt und Wechselgeld, Spontanüberänge
 }
 
 \begin{frame}{Mealy- vs. Moore-Automat}

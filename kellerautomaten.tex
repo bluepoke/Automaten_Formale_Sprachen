@@ -73,7 +73,7 @@
 		\item zu jeder kontextfreien Grammatik lässt sich ein (i.Allg. nichtdeterministischer) PDA konstruieren, der die gleiche Sprache akzeptiert
 		\item Grundsätzlicher Zusammenhang mit kontextfreier Grammatik
 		\begin{itemize}
-			\item PDA kann mit Grammatik-Startsymbol $S$ als Kellerboden initialisiert werden
+			\item PDA kann mit Grammatik-Startsymbol $S$ initialisiert werden
 			\item liegt Variable A oben auf Stack: per $\varepsilon$-Übergang durch rechte Seite einer Regel ersetzen (Produktion anwenden, dabei nichtdeterministisch raten)
 			\item liegt Terminalsymbol $a$ oben auf Stack: mit gelesenem Symbol abgleichen; Löschen bei Übereinstimmung, sonst Kopie verwerfen (matching Kellertop mit aktuellem Eingabezeichen)
 			\item Äquivalenter PDA ist i.Allg. nichtdeterministisch; lässt sich i.Allg. \underline{nicht} in einen deterministischen PDA äquivalent umrechnen
